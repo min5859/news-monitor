@@ -6,6 +6,7 @@ from urllib.parse import urlsplit
 
 from news_monitor.analysis import SENTIMENTS, validate_decision
 from news_monitor.collect import canonical_url, normalized, plain_title
+from news_monitor.display import display_name, public_text, validate_public_names
 
 ARTICLE_FIELDS = ("id", "title", "url", "publisher", "language", "indexed_at", "published_at", "analysis_scope", "source")
 WARNINGS = {"publisher_goal_not_met", "upstream_limit_reached", "remaining_queries_skipped_rate_limit",
@@ -127,6 +128,14 @@ def make_report(collection, decisions, info, config, now=None):
         if clean["analysis_failed"] and (clean["classification"]["relevance"] != "uncertain"
                                          or clean["classification"]["sentiment"] != "abstain"):
             raise ValueError("failed analysis must abstain")
+        # Decisions are checked against the original headline before display-only edits.
+        clean["title"] = public_text(clean["title"], config)
+        for field in ("reason", "evidence"):
+            clean["classification"][field] = public_text(clean["classification"][field], config)
+        clean["evidence_omitted_for_display"] = bool(clean["classification"]["evidence"]
+                                                   and clean["classification"]["evidence"] not in clean["title"])
+        if clean["evidence_omitted_for_display"]:
+            clean["classification"]["evidence"] = ""
         articles.append(clean)
     failed = collection["status"] == "failed"
     stats = None if failed else summarize(articles)
@@ -135,9 +144,11 @@ def make_report(collection, decisions, info, config, now=None):
     if state == "ok" and any(row["analysis_failed"] for row in articles):
         state = "partial"
     source = config["collection"]
-    return {
+    report = {
         "schema_version": 1, "sample": True, "human_reviewed": False, "status": state,
-        "target": {key: config["target"][key] for key in ("name", "organization")},
+        "target": {"name": display_name(config), "organization": config["target"]["organization"]},
+        "display_policy": {"person_name_replaced": True, "source_links_may_identify_target": True,
+                           "article_titles_modified": True, "evidence_may_be_omitted": True},
         "generated_at": now.isoformat(), "collection_checked_at": collection["checked_at"],
         "window_start": collection["window_start"], "window_end": collection["window_end"],
         "analysis_scope": "headline_only", "date_basis": "gdelt_observation_not_publication",
@@ -151,3 +162,5 @@ def make_report(collection, decisions, info, config, now=None):
                         **summarize([row for row in articles if row["publisher"] == publisher])} for publisher in publishers],
         "articles": articles,
     }
+    validate_public_names(report, config)
+    return report

@@ -1,6 +1,7 @@
 """Synthetic fixtures only; no API requests, credentials or model calls."""
 
 import copy
+import hashlib
 import io
 import json
 import sys
@@ -13,8 +14,8 @@ from pathlib import Path
 from unittest.mock import patch
 
 from news_monitor import analysis as a
+from news_monitor import preflight, run, site
 from news_monitor import report as r
-from news_monitor import run, site
 from news_monitor.collect import ROOT, collect, write_result
 
 CONFIG = json.loads((ROOT / "config.json").read_text())
@@ -68,6 +69,13 @@ class AnalysisTests(unittest.TestCase):
         self.assertEqual(rows[0]["decision"]["sentiment"], "neutral")
         self.assertEqual(info["model_calls"], 1)
         _, info = self.analyze(lambda *args: self.fail("cached"))
+        self.assertEqual(info["cache_hits"], 1)
+
+    def test_display_name_change_does_not_repeat_model_analysis(self):
+        self.analyze(lambda *args: json.dumps(decision()))
+        cfg = copy.deepcopy(CONFIG)
+        cfg["target"]["display_name"] = "대상 인물"
+        _, info = self.analyze(lambda *args: self.fail("display must not affect model cache"), cfg)
         self.assertEqual(info["cache_hits"], 1)
 
     def test_model_and_prompt_changes_invalidate_cache(self):
@@ -154,6 +162,58 @@ class AnalysisTests(unittest.TestCase):
 
 
 class ReportTests(unittest.TestCase):
+    def test_public_name_is_separate_from_internal_collection_target(self):
+        original = collection_fixture()
+        report = report_fixture()
+        self.assertEqual(original["target"], CONFIG["target"]["name"])
+        self.assertEqual(report["target"]["name"], "회장님")
+        self.assertNotIn(CONFIG["target"]["name"], json.dumps(report, ensure_ascii=False))
+        self.assertIn("회장님", report["articles"][0]["title"])
+        self.assertIn("회장님", report["articles"][0]["classification"]["evidence"])
+
+    def test_public_reason_and_english_aliases_are_replaced_after_validation(self):
+        collection = prepare(collection_fixture())
+        value = {**decision(), "reason": "Cho Hyun-joon과 조현준 회장에 대한 제목의 표현만 판단했습니다."}
+        results = [{"id": collection["articles"][0]["id"], "decision": value, "error": None}]
+        report = r.make_report(collection, results, report_fixture()["analysis"], CONFIG)
+        self.assertNotIn("Cho Hyun-joon", report["articles"][0]["classification"]["reason"])
+        self.assertNotIn("조현준", report["articles"][0]["classification"]["reason"])
+        self.assertEqual(report["statistics"]["denominator"], 1)
+        self.assertIn("효성 조현준", value["evidence"])
+
+    def test_display_replacement_covers_unicode_spacing_and_case(self):
+        from news_monitor.display import public_text
+
+        for value in ("조현준", "조 현 준", "CHO HYUN-JOON", "Cho Hyun Joon", "Ｃｈｏ Ｈｙｕｎ－ｊｏｏｎ", "Hyun‑Joon Cho"):
+            with self.subTest(value=value):
+                self.assertEqual(public_text(value, CONFIG), "회장님")
+        self.assertEqual(public_text("효성 조현준 회장, 행사 참석", CONFIG), "효성 회장님, 행사 참석")
+        self.assertEqual(public_text("ChoHyunJoonChairman", CONFIG), "회장님Chairman")
+        self.assertEqual(public_text("조현준 회장 회장님, 행사", CONFIG), "회장님, 행사")
+
+    def test_invalid_display_name_never_falls_back_to_real_name(self):
+        from news_monitor.display import display_name
+
+        for value in (None, "", " ", "조현준", "<script>"):
+            cfg = copy.deepcopy(CONFIG)
+            cfg["target"]["display_name"] = value
+            with self.subTest(value=value):
+                self.assertRaises((ValueError, TypeError), display_name, cfg)
+
+    def test_partial_name_evidence_is_omitted_not_misattributed(self):
+        collection = prepare(collection_fixture())
+        results = [{"id": collection["articles"][0]["id"], "decision": {**decision(), "evidence": "현준 회장"}, "error": None}]
+        report = r.make_report(collection, results, report_fixture()["analysis"], CONFIG)
+        self.assertTrue(report["articles"][0]["evidence_omitted_for_display"])
+        self.assertEqual(report["articles"][0]["classification"]["evidence"], "")
+
+    def test_original_links_are_retained_and_policy_is_explicit(self):
+        report = report_fixture()
+        self.assertEqual(report["articles"][0]["url"], "https://publisher0.example/news/1")
+        self.assertTrue(report["display_policy"]["person_name_replaced"])
+        self.assertTrue(report["display_policy"]["source_links_may_identify_target"])
+        self.assertIn("인명 표기를 치환", site.render(report))
+
     def test_ratios_use_completed_related_only(self):
         values = [decision("positive"), decision("negative"), decision("neutral"), decision("mixed"),
                   decision("abstain", "uncertain"), decision("abstain", "unrelated")]
@@ -333,6 +393,61 @@ class PipelineTests(unittest.TestCase):
         with patch("sys.argv", ["run", "--config", str(cfg), "--data-dir", str(self.root)]), redirect_stdout(io.StringIO()):
             self.assertEqual(run.main(), 1)
         self.assertEqual(json.loads((self.root / "pipeline_status.json").read_text())["status"], "failed")
+
+
+class PreflightTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name) / "data"
+        self.output = Path(self.temp.name) / "output"
+        write_result(collection_fixture(), self.root)
+        run.run_pipeline(CONFIG, self.root, self.output, reuse=True, runner=lambda *args: json.dumps(decision()))
+
+    def test_consistent_structure_passes_only_in_temporary_fixture(self):
+        self.assertTrue(preflight.check_ready(CONFIG, self.root, self.output)["ready"])
+
+    def test_named_source_url_is_preserved_without_showing_the_name_in_text(self):
+        value = collection_fixture()
+        url = "https://publisher0.example/news/cho-hyun-joon"
+        value["articles"][0].update(url=url, id=hashlib.sha256(url.encode()).hexdigest()[:20])
+        write_result(value, self.root)
+        report = run.run_pipeline(CONFIG, self.root, self.output, reuse=True, runner=lambda *args: json.dumps(decision()))
+        self.assertEqual(report["articles"][0]["url"], url)
+        self.assertNotIn("조현준", report["articles"][0]["title"])
+        self.assertTrue(preflight.check_ready(CONFIG, self.root, self.output)["ready"])
+
+    def test_old_success_cannot_hide_latest_collection_failure(self):
+        value = collection_fixture(0)
+        value["status"] = "failed"
+        write_result(value, self.root)
+        self.assertFalse(preflight.check_ready(CONFIG, self.root, self.output)["ready"])
+
+    def test_unreplaced_html_name_blocks_publication_even_with_good_json(self):
+        path = self.output / "index.html"
+        path.write_text(path.read_text().replace("회장님", CONFIG["target"]["name"]))
+        self.assertFalse(preflight.check_ready(CONFIG, self.root, self.output)["ready"])
+
+    def test_raw_fields_and_test_fixture_markers_are_rejected(self):
+        path = self.output / "report.json"
+        original = json.loads(path.read_text())
+        for key in ("raw_output", "test_fixture"):
+            value = {**original, key: True}
+            path.write_text(json.dumps(value))
+            with self.subTest(key=key):
+                self.assertFalse(preflight.check_ready(CONFIG, self.root, self.output)["ready"])
+
+    def test_unrelated_or_abstained_only_results_do_not_pass(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root, output = Path(temp) / "data", Path(temp) / "output"
+            write_result(collection_fixture(), root)
+            run.run_pipeline(CONFIG, root, output, reuse=True,
+                             runner=lambda *args: json.dumps({**decision("abstain", "uncertain"), "evidence": ""}))
+            self.assertFalse(preflight.check_ready(CONFIG, root, output)["ready"])
+
+    def test_extra_artifact_file_is_rejected(self):
+        (self.output / "private.txt").write_text("TEST_ONLY")
+        self.assertFalse(preflight.check_ready(CONFIG, self.root, self.output)["ready"])
 
 
 if __name__ == "__main__":

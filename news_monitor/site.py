@@ -52,6 +52,8 @@ def render(report):
         label = "unrelated" if decision["relevance"] == "unrelated" else decision["sentiment"]
         day = timestamp(row["indexed_at"]).astimezone(ZoneInfo("Asia/Seoul")).strftime("%Y-%m-%d")
         evidence = f'<p class="evidence">제목 근거: “{h(decision["evidence"])}”</p>' if decision["evidence"] else ""
+        if row.get("evidence_omitted_for_display"):
+            evidence = '<p class="evidence">인명 표기 변경으로 제목 근거의 일부 표시를 생략했습니다.</p>'
         relevance = {"related": "대상 관련", "uncertain": "관련성 불확실", "unrelated": "관련 없음"}[decision["relevance"]]
         outcome = "AI 호출·응답 검증 실패" if row["analysis_failed"] else "AI 자동분류 · 미검토"
         article_html.append(f'<article class="article" data-publisher="{h(row["publisher"])}" data-sentiment="{h(label)}" data-day="{day}"><div class="article-meta"><span class="label {h(label)}">{LABELS[label]}</span><span>{h(row["publisher"])}</span><span>관측 {h(display_time(row["indexed_at"]))}</span><span>{relevance} · {outcome}</span></div><h3><a href="{h(row["url"])}" target="_blank" rel="noopener noreferrer">{h(row["title"])} ↗</a></h3><p class="reason">{h(decision["reason"])}</p>{evidence}</article>')
@@ -66,6 +68,7 @@ def render(report):
         notice += f" 매체 확보 목표 {report['publisher_goal']}곳에는 미달했습니다."
     if report.get("test_fixture"):
         notice = "UI 테스트용 가상 데이터입니다. 실제 뉴스·실제 수집 결과가 아닙니다. " + notice
+    notice += " 기사 제목·판단 이유·근거의 인명 표기를 치환했습니다. 원문 링크에서 대상을 확인할 수 있어 완전 익명화는 아닙니다."
     pn = None if stats is None else stats["positive_negative_only"]
     ratio_note = "긍정 대 부정 비율: 산출 불가."
     if pn and pn["denominator"]:

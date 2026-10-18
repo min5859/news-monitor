@@ -22,6 +22,8 @@ from urllib.error import HTTPError
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 from urllib.request import Request, urlopen
 
+from news_monitor.display import display_name
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -81,6 +83,7 @@ def load_config(path):
                    config["target"]["organization_aliases"]):
         if not isinstance(values, list) or not values or any(not isinstance(v, str) or not v.strip() for v in values):
             raise ValueError("queries and aliases must be nonempty string lists")
+    display_name(config)
     return config
 
 
