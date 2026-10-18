@@ -130,12 +130,26 @@ class CollectionTests(unittest.TestCase):
             nonlocal count
             count += 1
             if count == 1:
-                raise HTTPError("https://example.com", 503, "Unavailable", {}, None)
+                raise HTTPError("https://example.com", 400, "Bad query", {}, None)
             return opener_for([article()])()
 
         result = c.collect(cfg, NOW, opener=request, sleeper=lambda _: None)
         self.assertEqual(result["status"], "partial")
         self.assertEqual(len(result["articles"]), 1)
+
+    def test_final_server_failure_preserves_retry_after(self):
+        cfg = copy.deepcopy(CONFIG)
+        cfg["collection"]["attempts"] = 1
+        cfg["collection"]["queries"] = ["first", "second"]
+        calls = []
+
+        def request(*args, **kwargs):
+            calls.append(1)
+            raise HTTPError("https://example.com", 503, "Unavailable", {"Retry-After": "3600"}, None)
+
+        result = c.collect(cfg, NOW, opener=request, sleeper=lambda _: None)
+        self.assertEqual(result["retry_after_seconds"], 3600)
+        self.assertEqual(len(calls), 1)
 
     def test_retry_after_is_respected(self):
         sleeps = []

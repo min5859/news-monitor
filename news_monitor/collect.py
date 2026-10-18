@@ -141,10 +141,12 @@ def fetch_json(url, opts, opener, sleeper):
             exc.close()
             if code == 429:
                 raise CollectionError("http_429", max(delay, opts["rate_limit_cooldown_seconds"])) from None
-            if code not in (500, 502, 503, 504) or attempt + 1 == opts["attempts"]:
+            if code not in (500, 502, 503, 504):
                 raise CollectionError(f"http_{code}") from None
             if delay > opts["max_retry_wait_seconds"]:
                 raise CollectionError(f"http_{code}:retry_after_exceeds_budget", delay) from None
+            if attempt + 1 == opts["attempts"]:
+                raise CollectionError(f"http_{code}", delay) from None
             sleeper(max(delay, opts["query_interval_seconds"]))
         except (OSError, HTTPException) as exc:
             if attempt + 1 == opts["attempts"]:
