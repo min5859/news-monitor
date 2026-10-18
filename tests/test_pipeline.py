@@ -19,6 +19,8 @@ from news_monitor import report as r
 from news_monitor.collect import ROOT, collect, write_result
 
 CONFIG = json.loads((ROOT / "config.json").read_text())
+CONFIG["collection"].update(provider="gdelt_doc", queries=['"Hyosung"'])
+CONFIG["analysis"].update(provider="cursor", model="synthetic-cursor-test")
 
 
 class Response(io.BytesIO):
@@ -190,6 +192,7 @@ class ReportTests(unittest.TestCase):
         self.assertEqual(public_text("효성 조현준 회장, 행사 참석", CONFIG), "효성 회장님, 행사 참석")
         self.assertEqual(public_text("ChoHyunJoonChairman", CONFIG), "회장님Chairman")
         self.assertEqual(public_text("조현준 회장 회장님, 행사", CONFIG), "회장님, 행사")
+        self.assertEqual(public_text("조현준 회장의 투자", CONFIG), "회장님의 투자")
 
     def test_invalid_display_name_never_falls_back_to_real_name(self):
         from news_monitor.display import display_name
@@ -367,6 +370,24 @@ class PipelineTests(unittest.TestCase):
                                   runner=lambda *args: self.fail("stale input"))
         self.assertEqual(result["status"], "failed")
         self.assertIsNone(result["collection_checked_at"])
+
+    def test_collection_failure_keeps_last_good_news_with_explicit_stale_status(self):
+        write_result(collection_fixture(), self.root)
+        good = run.run_pipeline(CONFIG, self.root, self.output, reuse=True, runner=lambda *args: json.dumps(decision()))
+        previous = (self.root / "report.json").read_text()
+        failed = collection_fixture(0)
+        failed["status"] = "failed"
+        write_result(failed, self.root)
+        result = run.run_pipeline(CONFIG, self.root, self.output, reuse=True,
+                                  runner=lambda *args: self.fail("failed source must not call model"))
+        shown = json.loads((self.output / "report.json").read_text())
+        self.assertEqual(result["status"], "failed")
+        self.assertEqual(shown["status"], "stale")
+        self.assertEqual(shown["article_count"], 1)
+        self.assertEqual(shown["collection_checked_at"], good["collection_checked_at"])
+        self.assertEqual(shown["latest_attempt"]["status"], "failed")
+        self.assertEqual((self.root / "report.json").read_text(), previous)
+        self.assertFalse(preflight.check_ready(CONFIG, self.root, self.output)["ready"])
 
     def test_missing_dataset_becomes_failure_without_using_previous_report(self):
         write_result(collection_fixture(), self.root)

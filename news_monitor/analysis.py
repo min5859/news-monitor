@@ -36,7 +36,7 @@ def strict_json(text):
 
 def validate_options(config):
     opts = config["analysis"]
-    if opts["provider"] != "cursor" or not isinstance(opts["model"], str) or not opts["model"].strip():
+    if opts["provider"] not in ("cursor", "codex") or not isinstance(opts["model"], str) or not opts["model"].strip():
         raise ValueError("invalid analysis provider or model")
     bounds = {"attempts": (1, 3), "timeout_seconds": (1, 300),
               "max_output_bytes": (1024, 1048576), "max_calls_per_run": (1, 100),
@@ -70,7 +70,7 @@ def validate_decision(value, title, opts):
     return {key: value[key] for key in sorted(DECISION_KEYS)}
 
 
-def capture_model(command, prompt, workspace, opts):
+def capture_model(command, prompt, workspace, opts, observer=None):
     """Bound combined stdout/stderr, wall time and the whole child process group."""
     chunks = []
     size = 0
@@ -108,6 +108,8 @@ def capture_model(command, prompt, workspace, opts):
                             raise AnalysisError("model_output_too_large")
                         if key.data == "stdout":
                             chunks.append(block)
+                            if observer is not None:
+                                observer(block)
             remaining = deadline - time.monotonic()
             if remaining <= 0:
                 raise AnalysisError("model_timeout")
@@ -155,9 +157,18 @@ def abstention():
             "reason": "AI 응답 실패 또는 검증 미통과로 판단을 보류했습니다."}
 
 
-def analyze_articles(articles, config, data_dir, runner=run_cursor):
+def run_codex(prompt, opts):
+    from news_monitor.codex import execute
+
+    result, _ = execute(prompt, opts["model"], timeout=opts["timeout_seconds"],
+                        max_bytes=opts["max_output_bytes"])
+    return result
+
+
+def analyze_articles(articles, config, data_dir, runner=None):
     template = validate_options(config)
     opts = config["analysis"]
+    runner = runner or (run_codex if opts["provider"] == "codex" else run_cursor)
     prompt_hash = hashlib.sha256(template.encode()).hexdigest()
     results = []
     calls = failures = cache_hits = 0

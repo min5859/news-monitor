@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["articles"],
+  "properties": {
+    "articles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "url", "published_date", "language"],
+        "properties": {
+          "title": {"type": "string"},
+          "url": {"type": "string"},
+          "published_date": {"type": "string"},
+          "language": {"type": "string"}
+        }
+      }
+    }
+  }
+}

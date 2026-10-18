@@ -1,12 +1,13 @@
 """Collect → validate → classify/abstain → aggregate → build a local sample."""
 
 import argparse
+import copy
 import hashlib
 import json
 from datetime import UTC, datetime
 from pathlib import Path
 
-from news_monitor.analysis import analyze_articles, run_cursor, validate_options
+from news_monitor.analysis import analyze_articles, validate_options
 from news_monitor.collect import (
     ROOT,
     _run_collection,
@@ -44,17 +45,32 @@ def process_inputs(config, data_dir, reuse, runner):
     return make_report(collection, decisions, info, config, datetime.now(UTC))
 
 
-def run_pipeline(config, data_dir, output_dir, reuse=False, runner=run_cursor):
+def run_pipeline(config, data_dir, output_dir, reuse=False, runner=None):
     with collection_lock(data_dir):
         status_file = data_dir / "pipeline_status.json"
         atomic_json(status_file, {"status": "running", "started_at": datetime.now(UTC).isoformat()})
         try:
             report = process_inputs(config, data_dir, reuse, runner)
-            build_site(report, output_dir)
+            display = report
+            if not report["articles"] and (data_dir / "report.json").exists():
+                from news_monitor.preflight import check_artifact
+
+                try:
+                    previous = json.loads((data_dir / "report.json").read_text())
+                    check_artifact(previous, config)
+                    if previous["articles"] and previous["status"] in ("ok", "partial"):
+                        display = copy.deepcopy(previous)
+                        display.update(status="stale", generated_at=report["generated_at"],
+                                       latest_attempt={"status": report["status"], "checked_at": report["generated_at"]})
+                except (OSError, ValueError, KeyError, TypeError):
+                    pass  # Do not display unknown, unsafe or incompatible cached data.
+            build_site(display, output_dir)
             if report["status"] != "failed" and report["articles"]:
                 atomic_json(data_dir / "report.json", report)
-            atomic_json(status_file, {key: report[key] for key in (
-                "status", "generated_at", "collection_checked_at", "analysis", "article_count")})
+            state = {key: report[key] for key in (
+                "status", "generated_at", "collection_checked_at", "analysis", "article_count")}
+            state.update(display_status=display["status"], display_article_count=display["article_count"])
+            atomic_json(status_file, state)
             return report
         except (OSError, ValueError, TypeError, KeyError, OverflowError) as exc:
             atomic_json(status_file, {"status": "failed", "checked_at": datetime.now(UTC).isoformat(),

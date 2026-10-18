@@ -57,7 +57,7 @@ def normalized(value):
 def load_config(path):
     config = json.loads(Path(path).read_text())
     opts = config["collection"]
-    if opts["provider"] != "gdelt_doc":
+    if opts["provider"] not in ("gdelt_doc", "codex_web_search"):
         raise ValueError("unsupported provider")
     if not opts["endpoint"].startswith("https://"):
         raise ValueError("collection endpoint must use HTTPS")
@@ -84,6 +84,14 @@ def load_config(path):
         if not isinstance(values, list) or not values or any(not isinstance(v, str) or not v.strip() for v in values):
             raise ValueError("queries and aliases must be nonempty string lists")
     display_name(config)
+    if opts["provider"] == "codex_web_search":
+        for key, low, high in (("codex_timeout_seconds", 1, 300), ("codex_output_bytes", 1024, 2097152),
+                               ("max_search_calls", 1, 30)):
+            if type(opts[key]) is not int or not low <= opts[key] <= high:
+                raise ValueError(f"invalid {key}")
+        for key, directory in (("schema_file", "schemas"), ("search_prompt_file", "prompts")):
+            if not (ROOT / opts[key]).resolve().is_relative_to(ROOT / directory):
+                raise ValueError("unsafe discovery resource path")
     return config
 
 
@@ -189,6 +197,10 @@ def collect(config, now=None, opener=urlopen, sleeper=time.sleep):
         raise ValueError("collection time must be timezone-aware")
     now = now.astimezone(UTC)
     opts = config["collection"]
+    if opts["provider"] == "codex_web_search":
+        from news_monitor.discovery import collect_web
+
+        return collect_web(config, now)
     start = now - timedelta(days=opts["lookback_days"])
     stats = {"fetched": 0, "invalid_metadata": 0, "out_of_window": 0, "not_target": 0,
              "duplicates": 0, "limit_excluded": 0, "selected": 0,

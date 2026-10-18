@@ -12,7 +12,8 @@ from news_monitor.collect import ROOT, atomic_json
 from news_monitor.report import timestamp
 
 LABELS = {"positive": "긍정", "negative": "부정", "neutral": "중립", "mixed": "혼합", "abstain": "판단 보류", "unrelated": "관련 없음"}
-STATUS = {"ok": "자동 분석 샘플", "partial": "일부 처리 미완료", "empty": "조건에 맞는 기사 없음", "failed": "수집·검증 실패"}
+STATUS = {"ok": "자동 분석 샘플", "partial": "일부 처리 미완료", "empty": "조건에 맞는 기사 없음", "failed": "수집·검증 실패",
+          "stale": "이전 수집 결과 · 최신 조회 미완료"}
 OUTPUT_FILES = {"index.html", "styles.css", "app.js", "report.json"}
 
 
@@ -50,13 +51,14 @@ def render(report):
     for row in report["articles"]:
         decision = row["classification"]
         label = "unrelated" if decision["relevance"] == "unrelated" else decision["sentiment"]
-        day = timestamp(row["indexed_at"]).astimezone(ZoneInfo("Asia/Seoul")).strftime("%Y-%m-%d")
+        day = row["published_at"] or timestamp(row["indexed_at"]).astimezone(ZoneInfo("Asia/Seoul")).strftime("%Y-%m-%d")
+        article_time = f"발행 {day}" if row["published_at"] else f"관측 {display_time(row['indexed_at'])}"
         evidence = f'<p class="evidence">제목 근거: “{h(decision["evidence"])}”</p>' if decision["evidence"] else ""
         if row.get("evidence_omitted_for_display"):
             evidence = '<p class="evidence">인명 표기 변경으로 제목 근거의 일부 표시를 생략했습니다.</p>'
         relevance = {"related": "대상 관련", "uncertain": "관련성 불확실", "unrelated": "관련 없음"}[decision["relevance"]]
         outcome = "AI 호출·응답 검증 실패" if row["analysis_failed"] else "AI 자동분류 · 미검토"
-        article_html.append(f'<article class="article" data-publisher="{h(row["publisher"])}" data-sentiment="{h(label)}" data-day="{day}"><div class="article-meta"><span class="label {h(label)}">{LABELS[label]}</span><span>{h(row["publisher"])}</span><span>관측 {h(display_time(row["indexed_at"]))}</span><span>{relevance} · {outcome}</span></div><h3><a href="{h(row["url"])}" target="_blank" rel="noopener noreferrer">{h(row["title"])} ↗</a></h3><p class="reason">{h(decision["reason"])}</p>{evidence}</article>')
+        article_html.append(f'<article class="article" data-publisher="{h(row["publisher"])}" data-sentiment="{h(label)}" data-day="{day}"><div class="article-meta"><span class="label {h(label)}">{LABELS[label]}</span><span>{h(row["publisher"])}</span><span>{h(article_time)}</span><span>{relevance} · {outcome}</span></div><h3><a href="{h(row["url"])}" target="_blank" rel="noopener noreferrer">{h(row["title"])} ↗</a></h3><p class="reason">{h(decision["reason"])}</p>{evidence}</article>')
     notice = "제목만으로 자동 분류한 미검토 샘플입니다. 실제 확보 범위 안에서만 해석해 주세요."
     if failed:
         notice = "수집 또는 입력 검증에 실패했습니다. 기사 수와 비율을 산출할 수 없습니다. 이전 자료를 이번 실행의 새 기사로 표시하지 않습니다."
@@ -64,6 +66,9 @@ def render(report):
         notice = "조회는 완료했으나 선정 조건에 맞는 기사가 없습니다. 이 결과가 전체 언론 보도 0건을 뜻하지는 않습니다."
     elif report["status"] == "partial":
         notice = "일부 수집·분류가 완료되지 않았습니다. 확보된 기사와 검증된 분류만 표시하며, 분석 실패는 판단 보류로 남깁니다."
+    elif report["status"] == "stale":
+        attempt = report["latest_attempt"]
+        notice = f"최근 조회({display_time(attempt['checked_at'])}, {STATUS[attempt['status']]})에서 새 기사를 확보하지 못해 이전 수집 결과를 표시합니다. 아래 기사와 비율은 이전 수집 시각의 자료이며 이번 조회의 새 결과가 아닙니다."
     if "publisher_goal_not_met" in report["warnings"]:
         notice += f" 매체 확보 목표 {report['publisher_goal']}곳에는 미달했습니다."
     if report.get("test_fixture"):
@@ -74,6 +79,7 @@ def render(report):
     if pn and pn["denominator"]:
         ratio_note = f"긍정 대 부정만 비교: {pn['percentages']['positive']:.1f}% / {pn['percentages']['negative']:.1f}% (분모 {pn['denominator']}건 · 중립·혼합·보류 제외)."
     attribution = report["source_attribution"]
+    publication_dates = report["date_basis"] == "publisher_date"
     values = {"title": h(f"{report['target']['organization']} {report['target']['name']}"),
               "status_label": STATUS[report["status"]], "checked": h(display_time(report["collection_checked_at"])),
               "window": h(f"{display_time(report['window_start'], True)} — {display_time(report['window_end'], True)}"),
@@ -87,6 +93,10 @@ def render(report):
               "model": h(f"{report['analysis']['provider']} / {report['analysis']['model']}"),
               "prompt_version": h(report["analysis"]["prompt_sha256"]),
               "generated": h(display_time(report["generated_at"]))}
+    values.update(window_label="발행일 범위" if publication_dates else "관측 기간",
+                  date_filter_label="발행일" if publication_dates else "관측일",
+                  date_filter_note="기사의 공개 발행일 기준입니다." if publication_dates else "날짜는 KST 관측일이며 발행일이 아닙니다.",
+                  date_basis_note="공개 발행일 기준 · AI 웹 검색 수집" if publication_dates else "GDELT 관측 시각 기준")
     return Template((ROOT / "web" / "index.html").read_text()).substitute(values)
 
 

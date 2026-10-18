@@ -33,7 +33,7 @@
           <dl>
             <dt>수집 확인</dt>
             <dd>$checked</dd>
-            <dt>관측 기간</dt>
+            <dt>$window_label</dt>
             <dd>$window</dd>
             <dt>분석 범위</dt>
             <dd>제목만 · 본문 미확인</dd>
@@ -115,11 +115,10 @@
               <option value="abstain">판단 보류</option>
               <option value="unrelated">관련 없음</option>
             </select></label
-          ><label>관측일<input id="date-filter" type="date" /></label>
+          ><label>$date_filter_label<input id="date-filter" type="date" /></label>
         </div>
         <p class="footnote">
-          필터는 목록만 바꾸며 위 집계의 분모는 바꾸지 않습니다. 날짜는 KST
-          관측일이며 발행일이 아닙니다.
+          필터는 목록만 바꾸며 위 집계의 분모는 바꾸지 않습니다. $date_filter_note
         </p>
         <div id="articles">$articles</div>
         <p id="filter-empty" class="empty" hidden>
@@ -138,7 +137,7 @@
           여론·개인의 객관적 평판이나 유무죄를 뜻하지 않습니다.
         </p>
         <p>
-          출처: $attribution · 전수 수집 아님 · GDELT 관측 시각 기준 · 원문·사진
+          출처: $attribution · 전수 수집 아님 · $date_basis_note · 원문·사진
           재게시 없음
         </p>
         <p>설정 모델: $model · 프롬프트 SHA-256: $prompt_version</p>

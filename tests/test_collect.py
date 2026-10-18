@@ -14,6 +14,7 @@ from urllib.error import HTTPError
 from news_monitor import collect as c
 
 CONFIG = json.loads((Path(__file__).resolve().parents[1] / "config.json").read_text())
+CONFIG["collection"].update(provider="gdelt_doc", queries=['"Hyosung"'])
 NOW = datetime(2026, 10, 17, 12, tzinfo=UTC)
 
 

@@ -1,8 +1,9 @@
 """Check collection freshness and deterministically export public fields only."""
 
 import hashlib
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, date, datetime, timedelta
 from urllib.parse import urlsplit
+from zoneinfo import ZoneInfo
 
 from news_monitor.analysis import SENTIMENTS, validate_decision
 from news_monitor.collect import canonical_url, normalized, plain_title
@@ -30,8 +31,11 @@ def prepare_collection(status, dataset, config, now=None):
     if not timedelta(0) <= now - checked <= timedelta(hours=config["analysis"]["max_collection_age_hours"]):
         raise ValueError("collection is stale or from the future")
     state = status["status"]
+    publication_dates = config["collection"]["provider"] == "codex_web_search"
     clean = {"status": state, "checked_at": checked.isoformat(), "articles": [],
              "window_start": None, "window_end": None,
+             "date_basis": "publisher_date" if publication_dates else "gdelt_observation_not_publication",
+             "selection": "latest_published_target_in_headline" if publication_dates else "latest_observed_target_in_headline",
              "warnings": sorted(set(status.get("warnings", [])) & WARNINGS)}
     if state == "failed":
         return clean  # Old articles.json is deliberately not examined or reused.
@@ -75,8 +79,15 @@ def prepare_collection(status, dataset, config, now=None):
             raise ValueError("invalid article publisher")
         if not isinstance(article["language"], str) or len(article["language"]) > 80:
             raise ValueError("invalid article language")
+        if publication_dates:
+            published = date.fromisoformat(article["published_at"])
+            if (published.isoformat() != article["published_at"]
+                    or not start.astimezone(ZoneInfo("Asia/Seoul")).date() <= published <= end.astimezone(ZoneInfo("Asia/Seoul")).date()):
+                raise ValueError("invalid publisher date")
+        elif article["published_at"] is not None:
+            raise ValueError("GDELT observation is not publication time")
         if (not start <= timestamp(article["indexed_at"]) <= end or timestamp(row["collected_at"]) != checked
-                or article["published_at"] is not None or article["analysis_scope"] != "headline_only"
+                or article["analysis_scope"] != "headline_only"
                 or article["source"] != config["collection"]["provider"]):
             raise ValueError("invalid article provenance")
         seen.add(url)
@@ -151,8 +162,8 @@ def make_report(collection, decisions, info, config, now=None):
                            "article_titles_modified": True, "evidence_may_be_omitted": True},
         "generated_at": now.isoformat(), "collection_checked_at": collection["checked_at"],
         "window_start": collection["window_start"], "window_end": collection["window_end"],
-        "analysis_scope": "headline_only", "date_basis": "gdelt_observation_not_publication",
-        "coverage": "search_sample_not_exhaustive", "selection": "latest_observed_target_in_headline",
+        "analysis_scope": "headline_only", "date_basis": collection.get("date_basis", "publisher_date" if source["provider"] == "codex_web_search" else "gdelt_observation_not_publication"),
+        "coverage": "search_sample_not_exhaustive", "selection": collection.get("selection", "latest_published_target_in_headline" if source["provider"] == "codex_web_search" else "latest_observed_target_in_headline"),
         "article_count": None if failed else len(articles), "publisher_count": None if failed else len(publishers),
         "publisher_goal": source["publisher_goal"], "warnings": collection["warnings"],
         "source_attribution": {"name": source["attribution_name"], "url": canonical_url(source["attribution_url"], source)},

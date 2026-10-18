@@ -36,7 +36,7 @@ def public_text(value, config):
     for pattern in name_patterns(config):
         value = pattern.sub(lambda _: replacement, value)
     # Avoid duplicated honorifics in common headlines, e.g. "회장님 회장, ...".
-    pattern = re.escape(replacement) + r"\s*회장(?:님)?(?=\s|[,.!?…，。]|$)"
+    pattern = re.escape(replacement) + r"\s*회장(?:님)?(?=\s|[,.!?…，。은는이가의과와을를께도에으]|$)"
     while True:
         shortened = re.sub(pattern, lambda _: replacement, value)
         if shortened == value:
