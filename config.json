@@ -26,5 +26,17 @@
     "attribution_name": "The GDELT Project",
     "attribution_url": "https://www.gdeltproject.org/",
     "tracking_query_parameters": ["fbclid", "gclid"]
+  },
+  "analysis": {
+    "provider": "cursor",
+    "model": "claude-sonnet-5-5-medium",
+    "prompt_file": "prompts/classify.md",
+    "attempts": 2,
+    "timeout_seconds": 90,
+    "max_output_bytes": 65536,
+    "max_calls_per_run": 30,
+    "max_reason_chars": 240,
+    "max_evidence_chars": 200,
+    "max_collection_age_hours": 24
   }
 }

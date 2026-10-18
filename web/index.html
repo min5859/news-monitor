@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; style-src 'self'; script-src 'self'; img-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>$title · News Monitor</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">본문 바로가기</a>
+    <header class="topbar">
+      <span class="brand">N<span class="brand-dot">.</span> NEWS MONITOR</span
+      ><span class="edition">AUTOMATED SAMPLE / 01</span>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">DAILY MEDIA BRIEFING</p>
+          <h1 id="page-title">$title<span>뉴스 모니터링</span></h1>
+          <p class="intro">
+            여러 매체의 제목에서 살펴보는 보도 논조.<br />자동 선정·AI 분류
+            결과이며, 사람이 검토하지 않은 샘플입니다.
+          </p>
+        </div>
+        <aside class="context">
+          <span class="badge">$status_label</span>
+          <dl>
+            <dt>수집 확인</dt>
+            <dd>$checked</dd>
+            <dt>관측 기간</dt>
+            <dd>$window</dd>
+            <dt>분석 범위</dt>
+            <dd>제목만 · 본문 미확인</dd>
+          </dl>
+        </aside>
+      </section>
+      <div class="notice" role="status">$notice</div>
+      <section class="metrics" aria-label="샘플 현황">$metrics</section>
+      <section class="panel distribution" aria-labelledby="distribution-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">TONE DISTRIBUTION</p>
+            <h2 id="distribution-title">보도 논조 분포</h2>
+          </div>
+          <span class="unit">기사 기준</span>
+        </div>
+        <p class="muted">
+          분모: 대상 관련성이 확인되고 논조 분류를 완료한 기사 $denominator건.
+          보류·관련 없음은 제외합니다.
+        </p>
+        <div class="tone-grid">$tones</div>
+        <p class="footnote">$ratio_note</p>
+      </section>
+      <section class="panel" aria-labelledby="publisher-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">SOURCE OVERVIEW</p>
+            <h2 id="publisher-title">매체별 비교</h2>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">매체 도메인</th>
+                <th scope="col">선정</th>
+                <th scope="col">분류 완료</th>
+                <th scope="col">긍정</th>
+                <th scope="col">부정</th>
+                <th scope="col">중립</th>
+                <th scope="col">혼합</th>
+                <th scope="col">보류</th>
+                <th scope="col">관련 없음</th>
+              </tr>
+            </thead>
+            <tbody>
+              $publishers
+            </tbody>
+          </table>
+        </div>
+        <p class="footnote">
+          같은 이슈를 다룬 다른 매체의 기사는 각각 셉니다. 의미 기반 이슈 통계는
+          아직 제공하지 않습니다.
+        </p>
+      </section>
+      <section class="panel" aria-labelledby="articles-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">SELECTED COVERAGE</p>
+            <h2 id="articles-title">기사 목록</h2>
+          </div>
+          <span id="visible-count" class="unit" aria-live="polite"
+            >$list_count</span
+          >
+        </div>
+        <div class="filters">
+          <label
+            >매체<select id="publisher-filter">
+              <option value="">전체 매체</option>
+              $publisher_options
+            </select></label
+          ><label
+            >분류<select id="sentiment-filter">
+              <option value="">전체 분류</option>
+              <option value="positive">긍정</option>
+              <option value="negative">부정</option>
+              <option value="neutral">중립</option>
+              <option value="mixed">혼합</option>
+              <option value="abstain">판단 보류</option>
+              <option value="unrelated">관련 없음</option>
+            </select></label
+          ><label>관측일<input id="date-filter" type="date" /></label>
+        </div>
+        <p class="footnote">
+          필터는 목록만 바꾸며 위 집계의 분모는 바꾸지 않습니다. 날짜는 KST
+          관측일이며 발행일이 아닙니다.
+        </p>
+        <div id="articles">$articles</div>
+        <p id="filter-empty" class="empty" hidden>
+          선택한 조건에 맞는 기사가 없습니다.
+        </p>
+        <noscript
+          ><p class="footnote">
+            JavaScript가 꺼져 있어 목록 필터는 사용할 수 없습니다. 기사와 집계는
+            그대로 확인할 수 있습니다.
+          </p></noscript
+        >
+      </section>
+      <footer>
+        <p>
+          이 수치는 선정된 뉴스 제목의 논조 분포입니다. 전체 언론 보도·국민
+          여론·개인의 객관적 평판이나 유무죄를 뜻하지 않습니다.
+        </p>
+        <p>
+          출처: $attribution · 전수 수집 아님 · GDELT 관측 시각 기준 · 원문·사진
+          재게시 없음
+        </p>
+        <p>설정 모델: $model · 프롬프트 SHA-256: $prompt_version</p>
+        <p>
+          샘플 화면 생성: $generated · <a href="report.json">공개 필드 JSON</a>
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>
