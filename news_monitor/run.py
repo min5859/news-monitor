@@ -28,7 +28,7 @@ def process_inputs(config, data_dir, reuse, runner):
             status = _run_collection(config, data_dir)
         now = datetime.now(UTC)
         dataset = None
-        if status["status"] in ("ok", "partial"):
+        if status["status"] in ("ok", "partial") and status["statistics"]["selected"] != 0:
             dataset = json.loads((data_dir / "articles.json").read_text())
         collection = prepare_collection(status, dataset, config, now)
     except (OSError, ValueError, TypeError, KeyError):

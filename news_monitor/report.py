@@ -40,9 +40,12 @@ def prepare_collection(status, dataset, config, now=None):
     if start > end or end != checked:
         raise ValueError("invalid collection window")
     clean.update(window_start=start.isoformat(), window_end=end.isoformat())
-    if state == "empty":
-        if status["statistics"]["selected"] != 0:
-            raise ValueError("invalid empty collection")
+    selected = status["statistics"]["selected"]
+    if type(selected) is not int or not 0 <= selected <= config["collection"]["max_articles"]:
+        raise ValueError("invalid selected count")
+    if state == "empty" and selected != 0:
+        raise ValueError("invalid empty collection")
+    if state in ("empty", "partial") and selected == 0:
         return clean
     if not isinstance(dataset, dict):
         raise TypeError("missing articles dataset")

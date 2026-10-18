@@ -289,6 +289,18 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(result["statistics"]["abstained"], 1)
         self.assertEqual(result["statistics"]["counts"]["neutral"], 0)
 
+    def test_partial_collection_with_no_selected_articles_does_not_reuse_old_data(self):
+        write_result(collection_fixture(), self.root)
+        empty = collection_fixture(0)
+        empty["status"] = "partial"
+        empty["warnings"] = ["upstream_limit_reached"]
+        write_result(empty, self.root)
+        result = run.run_pipeline(CONFIG, self.root, self.output, reuse=True,
+                                  runner=lambda *args: self.fail("no current selected articles"))
+        self.assertEqual(result["status"], "partial")
+        self.assertEqual(result["article_count"], 0)
+        self.assertEqual(result["analysis"]["model_calls"], 0)
+
     def test_stale_collection_cannot_be_reused_as_fresh(self):
         write_result(collection_fixture(now=datetime.now(UTC) - timedelta(days=2)), self.root)
         result = run.run_pipeline(CONFIG, self.root, self.output, reuse=True,
