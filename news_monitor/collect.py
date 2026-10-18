@@ -1,14 +1,17 @@
 """Bounded GDELT metadata collection; never fetch article bodies or images."""
 
 import argparse
+import fcntl
 import hashlib
 import ipaddress
 import json
+import math
 import os
 import re
 import tempfile
 import time
 import unicodedata
+from contextlib import contextmanager
 from datetime import UTC, datetime, timedelta
 from email.utils import parsedate_to_datetime
 from html import unescape
@@ -23,7 +26,9 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class CollectionError(Exception):
-    pass
+    def __init__(self, message, retry_after_seconds=None):
+        super().__init__(message)
+        self.retry_after_seconds = retry_after_seconds
 
 
 class PlainText(HTMLParser):
@@ -55,16 +60,20 @@ def load_config(path):
     if not opts["endpoint"].startswith("https://"):
         raise ValueError("collection endpoint must use HTTPS")
     for name, lower, upper in (("lookback_days", 1, 90), ("max_results_per_query", 1, 250),
-                                ("max_articles", 1, 250), ("attempts", 1, 3)):
+                                ("max_articles", 1, 250), ("attempts", 1, 3),
+                                ("publisher_goal", 1, 250)):
         value = opts[name]
         if type(value) is not int or not lower <= value <= upper:
             raise ValueError(f"invalid {name}")
     for name in ("timeout_seconds", "backoff_seconds", "max_retry_wait_seconds",
-                 "query_interval_seconds", "max_response_bytes", "max_title_chars"):
-        if type(opts[name]) not in (int, float) or opts[name] <= 0:
+                 "query_interval_seconds", "max_response_bytes", "max_title_chars",
+                 "minimum_run_interval_seconds", "rate_limit_cooldown_seconds"):
+        if type(opts[name]) not in (int, float) or not math.isfinite(opts[name]) or opts[name] <= 0:
             raise ValueError(f"invalid {name}")
     if opts["query_interval_seconds"] < 5:
         raise ValueError("GDELT query interval must be at least five seconds")
+    if min(opts["minimum_run_interval_seconds"], opts["rate_limit_cooldown_seconds"]) < opts["query_interval_seconds"]:
+        raise ValueError("run interval and cooldown must not be shorter than query interval")
     for name in ("max_response_bytes", "max_title_chars"):
         if type(opts[name]) is not int:
             raise ValueError(f"{name} must be an integer")
@@ -103,7 +112,9 @@ def retry_delay(headers, attempt, opts):
     value = headers.get("Retry-After") if headers else None
     if value:
         try:
-            return max(0, float(value))
+            delay = float(value)
+            if math.isfinite(delay):
+                return max(0, delay)
         except ValueError:
             try:
                 return max(0, (parsedate_to_datetime(value) - datetime.now(UTC)).total_seconds())
@@ -128,10 +139,12 @@ def fetch_json(url, opts, opener, sleeper):
             delay = retry_delay(exc.headers, attempt, opts)
             code = exc.code
             exc.close()
-            if code not in (429, 500, 502, 503, 504) or attempt + 1 == opts["attempts"]:
+            if code == 429:
+                raise CollectionError("http_429", max(delay, opts["rate_limit_cooldown_seconds"])) from None
+            if code not in (500, 502, 503, 504) or attempt + 1 == opts["attempts"]:
                 raise CollectionError(f"http_{code}") from None
             if delay > opts["max_retry_wait_seconds"]:
-                raise CollectionError(f"http_{code}:retry_after_exceeds_budget") from None
+                raise CollectionError(f"http_{code}:retry_after_exceeds_budget", delay) from None
             sleeper(max(delay, opts["query_interval_seconds"]))
         except (OSError, HTTPException) as exc:
             if attempt + 1 == opts["attempts"]:
@@ -173,9 +186,12 @@ def collect(config, now=None, opener=urlopen, sleeper=time.sleep):
     opts = config["collection"]
     start = now - timedelta(days=opts["lookback_days"])
     stats = {"fetched": 0, "invalid_metadata": 0, "out_of_window": 0, "not_target": 0,
-             "duplicates": 0, "limit_excluded": 0, "selected": 0}
+             "duplicates": 0, "limit_excluded": 0, "selected": 0,
+             "person_only": 0, "organization_only": 0, "neither_target": 0}
     rows, errors, warnings = {}, [], []
     successes = valid_metadata = 0
+    retry_after_seconds = None
+    attempted_queries = 0
     person = [normalized(v) for v in config["target"]["person_aliases"]]
     organization = [normalized(v) for v in config["target"]["organization_aliases"]]
     for index, query in enumerate(opts["queries"]):
@@ -185,9 +201,16 @@ def collect(config, now=None, opener=urlopen, sleeper=time.sleep):
                   "maxrecords": opts["max_results_per_query"],
                   "timespan": f"{opts['lookback_days']}d", "sort": "datedesc"}
         try:
+            attempted_queries += 1
             items = fetch_json(opts["endpoint"] + "?" + urlencode(params), opts, opener, sleeper)
         except CollectionError as exc:
             errors.append({"query": query, "error": str(exc)})
+            if exc.retry_after_seconds is not None:
+                retry_after_seconds = exc.retry_after_seconds
+                if index + 1 < len(opts["queries"]):
+                    warning = "remaining_queries_skipped_rate_limit" if str(exc) == "http_429" else "remaining_queries_skipped_retry_after"
+                    warnings.append(warning)
+                break
             continue
         successes += 1
         stats["fetched"] += len(items)
@@ -205,8 +228,12 @@ def collect(config, now=None, opener=urlopen, sleeper=time.sleep):
                 stats["out_of_window"] += 1
                 continue
             title = normalized(article["title"])
-            if not any(v in title for v in person) or not any(v in title for v in organization):
+            has_person = any(v in title for v in person)
+            has_organization = any(v in title for v in organization)
+            if not has_person or not has_organization:
                 stats["not_target"] += 1
+                reason = "person_only" if has_person else "organization_only" if has_organization else "neither_target"
+                stats[reason] += 1
                 continue
             article["collected_at"] = now.isoformat()
             old = rows.get(article["url"])
@@ -224,12 +251,20 @@ def collect(config, now=None, opener=urlopen, sleeper=time.sleep):
         status = "partial"
     else:
         status = "ok" if selected else "empty"
+    publishers = sorted({a["publisher"] for a in selected})
+    goal_met = len(publishers) >= opts["publisher_goal"]
+    if successes and not goal_met:
+        warnings.append("publisher_goal_not_met")
     return {
         "schema_version": 1, "status": status, "target": config["target"]["name"],
         "checked_at": now.isoformat(), "window_start": start.isoformat(), "window_end": now.isoformat(),
         "date_basis": "gdelt_observation_not_publication", "coverage": "search_sample_not_exhaustive",
         "selection": "latest_observed_target_in_headline", "statistics": stats,
-        "publishers": sorted({a["publisher"] for a in selected}),
+        "publishers": publishers,
+        "coverage_goals": {"publisher_goal": opts["publisher_goal"],
+                           "actual_publishers": len(publishers), "publisher_goal_met": goal_met},
+        "source_queries": {"planned": len(opts["queries"]), "attempted": attempted_queries, "succeeded": successes},
+        "retry_after_seconds": retry_after_seconds,
         "source_attribution": {"name": opts["attribution_name"], "url": opts["attribution_url"]},
         "warnings": sorted(set(warnings)), "errors": errors, "articles": selected,
     }
@@ -260,19 +295,83 @@ def write_result(result, data_dir):
     atomic_json(data_dir / "collection_status.json", status)
 
 
+@contextmanager
+def collection_lock(data_dir):
+    """OS releases the lock on exit/crash; never delete a lock held by another run."""
+    data_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
+    with (data_dir / ".collection.lock").open("a") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        yield
+
+
+def failure_result(error, now):
+    return {"schema_version": 1, "status": "failed", "checked_at": now.isoformat(),
+            "statistics": {"selected": 0}, "publishers": [], "warnings": [],
+            "errors": [{"error": error}], "articles": []}
+
+
+def _run_collection(config, data_dir, now=None, opener=urlopen, sleeper=time.sleep):
+    """Caller holds collection_lock. Persist throttling before any network I/O."""
+    def clock():
+        return now if now is not None else datetime.now(UTC)
+
+    current = clock()
+    if current.tzinfo is None:
+        raise ValueError("collection time must be timezone-aware")
+    state_path = data_dir / "request_state.json"
+    if state_path.exists():
+        state = json.loads(state_path.read_text())
+        if not isinstance(state, dict):
+            raise ValueError("invalid request state")
+        until = datetime.fromisoformat(state["retry_not_before"])
+        if until.tzinfo is None:
+            raise ValueError("request state must be timezone-aware")
+        if current < until:
+            result = failure_result("request_cooldown", current)
+            result["errors"][0]["reason"] = state.get("reason", "previous_run_cooldown")
+            result["retry_not_before"] = until.isoformat()
+            result["source_queries"] = {"planned": len(config["collection"]["queries"]), "attempted": 0, "succeeded": 0}
+            write_result(result, data_dir)
+            return result
+    interval = config["collection"]["minimum_run_interval_seconds"]
+    atomic_json(state_path, {"retry_not_before": (current + timedelta(seconds=interval)).isoformat(),
+                            "reason": "minimum_run_interval"})
+    result = collect(config, current, opener=opener, sleeper=sleeper)
+    delay = max(interval, result["retry_after_seconds"] or 0)
+    until = (clock() + timedelta(seconds=delay)).isoformat()
+    atomic_json(state_path, {"retry_not_before": until,
+                            "reason": result["errors"][-1]["error"] if result["retry_after_seconds"] else "minimum_run_interval"})
+    result["retry_not_before"] = until
+    write_result(result, data_dir)
+    return result
+
+
+def run_collection(config, data_dir, now=None, opener=urlopen, sleeper=time.sleep):
+    with collection_lock(data_dir):
+        return _run_collection(config, data_dir, now, opener, sleeper)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=ROOT / "config.json")
     parser.add_argument("--data-dir", type=Path, default=ROOT / "data")
     args = parser.parse_args()
     try:
-        config = load_config(args.config)
-        result = collect(config)
-        write_result(result, args.data_dir)
+        with collection_lock(args.data_dir):
+            try:
+                config = load_config(args.config)
+                result = _run_collection(config, args.data_dir)
+            except (OSError, ValueError, KeyError, TypeError, OverflowError) as exc:
+                result = failure_result(type(exc).__name__, datetime.now(UTC))
+                write_result(result, args.data_dir)
+    except BlockingIOError:
+        print(json.dumps({"status": "failed", "error": "already_running"}))
+        return 1
     except (OSError, ValueError, KeyError, TypeError) as exc:
         print(json.dumps({"status": "failed", "error": type(exc).__name__}))
         return 1
-    print(json.dumps({k: result[k] for k in ("status", "statistics", "publishers", "warnings", "errors")}, ensure_ascii=False, indent=2))
+    fields = ("status", "statistics", "publishers", "coverage_goals", "warnings", "errors", "retry_not_before")
+    print(json.dumps({k: result[k] for k in fields if k in result}, ensure_ascii=False, indent=2))
     return {"ok": 0, "failed": 1}.get(result["status"], 2)
 
 
