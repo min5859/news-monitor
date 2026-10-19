@@ -1,0 +1,318 @@
+{
+  "schema_version": 1,
+  "sample": true,
+  "human_reviewed": false,
+  "status": "ok",
+  "target": {
+    "name": "회장님",
+    "organization": "효성"
+  },
+  "display_policy": {
+    "person_name_replaced": true,
+    "source_links_may_identify_target": true,
+    "article_titles_modified": true,
+    "evidence_may_be_omitted": true
+  },
+  "generated_at": "2026-10-19T00:26:39.856665+00:00",
+  "collection_checked_at": "2026-10-19T00:20:13.087119+00:00",
+  "window_start": "2026-10-05T15:00:00+00:00",
+  "window_end": "2026-10-19T00:20:13.087119+00:00",
+  "analysis_scope": "headline_only",
+  "date_basis": "publisher_date",
+  "coverage": "search_sample_not_exhaustive",
+  "selection": "latest_published_target_in_headline",
+  "article_count": 5,
+  "publisher_count": 5,
+  "publisher_goal": 5,
+  "warnings": [],
+  "source_attribution": {
+    "name": "Codex live web search · 원문 언론사",
+    "url": "https://developers.openai.com/codex/"
+  },
+  "analysis": {
+    "provider": "codex",
+    "model": "gpt-6-luna",
+    "prompt_sha256": "577fb8d45a5b68cdf1276b241a66a8c5c9d9f40961bfeba35f6243ceccac4389",
+    "model_calls": 2,
+    "cache_hits": 3,
+    "failed_articles": 0
+  },
+  "statistics": {
+    "counts": {
+      "positive": 5,
+      "negative": 0,
+      "neutral": 0,
+      "mixed": 0
+    },
+    "denominator": 5,
+    "percentages": {
+      "positive": 100.0,
+      "negative": 0.0,
+      "neutral": 0.0,
+      "mixed": 0.0
+    },
+    "abstained": 0,
+    "unrelated": 0,
+    "positive_negative_only": {
+      "denominator": 5,
+      "percentages": {
+        "positive": 100.0,
+        "negative": 0.0
+      }
+    }
+  },
+  "publishers": [
+    {
+      "publisher": "biz.newdaily.co.kr",
+      "article_count": 1,
+      "counts": {
+        "positive": 1,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 0
+      },
+      "denominator": 1,
+      "percentages": {
+        "positive": 100.0,
+        "negative": 0.0,
+        "neutral": 0.0,
+        "mixed": 0.0
+      },
+      "abstained": 0,
+      "unrelated": 0,
+      "positive_negative_only": {
+        "denominator": 1,
+        "percentages": {
+          "positive": 100.0,
+          "negative": 0.0
+        }
+      }
+    },
+    {
+      "publisher": "dailyenews.co.kr",
+      "article_count": 1,
+      "counts": {
+        "positive": 1,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 0
+      },
+      "denominator": 1,
+      "percentages": {
+        "positive": 100.0,
+        "negative": 0.0,
+        "neutral": 0.0,
+        "mixed": 0.0
+      },
+      "abstained": 0,
+      "unrelated": 0,
+      "positive_negative_only": {
+        "denominator": 1,
+        "percentages": {
+          "positive": 100.0,
+          "negative": 0.0
+        }
+      }
+    },
+    {
+      "publisher": "etoday.co.kr",
+      "article_count": 1,
+      "counts": {
+        "positive": 1,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 0
+      },
+      "denominator": 1,
+      "percentages": {
+        "positive": 100.0,
+        "negative": 0.0,
+        "neutral": 0.0,
+        "mixed": 0.0
+      },
+      "abstained": 0,
+      "unrelated": 0,
+      "positive_negative_only": {
+        "denominator": 1,
+        "percentages": {
+          "positive": 100.0,
+          "negative": 0.0
+        }
+      }
+    },
+    {
+      "publisher": "koreatimes.co.kr",
+      "article_count": 1,
+      "counts": {
+        "positive": 1,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 0
+      },
+      "denominator": 1,
+      "percentages": {
+        "positive": 100.0,
+        "negative": 0.0,
+        "neutral": 0.0,
+        "mixed": 0.0
+      },
+      "abstained": 0,
+      "unrelated": 0,
+      "positive_negative_only": {
+        "denominator": 1,
+        "percentages": {
+          "positive": 100.0,
+          "negative": 0.0
+        }
+      }
+    },
+    {
+      "publisher": "topdaily.kr",
+      "article_count": 1,
+      "counts": {
+        "positive": 1,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 0
+      },
+      "denominator": 1,
+      "percentages": {
+        "positive": 100.0,
+        "negative": 0.0,
+        "neutral": 0.0,
+        "mixed": 0.0
+      },
+      "abstained": 0,
+      "unrelated": 0,
+      "positive_negative_only": {
+        "denominator": 1,
+        "percentages": {
+          "positive": 100.0,
+          "negative": 0.0
+        }
+      }
+    }
+  ],
+  "articles": [
+    {
+      "id": "e20ca96b7becc2d7f286",
+      "title": "AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로",
+      "url": "https://www.etoday.co.kr/news/view/2636513?trc=sub_list_news",
+      "publisher": "etoday.co.kr",
+      "language": "ko",
+      "indexed_at": "2026-10-18T13:19:04+00:00",
+      "published_at": "2026-10-16",
+      "analysis_scope": "headline_only",
+      "source": "codex_web_search",
+      "observation": {
+        "first_seen_at": "2026-10-18T13:19:04+00:00",
+        "last_seen_at": "2026-10-18T13:19:04+00:00",
+        "reused": true
+      },
+      "classification": {
+        "evidence": "AI 시대 내다본 회장님",
+        "reason": "제목은 회장님의 AI 시대 전망과 효성중공업의 생산 확대를 연결해 전합니다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "f2c4eb966ccb6aa8ce84",
+      "title": "효성重, 수출 전용 초고압차단기 신공장 준공...회장님, 글로벌 공급망 ‘드라이브’",
+      "url": "https://www.dailyenews.co.kr/news/articleView.html?idxno=53921",
+      "publisher": "dailyenews.co.kr",
+      "language": "ko",
+      "indexed_at": "2026-10-19T00:20:13.087119+00:00",
+      "published_at": "2026-10-16",
+      "analysis_scope": "headline_only",
+      "source": "codex_web_search",
+      "observation": {
+        "first_seen_at": "2026-10-19T00:20:13.087119+00:00",
+        "last_seen_at": "2026-10-19T00:20:13.087119+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "회장님, 글로벌 공급망 ‘드라이브’",
+        "reason": "제목에서 회장님이 글로벌 공급망 확대를 추진하는 내용으로 보도됩니다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "d9f75008af8159a3b208",
+      "title": "회장님의 '5년 앞선 투자' ... 효성重, 창원에 수출 전용 '초고압차단기 공장' 준공",
+      "url": "https://biz.newdaily.co.kr/site/data/html/2026/10/16/2026101600081.html",
+      "publisher": "biz.newdaily.co.kr",
+      "language": "ko",
+      "indexed_at": "2026-10-18T13:19:04+00:00",
+      "published_at": "2026-10-16",
+      "analysis_scope": "headline_only",
+      "source": "codex_web_search",
+      "observation": {
+        "first_seen_at": "2026-10-18T13:19:04+00:00",
+        "last_seen_at": "2026-10-18T13:19:04+00:00",
+        "reused": true
+      },
+      "classification": {
+        "evidence": "회장님의 '5년 앞선 투자'",
+        "reason": "제목은 회장님의 투자와 효성중공업 공장 준공을 연결해 전합니다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "14361f68b39f4521a4e0",
+      "title": "회장님, 효성 계열사 지분 확대...지배력 강화·책임경영 행보",
+      "url": "https://www.topdaily.kr/articles/112228",
+      "publisher": "topdaily.kr",
+      "language": "ko",
+      "indexed_at": "2026-10-19T00:20:13.087119+00:00",
+      "published_at": "2026-10-06",
+      "analysis_scope": "headline_only",
+      "source": "codex_web_search",
+      "observation": {
+        "first_seen_at": "2026-10-18T13:19:04+00:00",
+        "last_seen_at": "2026-10-19T00:20:13.087119+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "지배력 강화·책임경영 행보",
+        "reason": "제목은 회장님의 지분 확대와 책임경영 행보를 긍정적으로 전합니다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "35a8dc963c308a6f0364",
+      "title": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam",
+      "url": "https://www.koreatimes.co.kr/amp/business/20261006/hyosung-chairman-cho-hyun-joon-completes-bio-spandex-base-in-vietnam",
+      "publisher": "koreatimes.co.kr",
+      "language": "en",
+      "indexed_at": "2026-10-19T00:20:13.087119+00:00",
+      "published_at": "2026-10-06",
+      "analysis_scope": "headline_only",
+      "source": "codex_web_search",
+      "observation": {
+        "first_seen_at": "2026-10-19T00:20:13.087119+00:00",
+        "last_seen_at": "2026-10-19T00:20:13.087119+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam",
+        "reason": "효성 회장님의 베트남 바이오 스판덱스 거점 완공 소식을 전하는 제목입니다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    }
+  ]
+}
