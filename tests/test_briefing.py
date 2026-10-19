@@ -1,0 +1,185 @@
+"""Synthetic headline grouping and period checks; no model or network calls."""
+
+import copy
+import hashlib
+import json
+import shutil
+import subprocess
+import tempfile
+import unittest
+from pathlib import Path
+
+from test_pipeline import CONFIG, collection_fixture, decision, report_fixture
+
+from news_monitor import analysis, briefing, preflight, run, site
+from news_monitor.collect import ROOT, write_result
+from news_monitor.report import timestamp
+
+
+class BriefingTests(unittest.TestCase):
+    def setUp(self):
+        self.cfg = copy.deepcopy(CONFIG)
+        self.cfg["briefing"]["enabled"] = True
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.data = Path(self.temp.name)
+        self.report = report_fixture(3)
+        self.report["analysis"]["prompt_sha256"] = hashlib.sha256(analysis.validate_options(self.cfg).encode()).hexdigest()
+        titles = ["가상 효성 회장님 초고압차단기 생산 확대", "가상 효성 회장님 초고압차단기 공장 준공", "가상 효성 회장님 계열사 지분 매입"]
+        for row, title in zip(self.report["articles"], titles, strict=True):
+            row["title"] = title
+            row["classification"]["evidence"] = "효성 회장님"
+        self.ids = [row["id"] for row in self.report["articles"]]
+
+    def grouped(self):
+        return {"groups": [
+            {"label": "초고압차단기 생산 확대", "summary": "제목들은 회장님과 초고압차단기 생산 확대·공장 준공 소식을 연결합니다.",
+             "topic": "management", "article_ids": self.ids[:2],
+             "evidence": [{"article_id": row["id"], "quote": "초고압차단기"} for row in self.report["articles"][:2]]},
+            {"label": "계열사 지분 매입", "summary": "제목은 회장님의 계열사 지분 매입 소식을 전합니다.", "topic": "governance",
+             "article_ids": self.ids[2:], "evidence": [{"article_id": self.ids[2], "quote": "계열사 지분 매입"}]},
+        ]}
+
+    def enrich(self, response=None, runner=None):
+        return briefing.enrich(self.report, self.cfg, self.data,
+                               runner=runner or (lambda *args, **kwargs: (json.dumps(response or self.grouped()), {})))
+
+    def test_group_stats_are_computed_and_cache_avoids_second_call(self):
+        result = self.enrich()
+        self.assertEqual(result["insights"]["status"], "ok")
+        self.assertEqual(len(result["insights"]["groups"]), 2)
+        again = self.enrich(runner=lambda *args, **kwargs: self.fail("cached"))
+        self.assertTrue(again["insights"]["cache_hit"])
+        self.assertEqual(again["insights"]["model_calls"], 0)
+
+    def test_invalid_ids_missing_members_and_fabricated_evidence_fall_back(self):
+        for kind in ("duplicate", "missing", "unknown", "evidence", "number", "raw"):
+            document = self.grouped()
+            if kind == "duplicate":
+                document["groups"][1]["article_ids"] = self.ids[:1]
+            elif kind == "missing":
+                document["groups"].pop()
+            elif kind == "unknown":
+                document["groups"][0]["article_ids"].append("not-an-article")
+            elif kind == "evidence":
+                document["groups"][0]["evidence"][0]["quote"] = "제목에 없는 주장"
+            elif kind == "number":
+                document["groups"][0]["summary"] = "생산이 999배 늘었다는 제목입니다."
+            else:
+                document["raw"] = "MUST_NOT_PERSIST"
+            with self.subTest(kind=kind):
+                result = self.enrich(document)
+                self.assertEqual(result["insights"]["status"], "fallback")
+                self.assertEqual(len(result["insights"]["groups"]), 3)
+                self.assertEqual(list((self.data / "briefing").glob("*.json")), [])
+
+    def test_unrelated_articles_are_not_in_issues(self):
+        self.report["articles"][2]["classification"].update(relevance="uncertain", sentiment="abstain")
+        document = self.grouped()
+        document["groups"].pop()
+        result = self.enrich(document)
+        self.assertEqual(len(result["insights"]["groups"]), 1)
+        self.assertNotIn(self.ids[2], result["insights"]["groups"][0]["article_ids"])
+
+    def test_partial_period_uses_selected_headline_not_full_group_summary(self):
+        result = self.enrich()
+        rows = self.report["articles"][:1]
+        groups = briefing.select_groups(result["insights"]["groups"], rows)
+        self.assertEqual(len(groups), 1)
+        self.assertNotEqual(groups[0]["summary"], self.grouped()["groups"][0]["summary"])
+        self.assertIn(rows[0]["title"], groups[0]["summary"])
+
+    def test_dates_outside_real_collection_window_are_not_zero_news(self):
+        result = self.enrich()
+        window = next(row for row in result["insights"]["periods"] if row["days"] == 30)
+        self.assertFalse(window["coverage_complete"])
+        self.assertIsNone(window["daily"][0]["article_count"])
+        self.assertEqual(window["statistics"]["denominator"], 3)
+
+    def test_existing_observation_times_are_unchanged(self):
+        observations = copy.deepcopy([row["observation"] for row in self.report["articles"]])
+        result = self.enrich()
+        self.assertEqual([row["observation"] for row in result["articles"]], observations)
+
+    def test_bad_public_group_and_tampered_period_statistics_fail_gate(self):
+        result = self.enrich()
+        preflight.check_artifact(result, self.cfg)
+        result["insights"]["periods"][0]["statistics"]["denominator"] = 999
+        with self.assertRaises(ValueError):
+            preflight.check_artifact(result, self.cfg)
+
+    def test_kst_first_seen_day_and_article_publication_day_are_distinct(self):
+        self.assertEqual(briefing.kst_day("2026-10-18T16:00:00+00:00"), "2026-10-19")
+        result = self.enrich()
+        expected = timestamp(self.report["window_end"]).astimezone(briefing.KST).date().isoformat()
+        self.assertEqual(result["insights"]["as_of_day"], expected)
+
+    def test_pipeline_uses_readonly_grouping_and_records_it_separately(self):
+        write_result(collection_fixture(3), self.data)
+
+        def runner(prompt, model, **kwargs):
+            self.assertFalse(kwargs["search"])
+            payload = json.loads(prompt.split("INPUT_JSON:\n")[1])
+            self.assertNotIn("조현준", prompt)
+            self.assertNotIn("https://", prompt)
+            self.assertTrue(str(kwargs["schema"]).endswith("schemas/briefing.json"))
+            document = {"groups": [{"label": "가상 제목 보도", "summary": "제목은 회장님 관련 소식을 전합니다.",
+                                     "topic": "other", "article_ids": [row["id"]],
+                                     "evidence": [{"article_id": row["id"], "quote": "효성 회장님"}]}
+                                    for row in payload["articles"]]}
+            return json.dumps(document), {}
+
+        output = self.data / "dist"
+        result = run.run_pipeline(self.cfg, self.data, output, reuse=True,
+                                  runner=lambda *args: json.dumps(decision()), briefing_runner=runner)
+        self.assertEqual(result["insights"]["status"], "ok")
+        self.assertTrue(preflight.check_ready(self.cfg, self.data, output)["ready"])
+        status = json.loads((self.data / "pipeline_status.json").read_text())
+        self.assertEqual(status["briefing"]["model_calls"], 1)
+
+    def test_raw_model_failure_is_not_saved_and_fallback_is_explicit(self):
+        def failure(*args, **kwargs):
+            raise analysis.AnalysisError("PRIVATE_TOKEN_MUST_NOT_LEAK")
+
+        result = self.enrich(runner=failure)
+        self.assertEqual(result["status"], "partial")
+        self.assertEqual(result["insights"]["status"], "fallback")
+        self.assertNotIn("PRIVATE_TOKEN", json.dumps(result))
+        preflight.check_artifact(result, self.cfg)
+
+    def test_unknown_topic_and_dates_too_far_apart_are_not_merged(self):
+        document = self.grouped()
+        document["groups"][0]["topic"] = "invented_topic"
+        self.assertEqual(self.enrich(document)["insights"]["status"], "fallback")
+        self.report["articles"][0]["published_at"] = "2026-01-01"
+        self.report["articles"][1]["published_at"] = "2026-02-01"
+        self.assertEqual(self.enrich()["insights"]["status"], "fallback")
+
+    def test_no_related_articles_skips_model_instead_of_making_up_a_brief(self):
+        for row in self.report["articles"]:
+            row["classification"].update(relevance="uncertain", sentiment="abstain")
+        result = self.enrich(runner=lambda *args, **kwargs: self.fail("no input"))
+        self.assertEqual(result["insights"]["status"], "empty")
+        self.assertEqual(result["insights"]["groups"], [])
+
+    def test_script_data_cannot_close_its_inert_container(self):
+        self.report["articles"][0]["title"] = "가상 </script><img src=x onerror=alert(1)>"
+        data = site.dashboard_content(self.report)["dashboard_data"]
+        self.assertNotIn("<", data)
+        self.assertNotIn("</script>", data)
+        self.assertEqual(json.loads(data)["articles"][0]["title"], self.report["articles"][0]["title"])
+
+    @unittest.skipUnless(shutil.which("node"), "Node unavailable; run JS tests separately on Mac")
+    def test_browser_period_aggregation_matches_python(self):
+        result = self.enrich()
+        payload = site.dashboard_content(result)["dashboard_data"]
+        javascript = "const {buildView}=require('./web/app.js');let input='';process.stdin.on('data',x=>input+=x);process.stdin.on('end',()=>console.log(JSON.stringify([1,7,30].map(days=>buildView(JSON.parse(input),{days})))));"
+        response = subprocess.run(["node", "-e", javascript], input=payload, text=True, capture_output=True, check=True, cwd=ROOT)
+        actual = json.loads(response.stdout)
+        for js, py in zip(actual, result["insights"]["periods"], strict=True):
+            for key in ("statistics", "publisher_count", "newly_seen_count", "retained_count", "coverage_complete", "daily"):
+                self.assertEqual(js[key], py[key])
+
+
+if __name__ == "__main__":
+    unittest.main()

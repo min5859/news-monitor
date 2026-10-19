@@ -19,7 +19,10 @@ from news_monitor.report import make_report, prepare_collection
 from news_monitor.site import build_site
 
 
-def process_inputs(config, data_dir, reuse, runner):
+def process_inputs(config, data_dir, reuse, runner, briefing_runner=None):
+    from news_monitor.briefing import options
+
+    options(config)  # Validate new settings before spending collection/model budget.
     template = validate_options(config)
     now = datetime.now(UTC)
     try:
@@ -42,22 +45,24 @@ def process_inputs(config, data_dir, reuse, runner):
         decisions, info = analyze_articles(collection["articles"], config, data_dir, runner)
     else:
         decisions = []
-    return make_report(collection, decisions, info, config, datetime.now(UTC))
+    from news_monitor.briefing import enrich
+
+    return enrich(make_report(collection, decisions, info, config, datetime.now(UTC)), config, data_dir, briefing_runner)
 
 
-def run_pipeline(config, data_dir, output_dir, reuse=False, runner=None):
+def run_pipeline(config, data_dir, output_dir, reuse=False, runner=None, briefing_runner=None):
     with collection_lock(data_dir):
         status_file = data_dir / "pipeline_status.json"
         atomic_json(status_file, {"status": "running", "started_at": datetime.now(UTC).isoformat()})
         try:
-            report = process_inputs(config, data_dir, reuse, runner)
+            report = process_inputs(config, data_dir, reuse, runner, briefing_runner)
             display = report
             if not report["articles"] and (data_dir / "report.json").exists():
                 from news_monitor.preflight import check_artifact
 
                 try:
                     previous = json.loads((data_dir / "report.json").read_text())
-                    check_artifact(previous, config)
+                    check_artifact(previous, config, allow_legacy=True)
                     if previous["articles"] and previous["status"] in ("ok", "partial"):
                         display = copy.deepcopy(previous)
                         display.update(status="stale", generated_at=report["generated_at"],
@@ -70,6 +75,7 @@ def run_pipeline(config, data_dir, output_dir, reuse=False, runner=None):
             state = {key: report[key] for key in (
                 "status", "generated_at", "collection_checked_at", "analysis", "article_count")}
             state.update(display_status=display["status"], display_article_count=display["article_count"])
+            state["briefing"] = {key: report["insights"][key] for key in ("status", "model_calls", "cache_hit")}
             atomic_json(status_file, state)
             return report
         except (OSError, ValueError, TypeError, KeyError, OverflowError) as exc:
@@ -98,7 +104,9 @@ def main():
                 pass  # Never clobber an active run or hide the original failure.
         print(json.dumps({"status": "failed", "error": type(exc).__name__}))
         return 1
-    print(json.dumps({key: report[key] for key in ("status", "article_count", "publisher_count", "analysis")}, ensure_ascii=False))
+    summary = {key: report[key] for key in ("status", "article_count", "publisher_count", "analysis")}
+    summary["briefing"] = {key: report["insights"][key] for key in ("status", "model_calls", "cache_hit")}
+    print(json.dumps(summary, ensure_ascii=False))
     return {"ok": 0, "failed": 1}.get(report["status"], 2)
 
 

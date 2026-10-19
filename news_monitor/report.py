@@ -167,7 +167,7 @@ def make_report(collection, decisions, info, config, now=None):
         state = "partial"
     source = config["collection"]
     report = {
-        "schema_version": 1, "sample": True, "human_reviewed": False, "status": state,
+        "schema_version": 2, "sample": True, "human_reviewed": False, "status": state,
         "target": {"name": display_name(config), "organization": config["target"]["organization"]},
         "display_policy": {"person_name_replaced": True, "source_links_may_identify_target": True,
                            "article_titles_modified": True, "evidence_may_be_omitted": True},
@@ -185,4 +185,7 @@ def make_report(collection, decisions, info, config, now=None):
         "articles": articles,
     }
     validate_public_names(report, config)
+    from news_monitor.briefing import compose
+
+    report["insights"] = compose(report, config, status="pending" if config["briefing"]["enabled"] else "disabled")
     return report

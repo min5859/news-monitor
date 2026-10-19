@@ -11,6 +11,8 @@ from news_monitor.collect import ROOT
 
 CONFIG = json.loads((ROOT / "config.json").read_text())
 CONFIG["collection"]["search_groups"] = [["가상 검색"]]
+CONFIG["collection"]["lookback_days"] = 14
+CONFIG["briefing"]["enabled"] = False
 NOW = datetime(2026, 10, 18, 12, tzinfo=UTC)
 
 

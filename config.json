@@ -25,7 +25,7 @@
     "schema_file": "schemas/discovery.json",
     "endpoint": "https://api.gdeltproject.org/api/v2/doc/doc",
     "queries": ["(Hyosung OR \"Cho Hyun-joon\" OR \"Hyun-Joon Cho\")"],
-    "lookback_days": 14,
+    "lookback_days": 30,
     "max_results_per_query": 30,
     "max_articles": 30,
     "max_title_chars": 1000,
@@ -42,6 +42,28 @@
     "attribution_name": "Codex live web search · 원문 언론사",
     "attribution_url": "https://developers.openai.com/codex/",
     "tracking_query_parameters": ["fbclid", "gclid"]
+  },
+  "briefing": {
+    "enabled": true,
+    "model": "gpt-6-luna",
+    "prompt_file": "prompts/briefing.md",
+    "schema_file": "schemas/briefing.json",
+    "attempts": 2,
+    "timeout_seconds": 90,
+    "max_output_bytes": 65536,
+    "max_label_chars": 80,
+    "max_summary_chars": 240,
+    "max_evidence_chars": 160,
+    "max_group_span_days": 7,
+    "period_days": [1, 7, 30],
+    "default_period_days": 30,
+    "topics": {
+      "management": "경영·투자",
+      "governance": "지배구조",
+      "legal_regulation": "법원·규제",
+      "external": "대외활동",
+      "other": "기타"
+    }
   },
   "analysis": {
     "provider": "codex",

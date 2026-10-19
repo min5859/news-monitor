@@ -1,5 +1,6 @@
 """Build only explicitly named static artifacts; never copy runtime directories."""
 
+import json
 import os
 import tempfile
 from html import escape
@@ -8,6 +9,7 @@ from string import Template
 from zoneinfo import ZoneInfo
 
 from news_monitor.analysis import SENTIMENTS
+from news_monitor.briefing import article_day, kst_day, select_groups
 from news_monitor.collect import ROOT, atomic_json
 from news_monitor.report import summarize, timestamp
 
@@ -27,12 +29,75 @@ def display_time(value, short=False):
     return timestamp(value).astimezone(ZoneInfo("Asia/Seoul")).strftime("%m.%d" if short else "%Y.%m.%d %H:%M KST")
 
 
+def dashboard_content(report):
+    empty = {"period_options": "", "topic_options": "", "scope_note": "자료 범위를 확인해 주세요.",
+             "coverage_detail": "", "briefing_lines": "<li>검증된 핵심 브리핑을 표시할 수 없습니다.</li>",
+             "briefing_meta": "이슈 요약 미완료", "issue_cards": "", "issue_count": "—",
+             "trend_rows": "", "dashboard_data": "null"}
+    insights = report.get("insights")
+    if not insights or not insights["periods"] or report["status"] == "failed":
+        return empty
+    view = next(row for row in insights["periods"] if row["days"] == insights["default_period_days"])
+    by_id = {row["id"]: row for row in report["articles"]}
+    rows = [by_id[identity] for identity in view["article_ids"]]
+    groups = select_groups(insights["groups"], rows)
+    groups.sort(key=lambda group: (max(article_day(by_id[identity]) for identity in group["article_ids"]),
+                                   len({by_id[identity]["publisher"] for identity in group["article_ids"]})), reverse=True)
+    cards, lines = [], []
+    for index, group in enumerate(groups):
+        members = [by_id[identity] for identity in group["article_ids"]]
+        publishers = len({row["publisher"] for row in members})
+        if index < 3:
+            lines.append(f'<li>{h(group["summary"])} ({publishers}개 매체·{len(members)}건)</li>')
+        quotes = "".join(f'<li><a href="#article-{h(entry["article_id"])}">{h(by_id[entry["article_id"]]["publisher"])}: “{h(entry["quote"])}”</a></li>' for entry in group["evidence"])
+        cards.append(f'<article class="issue-card"><span class="issue-topic">{h(insights["topics"][group["topic"]])}</span>'
+                     f'<h3>{h(group["label"])}</h3><p>{h(group["summary"])}</p>'
+                     f'<p class="footnote">{len(members)}건 · {publishers}개 매체</p>'
+                     f'<details><summary>제목 근거·관련 기사</summary><ul>{quotes}</ul></details></article>')
+    trend = []
+    for day in reversed(view["daily"]):
+        cells = [day["date"], "자료 범위 밖", *["—"] * 5]
+        if day["covered"]:
+            cells = [day["date"], day["article_count"], *[day["statistics"]["counts"][key] for key in SENTIMENTS], day["statistics"]["abstained"]]
+        trend.append("<tr>" + "".join(f"<td>{h(value)}</td>" for value in cells) + "</tr>")
+    # No external URLs are embedded in script data; source links remain escaped anchors.
+    payload = {key: insights[key] for key in ("as_of_day", "available_start", "groups", "topics")}
+    payload["articles"] = [{"id": row["id"], "title": row["title"], "publisher": row["publisher"],
+                            "day": article_day(row), "relevance": row["classification"]["relevance"],
+                            "sentiment": row["classification"]["sentiment"],
+                            "first_seen_day": kst_day(row["observation"]["first_seen_at"]),
+                            "reused": row["observation"]["reused"]} for row in report["articles"]]
+    data = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+    for source, escaped in (("<", "\\u003c"), (">", "\\u003e"), ("&", "\\u0026"), ("\u2028", "\\u2028"), ("\u2029", "\\u2029")):
+        data = data.replace(source, escaped)
+    note = f'{view["start"]} — {view["end"]} · 실제 자료 범위 {insights["available_start"]} — {insights["as_of_day"]}'
+    if not view["coverage_complete"]:
+        note += " · 요청 기간 일부는 자료 범위 밖입니다."
+    meta = "AI가 제목만으로 묶고 작성한 미검토 요약입니다. 같은 사건인지·요약의 정확성을 보장하지 않습니다."
+    if insights["status"] != "ok":
+        meta = "AI 이슈 묶음 미완료/비활성: 요약을 만들지 않고 기사 제목별로 표시합니다."
+    return {"period_options": "".join(f'<option value="{row["days"]}"' + (' selected' if row["days"] == insights["default_period_days"] else '') + f'>{"기준일 하루" if row["days"] == 1 else str(row["days"]) + "일"}</option>' for row in insights["periods"]),
+            "topic_options": "".join(f'<option value="{h(key)}">{h(label)}</option>' for key, label in insights["topics"].items()),
+            "scope_note": h(note),
+            "coverage_detail": h(f'핵심 이슈 {view["issue_count"]}개 · 기준일에 처음 확인 {view["newly_seen_count"]}건 · 이전 수집 유지 {view["retained_count"]}건'),
+            "briefing_lines": "".join(lines) or "<li>선택 범위에서 핵심 이슈로 정리할 관련 기사를 확보하지 못했습니다.</li>",
+            "briefing_meta": h(meta), "issue_cards": "".join(cards), "issue_count": f'{view["issue_count"]}개 이슈 / {len(rows)}건 기사',
+            "trend_rows": "".join(trend), "dashboard_data": data}
+
+
 def render(report):
     failed = report["status"] == "failed"
     stats = report["statistics"]
+    scoped_rows = report["articles"]
+    insights = report.get("insights")
+    if not failed and insights and insights["periods"]:
+        view = next(row for row in insights["periods"] if row["days"] == insights["default_period_days"])
+        stats = view["statistics"]
+        scoped_rows = [row for row in report["articles"] if row["id"] in view["article_ids"]]
+    scoped_ids = {row["id"] for row in scoped_rows}
     unknown = "—"
-    metrics = (("선정 기사", report["article_count"], "URL 중복 제거 후"),
-               ("확보 매체", report["publisher_count"], f"목표 {report['publisher_goal']}곳 · 전수 수집 아님"),
+    metrics = (("선정 기사", None if failed else len(scoped_rows), "선택 범위 · 중복 제거 후"),
+               ("확보 매체", None if failed else len({row["publisher"] for row in scoped_rows}), f"목표 {report['publisher_goal']}곳 · 전수 수집 아님"),
                ("분류 완료", None if stats is None else stats["denominator"], "대상 관련 기사만 집계"),
                ("판단 보류", None if stats is None else stats["abstained"], "분모에서 제외"))
     metric_html = "".join(f'<div class="metric"><span class="metric-label">{h(label)}</span><strong class="metric-value">{unknown if value is None else value}</strong><span class="metric-note">{h(note)}</span></div>' for label, value, note in metrics)
@@ -44,7 +109,10 @@ def render(report):
         meter = "" if percentage is None else f'<meter min="0" max="100" value="{percentage:.1f}" aria-label="{LABELS[label]} 비율">{text}</meter>'
         tones.append(f'<div class="tone {label}"><span>{LABELS[label]}</span><span class="tone-count">{unknown if count is None else count}건</span><strong>{text}</strong>{meter}</div>')
     publisher_html = []
-    for row in report["publishers"]:
+    scoped_publishers = [{"publisher": name, "article_count": sum(row["publisher"] == name for row in scoped_rows),
+                          **summarize([row for row in scoped_rows if row["publisher"] == name])}
+                         for name in sorted({row["publisher"] for row in scoped_rows})]
+    for row in scoped_publishers:
         cells = [row["publisher"], row["article_count"], row["denominator"], *[row["counts"][key] for key in SENTIMENTS], row["abstained"], row["unrelated"]]
         publisher_html.append("<tr>" + "".join(f"<td>{h(value)}</td>" for value in cells) + "</tr>")
     article_html = []
@@ -61,7 +129,8 @@ def render(report):
         observation = row.get("observation", {})
         if observation.get("reused"):
             outcome += f" · 이전 수집 유지(마지막 확인 {display_time(observation['last_seen_at'])})"
-        article_html.append(f'<article class="article" data-publisher="{h(row["publisher"])}" data-sentiment="{h(label)}" data-day="{day}"><div class="article-meta"><span class="label {h(label)}">{LABELS[label]}</span><span>{h(row["publisher"])}</span><span>{h(article_time)}</span><span>{relevance} · {outcome}</span></div><h3><a href="{h(row["url"])}" target="_blank" rel="noopener noreferrer">{h(row["title"])} ↗</a></h3><p class="reason">{h(decision["reason"])}</p>{evidence}</article>')
+        hidden = "" if row["id"] in scoped_ids else " hidden"
+        article_html.append(f'<article class="article" id="article-{h(row["id"])}" data-id="{h(row["id"])}" data-publisher="{h(row["publisher"])}" data-sentiment="{h(label)}" data-day="{day}"{hidden}><div class="article-meta"><span class="label {h(label)}">{LABELS[label]}</span><span>{h(row["publisher"])}</span><span>{h(article_time)}</span><span>{relevance} · {outcome}</span></div><h3><a href="{h(row["url"])}" target="_blank" rel="noopener noreferrer">{h(row["title"])} ↗</a></h3><p class="reason">{h(decision["reason"])}</p>{evidence}</article>')
     notice = "제목만으로 자동 분류한 미검토 샘플입니다. 실제 확보 범위 안에서만 해석해 주세요."
     if failed:
         notice = "수집 또는 입력 검증에 실패했습니다. 기사 수와 비율을 산출할 수 없습니다. 이전 자료를 이번 실행의 새 기사로 표시하지 않습니다."
@@ -86,12 +155,12 @@ def render(report):
     daily_summary = ""
     if publication_dates and report["window_end"]:
         day = timestamp(report["window_end"]).astimezone(ZoneInfo("Asia/Seoul")).date().isoformat()
-        rows = [row for row in report["articles"] if row["published_at"] == day]
+        rows = [row for row in scoped_rows if row["published_at"] == day]
         daily = summarize(rows)
         values = " · ".join(f"{LABELS[key]} {daily['counts'][key]}건" for key in SENTIMENTS)
         ratios = "비율 산출 불가" if not daily["denominator"] else " · ".join(
             f"{LABELS[key]} {daily['percentages'][key]:.1f}%" for key in SENTIMENTS)
-        daily_summary = (f'<section class="panel" aria-label="당일 발행 기사"><h2>{day} 발행 기사</h2>'
+        daily_summary = (f'<section class="panel" id="daily-summary" aria-label="당일 발행 기사"><h2>{day} 발행 기사</h2>'
                          f'<p>{len(rows)}건 · 분류 완료 {daily["denominator"]}건 · 판단 보류 {daily["abstained"]}건</p>'
                          f'<p>{values}</p><p class="footnote">{ratios}. 수집일이 아닌 발행일 기준이며 아래 분포는 전체 조회 기간 기준입니다.</p></section>')
     values = {"title": h(f"{report['target']['organization']} {report['target']['name']}"),
@@ -102,7 +171,7 @@ def render(report):
               "publishers": "".join(publisher_html) or '<tr><td colspan="9">표시할 매체 데이터가 없습니다.</td></tr>',
               "publisher_options": "".join(f'<option value="{h(row["publisher"])}">{h(row["publisher"])}</option>' for row in report["publishers"]),
               "articles": "".join(article_html) or '<p class="empty">' + ("수집 상태를 확인해야 합니다." if failed else "선정된 기사가 없습니다.") + "</p>",
-              "list_count": unknown if failed else f"{len(article_html)}건",
+              "list_count": unknown if failed else f"{len(scoped_rows)}건",
               "attribution": f'<a href="{h(attribution["url"])}" target="_blank" rel="noopener noreferrer">{h(attribution["name"])}</a>',
               "model": h(f"{report['analysis']['provider']} / {report['analysis']['model']}"),
               "prompt_version": h(report["analysis"]["prompt_sha256"]),
@@ -111,6 +180,7 @@ def render(report):
                   date_filter_label="발행일" if publication_dates else "관측일",
                   date_filter_note="기사의 공개 발행일 기준입니다." if publication_dates else "날짜는 KST 관측일이며 발행일이 아닙니다.",
                   date_basis_note="공개 발행일 기준 · AI 웹 검색 수집" if publication_dates else "GDELT 관측 시각 기준")
+    values.update(dashboard_content(report))
     return Template((ROOT / "web" / "index.html").read_text()).substitute(values)
 
 

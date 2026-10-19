@@ -12,13 +12,14 @@ from news_monitor.analysis import DECISION_KEYS, RELEVANCE, SENTIMENTS, validate
 from news_monitor.collect import ROOT, canonical_url, load_config
 from news_monitor.display import public_text, validate_public_names
 from news_monitor.report import ARTICLE_FIELDS, WARNINGS, summarize, timestamp
-from news_monitor.site import OUTPUT_FILES
+from news_monitor.site import OUTPUT_FILES, render
 
 PUBLIC_FIELDS = {
     "schema_version", "sample", "human_reviewed", "status", "target", "display_policy",
     "generated_at", "collection_checked_at", "window_start", "window_end", "analysis_scope",
     "date_basis", "coverage", "selection", "article_count", "publisher_count", "publisher_goal",
     "warnings", "source_attribution", "analysis", "statistics", "publishers", "articles",
+    "insights",
 }
 
 
@@ -38,10 +39,11 @@ def exact_keys(value, keys):
     return isinstance(value, dict) and set(value) == set(keys)
 
 
-def check_artifact(report, config):
-    if not exact_keys(report, PUBLIC_FIELDS):
+def check_artifact(report, config, *, allow_legacy=False):
+    legacy = allow_legacy and report.get("schema_version") == 1
+    if not exact_keys(report, PUBLIC_FIELDS - {"insights"} if legacy else PUBLIC_FIELDS):
         raise ValueError("unexpected public report fields")
-    if (report["schema_version"] != 1 or report["sample"] is not True or report["human_reviewed"] is not False
+    if (report["schema_version"] != (1 if legacy else 2) or report["sample"] is not True or report["human_reviewed"] is not False
             or report["analysis_scope"] != "headline_only"
             or not exact_keys(report["target"], {"name", "organization"})
             or not exact_keys(report["display_policy"], {"person_name_replaced", "source_links_may_identify_target",
@@ -92,6 +94,10 @@ def check_artifact(report, config):
         expected_publishers.append({"publisher": domain, "article_count": len(rows), **summarize(rows)})
     if report["publisher_count"] != len(domains) or report["publishers"] != expected_publishers:
         raise ValueError("publisher statistics mismatch")
+    if not legacy:
+        from news_monitor.briefing import validate_insights
+
+        validate_insights(report, config)
 
 
 def check_ready(config, data_dir, output_dir, now=None):
@@ -116,9 +122,14 @@ def check_ready(config, data_dir, output_dir, now=None):
             return {"ready": False, "checks": checks}
         check_artifact(report, config)
         record("public_schema_and_display_name", True)
+        record("insights_processed", report["insights"]["status"] != "pending")
         parser = DisplayText()
-        parser.feed((output_dir / "index.html").read_text())
+        html = (output_dir / "index.html").read_text()
+        parser.feed(html)
         record("html_display_name", all(public_text(value, config) == value for value in parser.parts))
+        record("html_matches_report", html == render(report))
+        record("static_assets_match_source", all((output_dir / name).read_bytes() == (ROOT / "web" / name).read_bytes()
+                                                   for name in ("styles.css", "app.js")))
         pipeline = json.loads((data_dir / "pipeline_status.json").read_text())
         collection = json.loads((data_dir / "collection_status.json").read_text())
         record("matches_latest_pipeline", pipeline["status"] == report["status"]

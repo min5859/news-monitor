@@ -19,7 +19,8 @@ from news_monitor import report as r
 from news_monitor.collect import ROOT, collect, write_result
 
 CONFIG = json.loads((ROOT / "config.json").read_text())
-CONFIG["collection"].update(provider="gdelt_doc", queries=['"Hyosung"'])
+CONFIG["collection"].update(provider="gdelt_doc", queries=['"Hyosung"'], lookback_days=14)
+CONFIG["briefing"]["enabled"] = False
 CONFIG["analysis"].update(provider="cursor", model="synthetic-cursor-test")
 
 
@@ -236,7 +237,8 @@ class ReportTests(unittest.TestCase):
         self.assertEqual(site.display_time("2026-10-17T16:00:00+00:00", True), "10.18")
         report = report_fixture()
         report["publishers"][0]["counts"] = {"mixed": 4, "neutral": 3, "negative": 2, "positive": 1}
-        self.assertIn("<td>1</td><td>2</td><td>3</td><td>4</td>", site.render(report))
+        # Filter-aware tables recompute from the one neutral article, not this tampered summary.
+        self.assertIn("<td>0</td><td>0</td><td>1</td><td>0</td>", site.render(report))
 
     def test_rounding_totals_one_hundred(self):
         self.assertEqual(r.percentages({"a": 1, "b": 1, "c": 1}), {"a": 33.4, "b": 33.3, "c": 33.3})
@@ -277,10 +279,13 @@ class OutputParser(HTMLParser):
         super().__init__()
         self.tags = []
         self.events = []
+        self.scripts = []
 
     def handle_starttag(self, tag, attrs):
         self.tags.append(tag)
         self.events.extend(key for key, _ in attrs if key.startswith("on"))
+        if tag == "script":
+            self.scripts.append(dict(attrs))
 
 
 class SiteTests(unittest.TestCase):
@@ -292,7 +297,9 @@ class SiteTests(unittest.TestCase):
         parser = OutputParser()
         parser.feed(html)
         self.assertNotIn("img", parser.tags)
-        self.assertEqual(parser.tags.count("script"), 1)  # Only our external app.js.
+        self.assertEqual(parser.tags.count("script"), 2)
+        self.assertEqual(parser.scripts, [{"src": "app.js", "defer": None},
+                                          {"type": "application/json", "id": "dashboard-data"}])
         self.assertEqual(parser.events, [])
         self.assertIn("&lt;img", html)
         self.assertIn('rel="noopener noreferrer"', html)
@@ -427,6 +434,15 @@ class PreflightTests(unittest.TestCase):
 
     def test_consistent_structure_passes_only_in_temporary_fixture(self):
         self.assertTrue(preflight.check_ready(CONFIG, self.root, self.output)["ready"])
+
+    def test_stale_embedded_html_or_changed_script_blocks_publication(self):
+        for name in ("index.html", "app.js"):
+            with self.subTest(name=name):
+                target = self.output / name
+                original = target.read_text()
+                target.write_text(original + "\n/* unexpected edit */")
+                self.assertFalse(preflight.check_ready(CONFIG, self.root, self.output)["ready"])
+                target.write_text(original)
 
     def test_named_source_url_is_preserved_without_showing_the_name_in_text(self):
         value = collection_fixture()
