@@ -71,7 +71,7 @@ sudo -u wiki-publisher python3 -m json.tool /srv/news-monitor/data/publication_s
   GitHub Actions의 `pages build and deployment` 결과와 공개 시각을 확인한다.
 - `retained_articles_only`: 검색은 끝났지만 이번에 확인한 선정 기사는 없고 이전 기사만 남았다.
   새 성공으로 게시하지 않는다. 원문 전체가 0건이라는 뜻은 아니다.
-- 기사 **당일 발행 0건**과 수집 실패는 다르다. 화면의 전체 14일 기사와 당일 영역을 구분한다.
+- 기사 **당일 발행 0건**과 수집 실패는 다르다. 화면의 선택 기간 기사와 당일 영역을 구분한다.
 - 모델은 기존 ChatGPT 구독 사용량을 소비한다. 인증 만료·사용 한도는 계정 관리자가 조치한다.
 - wrapper가 게시 단계 전에 실패하면 publication_status에는 이전 게시가 남을 수 있다.
   반드시 service·pipeline·collection의 최신 시각도 함께 비교한다.

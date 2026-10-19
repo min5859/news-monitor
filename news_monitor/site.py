@@ -1,5 +1,6 @@
 """Build only explicitly named static artifacts; never copy runtime directories."""
 
+import hashlib
 import json
 import os
 import tempfile
@@ -181,6 +182,8 @@ def render(report):
                   date_filter_note="기사의 공개 발행일 기준입니다." if publication_dates else "날짜는 KST 관측일이며 발행일이 아닙니다.",
                   date_basis_note="공개 발행일 기준 · AI 웹 검색 수집" if publication_dates else "GDELT 관측 시각 기준")
     values.update(dashboard_content(report))
+    values["asset_version"] = hashlib.sha256(b"".join((ROOT / "web" / name).read_bytes()
+                                                     for name in ("app.js", "styles.css"))).hexdigest()[:12]
     return Template((ROOT / "web" / "index.html").read_text()).substitute(values)
 
 

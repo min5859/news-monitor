@@ -298,8 +298,9 @@ class SiteTests(unittest.TestCase):
         parser.feed(html)
         self.assertNotIn("img", parser.tags)
         self.assertEqual(parser.tags.count("script"), 2)
-        self.assertEqual(parser.scripts, [{"src": "app.js", "defer": None},
-                                          {"type": "application/json", "id": "dashboard-data"}])
+        self.assertRegex(parser.scripts[0]["src"], r"^app\.js\?v=[0-9a-f]{12}$")
+        self.assertIsNone(parser.scripts[0]["defer"])
+        self.assertEqual(parser.scripts[1], {"type": "application/json", "id": "dashboard-data"})
         self.assertEqual(parser.events, [])
         self.assertIn("&lt;img", html)
         self.assertIn('rel="noopener noreferrer"', html)
@@ -403,6 +404,22 @@ class PipelineTests(unittest.TestCase):
                                   runner=lambda *args: self.fail("missing dataset"))
         self.assertEqual(result["status"], "failed")
         self.assertIsNone(result["article_count"])
+
+    def test_legacy_v1_is_preserved_for_stale_display_but_not_ready_to_publish(self):
+        write_result(collection_fixture(), self.root)
+        good = run.run_pipeline(CONFIG, self.root, self.output, reuse=True, runner=lambda *args: json.dumps(decision()))
+        good.pop("insights")
+        good["schema_version"] = 1
+        (self.root / "report.json").write_text(json.dumps(good))
+        failed = collection_fixture(0)
+        failed["status"] = "failed"
+        write_result(failed, self.root)
+        run.run_pipeline(CONFIG, self.root, self.output, reuse=True, runner=lambda *args: self.fail("failed source"))
+        shown = json.loads((self.output / "report.json").read_text())
+        self.assertEqual(shown["status"], "stale")
+        self.assertEqual(shown["article_count"], 1)
+        self.assertEqual(shown["schema_version"], 1)
+        self.assertFalse(preflight.check_ready(CONFIG, self.root, self.output)["ready"])
 
     def test_output_error_cannot_leave_old_success_pipeline_status(self):
         write_result(collection_fixture(), self.root)
