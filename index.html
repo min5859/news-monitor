@@ -16,7 +16,7 @@
     <a class="skip" href="#main">본문 바로가기</a>
     <header class="topbar">
       <span class="brand">N<span class="brand-dot">.</span> NEWS MONITOR</span
-      ><span class="edition">AUTOMATED SAMPLE / 01</span>
+      ><span class="edition">AUTOMATED SAMPLE / 02</span>
     </header>
     <main id="main">
       <section class="hero" aria-labelledby="page-title">
@@ -41,8 +41,71 @@
         </aside>
       </section>
       <div class="notice" role="status">제목만으로 자동 분류한 미검토 샘플입니다. 실제 확보 범위 안에서만 해석해 주세요. 기사 제목·판단 이유·근거의 인명 표기를 치환했습니다. 원문 링크에서 대상을 확인할 수 있어 완전 익명화는 아닙니다.</div>
-      <section class="metrics" aria-label="샘플 현황"><div class="metric"><span class="metric-label">선정 기사</span><strong class="metric-value">5</strong><span class="metric-note">URL 중복 제거 후</span></div><div class="metric"><span class="metric-label">확보 매체</span><strong class="metric-value">5</strong><span class="metric-note">목표 5곳 · 전수 수집 아님</span></div><div class="metric"><span class="metric-label">분류 완료</span><strong class="metric-value">5</strong><span class="metric-note">대상 관련 기사만 집계</span></div><div class="metric"><span class="metric-label">판단 보류</span><strong class="metric-value">0</strong><span class="metric-note">분모에서 제외</span></div></section>
-      <section class="panel" aria-label="당일 발행 기사"><h2>2026-10-19 발행 기사</h2><p>0건 · 분류 완료 0건 · 판단 보류 0건</p><p>긍정 0건 · 부정 0건 · 중립 0건 · 혼합 0건</p><p class="footnote">비율 산출 불가. 수집일이 아닌 발행일 기준이며 아래 분포는 전체 조회 기간 기준입니다.</p></section>
+      <section class="panel controls" aria-label="조회 조건">
+        <div class="filters">
+          <label
+            >기간<select id="period-filter">
+              <option value="1">기준일 하루</option><option value="7">7일</option><option value="30" selected>30일</option>
+            </select></label
+          >
+          <label
+            >매체<select id="publisher-filter">
+              <option value="">전체 매체</option>
+              <option value="biz.newdaily.co.kr">biz.newdaily.co.kr</option><option value="dailyenews.co.kr">dailyenews.co.kr</option><option value="etoday.co.kr">etoday.co.kr</option><option value="koreatimes.co.kr">koreatimes.co.kr</option><option value="topdaily.kr">topdaily.kr</option>
+            </select></label
+          >
+          <label
+            >분류<select id="sentiment-filter">
+              <option value="">전체 분류</option>
+              <option value="positive">긍정</option>
+              <option value="negative">부정</option>
+              <option value="neutral">중립</option>
+              <option value="mixed">혼합</option>
+              <option value="abstain">판단 보류</option>
+              <option value="unrelated">관련 없음</option>
+            </select></label
+          >
+          <label
+            >주제<select id="topic-filter">
+              <option value="">전체 주제</option>
+              <option value="management">경영·투자</option><option value="governance">지배구조</option><option value="legal_regulation">법원·규제</option><option value="external">대외활동</option><option value="other">기타</option>
+            </select></label
+          >
+          <label
+            >발행일<input id="date-filter" type="date"
+          /></label>
+        </div>
+        <p id="scope-note" class="footnote" aria-live="polite">2026-09-20 — 2026-10-19 · 실제 자료 범위 2026-10-06 — 2026-10-19 · 요청 기간 일부는 자료 범위 밖입니다.</p>
+        <p class="footnote">
+          기준일은 최근 수집일입니다. 조건을 바꾸면 브리핑·통계·목록이 함께
+          바뀝니다. 기사의 공개 발행일 기준입니다.
+        </p>
+      </section>
+      <section class="metrics" aria-label="샘플 현황"><div class="metric"><span class="metric-label">선정 기사</span><strong class="metric-value">5</strong><span class="metric-note">선택 범위 · 중복 제거 후</span></div><div class="metric"><span class="metric-label">확보 매체</span><strong class="metric-value">5</strong><span class="metric-note">목표 5곳 · 전수 수집 아님</span></div><div class="metric"><span class="metric-label">분류 완료</span><strong class="metric-value">5</strong><span class="metric-note">대상 관련 기사만 집계</span></div><div class="metric"><span class="metric-label">판단 보류</span><strong class="metric-value">0</strong><span class="metric-note">분모에서 제외</span></div></section>
+      <p id="coverage-detail" class="coverage-detail">핵심 이슈 3개 · 기준일에 처음 확인 2건 · 이전 수집 유지 2건</p>
+      <section class="panel briefing" aria-labelledby="briefing-title">
+        <p class="eyebrow">HEADLINE BRIEFING</p>
+        <h2 id="briefing-title">핵심 브리핑</h2>
+        <ul id="briefing-lines">
+          <li>효성중공업이 수출 전용 초고압차단기 공장을 준공하고 생산 확대와 글로벌 공급망을 추진한다는 보도입니다. (3개 매체·3건)</li><li>회장님이 효성 계열사 지분을 확대했다는 보도입니다. (1개 매체·1건)</li><li>효성 회장님이 베트남에 바이오스판덱스 기지를 완성했다는 제목의 보도입니다. (1개 매체·1건)</li>
+        </ul>
+        <p class="footnote">AI가 제목만으로 묶고 작성한 미검토 요약입니다. 같은 사건인지·요약의 정확성을 보장하지 않습니다.</p>
+      </section>
+      <section class="panel" aria-labelledby="issues-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">ISSUE DESK</p>
+            <h2 id="issues-title">이슈별 묶음</h2>
+          </div>
+          <span class="unit" id="issue-count">3개 이슈 / 5건 기사</span>
+        </div>
+        <div class="issue-grid" id="issue-cards"><article class="issue-card"><span class="issue-topic">경영·투자</span><h3>효성중공업 수출용 초고압차단기 공장 준공</h3><p>효성중공업이 수출 전용 초고압차단기 공장을 준공하고 생산 확대와 글로벌 공급망을 추진한다는 보도입니다.</p><p class="footnote">3건 · 3개 매체</p><details><summary>제목 근거·관련 기사</summary><ul><li><a href="#article-d9f75008af8159a3b208">biz.newdaily.co.kr: “수출 전용 &#x27;초고압차단기 공장&#x27; 준공”</a></li><li><a href="#article-e20ca96b7becc2d7f286">etoday.co.kr: “초고압차단기 생산 2배로”</a></li><li><a href="#article-f2c4eb966ccb6aa8ce84">dailyenews.co.kr: “수출 전용 초고압차단기 신공장 준공”</a></li></ul></details></article><article class="issue-card"><span class="issue-topic">지배구조</span><h3>효성 계열사 지분 확대</h3><p>회장님이 효성 계열사 지분을 확대했다는 보도입니다.</p><p class="footnote">1건 · 1개 매체</p><details><summary>제목 근거·관련 기사</summary><ul><li><a href="#article-14361f68b39f4521a4e0">topdaily.kr: “효성 계열사 지분 확대”</a></li></ul></details></article><article class="issue-card"><span class="issue-topic">경영·투자</span><h3>베트남 바이오스판덱스 기지 구축</h3><p>효성 회장님이 베트남에 바이오스판덱스 기지를 완성했다는 제목의 보도입니다.</p><p class="footnote">1건 · 1개 매체</p><details><summary>제목 근거·관련 기사</summary><ul><li><a href="#article-35a8dc963c308a6f0364">koreatimes.co.kr: “completes bio-spandex base in Vietnam”</a></li></ul></details></article></div>
+        <p class="footnote">
+          같은 이슈의 여러 매체 보도는 각각 기사로 셉니다. 이슈 수는 자동 묶음
+          개수이며 객관적인 사건 수나 평판 점수가 아닙니다.
+        </p>
+      </section>
+      <section class="panel" id="daily-summary" aria-label="당일 발행 기사"><h2>2026-10-19 발행 기사</h2><p>0건 · 분류 완료 0건 · 판단 보류 0건</p><p>긍정 0건 · 부정 0건 · 중립 0건 · 혼합 0건</p><p class="footnote">비율 산출 불가. 수집일이 아닌 발행일 기준이며 아래 분포는 전체 조회 기간 기준입니다.</p></section>
       <section class="panel distribution" aria-labelledby="distribution-title">
         <div class="section-heading">
           <div>
@@ -52,11 +115,42 @@
           <span class="unit">기사 기준</span>
         </div>
         <p class="muted">
-          분모: 대상 관련성이 확인되고 논조 분류를 완료한 기사 5건.
-          보류·관련 없음은 제외합니다.
+          분모: 대상 관련성이 확인되고 논조 분류를 완료한 기사
+          <span id="denominator">5</span>건. 보류·관련 없음은
+          제외합니다.
         </p>
-        <div class="tone-grid"><div class="tone positive"><span>긍정</span><span class="tone-count">5건</span><strong>100.0%</strong><meter min="0" max="100" value="100.0" aria-label="긍정 비율">100.0%</meter></div><div class="tone negative"><span>부정</span><span class="tone-count">0건</span><strong>0.0%</strong><meter min="0" max="100" value="0.0" aria-label="부정 비율">0.0%</meter></div><div class="tone neutral"><span>중립</span><span class="tone-count">0건</span><strong>0.0%</strong><meter min="0" max="100" value="0.0" aria-label="중립 비율">0.0%</meter></div><div class="tone mixed"><span>혼합</span><span class="tone-count">0건</span><strong>0.0%</strong><meter min="0" max="100" value="0.0" aria-label="혼합 비율">0.0%</meter></div></div>
-        <p class="footnote">긍정 대 부정만 비교: 100.0% / 0.0% (분모 5건 · 중립·혼합·보류 제외).</p>
+        <div class="tone-grid" id="tones"><div class="tone positive"><span>긍정</span><span class="tone-count">5건</span><strong>100.0%</strong><meter min="0" max="100" value="100.0" aria-label="긍정 비율">100.0%</meter></div><div class="tone negative"><span>부정</span><span class="tone-count">0건</span><strong>0.0%</strong><meter min="0" max="100" value="0.0" aria-label="부정 비율">0.0%</meter></div><div class="tone neutral"><span>중립</span><span class="tone-count">0건</span><strong>0.0%</strong><meter min="0" max="100" value="0.0" aria-label="중립 비율">0.0%</meter></div><div class="tone mixed"><span>혼합</span><span class="tone-count">0건</span><strong>0.0%</strong><meter min="0" max="100" value="0.0" aria-label="혼합 비율">0.0%</meter></div></div>
+        <p class="footnote" id="ratio-note">긍정 대 부정만 비교: 100.0% / 0.0% (분모 5건 · 중립·혼합·보류 제외).</p>
+      </section>
+      <section class="panel" aria-labelledby="trend-title">
+        <p class="eyebrow">PUBLICATION-DATE VIEW</p>
+        <h2 id="trend-title">발행일별 확보 기사</h2>
+        <p class="footnote">
+          현재 확보된 기사를 발행일별로 나눈 표본 분포입니다. 과거 각 날의 수집
+          스냅샷·전체 보도량이 아니며, 자료 범위 밖은 0건으로 표시하지 않습니다.
+        </p>
+        <div
+          class="table-scroll trend-scroll"
+          tabindex="0"
+          aria-label="선택 기간 날짜별 기사 분포"
+        >
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">날짜</th>
+                <th scope="col">확보</th>
+                <th scope="col">긍정</th>
+                <th scope="col">부정</th>
+                <th scope="col">중립</th>
+                <th scope="col">혼합</th>
+                <th scope="col">보류</th>
+              </tr>
+            </thead>
+            <tbody id="trend-rows">
+              <tr><td>2026-10-19</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>2026-10-18</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>2026-10-17</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>2026-10-16</td><td>3</td><td>3</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>2026-10-15</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>2026-10-14</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>2026-10-13</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>2026-10-12</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>2026-10-11</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>2026-10-10</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>2026-10-09</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>2026-10-08</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>2026-10-07</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>2026-10-06</td><td>2</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>2026-10-05</td><td>자료 범위 밖</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>2026-10-04</td><td>자료 범위 밖</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>2026-10-03</td><td>자료 범위 밖</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>2026-10-02</td><td>자료 범위 밖</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>2026-10-01</td><td>자료 범위 밖</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>2026-09-30</td><td>자료 범위 밖</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>2026-09-29</td><td>자료 범위 밖</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>2026-09-28</td><td>자료 범위 밖</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>2026-09-27</td><td>자료 범위 밖</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>2026-09-26</td><td>자료 범위 밖</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>2026-09-25</td><td>자료 범위 밖</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>2026-09-24</td><td>자료 범위 밖</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>2026-09-23</td><td>자료 범위 밖</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>2026-09-22</td><td>자료 범위 밖</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>2026-09-21</td><td>자료 범위 밖</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>2026-09-20</td><td>자료 범위 밖</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
       <section class="panel" aria-labelledby="publisher-title">
         <div class="section-heading">
@@ -80,14 +174,14 @@
                 <th scope="col">관련 없음</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="publisher-rows">
               <tr><td>biz.newdaily.co.kr</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>dailyenews.co.kr</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>etoday.co.kr</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>koreatimes.co.kr</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>topdaily.kr</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
             </tbody>
           </table>
         </div>
         <p class="footnote">
-          같은 이슈를 다룬 다른 매체의 기사는 각각 셉니다. 의미 기반 이슈 통계는
-          아직 제공하지 않습니다.
+          같은 이슈를 다룬 다른 매체의 기사는 각각 셉니다. 비율은 이슈가 아닌
+          기사 기준입니다.
         </p>
       </section>
       <section class="panel" aria-labelledby="articles-title">
@@ -100,28 +194,11 @@
             >5건</span
           >
         </div>
-        <div class="filters">
-          <label
-            >매체<select id="publisher-filter">
-              <option value="">전체 매체</option>
-              <option value="biz.newdaily.co.kr">biz.newdaily.co.kr</option><option value="dailyenews.co.kr">dailyenews.co.kr</option><option value="etoday.co.kr">etoday.co.kr</option><option value="koreatimes.co.kr">koreatimes.co.kr</option><option value="topdaily.kr">topdaily.kr</option>
-            </select></label
-          ><label
-            >분류<select id="sentiment-filter">
-              <option value="">전체 분류</option>
-              <option value="positive">긍정</option>
-              <option value="negative">부정</option>
-              <option value="neutral">중립</option>
-              <option value="mixed">혼합</option>
-              <option value="abstain">판단 보류</option>
-              <option value="unrelated">관련 없음</option>
-            </select></label
-          ><label>발행일<input id="date-filter" type="date" /></label>
-        </div>
         <p class="footnote">
-          필터는 목록만 바꾸며 위 집계의 분모는 바꾸지 않습니다. 기사의 공개 발행일 기준입니다.
+          위 조회 조건에 맞는 기사입니다. 이슈 카드의 제목 근거에서 해당 기사로
+          이동할 수 있습니다.
         </p>
-        <div id="articles"><article class="article" data-publisher="etoday.co.kr" data-sentiment="positive" data-day="2026-10-16"><div class="article-meta"><span class="label positive">긍정</span><span>etoday.co.kr</span><span>발행 2026-10-16</span><span>대상 관련 · AI 자동분류 · 미검토 · 이전 수집 유지(마지막 확인 2026.10.18 22:19 KST)</span></div><h3><a href="https://www.etoday.co.kr/news/view/2636513?trc=sub_list_news" target="_blank" rel="noopener noreferrer">AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로 ↗</a></h3><p class="reason">제목은 회장님의 AI 시대 전망과 효성중공업의 생산 확대를 연결해 전합니다.</p><p class="evidence">제목 근거: “AI 시대 내다본 회장님”</p></article><article class="article" data-publisher="dailyenews.co.kr" data-sentiment="positive" data-day="2026-10-16"><div class="article-meta"><span class="label positive">긍정</span><span>dailyenews.co.kr</span><span>발행 2026-10-16</span><span>대상 관련 · AI 자동분류 · 미검토</span></div><h3><a href="https://www.dailyenews.co.kr/news/articleView.html?idxno=53921" target="_blank" rel="noopener noreferrer">효성重, 수출 전용 초고압차단기 신공장 준공...회장님, 글로벌 공급망 ‘드라이브’ ↗</a></h3><p class="reason">제목에서 회장님이 글로벌 공급망 확대를 추진하는 내용으로 보도됩니다.</p><p class="evidence">제목 근거: “회장님, 글로벌 공급망 ‘드라이브’”</p></article><article class="article" data-publisher="biz.newdaily.co.kr" data-sentiment="positive" data-day="2026-10-16"><div class="article-meta"><span class="label positive">긍정</span><span>biz.newdaily.co.kr</span><span>발행 2026-10-16</span><span>대상 관련 · AI 자동분류 · 미검토 · 이전 수집 유지(마지막 확인 2026.10.18 22:19 KST)</span></div><h3><a href="https://biz.newdaily.co.kr/site/data/html/2026/10/16/2026101600081.html" target="_blank" rel="noopener noreferrer">회장님의 &#x27;5년 앞선 투자&#x27; ... 효성重, 창원에 수출 전용 &#x27;초고압차단기 공장&#x27; 준공 ↗</a></h3><p class="reason">제목은 회장님의 투자와 효성중공업 공장 준공을 연결해 전합니다.</p><p class="evidence">제목 근거: “회장님의 &#x27;5년 앞선 투자&#x27;”</p></article><article class="article" data-publisher="topdaily.kr" data-sentiment="positive" data-day="2026-10-06"><div class="article-meta"><span class="label positive">긍정</span><span>topdaily.kr</span><span>발행 2026-10-06</span><span>대상 관련 · AI 자동분류 · 미검토</span></div><h3><a href="https://www.topdaily.kr/articles/112228" target="_blank" rel="noopener noreferrer">회장님, 효성 계열사 지분 확대...지배력 강화·책임경영 행보 ↗</a></h3><p class="reason">제목은 회장님의 지분 확대와 책임경영 행보를 긍정적으로 전합니다.</p><p class="evidence">제목 근거: “지배력 강화·책임경영 행보”</p></article><article class="article" data-publisher="koreatimes.co.kr" data-sentiment="positive" data-day="2026-10-06"><div class="article-meta"><span class="label positive">긍정</span><span>koreatimes.co.kr</span><span>발행 2026-10-06</span><span>대상 관련 · AI 자동분류 · 미검토</span></div><h3><a href="https://www.koreatimes.co.kr/amp/business/20261006/hyosung-chairman-cho-hyun-joon-completes-bio-spandex-base-in-vietnam" target="_blank" rel="noopener noreferrer">Hyosung Chairman 회장님 completes bio-spandex base in Vietnam ↗</a></h3><p class="reason">효성 회장님의 베트남 바이오 스판덱스 거점 완공 소식을 전하는 제목입니다.</p><p class="evidence">제목 근거: “Hyosung Chairman 회장님 completes bio-spandex base in Vietnam”</p></article></div>
+        <div id="articles"><article class="article" id="article-e20ca96b7becc2d7f286" data-id="e20ca96b7becc2d7f286" data-publisher="etoday.co.kr" data-sentiment="positive" data-day="2026-10-16"><div class="article-meta"><span class="label positive">긍정</span><span>etoday.co.kr</span><span>발행 2026-10-16</span><span>대상 관련 · AI 자동분류 · 미검토 · 이전 수집 유지(마지막 확인 2026.10.18 22:19 KST)</span></div><h3><a href="https://www.etoday.co.kr/news/view/2636513?trc=sub_list_news" target="_blank" rel="noopener noreferrer">AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로 ↗</a></h3><p class="reason">제목은 회장님의 AI 시대 전망과 효성중공업의 생산 확대를 연결해 전합니다.</p><p class="evidence">제목 근거: “AI 시대 내다본 회장님”</p></article><article class="article" id="article-f2c4eb966ccb6aa8ce84" data-id="f2c4eb966ccb6aa8ce84" data-publisher="dailyenews.co.kr" data-sentiment="positive" data-day="2026-10-16"><div class="article-meta"><span class="label positive">긍정</span><span>dailyenews.co.kr</span><span>발행 2026-10-16</span><span>대상 관련 · AI 자동분류 · 미검토</span></div><h3><a href="https://www.dailyenews.co.kr/news/articleView.html?idxno=53921" target="_blank" rel="noopener noreferrer">효성重, 수출 전용 초고압차단기 신공장 준공...회장님, 글로벌 공급망 ‘드라이브’ ↗</a></h3><p class="reason">제목에서 회장님이 글로벌 공급망 확대를 추진하는 내용으로 보도됩니다.</p><p class="evidence">제목 근거: “회장님, 글로벌 공급망 ‘드라이브’”</p></article><article class="article" id="article-d9f75008af8159a3b208" data-id="d9f75008af8159a3b208" data-publisher="biz.newdaily.co.kr" data-sentiment="positive" data-day="2026-10-16"><div class="article-meta"><span class="label positive">긍정</span><span>biz.newdaily.co.kr</span><span>발행 2026-10-16</span><span>대상 관련 · AI 자동분류 · 미검토 · 이전 수집 유지(마지막 확인 2026.10.18 22:19 KST)</span></div><h3><a href="https://biz.newdaily.co.kr/site/data/html/2026/10/16/2026101600081.html" target="_blank" rel="noopener noreferrer">회장님의 &#x27;5년 앞선 투자&#x27; ... 효성重, 창원에 수출 전용 &#x27;초고압차단기 공장&#x27; 준공 ↗</a></h3><p class="reason">제목은 회장님의 투자와 효성중공업 공장 준공을 연결해 전합니다.</p><p class="evidence">제목 근거: “회장님의 &#x27;5년 앞선 투자&#x27;”</p></article><article class="article" id="article-14361f68b39f4521a4e0" data-id="14361f68b39f4521a4e0" data-publisher="topdaily.kr" data-sentiment="positive" data-day="2026-10-06"><div class="article-meta"><span class="label positive">긍정</span><span>topdaily.kr</span><span>발행 2026-10-06</span><span>대상 관련 · AI 자동분류 · 미검토</span></div><h3><a href="https://www.topdaily.kr/articles/112228" target="_blank" rel="noopener noreferrer">회장님, 효성 계열사 지분 확대...지배력 강화·책임경영 행보 ↗</a></h3><p class="reason">제목은 회장님의 지분 확대와 책임경영 행보를 긍정적으로 전합니다.</p><p class="evidence">제목 근거: “지배력 강화·책임경영 행보”</p></article><article class="article" id="article-35a8dc963c308a6f0364" data-id="35a8dc963c308a6f0364" data-publisher="koreatimes.co.kr" data-sentiment="positive" data-day="2026-10-06"><div class="article-meta"><span class="label positive">긍정</span><span>koreatimes.co.kr</span><span>발행 2026-10-06</span><span>대상 관련 · AI 자동분류 · 미검토</span></div><h3><a href="https://www.koreatimes.co.kr/amp/business/20261006/hyosung-chairman-cho-hyun-joon-completes-bio-spandex-base-in-vietnam" target="_blank" rel="noopener noreferrer">Hyosung Chairman 회장님 completes bio-spandex base in Vietnam ↗</a></h3><p class="reason">효성 회장님의 베트남 바이오 스판덱스 거점 완공 소식을 전하는 제목입니다.</p><p class="evidence">제목 근거: “Hyosung Chairman 회장님 completes bio-spandex base in Vietnam”</p></article></div>
         <p id="filter-empty" class="empty" hidden>
           선택한 조건에 맞는 기사가 없습니다.
         </p>
@@ -132,6 +209,9 @@
           </p></noscript
         >
       </section>
+      <script type="application/json" id="dashboard-data">
+        {"as_of_day":"2026-10-19","available_start":"2026-10-06","groups":[{"label":"효성 계열사 지분 확대","summary":"회장님이 효성 계열사 지분을 확대했다는 보도입니다.","topic":"governance","article_ids":["14361f68b39f4521a4e0"],"evidence":[{"article_id":"14361f68b39f4521a4e0","quote":"효성 계열사 지분 확대"}]},{"label":"베트남 바이오스판덱스 기지 구축","summary":"효성 회장님이 베트남에 바이오스판덱스 기지를 완성했다는 제목의 보도입니다.","topic":"management","article_ids":["35a8dc963c308a6f0364"],"evidence":[{"article_id":"35a8dc963c308a6f0364","quote":"completes bio-spandex base in Vietnam"}]},{"label":"효성중공업 수출용 초고압차단기 공장 준공","summary":"효성중공업이 수출 전용 초고압차단기 공장을 준공하고 생산 확대와 글로벌 공급망을 추진한다는 보도입니다.","topic":"management","article_ids":["d9f75008af8159a3b208","e20ca96b7becc2d7f286","f2c4eb966ccb6aa8ce84"],"evidence":[{"article_id":"d9f75008af8159a3b208","quote":"수출 전용 '초고압차단기 공장' 준공"},{"article_id":"e20ca96b7becc2d7f286","quote":"초고압차단기 생산 2배로"},{"article_id":"f2c4eb966ccb6aa8ce84","quote":"수출 전용 초고압차단기 신공장 준공"}]}],"topics":{"management":"경영·투자","governance":"지배구조","legal_regulation":"법원·규제","external":"대외활동","other":"기타"},"articles":[{"id":"e20ca96b7becc2d7f286","title":"AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로","publisher":"etoday.co.kr","day":"2026-10-16","relevance":"related","sentiment":"positive","first_seen_day":"2026-10-18","reused":true},{"id":"f2c4eb966ccb6aa8ce84","title":"효성重, 수출 전용 초고압차단기 신공장 준공...회장님, 글로벌 공급망 ‘드라이브’","publisher":"dailyenews.co.kr","day":"2026-10-16","relevance":"related","sentiment":"positive","first_seen_day":"2026-10-19","reused":false},{"id":"d9f75008af8159a3b208","title":"회장님의 '5년 앞선 투자' ... 효성重, 창원에 수출 전용 '초고압차단기 공장' 준공","publisher":"biz.newdaily.co.kr","day":"2026-10-16","relevance":"related","sentiment":"positive","first_seen_day":"2026-10-18","reused":true},{"id":"14361f68b39f4521a4e0","title":"회장님, 효성 계열사 지분 확대...지배력 강화·책임경영 행보","publisher":"topdaily.kr","day":"2026-10-06","relevance":"related","sentiment":"positive","first_seen_day":"2026-10-18","reused":false},{"id":"35a8dc963c308a6f0364","title":"Hyosung Chairman 회장님 completes bio-spandex base in Vietnam","publisher":"koreatimes.co.kr","day":"2026-10-06","relevance":"related","sentiment":"positive","first_seen_day":"2026-10-19","reused":false}]}
+      </script>
       <footer>
         <p>
           이 수치는 선정된 뉴스 제목의 논조 분포입니다. 전체 언론 보도·국민
@@ -143,7 +223,7 @@
         </p>
         <p>설정 모델: codex / gpt-6-luna · 프롬프트 SHA-256: 577fb8d45a5b68cdf1276b241a66a8c5c9d9f40961bfeba35f6243ceccac4389</p>
         <p>
-          샘플 화면 생성: 2026.10.19 09:26 KST · <a href="report.json">공개 필드 JSON</a>
+          샘플 화면 생성: 2026.10.19 21:38 KST · <a href="report.json">공개 필드 JSON</a>
         </p>
       </footer>
     </main>

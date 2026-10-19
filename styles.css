@@ -246,6 +246,79 @@ td:first-child {
   font-size: 11px;
   color: var(--muted);
 }
+.controls .filters {
+  margin-top: 0;
+}
+.coverage-detail {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 0 0 24px;
+}
+.briefing {
+  border-top: 3px solid var(--green);
+}
+.briefing ul {
+  margin: 20px 0 0;
+  padding-left: 20px;
+}
+.briefing li {
+  padding: 7px 0;
+  font-size: 15px;
+  line-height: 1.8;
+}
+.issue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 18px;
+  margin-top: 24px;
+}
+.issue-card {
+  border: 1px solid var(--line);
+  background: #f9fbfa;
+  padding: 20px;
+}
+.issue-card h3 {
+  font-size: 17px;
+  margin: 10px 0;
+}
+.issue-card p {
+  font-size: 13px;
+  color: #435962;
+  line-height: 1.8;
+}
+.issue-topic {
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 650;
+}
+.issue-card details {
+  margin-top: 18px;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.issue-card summary {
+  cursor: pointer;
+  color: var(--green);
+}
+.issue-card ul {
+  padding-left: 16px;
+}
+.issue-card li {
+  margin: 10px 0;
+}
+.trend-scroll {
+  max-height: 310px;
+  margin-top: 20px;
+}
+.trend-scroll th {
+  position: sticky;
+  top: 0;
+}
+.article:target {
+  outline: 2px solid var(--green);
+  outline-offset: 6px;
+  scroll-margin-top: 24px;
+}
 select,
 input {
   display: block;
@@ -320,6 +393,7 @@ footer {
   font-size: 11px;
   color: var(--muted);
   padding: 0 4px;
+  overflow-wrap: anywhere;
 }
 footer p {
   margin: 7px 0;
@@ -350,6 +424,7 @@ footer p {
   }
   .edition {
     font-size: 9px;
+    display: none;
   }
   main {
     padding: 32px 16px;
