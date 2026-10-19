@@ -134,6 +134,22 @@ class DailyTests(unittest.TestCase):
         self.assertEqual(merged["statistics"]["reconfirmed"], 1)
         report.prepare_collection(merged, merged, CONFIG, NOW)
 
+    def test_cumulative_cap_reports_excluded_articles(self):
+        cfg = copy.deepcopy(CONFIG)
+        cfg["collection"]["max_articles"] = 1
+        previous = run_search([article(url="https://old.example/news/1", day="2026-10-10")], config=cfg)
+        fresh = run_search([article(url="https://new.example/news/2")], config=cfg)
+        merged = discovery.merge_previous(fresh, previous, cfg)
+        self.assertEqual(merged["statistics"]["limit_excluded"], 1)
+        self.assertEqual(merged["status"], "partial")
+
+    def test_response_cap_is_not_silent_full_success(self):
+        cfg = copy.deepcopy(CONFIG)
+        cfg["collection"]["max_results_per_query"] = 1
+        result = run_search([article()], config=cfg)
+        self.assertEqual(result["status"], "partial")
+        self.assertIn("upstream_limit_reached", result["warnings"])
+
     def test_deadline_skips_remaining_groups(self):
         cfg = self.config()
         cfg["collection"]["codex_timeout_seconds"] = 10

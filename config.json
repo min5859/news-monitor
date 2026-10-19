@@ -13,7 +13,7 @@
     "codex_output_bytes": 1048576,
     "max_search_calls": 30,
     "search_groups": [
-      ["효성 조현준 회장 뉴스", "조현준 회장 투자 경영"],
+      ["효성 조현준 회장 뉴스", "조현준 회장 최근 보도"],
       ["site:newsis.com 조현준 효성", "site:yna.co.kr 조현준 효성"],
       ["site:etoday.co.kr 조현준 효성", "site:biz.newdaily.co.kr 조현준 효성"],
       ["site:newspim.com 조현준 효성", "site:sedaily.com 조현준 효성"],

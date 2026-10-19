@@ -67,6 +67,8 @@ def collect_web(config, now, runner=execute):
                 raise ValueError("missing real search provenance")
             if len(document["articles"]) > opts["max_results_per_query"]:
                 raise ValueError("too many discovery results")
+            if len(document["articles"]) == opts["max_results_per_query"]:
+                result["warnings"].append("upstream_limit_reached")
             group_sources = set()
             for url in trace["sources"]:
                 try:
@@ -89,7 +91,7 @@ def collect_web(config, now, runner=execute):
         except (AnalysisError, OSError, ValueError, TypeError, KeyError):
             result["errors"].append({"error": "web_discovery_failed", "group": index + 1})
     rows = {}
-    stats["fetched"] = len(items)
+    stats["fetched"] = len(items) + stats["unverified_url"]
     for item in items:
         try:
             if not isinstance(item, dict) or set(item) != {"title", "url", "published_date", "language"}:
@@ -134,11 +136,13 @@ def collect_web(config, now, runner=execute):
         result["errors"].append({"error": "no_verified_discovery_metadata"})
     else:
         result["status"] = "ok" if selected else "empty"
-        if result["errors"] or stats["invalid_metadata"] or stats["unverified_url"] or stats["limit_excluded"]:
+        if (result["errors"] or stats["invalid_metadata"] or stats["unverified_url"] or stats["limit_excluded"]
+                or "upstream_limit_reached" in result["warnings"]):
             result["status"] = "partial"
     stats.update(newly_found=len(selected), reconfirmed=0, retained=0)
     if len(result["publishers"]) < opts["publisher_goal"]:
         result["warnings"].append("publisher_goal_not_met")
+    result["warnings"] = sorted(set(result["warnings"]))
     return result
 
 
@@ -173,6 +177,10 @@ def merge_previous(result, previous, config):
     remaining_old = {key: row for key, row in old.items() if row["url"] not in fresh_urls}
     ordered = sorted({**remaining_old, **fresh}.values(), key=lambda row: (row["published_at"], row["url"]), reverse=True)
     selected = ordered[:config["collection"]["max_articles"]]
+    excluded = len(ordered) - len(selected)
+    result["statistics"]["limit_excluded"] += excluded
+    if excluded:
+        result["status"] = "partial"
     retained = sum(story_key(row) not in fresh for row in selected)
     reconfirmed = sum(story_key(row) in fresh and (story_key(row) in old or row["url"] in old_urls) for row in selected)
     result["statistics"].update(selected=len(selected), retained=retained, reconfirmed=reconfirmed,

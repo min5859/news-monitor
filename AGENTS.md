@@ -14,3 +14,7 @@
 - 제목·AI 이유·근거의 인명은 공개 export 때 치환한다. 원문 링크/기존 Git 이력의 익명화를 보장하지 않는다.
 - 테스트 자료는 가상이며 실제 수집/공개 통계와 섞지 않는다.
 - 새 수집원·공개 배포·정기 타이머는 단계별 검증 결과를 기록한다.
+- OCI는 /srv/news-monitor, 기존 wiki-publisher 계정, 매일 07:00 KST timer를 사용한다.
+- 공개 배포는 preflight를 통과한 정적 파일 4개만 pages-data로 push한다. force push/reset은 금지한다.
+- Git push 성공(pushed)과 공개 파일 검증 성공(published)을 구분한다. 운영은 docs/OCI-OPERATIONS.md를 참고한다.
+- 이전 기사를 누적해도 최초/최근 확인일을 새로 만들지 않는다. 이전 기사만 남으면 새 배포를 차단한다.
