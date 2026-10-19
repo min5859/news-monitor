@@ -1,0 +1,9 @@
+{
+  "remote": "git@github.com:min5859/news-monitor.git",
+  "branch": "pages-data",
+  "url": "https://min5859.github.io/news-monitor/",
+  "author_name": "min5859",
+  "author_email": "min5859@users.noreply.github.com",
+  "identity_file": "/srv/news-monitor/config/pages_ed25519",
+  "known_hosts_file": "/srv/news-monitor/config/known_hosts"
+}

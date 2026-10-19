@@ -1,0 +1,13 @@
+[Unit]
+Description=Collect news daily at 07:00 KST
+
+[Timer]
+OnCalendar=*-*-* 07:00:00 Asia/Seoul
+Persistent=true
+AccuracySec=1min
+RandomizedDelaySec=30
+Unit=news-monitor.service
+
+[Install]
+WantedBy=timers.target
+

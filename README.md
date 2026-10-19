@@ -46,7 +46,7 @@ GDELT 옵션(endpoint/queries/user_agent 등)은 선택 가능한 이전 경로�
   구독 사용량/쿼터를 소비한다. 다른 계정의 인증 파일을 복사하지 않는다.
 - `gpt-6-luna`를 읽기 전용 임시 workspace에서 실행하고 shell·apps/MCP·plugins·하위 에이전트·
   이미지 생성을 비활성화한다. 사용자 config/rules는 이 호출에서 로드하지 않고 인증만 재사용한다.
-- 수집만 live web search를 허용하고 검색어 3개 묶음에 최대 24개 웹 도구 호출·600초를
+- 수집만 live web search를 허용하고 검색어 6개 묶음에 최대 30개 웹 도구 호출·600초를
   배분한다. 출력은 묶음당 1 MiB로 제한한다.
   제목 분류에는 웹 검색도 허용하지 않는다. 예상하지 않은 도구 이벤트는 실패 처리한다.
 - `analysis.provider=cursor` 경로도 남아 있으며 ask 모드·강제 샌드박스·도구 거부를 유지한다.

@@ -1,0 +1,26 @@
+[Unit]
+Description=Daily news collection and verified GitHub Pages push
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=wiki-publisher
+Group=wiki-publisher
+WorkingDirectory=/srv/news-monitor/app
+Environment=HOME=/home/wiki-publisher
+Environment=PATH=/home/wiki-publisher/.local/bin:/usr/local/bin:/usr/bin:/bin
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/usr/bin/bash /srv/news-monitor/app/scripts/run_daily.sh
+TimeoutStartSec=60min
+UMask=0077
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/wiki-publisher/.codex /srv/news-monitor/data /srv/news-monitor/dist /srv/news-monitor/publish
+MemoryMax=2G
+CPUQuota=100%
+StandardOutput=journal
+StandardError=journal
+

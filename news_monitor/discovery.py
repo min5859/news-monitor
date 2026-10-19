@@ -12,6 +12,10 @@ from news_monitor.codex import execute
 from news_monitor.collect import ROOT, canonical_url, normalized, parse_article
 
 
+def story_key(row):
+    return row["publisher"], normalized(row["title"]), row["published_at"]
+
+
 def collect_web(config, now, runner=execute):
     opts = config["collection"]
     now = now.astimezone(UTC)
@@ -114,8 +118,15 @@ def collect_web(config, now, runner=execute):
             continue
         if url in rows:
             stats["duplicates"] += 1
-        rows[url] = article
-    ordered = sorted(rows.values(), key=lambda row: (row["published_at"], row["url"]), reverse=True)
+        if url not in rows or article["published_at"] >= rows[url]["published_at"]:
+            rows[url] = article
+    stories = {}
+    for row in rows.values():
+        key = story_key(row)
+        if key in stories:
+            stats["duplicates"] += 1
+        stories[key] = row
+    ordered = sorted(stories.values(), key=lambda row: (row["published_at"], row["url"]), reverse=True)
     selected = ordered[:opts["max_articles"]]
     stats.update(selected=len(selected), limit_excluded=len(ordered) - len(selected))
     result.update(articles=selected, publishers=sorted({row["publisher"] for row in selected}))
@@ -147,17 +158,23 @@ def merge_previous(result, previous, config):
             return result
         start = timestamp(result["window_start"]).astimezone(ZoneInfo("Asia/Seoul")).date()
         end = checked.astimezone(ZoneInfo("Asia/Seoul")).date()
-        old = {row["url"]: row for row in clean["articles"] if start <= date.fromisoformat(row["published_at"]) <= end}
+        old = {story_key(row): row for row in clean["articles"] if start <= date.fromisoformat(row["published_at"]) <= end}
     except (ValueError, KeyError, TypeError, OverflowError):
         result["warnings"].append("previous_collection_rejected")
         return result
-    fresh = {row["url"]: row for row in result["articles"]}
-    for url in old.keys() & fresh.keys():
-        fresh[url]["first_seen_at"] = old[url]["first_seen_at"]
-    ordered = sorted({**old, **fresh}.values(), key=lambda row: (row["published_at"], row["url"]), reverse=True)
+    fresh = {story_key(row): row for row in result["articles"]}
+    old_urls = {row["url"]: row for row in old.values()}
+    fresh_urls = {row["url"] for row in fresh.values()}
+    for key in old.keys() & fresh.keys():
+        fresh[key]["first_seen_at"] = old[key]["first_seen_at"]
+    for row in fresh.values():
+        if row["url"] in old_urls:
+            row["first_seen_at"] = old_urls[row["url"]]["first_seen_at"]
+    remaining_old = {key: row for key, row in old.items() if row["url"] not in fresh_urls}
+    ordered = sorted({**remaining_old, **fresh}.values(), key=lambda row: (row["published_at"], row["url"]), reverse=True)
     selected = ordered[:config["collection"]["max_articles"]]
-    retained = sum(row["url"] not in fresh for row in selected)
-    reconfirmed = sum(row["url"] in fresh and row["url"] in old for row in selected)
+    retained = sum(story_key(row) not in fresh for row in selected)
+    reconfirmed = sum(story_key(row) in fresh and (story_key(row) in old or row["url"] in old_urls) for row in selected)
     result["statistics"].update(selected=len(selected), retained=retained, reconfirmed=reconfirmed,
                                 newly_found=len(selected) - retained - reconfirmed)
     result.update(articles=selected, publishers=sorted({row["publisher"] for row in selected}))

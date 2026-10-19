@@ -129,7 +129,9 @@ def check_ready(config, data_dir, output_dir, now=None):
         age = now - timestamp(report["collection_checked_at"])
         record("fresh_collection", timedelta(0) <= age <= timedelta(hours=config["analysis"]["max_collection_age_hours"]))
         record("has_completed_related_analysis", report["statistics"]["denominator"] > 0)
-        record("has_current_search_results", "retained_articles_only" not in report["warnings"])
+        record("all_model_calls_completed", report["analysis"]["failed_articles"] == 0)
+        record("has_current_search_results", "retained_articles_only" not in report["warnings"]
+               and any(not row["observation"]["reused"] for row in report["articles"]))
     except (OSError, ValueError, KeyError, TypeError, OverflowError):
         record("valid_artifact_and_inputs", False)
     return {"ready": bool(checks) and all(row["ok"] for row in checks), "checks": checks}

@@ -117,6 +117,23 @@ class DailyTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             report.prepare_collection(value, value, CONFIG, NOW)
 
+    def test_tracking_variants_of_same_publisher_title_and_day_count_once(self):
+        previous = run_search([article(url="https://example.com/news/1?ref_sec=stocks")])
+        fresh = run_search([article()])
+        merged = discovery.merge_previous(fresh, previous, CONFIG)
+        self.assertEqual(len(merged["articles"]), 1)
+        self.assertEqual(merged["articles"][0]["url"], article()["url"])
+        self.assertEqual(merged["statistics"]["reconfirmed"], 1)
+        self.assertEqual(run_search([article(), article(url="https://example.com/news/1?ref_sec=stocks")])["statistics"]["selected"], 1)
+
+    def test_updated_title_at_same_url_does_not_retain_two_versions(self):
+        previous = run_search([article()])
+        fresh = run_search([article(title="가상 테스트: 효성 조현준 회장 새 소식")])
+        merged = discovery.merge_previous(fresh, previous, CONFIG)
+        self.assertEqual(len(merged["articles"]), 1)
+        self.assertEqual(merged["statistics"]["reconfirmed"], 1)
+        report.prepare_collection(merged, merged, CONFIG, NOW)
+
     def test_deadline_skips_remaining_groups(self):
         cfg = self.config()
         cfg["collection"]["codex_timeout_seconds"] = 10
