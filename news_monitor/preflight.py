@@ -57,7 +57,7 @@ def check_artifact(report, config):
             or info["prompt_sha256"] != hashlib.sha256(validate_options(config).encode()).hexdigest()
             or not isinstance(report["warnings"], list) or not set(report["warnings"]).issubset(WARNINGS)):
         raise ValueError("outdated analysis or invalid warnings")
-    expected = {*ARTICLE_FIELDS, "classification", "analysis_failed", "evidence_omitted_for_display"}
+    expected = {*ARTICLE_FIELDS, "observation", "classification", "analysis_failed", "evidence_omitted_for_display"}
     seen = set()
     for row in report["articles"]:
         if not exact_keys(row, expected) or not exact_keys(row["classification"], DECISION_KEYS):
@@ -75,6 +75,12 @@ def check_artifact(report, config):
                 or (row["analysis_failed"] and (value["relevance"], value["sentiment"]) != ("uncertain", "abstain"))):
             raise ValueError("invalid public classification")
         seen.add(url)
+        observation = row["observation"]
+        if (not exact_keys(observation, {"first_seen_at", "last_seen_at", "reused"})
+                or type(observation["reused"]) is not bool
+                or observation["last_seen_at"] != row["indexed_at"]
+                or not timestamp(observation["first_seen_at"]) <= timestamp(observation["last_seen_at"]) <= timestamp(report["collection_checked_at"])):
+            raise ValueError("invalid public observation")
     if report["article_count"] != len(report["articles"]):
         raise ValueError("public article count mismatch")
     if report["statistics"] != summarize(report["articles"]):
@@ -123,6 +129,7 @@ def check_ready(config, data_dir, output_dir, now=None):
         age = now - timestamp(report["collection_checked_at"])
         record("fresh_collection", timedelta(0) <= age <= timedelta(hours=config["analysis"]["max_collection_age_hours"]))
         record("has_completed_related_analysis", report["statistics"]["denominator"] > 0)
+        record("has_current_search_results", "retained_articles_only" not in report["warnings"])
     except (OSError, ValueError, KeyError, TypeError, OverflowError):
         record("valid_artifact_and_inputs", False)
     return {"ready": bool(checks) and all(row["ok"] for row in checks), "checks": checks}

@@ -9,7 +9,7 @@ from zoneinfo import ZoneInfo
 
 from news_monitor.analysis import SENTIMENTS
 from news_monitor.collect import ROOT, atomic_json
-from news_monitor.report import timestamp
+from news_monitor.report import summarize, timestamp
 
 LABELS = {"positive": "긍정", "negative": "부정", "neutral": "중립", "mixed": "혼합", "abstain": "판단 보류", "unrelated": "관련 없음"}
 STATUS = {"ok": "자동 분석 샘플", "partial": "일부 처리 미완료", "empty": "조건에 맞는 기사 없음", "failed": "수집·검증 실패",
@@ -58,6 +58,9 @@ def render(report):
             evidence = '<p class="evidence">인명 표기 변경으로 제목 근거의 일부 표시를 생략했습니다.</p>'
         relevance = {"related": "대상 관련", "uncertain": "관련성 불확실", "unrelated": "관련 없음"}[decision["relevance"]]
         outcome = "AI 호출·응답 검증 실패" if row["analysis_failed"] else "AI 자동분류 · 미검토"
+        observation = row.get("observation", {})
+        if observation.get("reused"):
+            outcome += f" · 이전 수집 유지(마지막 확인 {display_time(observation['last_seen_at'])})"
         article_html.append(f'<article class="article" data-publisher="{h(row["publisher"])}" data-sentiment="{h(label)}" data-day="{day}"><div class="article-meta"><span class="label {h(label)}">{LABELS[label]}</span><span>{h(row["publisher"])}</span><span>{h(article_time)}</span><span>{relevance} · {outcome}</span></div><h3><a href="{h(row["url"])}" target="_blank" rel="noopener noreferrer">{h(row["title"])} ↗</a></h3><p class="reason">{h(decision["reason"])}</p>{evidence}</article>')
     notice = "제목만으로 자동 분류한 미검토 샘플입니다. 실제 확보 범위 안에서만 해석해 주세요."
     if failed:
@@ -80,6 +83,17 @@ def render(report):
         ratio_note = f"긍정 대 부정만 비교: {pn['percentages']['positive']:.1f}% / {pn['percentages']['negative']:.1f}% (분모 {pn['denominator']}건 · 중립·혼합·보류 제외)."
     attribution = report["source_attribution"]
     publication_dates = report["date_basis"] == "publisher_date"
+    daily_summary = ""
+    if publication_dates and report["window_end"]:
+        day = timestamp(report["window_end"]).astimezone(ZoneInfo("Asia/Seoul")).date().isoformat()
+        rows = [row for row in report["articles"] if row["published_at"] == day]
+        daily = summarize(rows)
+        values = " · ".join(f"{LABELS[key]} {daily['counts'][key]}건" for key in SENTIMENTS)
+        ratios = "비율 산출 불가" if not daily["denominator"] else " · ".join(
+            f"{LABELS[key]} {daily['percentages'][key]:.1f}%" for key in SENTIMENTS)
+        daily_summary = (f'<section class="panel" aria-label="당일 발행 기사"><h2>{day} 발행 기사</h2>'
+                         f'<p>{len(rows)}건 · 분류 완료 {daily["denominator"]}건 · 판단 보류 {daily["abstained"]}건</p>'
+                         f'<p>{values}</p><p class="footnote">{ratios}. 수집일이 아닌 발행일 기준이며 아래 분포는 전체 조회 기간 기준입니다.</p></section>')
     values = {"title": h(f"{report['target']['organization']} {report['target']['name']}"),
               "status_label": STATUS[report["status"]], "checked": h(display_time(report["collection_checked_at"])),
               "window": h(f"{display_time(report['window_start'], True)} — {display_time(report['window_end'], True)}"),
@@ -92,7 +106,7 @@ def render(report):
               "attribution": f'<a href="{h(attribution["url"])}" target="_blank" rel="noopener noreferrer">{h(attribution["name"])}</a>',
               "model": h(f"{report['analysis']['provider']} / {report['analysis']['model']}"),
               "prompt_version": h(report["analysis"]["prompt_sha256"]),
-              "generated": h(display_time(report["generated_at"]))}
+              "generated": h(display_time(report["generated_at"])), "daily_summary": daily_summary}
     values.update(window_label="발행일 범위" if publication_dates else "관측 기간",
                   date_filter_label="발행일" if publication_dates else "관측일",
                   date_filter_note="기사의 공개 발행일 기준입니다." if publication_dates else "날짜는 KST 관측일이며 발행일이 아닙니다.",

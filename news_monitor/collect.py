@@ -85,10 +85,18 @@ def load_config(path):
             raise ValueError("queries and aliases must be nonempty string lists")
     display_name(config)
     if opts["provider"] == "codex_web_search":
-        for key, low, high in (("codex_timeout_seconds", 1, 300), ("codex_output_bytes", 1024, 2097152),
+        for key, low, high in (("codex_timeout_seconds", 1, 900), ("codex_output_bytes", 1024, 2097152),
                                ("max_search_calls", 1, 30)):
             if type(opts[key]) is not int or not low <= opts[key] <= high:
                 raise ValueError(f"invalid {key}")
+        groups = opts.get("search_groups", [[config["target"]["name"]]])
+        if (not isinstance(groups, list) or not 1 <= len(groups) <= min(6, opts["max_search_calls"])
+                or any(not isinstance(group, list) or not 1 <= len(group) <= 4
+                       or any(not isinstance(query, str) or not query.strip() or len(query) > 200 for query in group)
+                       for group in groups)):
+            raise ValueError("invalid search_groups")
+        if type(opts.get("require_organization_in_headline", True)) is not bool:
+            raise ValueError("invalid headline selection option")
         for key, directory in (("schema_file", "schemas"), ("search_prompt_file", "prompts")):
             if not (ROOT / opts[key]).resolve().is_relative_to(ROOT / directory):
                 raise ValueError("unsafe discovery resource path")
@@ -354,6 +362,19 @@ def _run_collection(config, data_dir, now=None, opener=urlopen, sleeper=time.sle
     atomic_json(state_path, {"retry_not_before": (current + timedelta(seconds=interval)).isoformat(),
                             "reason": "minimum_run_interval"})
     result = collect(config, current, opener=opener, sleeper=sleeper)
+    if config["collection"]["provider"] == "codex_web_search" and (data_dir / "articles.json").exists():
+        from news_monitor.discovery import merge_previous
+
+        try:
+            with (data_dir / "articles.json").open("rb") as stream:
+                raw = stream.read(config["collection"]["max_response_bytes"] + 1)
+            if len(raw) > config["collection"]["max_response_bytes"]:
+                raise ValueError("previous collection too large")
+            previous = json.loads(raw)
+        except (OSError, ValueError, TypeError):
+            previous = None
+            result["warnings"].append("previous_collection_rejected")
+        result = merge_previous(result, previous, config)
     delay = max(interval, result["retry_after_seconds"] or 0)
     until = (clock() + timedelta(seconds=delay)).isoformat()
     atomic_json(state_path, {"retry_not_before": until,

@@ -9,9 +9,15 @@
   "collection": {
     "provider": "codex_web_search",
     "codex_model": "gpt-6-luna",
-    "codex_timeout_seconds": 240,
+    "codex_timeout_seconds": 600,
     "codex_output_bytes": 1048576,
-    "max_search_calls": 16,
+    "max_search_calls": 24,
+    "search_groups": [
+      ["효성 조현준 회장 뉴스", "조현준 회장 투자 경영"],
+      ["조현준 회장 최근 보도", "조현준 회장 효성그룹"],
+      ["Hyosung Cho Hyun-joon chairman news", "Hyun-Joon Cho Hyosung"]
+    ],
+    "require_organization_in_headline": false,
     "search_prompt_file": "prompts/discover.md",
     "schema_file": "schemas/discovery.json",
     "endpoint": "https://api.gdeltproject.org/api/v2/doc/doc",

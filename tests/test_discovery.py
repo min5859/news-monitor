@@ -10,6 +10,7 @@ from news_monitor import analysis, codex, discovery, report, site
 from news_monitor.collect import ROOT
 
 CONFIG = json.loads((ROOT / "config.json").read_text())
+CONFIG["collection"]["search_groups"] = [["가상 검색"]]
 NOW = datetime(2026, 10, 18, 12, tzinfo=UTC)
 
 

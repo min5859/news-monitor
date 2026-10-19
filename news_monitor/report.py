@@ -11,7 +11,7 @@ from news_monitor.display import display_name, public_text, validate_public_name
 
 ARTICLE_FIELDS = ("id", "title", "url", "publisher", "language", "indexed_at", "published_at", "analysis_scope", "source")
 WARNINGS = {"publisher_goal_not_met", "upstream_limit_reached", "remaining_queries_skipped_rate_limit",
-            "remaining_queries_skipped_retry_after"}
+            "remaining_queries_skipped_retry_after", "retained_articles_only", "previous_collection_rejected"}
 
 
 def timestamp(value):
@@ -70,7 +70,10 @@ def prepare_collection(status, dataset, config, now=None):
         url = canonical_url(article["url"], config["collection"])
         if not title or len(title) > config["collection"]["max_title_chars"] or title != article["title"]:
             raise ValueError("invalid article title")
-        for aliases in (config["target"]["person_aliases"], config["target"]["organization_aliases"]):
+        alias_groups = [config["target"]["person_aliases"]]
+        if not publication_dates or config["collection"].get("require_organization_in_headline", True):
+            alias_groups.append(config["target"]["organization_aliases"])
+        for aliases in alias_groups:
             if not any(normalized(alias) in normalized(title) for alias in aliases):
                 raise ValueError("headline does not match configured target")
         if article["url"] != url or article["id"] != hashlib.sha256(url.encode()).hexdigest()[:20] or url in seen:
@@ -86,10 +89,15 @@ def prepare_collection(status, dataset, config, now=None):
                 raise ValueError("invalid publisher date")
         elif article["published_at"] is not None:
             raise ValueError("GDELT observation is not publication time")
-        if (not start <= timestamp(article["indexed_at"]) <= end or timestamp(row["collected_at"]) != checked
+        observed = timestamp(article["indexed_at"])
+        collected = timestamp(row["collected_at"])
+        first_seen = timestamp(row.get("first_seen_at", article["indexed_at"]))
+        if (not start <= observed <= collected <= checked or not first_seen <= observed
+                or (not publication_dates and collected != checked)
                 or article["analysis_scope"] != "headline_only"
                 or article["source"] != config["collection"]["provider"]):
             raise ValueError("invalid article provenance")
+        article.update(first_seen_at=first_seen.isoformat(), collected_at=collected.isoformat())
         seen.add(url)
         clean["articles"].append(article)
     return clean
@@ -134,6 +142,9 @@ def make_report(collection, decisions, info, config, now=None):
         if article["id"] != decision["id"]:
             raise ValueError("analysis identity mismatch")
         clean = {field: article[field] for field in ARTICLE_FIELDS}
+        clean["observation"] = {"first_seen_at": article.get("first_seen_at", article["indexed_at"]),
+                                "last_seen_at": article["indexed_at"],
+                                "reused": article.get("collected_at", collection["checked_at"]) != collection["checked_at"]}
         clean["classification"] = validate_decision(decision["decision"], article["title"], config["analysis"])
         clean["analysis_failed"] = decision["error"] is not None
         if clean["analysis_failed"] and (clean["classification"]["relevance"] != "uncertain"
