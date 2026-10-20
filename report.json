@@ -2,7 +2,7 @@
   "schema_version": 2,
   "sample": true,
   "human_reviewed": false,
-  "status": "ok",
+  "status": "partial",
   "target": {
     "name": "회장님",
     "organization": "효성"
@@ -13,16 +13,16 @@
     "article_titles_modified": true,
     "evidence_may_be_omitted": true
   },
-  "generated_at": "2026-10-19T22:02:44.182301+00:00",
-  "collection_checked_at": "2026-10-19T22:00:27.129453+00:00",
-  "window_start": "2026-09-20T15:00:00+00:00",
-  "window_end": "2026-10-19T22:00:27.129453+00:00",
+  "generated_at": "2026-10-20T22:02:23.830182+00:00",
+  "collection_checked_at": "2026-10-20T22:00:25.295710+00:00",
+  "window_start": "2026-09-21T15:00:00+00:00",
+  "window_end": "2026-10-20T22:00:25.295710+00:00",
   "analysis_scope": "headline_only",
   "date_basis": "publisher_date",
   "coverage": "search_sample_not_exhaustive",
   "selection": "latest_published_target_in_headline",
-  "article_count": 11,
-  "publisher_count": 10,
+  "article_count": 12,
+  "publisher_count": 11,
   "publisher_goal": 5,
   "warnings": [],
   "source_attribution": {
@@ -33,18 +33,18 @@
     "provider": "codex",
     "model": "gpt-6-luna",
     "prompt_sha256": "577fb8d45a5b68cdf1276b241a66a8c5c9d9f40961bfeba35f6243ceccac4389",
-    "model_calls": 6,
-    "cache_hits": 5,
+    "model_calls": 0,
+    "cache_hits": 12,
     "failed_articles": 0
   },
   "statistics": {
     "counts": {
-      "positive": 11,
+      "positive": 12,
       "negative": 0,
       "neutral": 0,
       "mixed": 0
     },
-    "denominator": 11,
+    "denominator": 12,
     "percentages": {
       "positive": 100.0,
       "negative": 0.0,
@@ -54,7 +54,7 @@
     "abstained": 0,
     "unrelated": 0,
     "positive_negative_only": {
-      "denominator": 11,
+      "denominator": 12,
       "percentages": {
         "positive": 100.0,
         "negative": 0.0
@@ -219,6 +219,32 @@
       }
     },
     {
+      "publisher": "mobile.newsis.com",
+      "article_count": 1,
+      "counts": {
+        "positive": 1,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 0
+      },
+      "denominator": 1,
+      "percentages": {
+        "positive": 100.0,
+        "negative": 0.0,
+        "neutral": 0.0,
+        "mixed": 0.0
+      },
+      "abstained": 0,
+      "unrelated": 0,
+      "positive_negative_only": {
+        "denominator": 1,
+        "percentages": {
+          "positive": 100.0,
+          "negative": 0.0
+        }
+      }
+    },
+    {
       "publisher": "newsis.com",
       "article_count": 1,
       "counts": {
@@ -337,7 +363,7 @@
       "observation": {
         "first_seen_at": "2026-10-18T13:19:04+00:00",
         "last_seen_at": "2026-10-19T22:00:27.129453+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "AI 시대 내다본 회장님",
@@ -378,13 +404,13 @@
       "url": "https://search.newspim.com/news/view/20261016000187",
       "publisher": "search.newspim.com",
       "language": "ko",
-      "indexed_at": "2026-10-19T22:00:27.129453+00:00",
+      "indexed_at": "2026-10-20T22:00:25.295710+00:00",
       "published_at": "2026-10-16",
       "analysis_scope": "headline_only",
       "source": "codex_web_search",
       "observation": {
         "first_seen_at": "2026-10-19T22:00:27.129453+00:00",
-        "last_seen_at": "2026-10-19T22:00:27.129453+00:00",
+        "last_seen_at": "2026-10-20T22:00:25.295710+00:00",
         "reused": false
       },
       "classification": {
@@ -402,13 +428,13 @@
       "url": "https://biz.newdaily.co.kr/site/data/html/2026/10/16/2026101600081.html",
       "publisher": "biz.newdaily.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-19T22:00:27.129453+00:00",
+      "indexed_at": "2026-10-20T22:00:25.295710+00:00",
       "published_at": "2026-10-16",
       "analysis_scope": "headline_only",
       "source": "codex_web_search",
       "observation": {
         "first_seen_at": "2026-10-18T13:19:04+00:00",
-        "last_seen_at": "2026-10-19T22:00:27.129453+00:00",
+        "last_seen_at": "2026-10-20T22:00:25.295710+00:00",
         "reused": false
       },
       "classification": {
@@ -433,7 +459,7 @@
       "observation": {
         "first_seen_at": "2026-10-18T13:19:04+00:00",
         "last_seen_at": "2026-10-19T22:00:27.129453+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "지배력 강화·책임경영 행보",
@@ -481,7 +507,7 @@
       "observation": {
         "first_seen_at": "2026-10-19T22:00:27.129453+00:00",
         "last_seen_at": "2026-10-19T22:00:27.129453+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "고속 성장",
@@ -505,11 +531,35 @@
       "observation": {
         "first_seen_at": "2026-10-19T22:00:27.129453+00:00",
         "last_seen_at": "2026-10-19T22:00:27.129453+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "회장님 승부수",
         "reason": "회장님의 승부수와 효성중공업의 목표를 연결해 보도하며 제목상 긍정적입니다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "f7af01241e3bc5cf13dc",
+      "title": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞",
+      "url": "https://mobile.newsis.com/view/NISX20260928_0003805093",
+      "publisher": "mobile.newsis.com",
+      "language": "ko",
+      "indexed_at": "2026-10-20T22:00:25.295710+00:00",
+      "published_at": "2026-09-28",
+      "analysis_scope": "headline_only",
+      "source": "codex_web_search",
+      "observation": {
+        "first_seen_at": "2026-10-20T22:00:25.295710+00:00",
+        "last_seen_at": "2026-10-20T22:00:25.295710+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "고속 성장",
+        "reason": "회장님을 직접 언급하며 효성중공업의 고속 성장과 실적 전망을 전하는 제목입니다.",
         "relevance": "related",
         "sentiment": "positive"
       },
@@ -529,7 +579,7 @@
       "observation": {
         "first_seen_at": "2026-10-19T22:00:27.129453+00:00",
         "last_seen_at": "2026-10-19T22:00:27.129453+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "회장님號 효성중공업, 美생산확대에 3300억 투입",
@@ -553,7 +603,7 @@
       "observation": {
         "first_seen_at": "2026-10-19T22:00:27.129453+00:00",
         "last_seen_at": "2026-10-19T22:00:27.129453+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "Drives Development of Core HVDC Technologies",
@@ -577,7 +627,7 @@
       "observation": {
         "first_seen_at": "2026-10-19T22:00:27.129453+00:00",
         "last_seen_at": "2026-10-19T22:00:27.129453+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "Turns ESG Investments into New Growth Engines",
@@ -591,11 +641,11 @@
   ],
   "insights": {
     "schema_version": 1,
-    "status": "ok",
+    "status": "fallback",
     "provider": "codex",
     "model": "gpt-6-luna",
     "prompt_sha256": "8e718d2fea0f520133c4cb77dd0337b3596719941e908ec03e606eff72f9e73a",
-    "model_calls": 1,
+    "model_calls": 2,
     "cache_hit": false,
     "topics": {
       "management": "경영·투자",
@@ -605,133 +655,174 @@
       "other": "기타"
     },
     "default_period_days": 30,
-    "as_of_day": "2026-10-20",
-    "available_start": "2026-09-21",
+    "as_of_day": "2026-10-21",
+    "available_start": "2026-09-22",
     "groups": [
       {
-        "label": "효성중공업 3분기 실적 보도",
-        "summary": "효성중공업이 3분기에도 성장했고 연간 영업이익 1조원을 눈앞에 뒀다는 보도입니다.",
-        "topic": "management",
+        "label": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞",
+        "summary": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞",
+        "topic": "other",
         "article_ids": [
           "04befdf786d1fa911834"
         ],
         "evidence": [
           {
             "article_id": "04befdf786d1fa911834",
-            "quote": "3분기도 '고속 성장'"
+            "quote": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞"
           }
         ]
       },
       {
-        "label": "효성 계열사 지분 확대",
-        "summary": "회장님이 효성 계열사 지분을 확대했다는 보도입니다.",
-        "topic": "governance",
+        "label": "회장님, 효성 계열사 지분 확대...지배력 강화·책임경영 행보",
+        "summary": "회장님, 효성 계열사 지분 확대...지배력 강화·책임경영 행보",
+        "topic": "other",
         "article_ids": [
           "14361f68b39f4521a4e0"
         ],
         "evidence": [
           {
             "article_id": "14361f68b39f4521a4e0",
-            "quote": "효성 계열사 지분 확대"
+            "quote": "회장님, 효성 계열사 지분 확대...지배력 강화·책임경영 행보"
           }
         ]
       },
       {
-        "label": "베트남 바이오스판덱스 기반 구축",
-        "summary": "효성 회장님이 베트남에 바이오스판덱스 기반을 완성했다는 제목입니다.",
-        "topic": "management",
+        "label": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam",
+        "summary": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam",
+        "topic": "other",
         "article_ids": [
           "35a8dc963c308a6f0364"
         ],
         "evidence": [
           {
             "article_id": "35a8dc963c308a6f0364",
-            "quote": "completes bio-spandex base in Vietnam"
+            "quote": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam"
           }
         ]
       },
       {
-        "label": "효성 ESG 투자",
-        "summary": "효성 회장님이 ESG 투자를 새로운 성장 동력으로 전환한다는 제목입니다.",
-        "topic": "management",
+        "label": "Hyosung Chairman 회장님 Turns ESG Investments into New Growth Engines",
+        "summary": "Hyosung Chairman 회장님 Turns ESG Investments into New Growth Engines",
+        "topic": "other",
         "article_ids": [
           "6d0dbbfcc5d8584ba401"
         ],
         "evidence": [
           {
             "article_id": "6d0dbbfcc5d8584ba401",
-            "quote": "ESG Investments into New Growth Engines"
+            "quote": "Hyosung Chairman 회장님 Turns ESG Investments into New Growth Engines"
           }
         ]
       },
       {
-        "label": "효성중공업 미국 생산 확대 투자",
-        "summary": "효성중공업이 미국 생산 확대에 3300억원을 투입한다는 보도입니다.",
-        "topic": "management",
+        "label": "회장님號 효성중공업, 美생산확대에 3300억 투입...AI發 수요 선점 '집중'",
+        "summary": "회장님號 효성중공업, 美생산확대에 3300억 투입...AI發 수요 선점 '집중'",
+        "topic": "other",
         "article_ids": [
           "6f43ef51dd00df8b9fb7"
         ],
         "evidence": [
           {
             "article_id": "6f43ef51dd00df8b9fb7",
-            "quote": "美생산확대에 3300억 투입"
+            "quote": "회장님號 효성중공업, 美생산확대에 3300억 투입...AI發 수요 선점 '집중'"
           }
         ]
       },
       {
-        "label": "효성중공업 창원 초고압차단기 신공장 준공",
-        "summary": "효성중공업이 창원에 수출 전용 초고압차단기 신공장을 준공했으며, 초고압차단기 생산을 2배로 늘린다는 보도도 있습니다.",
-        "topic": "management",
+        "label": "AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로",
+        "summary": "AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로",
+        "topic": "other",
         "article_ids": [
-          "7fe9c5d576a1cb3f675c",
-          "a0fd25f50d995109f300",
-          "d9f75008af8159a3b208",
-          "f2c4eb966ccb6aa8ce84"
+          "7fe9c5d576a1cb3f675c"
         ],
         "evidence": [
           {
             "article_id": "7fe9c5d576a1cb3f675c",
-            "quote": "초고압차단기 생산 2배로"
-          },
-          {
-            "article_id": "a0fd25f50d995109f300",
-            "quote": "창원 초고압차단기 신공장 준공"
-          },
-          {
-            "article_id": "d9f75008af8159a3b208",
-            "quote": "창원에 수출 전용 '초고압차단기 공장' 준공"
-          },
-          {
-            "article_id": "f2c4eb966ccb6aa8ce84",
-            "quote": "수출 전용 초고압차단기 신공장 준공"
+            "quote": "AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로"
           }
         ]
       },
       {
-        "label": "효성중공업 글로벌 톱3 목표",
-        "summary": "효성중공업의 2031년 글로벌 톱3 목표를 다룬 제목입니다.",
-        "topic": "management",
+        "label": "회장님 효성重 회장, 글로벌 공급망 확대 속도...창원 초고압차단기 신공장 준공",
+        "summary": "회장님 효성重 회장, 글로벌 공급망 확대 속도...창원 초고압차단기 신공장 준공",
+        "topic": "other",
+        "article_ids": [
+          "a0fd25f50d995109f300"
+        ],
+        "evidence": [
+          {
+            "article_id": "a0fd25f50d995109f300",
+            "quote": "회장님 효성重 회장, 글로벌 공급망 확대 속도...창원 초고압차단기 신공장 준공"
+          }
+        ]
+      },
+      {
+        "label": "회장님 승부수...효성重 2031년 ‘글로벌 톱3ʼ",
+        "summary": "회장님 승부수...효성重 2031년 ‘글로벌 톱3ʼ",
+        "topic": "other",
         "article_ids": [
           "af179616fe2fca4bc19a"
         ],
         "evidence": [
           {
             "article_id": "af179616fe2fca4bc19a",
-            "quote": "2031년 ‘글로벌 톱3ʼ"
+            "quote": "회장님 승부수...효성重 2031년 ‘글로벌 톱3ʼ"
           }
         ]
       },
       {
-        "label": "효성의 HVDC 기술 개발",
-        "summary": "효성 회장님이 핵심 HVDC 기술 개발을 추진한다는 제목입니다.",
-        "topic": "management",
+        "label": "Hyosung Chairman 회장님 Drives Development of Core HVDC Technologies",
+        "summary": "Hyosung Chairman 회장님 Drives Development of Core HVDC Technologies",
+        "topic": "other",
         "article_ids": [
           "c3ee544a4226c5b03556"
         ],
         "evidence": [
           {
             "article_id": "c3ee544a4226c5b03556",
-            "quote": "Development of Core HVDC Technologies"
+            "quote": "Hyosung Chairman 회장님 Drives Development of Core HVDC Technologies"
+          }
+        ]
+      },
+      {
+        "label": "회장님의 '5년 앞선 투자' ... 효성重, 창원에 수출 전용 '초고압차단기 공장' 준공",
+        "summary": "회장님의 '5년 앞선 투자' ... 효성重, 창원에 수출 전용 '초고압차단기 공장' 준공",
+        "topic": "other",
+        "article_ids": [
+          "d9f75008af8159a3b208"
+        ],
+        "evidence": [
+          {
+            "article_id": "d9f75008af8159a3b208",
+            "quote": "회장님의 '5년 앞선 투자' ... 효성重, 창원에 수출 전용 '초고압차단기 공장' 준공"
+          }
+        ]
+      },
+      {
+        "label": "효성重, 수출 전용 초고압차단기 신공장 준공...회장님, 글로벌 공급망 ‘드라이브’",
+        "summary": "효성重, 수출 전용 초고압차단기 신공장 준공...회장님, 글로벌 공급망 ‘드라이브’",
+        "topic": "other",
+        "article_ids": [
+          "f2c4eb966ccb6aa8ce84"
+        ],
+        "evidence": [
+          {
+            "article_id": "f2c4eb966ccb6aa8ce84",
+            "quote": "효성重, 수출 전용 초고압차단기 신공장 준공...회장님, 글로벌 공급망 ‘드라이브’"
+          }
+        ]
+      },
+      {
+        "label": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞",
+        "summary": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞",
+        "topic": "other",
+        "article_ids": [
+          "f7af01241e3bc5cf13dc"
+        ],
+        "evidence": [
+          {
+            "article_id": "f7af01241e3bc5cf13dc",
+            "quote": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞"
           }
         ]
       }
@@ -739,8 +830,8 @@
     "periods": [
       {
         "days": 1,
-        "start": "2026-10-20",
-        "end": "2026-10-20",
+        "start": "2026-10-21",
+        "end": "2026-10-21",
         "coverage_complete": true,
         "article_ids": [],
         "statistics": {
@@ -773,7 +864,7 @@
         "retained_count": 0,
         "daily": [
           {
-            "date": "2026-10-20",
+            "date": "2026-10-21",
             "covered": true,
             "article_count": 0,
             "statistics": {
@@ -805,8 +896,8 @@
       },
       {
         "days": 7,
-        "start": "2026-10-14",
-        "end": "2026-10-20",
+        "start": "2026-10-15",
+        "end": "2026-10-21",
         "coverage_complete": true,
         "article_ids": [
           "7fe9c5d576a1cb3f675c",
@@ -839,39 +930,10 @@
           }
         },
         "publisher_count": 4,
-        "issue_count": 1,
-        "newly_seen_count": 1,
-        "retained_count": 1,
+        "issue_count": 4,
+        "newly_seen_count": 0,
+        "retained_count": 2,
         "daily": [
-          {
-            "date": "2026-10-14",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
-          },
           {
             "date": "2026-10-15",
             "covered": true,
@@ -1045,58 +1107,9 @@
                 }
               }
             }
-          }
-        ]
-      },
-      {
-        "days": 30,
-        "start": "2026-09-21",
-        "end": "2026-10-20",
-        "coverage_complete": true,
-        "article_ids": [
-          "7fe9c5d576a1cb3f675c",
-          "f2c4eb966ccb6aa8ce84",
-          "a0fd25f50d995109f300",
-          "d9f75008af8159a3b208",
-          "14361f68b39f4521a4e0",
-          "35a8dc963c308a6f0364",
-          "04befdf786d1fa911834",
-          "af179616fe2fca4bc19a",
-          "6f43ef51dd00df8b9fb7",
-          "c3ee544a4226c5b03556",
-          "6d0dbbfcc5d8584ba401"
-        ],
-        "statistics": {
-          "counts": {
-            "positive": 11,
-            "negative": 0,
-            "neutral": 0,
-            "mixed": 0
           },
-          "denominator": 11,
-          "percentages": {
-            "positive": 100.0,
-            "negative": 0.0,
-            "neutral": 0.0,
-            "mixed": 0.0
-          },
-          "abstained": 0,
-          "unrelated": 0,
-          "positive_negative_only": {
-            "denominator": 11,
-            "percentages": {
-              "positive": 100.0,
-              "negative": 0.0
-            }
-          }
-        },
-        "publisher_count": 10,
-        "issue_count": 8,
-        "newly_seen_count": 6,
-        "retained_count": 2,
-        "daily": [
           {
-            "date": "2026-09-21",
+            "date": "2026-10-21",
             "covered": true,
             "article_count": 0,
             "statistics": {
@@ -1123,7 +1136,57 @@
                 }
               }
             }
+          }
+        ]
+      },
+      {
+        "days": 30,
+        "start": "2026-09-22",
+        "end": "2026-10-21",
+        "coverage_complete": true,
+        "article_ids": [
+          "7fe9c5d576a1cb3f675c",
+          "f2c4eb966ccb6aa8ce84",
+          "a0fd25f50d995109f300",
+          "d9f75008af8159a3b208",
+          "14361f68b39f4521a4e0",
+          "35a8dc963c308a6f0364",
+          "04befdf786d1fa911834",
+          "af179616fe2fca4bc19a",
+          "f7af01241e3bc5cf13dc",
+          "6f43ef51dd00df8b9fb7",
+          "c3ee544a4226c5b03556",
+          "6d0dbbfcc5d8584ba401"
+        ],
+        "statistics": {
+          "counts": {
+            "positive": 12,
+            "negative": 0,
+            "neutral": 0,
+            "mixed": 0
           },
+          "denominator": 12,
+          "percentages": {
+            "positive": 100.0,
+            "negative": 0.0,
+            "neutral": 0.0,
+            "mixed": 0.0
+          },
+          "abstained": 0,
+          "unrelated": 0,
+          "positive_negative_only": {
+            "denominator": 12,
+            "percentages": {
+              "positive": 100.0,
+              "negative": 0.0
+            }
+          }
+        },
+        "publisher_count": 11,
+        "issue_count": 12,
+        "newly_seen_count": 1,
+        "retained_count": 9,
+        "daily": [
           {
             "date": "2026-09-22",
             "covered": true,
@@ -1301,15 +1364,15 @@
           {
             "date": "2026-09-28",
             "covered": true,
-            "article_count": 2,
+            "article_count": 3,
             "statistics": {
               "counts": {
-                "positive": 2,
+                "positive": 3,
                 "negative": 0,
                 "neutral": 0,
                 "mixed": 0
               },
-              "denominator": 2,
+              "denominator": 3,
               "percentages": {
                 "positive": 100.0,
                 "negative": 0.0,
@@ -1319,7 +1382,7 @@
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 2,
+                "denominator": 3,
                 "percentages": {
                   "positive": 100.0,
                   "negative": 0.0
@@ -1938,6 +2001,35 @@
           },
           {
             "date": "2026-10-20",
+            "covered": true,
+            "article_count": 0,
+            "statistics": {
+              "counts": {
+                "positive": 0,
+                "negative": 0,
+                "neutral": 0,
+                "mixed": 0
+              },
+              "denominator": 0,
+              "percentages": {
+                "positive": null,
+                "negative": null,
+                "neutral": null,
+                "mixed": null
+              },
+              "abstained": 0,
+              "unrelated": 0,
+              "positive_negative_only": {
+                "denominator": 0,
+                "percentages": {
+                  "positive": null,
+                  "negative": null
+                }
+              }
+            }
+          },
+          {
+            "date": "2026-10-21",
             "covered": true,
             "article_count": 0,
             "statistics": {
