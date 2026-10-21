@@ -13,16 +13,16 @@
     "article_titles_modified": true,
     "evidence_may_be_omitted": true
   },
-  "generated_at": "2026-10-20T22:02:23.830182+00:00",
-  "collection_checked_at": "2026-10-20T22:00:25.295710+00:00",
-  "window_start": "2026-09-21T15:00:00+00:00",
-  "window_end": "2026-10-20T22:00:25.295710+00:00",
+  "generated_at": "2026-10-21T22:02:04.147113+00:00",
+  "collection_checked_at": "2026-10-21T22:00:23.563637+00:00",
+  "window_start": "2026-09-22T15:00:00+00:00",
+  "window_end": "2026-10-21T22:00:23.563637+00:00",
   "analysis_scope": "headline_only",
   "date_basis": "publisher_date",
   "coverage": "search_sample_not_exhaustive",
   "selection": "latest_published_target_in_headline",
-  "article_count": 12,
-  "publisher_count": 11,
+  "article_count": 14,
+  "publisher_count": 14,
   "publisher_goal": 5,
   "warnings": [],
   "source_attribution": {
@@ -33,28 +33,28 @@
     "provider": "codex",
     "model": "gpt-6-luna",
     "prompt_sha256": "577fb8d45a5b68cdf1276b241a66a8c5c9d9f40961bfeba35f6243ceccac4389",
-    "model_calls": 0,
-    "cache_hits": 12,
+    "model_calls": 3,
+    "cache_hits": 11,
     "failed_articles": 0
   },
   "statistics": {
     "counts": {
-      "positive": 12,
+      "positive": 13,
       "negative": 0,
-      "neutral": 0,
+      "neutral": 1,
       "mixed": 0
     },
-    "denominator": 12,
+    "denominator": 14,
     "percentages": {
-      "positive": 100.0,
+      "positive": 92.9,
       "negative": 0.0,
-      "neutral": 0.0,
+      "neutral": 7.1,
       "mixed": 0.0
     },
     "abstained": 0,
     "unrelated": 0,
     "positive_negative_only": {
-      "denominator": 12,
+      "denominator": 13,
       "percentages": {
         "positive": 100.0,
         "negative": 0.0
@@ -89,6 +89,32 @@
       }
     },
     {
+      "publisher": "cbcglobe.com",
+      "article_count": 1,
+      "counts": {
+        "positive": 0,
+        "negative": 0,
+        "neutral": 1,
+        "mixed": 0
+      },
+      "denominator": 1,
+      "percentages": {
+        "positive": 0.0,
+        "negative": 0.0,
+        "neutral": 100.0,
+        "mixed": 0.0
+      },
+      "abstained": 0,
+      "unrelated": 0,
+      "positive_negative_only": {
+        "denominator": 0,
+        "percentages": {
+          "positive": null,
+          "negative": null
+        }
+      }
+    },
+    {
       "publisher": "dailyenews.co.kr",
       "article_count": 1,
       "counts": {
@@ -116,14 +142,14 @@
     },
     {
       "publisher": "en.prnasia.com",
-      "article_count": 2,
+      "article_count": 1,
       "counts": {
-        "positive": 2,
+        "positive": 1,
         "negative": 0,
         "neutral": 0,
         "mixed": 0
       },
-      "denominator": 2,
+      "denominator": 1,
       "percentages": {
         "positive": 100.0,
         "negative": 0.0,
@@ -133,7 +159,33 @@
       "abstained": 0,
       "unrelated": 0,
       "positive_negative_only": {
-        "denominator": 2,
+        "denominator": 1,
+        "percentages": {
+          "positive": 100.0,
+          "negative": 0.0
+        }
+      }
+    },
+    {
+      "publisher": "en.topdaily.kr",
+      "article_count": 1,
+      "counts": {
+        "positive": 1,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 0
+      },
+      "denominator": 1,
+      "percentages": {
+        "positive": 100.0,
+        "negative": 0.0,
+        "neutral": 0.0,
+        "mixed": 0.0
+      },
+      "abstained": 0,
+      "unrelated": 0,
+      "positive_negative_only": {
+        "denominator": 1,
         "percentages": {
           "positive": 100.0,
           "negative": 0.0
@@ -194,6 +246,32 @@
     },
     {
       "publisher": "koreatimes.co.kr",
+      "article_count": 1,
+      "counts": {
+        "positive": 1,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 0
+      },
+      "denominator": 1,
+      "percentages": {
+        "positive": 100.0,
+        "negative": 0.0,
+        "neutral": 0.0,
+        "mixed": 0.0
+      },
+      "abstained": 0,
+      "unrelated": 0,
+      "positive_negative_only": {
+        "denominator": 1,
+        "percentages": {
+          "positive": 100.0,
+          "negative": 0.0
+        }
+      }
+    },
+    {
+      "publisher": "mk.co.kr",
       "article_count": 1,
       "counts": {
         "positive": 1,
@@ -351,19 +429,43 @@
   ],
   "articles": [
     {
-      "id": "7fe9c5d576a1cb3f675c",
+      "id": "04c8ac344b177f3e1f44",
+      "title": "효성重, 수출 전용 ‘초고압차단기 신공장’ 준공...회장님, 글로벌 공급망 ‘드라이브’",
+      "url": "https://www.mk.co.kr/news/business/12177444",
+      "publisher": "mk.co.kr",
+      "language": "ko",
+      "indexed_at": "2026-10-21T22:00:23.563637+00:00",
+      "published_at": "2026-10-16",
+      "analysis_scope": "headline_only",
+      "source": "codex_web_search",
+      "observation": {
+        "first_seen_at": "2026-10-21T22:00:23.563637+00:00",
+        "last_seen_at": "2026-10-21T22:00:23.563637+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "회장님, 글로벌 공급망 ‘드라이브’",
+        "reason": "회장님의 글로벌 공급망 추진을 제목이 긍정적으로 전합니다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "e0f67d230ff01e3bb5f2",
       "title": "AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로",
-      "url": "https://www.etoday.co.kr/news/view/2636513?trc=main_newsflash",
+      "url": "https://www.etoday.co.kr/news/view/2636513",
       "publisher": "etoday.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-19T22:00:27.129453+00:00",
+      "indexed_at": "2026-10-21T22:00:23.563637+00:00",
       "published_at": "2026-10-16",
       "analysis_scope": "headline_only",
       "source": "codex_web_search",
       "observation": {
         "first_seen_at": "2026-10-18T13:19:04+00:00",
-        "last_seen_at": "2026-10-19T22:00:27.129453+00:00",
-        "reused": true
+        "last_seen_at": "2026-10-21T22:00:23.563637+00:00",
+        "reused": false
       },
       "classification": {
         "evidence": "AI 시대 내다본 회장님",
@@ -404,13 +506,13 @@
       "url": "https://search.newspim.com/news/view/20261016000187",
       "publisher": "search.newspim.com",
       "language": "ko",
-      "indexed_at": "2026-10-20T22:00:25.295710+00:00",
+      "indexed_at": "2026-10-21T22:00:23.563637+00:00",
       "published_at": "2026-10-16",
       "analysis_scope": "headline_only",
       "source": "codex_web_search",
       "observation": {
         "first_seen_at": "2026-10-19T22:00:27.129453+00:00",
-        "last_seen_at": "2026-10-20T22:00:25.295710+00:00",
+        "last_seen_at": "2026-10-21T22:00:23.563637+00:00",
         "reused": false
       },
       "classification": {
@@ -435,7 +537,7 @@
       "observation": {
         "first_seen_at": "2026-10-18T13:19:04+00:00",
         "last_seen_at": "2026-10-20T22:00:25.295710+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "회장님의 '5년 앞선 투자'",
@@ -452,14 +554,14 @@
       "url": "https://www.topdaily.kr/articles/112228",
       "publisher": "topdaily.kr",
       "language": "ko",
-      "indexed_at": "2026-10-19T22:00:27.129453+00:00",
+      "indexed_at": "2026-10-21T22:00:23.563637+00:00",
       "published_at": "2026-10-06",
       "analysis_scope": "headline_only",
       "source": "codex_web_search",
       "observation": {
         "first_seen_at": "2026-10-18T13:19:04+00:00",
-        "last_seen_at": "2026-10-19T22:00:27.129453+00:00",
-        "reused": true
+        "last_seen_at": "2026-10-21T22:00:23.563637+00:00",
+        "reused": false
       },
       "classification": {
         "evidence": "지배력 강화·책임경영 행보",
@@ -490,6 +592,54 @@
         "reason": "효성 회장님의 베트남 바이오 스판덱스 거점 완공 소식을 전하는 제목입니다.",
         "relevance": "related",
         "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "cb08c48c7bcc69be40ad",
+      "title": "회장님 Increases Stake in Hyosung Affiliates... Moves to Strengthen Control and Responsible Management",
+      "url": "https://en.topdaily.kr/articles/14957",
+      "publisher": "en.topdaily.kr",
+      "language": "en",
+      "indexed_at": "2026-10-21T22:00:23.563637+00:00",
+      "published_at": "2026-10-06",
+      "analysis_scope": "headline_only",
+      "source": "codex_web_search",
+      "observation": {
+        "first_seen_at": "2026-10-21T22:00:23.563637+00:00",
+        "last_seen_at": "2026-10-21T22:00:23.563637+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "Moves to Strengthen Control and Responsible Management",
+        "reason": "효성 계열사 지분 확대와 책임경영 강화를 전하는 제목만 근거로 긍정적으로 분류했습니다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "3ce5cbf9b3eb057b29b9",
+      "title": "Hyosung Chairman 회장님 Plans to Acquire Additional 736 Treasury Shares... Stake to Rise to 41.52%",
+      "url": "https://cbcglobe.com/en/articles/2026/09/29/hyosung-chairman-cho-hyun-joon-plans-to-acquire-additional-7-10c6305c",
+      "publisher": "cbcglobe.com",
+      "language": "en",
+      "indexed_at": "2026-10-21T22:00:23.563637+00:00",
+      "published_at": "2026-09-29",
+      "analysis_scope": "headline_only",
+      "source": "codex_web_search",
+      "observation": {
+        "first_seen_at": "2026-10-21T22:00:23.563637+00:00",
+        "last_seen_at": "2026-10-21T22:00:23.563637+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "Hyosung Chairman 회장님 Plans to Acquire Additional 736 Treasury Shares",
+        "reason": "효성 회장님의 자사주 추가 취득 계획을 전하는 제목이며, 논조는 중립적입니다.",
+        "relevance": "related",
+        "sentiment": "neutral"
       },
       "analysis_failed": false,
       "evidence_omitted_for_display": false
@@ -555,7 +705,7 @@
       "observation": {
         "first_seen_at": "2026-10-20T22:00:25.295710+00:00",
         "last_seen_at": "2026-10-20T22:00:25.295710+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "고속 성장",
@@ -613,30 +763,6 @@
       },
       "analysis_failed": false,
       "evidence_omitted_for_display": false
-    },
-    {
-      "id": "6d0dbbfcc5d8584ba401",
-      "title": "Hyosung Chairman 회장님 Turns ESG Investments into New Growth Engines",
-      "url": "https://en.prnasia.com/releases/global/hyosung-chairman-cho-hyun-joon-turns-esg-investments-into-new-growth-engines-549030.shtml",
-      "publisher": "en.prnasia.com",
-      "language": "en",
-      "indexed_at": "2026-10-19T22:00:27.129453+00:00",
-      "published_at": "2026-09-22",
-      "analysis_scope": "headline_only",
-      "source": "codex_web_search",
-      "observation": {
-        "first_seen_at": "2026-10-19T22:00:27.129453+00:00",
-        "last_seen_at": "2026-10-19T22:00:27.129453+00:00",
-        "reused": true
-      },
-      "classification": {
-        "evidence": "Turns ESG Investments into New Growth Engines",
-        "reason": "회장님이 ESG 투자를 성장 동력으로 전환했다는 긍정적 내용을 제목만으로 판단했습니다.",
-        "relevance": "related",
-        "sentiment": "positive"
-      },
-      "analysis_failed": false,
-      "evidence_omitted_for_display": false
     }
   ],
   "insights": {
@@ -655,8 +781,8 @@
       "other": "기타"
     },
     "default_period_days": 30,
-    "as_of_day": "2026-10-21",
-    "available_start": "2026-09-22",
+    "as_of_day": "2026-10-22",
+    "available_start": "2026-09-23",
     "groups": [
       {
         "label": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞",
@@ -669,6 +795,20 @@
           {
             "article_id": "04befdf786d1fa911834",
             "quote": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞"
+          }
+        ]
+      },
+      {
+        "label": "효성重, 수출 전용 ‘초고압차단기 신공장’ 준공...회장님, 글로벌 공급망 ‘드라이브’",
+        "summary": "효성重, 수출 전용 ‘초고압차단기 신공장’ 준공...회장님, 글로벌 공급망 ‘드라이브’",
+        "topic": "other",
+        "article_ids": [
+          "04c8ac344b177f3e1f44"
+        ],
+        "evidence": [
+          {
+            "article_id": "04c8ac344b177f3e1f44",
+            "quote": "효성重, 수출 전용 ‘초고압차단기 신공장’ 준공...회장님, 글로벌 공급망 ‘드라이브’"
           }
         ]
       },
@@ -701,16 +841,16 @@
         ]
       },
       {
-        "label": "Hyosung Chairman 회장님 Turns ESG Investments into New Growth Engines",
-        "summary": "Hyosung Chairman 회장님 Turns ESG Investments into New Growth Engines",
+        "label": "Hyosung Chairman 회장님 Plans to Acquire Additional 736 Treasury Shares... Stake to",
+        "summary": "Hyosung Chairman 회장님 Plans to Acquire Additional 736 Treasury Shares... Stake to Rise to 41.52%",
         "topic": "other",
         "article_ids": [
-          "6d0dbbfcc5d8584ba401"
+          "3ce5cbf9b3eb057b29b9"
         ],
         "evidence": [
           {
-            "article_id": "6d0dbbfcc5d8584ba401",
-            "quote": "Hyosung Chairman 회장님 Turns ESG Investments into New Growth Engines"
+            "article_id": "3ce5cbf9b3eb057b29b9",
+            "quote": "Hyosung Chairman 회장님 Plans to Acquire Additional 736 Treasury Shares... Stake to Rise to 41.52%"
           }
         ]
       },
@@ -725,20 +865,6 @@
           {
             "article_id": "6f43ef51dd00df8b9fb7",
             "quote": "회장님號 효성중공업, 美생산확대에 3300억 투입...AI發 수요 선점 '집중'"
-          }
-        ]
-      },
-      {
-        "label": "AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로",
-        "summary": "AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로",
-        "topic": "other",
-        "article_ids": [
-          "7fe9c5d576a1cb3f675c"
-        ],
-        "evidence": [
-          {
-            "article_id": "7fe9c5d576a1cb3f675c",
-            "quote": "AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로"
           }
         ]
       },
@@ -785,6 +911,20 @@
         ]
       },
       {
+        "label": "회장님 Increases Stake in Hyosung Affiliates... Moves to Strengthen Control and Res",
+        "summary": "회장님 Increases Stake in Hyosung Affiliates... Moves to Strengthen Control and Responsible Management",
+        "topic": "other",
+        "article_ids": [
+          "cb08c48c7bcc69be40ad"
+        ],
+        "evidence": [
+          {
+            "article_id": "cb08c48c7bcc69be40ad",
+            "quote": "회장님 Increases Stake in Hyosung Affiliates... Moves to Strengthen Control and Responsible Management"
+          }
+        ]
+      },
+      {
         "label": "회장님의 '5년 앞선 투자' ... 효성重, 창원에 수출 전용 '초고압차단기 공장' 준공",
         "summary": "회장님의 '5년 앞선 투자' ... 효성重, 창원에 수출 전용 '초고압차단기 공장' 준공",
         "topic": "other",
@@ -795,6 +935,20 @@
           {
             "article_id": "d9f75008af8159a3b208",
             "quote": "회장님의 '5년 앞선 투자' ... 효성重, 창원에 수출 전용 '초고압차단기 공장' 준공"
+          }
+        ]
+      },
+      {
+        "label": "AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로",
+        "summary": "AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로",
+        "topic": "other",
+        "article_ids": [
+          "e0f67d230ff01e3bb5f2"
+        ],
+        "evidence": [
+          {
+            "article_id": "e0f67d230ff01e3bb5f2",
+            "quote": "AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로"
           }
         ]
       },
@@ -830,8 +984,8 @@
     "periods": [
       {
         "days": 1,
-        "start": "2026-10-21",
-        "end": "2026-10-21",
+        "start": "2026-10-22",
+        "end": "2026-10-22",
         "coverage_complete": true,
         "article_ids": [],
         "statistics": {
@@ -864,7 +1018,7 @@
         "retained_count": 0,
         "daily": [
           {
-            "date": "2026-10-21",
+            "date": "2026-10-22",
             "covered": true,
             "article_count": 0,
             "statistics": {
@@ -896,23 +1050,24 @@
       },
       {
         "days": 7,
-        "start": "2026-10-15",
-        "end": "2026-10-21",
+        "start": "2026-10-16",
+        "end": "2026-10-22",
         "coverage_complete": true,
         "article_ids": [
-          "7fe9c5d576a1cb3f675c",
+          "04c8ac344b177f3e1f44",
+          "e0f67d230ff01e3bb5f2",
           "f2c4eb966ccb6aa8ce84",
           "a0fd25f50d995109f300",
           "d9f75008af8159a3b208"
         ],
         "statistics": {
           "counts": {
-            "positive": 4,
+            "positive": 5,
             "negative": 0,
             "neutral": 0,
             "mixed": 0
           },
-          "denominator": 4,
+          "denominator": 5,
           "percentages": {
             "positive": 100.0,
             "negative": 0.0,
@@ -922,59 +1077,30 @@
           "abstained": 0,
           "unrelated": 0,
           "positive_negative_only": {
-            "denominator": 4,
+            "denominator": 5,
             "percentages": {
               "positive": 100.0,
               "negative": 0.0
             }
           }
         },
-        "publisher_count": 4,
-        "issue_count": 4,
-        "newly_seen_count": 0,
+        "publisher_count": 5,
+        "issue_count": 5,
+        "newly_seen_count": 1,
         "retained_count": 2,
         "daily": [
           {
-            "date": "2026-10-15",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
-          },
-          {
             "date": "2026-10-16",
             "covered": true,
-            "article_count": 4,
+            "article_count": 5,
             "statistics": {
               "counts": {
-                "positive": 4,
+                "positive": 5,
                 "negative": 0,
                 "neutral": 0,
                 "mixed": 0
               },
-              "denominator": 4,
+              "denominator": 5,
               "percentages": {
                 "positive": 100.0,
                 "negative": 0.0,
@@ -984,7 +1110,7 @@
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 4,
+                "denominator": 5,
                 "percentages": {
                   "positive": 100.0,
                   "negative": 0.0
@@ -1136,86 +1262,88 @@
                 }
               }
             }
+          },
+          {
+            "date": "2026-10-22",
+            "covered": true,
+            "article_count": 0,
+            "statistics": {
+              "counts": {
+                "positive": 0,
+                "negative": 0,
+                "neutral": 0,
+                "mixed": 0
+              },
+              "denominator": 0,
+              "percentages": {
+                "positive": null,
+                "negative": null,
+                "neutral": null,
+                "mixed": null
+              },
+              "abstained": 0,
+              "unrelated": 0,
+              "positive_negative_only": {
+                "denominator": 0,
+                "percentages": {
+                  "positive": null,
+                  "negative": null
+                }
+              }
+            }
           }
         ]
       },
       {
         "days": 30,
-        "start": "2026-09-22",
-        "end": "2026-10-21",
+        "start": "2026-09-23",
+        "end": "2026-10-22",
         "coverage_complete": true,
         "article_ids": [
-          "7fe9c5d576a1cb3f675c",
+          "04c8ac344b177f3e1f44",
+          "e0f67d230ff01e3bb5f2",
           "f2c4eb966ccb6aa8ce84",
           "a0fd25f50d995109f300",
           "d9f75008af8159a3b208",
           "14361f68b39f4521a4e0",
           "35a8dc963c308a6f0364",
+          "cb08c48c7bcc69be40ad",
+          "3ce5cbf9b3eb057b29b9",
           "04befdf786d1fa911834",
           "af179616fe2fca4bc19a",
           "f7af01241e3bc5cf13dc",
           "6f43ef51dd00df8b9fb7",
-          "c3ee544a4226c5b03556",
-          "6d0dbbfcc5d8584ba401"
+          "c3ee544a4226c5b03556"
         ],
         "statistics": {
           "counts": {
-            "positive": 12,
+            "positive": 13,
             "negative": 0,
-            "neutral": 0,
+            "neutral": 1,
             "mixed": 0
           },
-          "denominator": 12,
+          "denominator": 14,
           "percentages": {
-            "positive": 100.0,
+            "positive": 92.9,
             "negative": 0.0,
-            "neutral": 0.0,
+            "neutral": 7.1,
             "mixed": 0.0
           },
           "abstained": 0,
           "unrelated": 0,
           "positive_negative_only": {
-            "denominator": 12,
+            "denominator": 13,
             "percentages": {
               "positive": 100.0,
               "negative": 0.0
             }
           }
         },
-        "publisher_count": 11,
-        "issue_count": 12,
-        "newly_seen_count": 1,
-        "retained_count": 9,
+        "publisher_count": 14,
+        "issue_count": 14,
+        "newly_seen_count": 3,
+        "retained_count": 8,
         "daily": [
-          {
-            "date": "2026-09-22",
-            "covered": true,
-            "article_count": 1,
-            "statistics": {
-              "counts": {
-                "positive": 1,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 1,
-              "percentages": {
-                "positive": 100.0,
-                "negative": 0.0,
-                "neutral": 0.0,
-                "mixed": 0.0
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 1,
-                "percentages": {
-                  "positive": 100.0,
-                  "negative": 0.0
-                }
-              }
-            }
-          },
           {
             "date": "2026-09-23",
             "covered": true,
@@ -1393,20 +1521,20 @@
           {
             "date": "2026-09-29",
             "covered": true,
-            "article_count": 0,
+            "article_count": 1,
             "statistics": {
               "counts": {
                 "positive": 0,
                 "negative": 0,
-                "neutral": 0,
+                "neutral": 1,
                 "mixed": 0
               },
-              "denominator": 0,
+              "denominator": 1,
               "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
+                "positive": 0.0,
+                "negative": 0.0,
+                "neutral": 100.0,
+                "mixed": 0.0
               },
               "abstained": 0,
               "unrelated": 0,
@@ -1596,15 +1724,15 @@
           {
             "date": "2026-10-06",
             "covered": true,
-            "article_count": 2,
+            "article_count": 3,
             "statistics": {
               "counts": {
-                "positive": 2,
+                "positive": 3,
                 "negative": 0,
                 "neutral": 0,
                 "mixed": 0
               },
-              "denominator": 2,
+              "denominator": 3,
               "percentages": {
                 "positive": 100.0,
                 "negative": 0.0,
@@ -1614,7 +1742,7 @@
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 2,
+                "denominator": 3,
                 "percentages": {
                   "positive": 100.0,
                   "negative": 0.0
@@ -1886,15 +2014,15 @@
           {
             "date": "2026-10-16",
             "covered": true,
-            "article_count": 4,
+            "article_count": 5,
             "statistics": {
               "counts": {
-                "positive": 4,
+                "positive": 5,
                 "negative": 0,
                 "neutral": 0,
                 "mixed": 0
               },
-              "denominator": 4,
+              "denominator": 5,
               "percentages": {
                 "positive": 100.0,
                 "negative": 0.0,
@@ -1904,7 +2032,7 @@
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 4,
+                "denominator": 5,
                 "percentages": {
                   "positive": 100.0,
                   "negative": 0.0
@@ -2030,6 +2158,35 @@
           },
           {
             "date": "2026-10-21",
+            "covered": true,
+            "article_count": 0,
+            "statistics": {
+              "counts": {
+                "positive": 0,
+                "negative": 0,
+                "neutral": 0,
+                "mixed": 0
+              },
+              "denominator": 0,
+              "percentages": {
+                "positive": null,
+                "negative": null,
+                "neutral": null,
+                "mixed": null
+              },
+              "abstained": 0,
+              "unrelated": 0,
+              "positive_negative_only": {
+                "denominator": 0,
+                "percentages": {
+                  "positive": null,
+                  "negative": null
+                }
+              }
+            }
+          },
+          {
+            "date": "2026-10-22",
             "covered": true,
             "article_count": 0,
             "statistics": {
