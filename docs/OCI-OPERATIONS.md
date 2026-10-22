@@ -1,6 +1,6 @@
 # OCI 뉴스 모니터 운영 가이드
 
-작성: 2026-10-19, 갱신: 2026-10-22 KST. 공개 샘플이며 사내 인증 사이트가 아니다.
+작성: 2026-10-19, 갱신: 2026-10-23 KST. 공개 샘플이며 사내 인증 사이트가 아니다.
 
 ## 현재 구성
 
@@ -11,21 +11,47 @@
   첫 예약은 **2026-10-20 07:00 KST**였다. 10/22 정기 실행과 공개 배포를 확인했다.
   다만 이슈 fallback은 부분 성공이며 별도 장애 기록에서 복구 여부를 확인한다.
 - `Persistent=true`: 서버가 꺼져 놓친 예약은 복구 후 보완 실행한다.
-- 소스는 root 소유로 고정하며 매일 자동 pull하지 않는다. 검증한 소스를 수동 업데이트한다.
+- 소스 소유자와 실행 계정 모두 기존 게시기와 같은 `wiki-publisher`다. 매일 자동 pull하지 않으며
+  검증한 소스를 해당 계정으로 수동 업데이트한다. root로 Git 작업하지 않는다.
 - 기존 Dev Blog·Research Wiki·OSS Radar의 유닛·인증·코드는 변경하지 않았다.
 
 ```text
 /srv/news-monitor/
-├── app/       root 소유 소스(main), 설정·프롬프트·실행 코드
+├── app/       wiki-publisher 소유 소스(main), 설정·프롬프트·실행 코드
 ├── config/    공개하지 않는 배포 설정·개인키·GitHub 호스트 키
 ├── data/      수집 상태·기사 메타데이터·검증한 분류 캐시·게시 상태
 ├── dist/      공개 전 검사 대상 정적 파일 4개
 └── publish/   pages-data 전용 Git 작업 디렉터리
 ```
 
-소스는 0755, 운영 디렉터리는 `wiki-publisher` 0700이다. 개인키는 0600이며
+프로젝트 루트와 app 디렉터리는 `wiki-publisher` 소유 0755이며 기존 소스 파일 모드는 유지한다.
+운영 디렉터리는 `wiki-publisher` 0700이다. 개인키는 0600이며
 배포 설정·known_hosts는 root 소유, wiki-publisher 그룹 읽기만 허용한다.
 별도 `.env`나 `GITHUB_WIKI_TOKEN`은 필요하지 않다.
+
+## 소스 관리 계정 통일
+
+10/23에 root 소유 소스를 기존 세 게시기와 같은 `wiki-publisher` 소유로 통일했다.
+서비스 실행 계정·타이머·인증·경로는 그대로다. `ProtectSystem=strict`로 서비스 안에서는
+소스/홈을 읽기 전용으로 유지하고, 서비스 밖에서는 해당 계정으로 소스를 관리한다.
+같은 계정의 다른 프로그램도 서비스 밖에서는 소스를 수정할 수 있다는 경계는 기존 게시기와 같다.
+
+```bash
+# wiki-publisher 셸에서는 바로 조회한다.
+cd /srv/news-monitor/app
+git log --oneline -10
+
+# ubuntu에서는 소유 계정으로 Git 명령을 실행한다.
+sudo -u wiki-publisher -H git -C /srv/news-monitor/app status --short
+sudo -u wiki-publisher -H git -C /srv/news-monitor/app log --oneline -10
+
+# 실행 중이 아니고 작업 트리가 깨끗할 때, 검증한 main만 갱신한다.
+sudo -u wiki-publisher -H git -C /srv/news-monitor/app pull --ff-only origin main
+```
+
+ubuntu에서 직접 Git을 실행하면 소유자가 달라 보호 오류가 날 수 있다. 전역 safe.directory 예외나
+전체 chmod 대신 위의 계정 전환 방식을 사용한다. 다른 소유권/계정/배포 정책이 필요하면
+적용 전에 이유와 영향을 설명하고 승인받는다. [변경 계획·검증 기록](OWNERSHIP-ALIGNMENT.md)을 본다.
 
 ## 매일 실행되는 흐름
 
