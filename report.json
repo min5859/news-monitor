@@ -2,7 +2,7 @@
   "schema_version": 2,
   "sample": true,
   "human_reviewed": false,
-  "status": "partial",
+  "status": "ok",
   "target": {
     "name": "회장님",
     "organization": "효성"
@@ -13,7 +13,7 @@
     "article_titles_modified": true,
     "evidence_may_be_omitted": true
   },
-  "generated_at": "2026-10-21T22:02:04.147113+00:00",
+  "generated_at": "2026-10-22T13:21:18.786610+00:00",
   "collection_checked_at": "2026-10-21T22:00:23.563637+00:00",
   "window_start": "2026-09-22T15:00:00+00:00",
   "window_end": "2026-10-21T22:00:23.563637+00:00",
@@ -33,8 +33,8 @@
     "provider": "codex",
     "model": "gpt-6-luna",
     "prompt_sha256": "577fb8d45a5b68cdf1276b241a66a8c5c9d9f40961bfeba35f6243ceccac4389",
-    "model_calls": 3,
-    "cache_hits": 11,
+    "model_calls": 0,
+    "cache_hits": 14,
     "failed_articles": 0
   },
   "statistics": {
@@ -767,11 +767,11 @@
   ],
   "insights": {
     "schema_version": 1,
-    "status": "fallback",
+    "status": "ok",
     "provider": "codex",
     "model": "gpt-6-luna",
-    "prompt_sha256": "8e718d2fea0f520133c4cb77dd0337b3596719941e908ec03e606eff72f9e73a",
-    "model_calls": 2,
+    "prompt_sha256": "0bce342e96822ab8a4b8b57d75fed31b7d16f44d10821265d02a4f95111c5b5a",
+    "model_calls": 1,
     "cache_hit": false,
     "topics": {
       "management": "경영·투자",
@@ -785,51 +785,81 @@
     "available_start": "2026-09-23",
     "groups": [
       {
-        "label": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞",
-        "summary": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞",
-        "topic": "other",
+        "label": "효성중공업 3분기 실적 및 연간 영업이익 전망",
+        "summary": "효성중공업이 3분기에도 성장해 사상 처음 연간 영업이익 1조원을 앞두고 있다는 제목들입니다.",
+        "topic": "management",
         "article_ids": [
-          "04befdf786d1fa911834"
+          "04befdf786d1fa911834",
+          "f7af01241e3bc5cf13dc"
         ],
         "evidence": [
           {
             "article_id": "04befdf786d1fa911834",
             "quote": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞"
+          },
+          {
+            "article_id": "f7af01241e3bc5cf13dc",
+            "quote": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞"
           }
         ]
       },
       {
-        "label": "효성重, 수출 전용 ‘초고압차단기 신공장’ 준공...회장님, 글로벌 공급망 ‘드라이브’",
-        "summary": "효성重, 수출 전용 ‘초고압차단기 신공장’ 준공...회장님, 글로벌 공급망 ‘드라이브’",
-        "topic": "other",
+        "label": "효성중공업 창원 초고압차단기 신공장 준공",
+        "summary": "효성중공업이 창원에 수출 전용 초고압차단기 신공장을 준공하고 생산 확대와 글로벌 공급망 확대를 추진한다는 제목들입니다.",
+        "topic": "management",
         "article_ids": [
-          "04c8ac344b177f3e1f44"
+          "04c8ac344b177f3e1f44",
+          "a0fd25f50d995109f300",
+          "d9f75008af8159a3b208",
+          "e0f67d230ff01e3bb5f2",
+          "f2c4eb966ccb6aa8ce84"
         ],
         "evidence": [
           {
             "article_id": "04c8ac344b177f3e1f44",
             "quote": "효성重, 수출 전용 ‘초고압차단기 신공장’ 준공...회장님, 글로벌 공급망 ‘드라이브’"
+          },
+          {
+            "article_id": "a0fd25f50d995109f300",
+            "quote": "회장님 효성重 회장, 글로벌 공급망 확대 속도...창원 초고압차단기 신공장 준공"
+          },
+          {
+            "article_id": "d9f75008af8159a3b208",
+            "quote": "회장님의 '5년 앞선 투자' ... 효성重, 창원에 수출 전용 '초고압차단기 공장' 준공"
+          },
+          {
+            "article_id": "e0f67d230ff01e3bb5f2",
+            "quote": "AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로"
+          },
+          {
+            "article_id": "f2c4eb966ccb6aa8ce84",
+            "quote": "효성重, 수출 전용 초고압차단기 신공장 준공...회장님, 글로벌 공급망 ‘드라이브’"
           }
         ]
       },
       {
-        "label": "회장님, 효성 계열사 지분 확대...지배력 강화·책임경영 행보",
-        "summary": "회장님, 효성 계열사 지분 확대...지배력 강화·책임경영 행보",
-        "topic": "other",
+        "label": "효성 계열사 지분 확대",
+        "summary": "회장님이 효성 계열사 지분을 늘려 지배력을 강화하고 책임경영에 나선다는 제목들입니다.",
+        "topic": "governance",
         "article_ids": [
-          "14361f68b39f4521a4e0"
+          "14361f68b39f4521a4e0",
+          "cb08c48c7bcc69be40ad"
         ],
         "evidence": [
           {
             "article_id": "14361f68b39f4521a4e0",
             "quote": "회장님, 효성 계열사 지분 확대...지배력 강화·책임경영 행보"
+          },
+          {
+            "article_id": "cb08c48c7bcc69be40ad",
+            "quote": "회장님 Increases Stake in Hyosung Affiliates... Moves to Strengthen Control and Responsible Management"
           }
         ]
       },
       {
-        "label": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam",
-        "summary": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam",
-        "topic": "other",
+        "label": "효성의 베트남 바이오 스판덱스 기반 구축",
+        "summary": "효성 회장님이 베트남에 바이오 스판덱스 기반을 완성했다는 제목입니다.",
+        "topic": "management",
         "article_ids": [
           "35a8dc963c308a6f0364"
         ],
@@ -841,9 +871,9 @@
         ]
       },
       {
-        "label": "Hyosung Chairman 회장님 Plans to Acquire Additional 736 Treasury Shares... Stake to",
-        "summary": "Hyosung Chairman 회장님 Plans to Acquire Additional 736 Treasury Shares... Stake to Rise to 41.52%",
-        "topic": "other",
+        "label": "효성 회장 추가 자사주 취득 계획",
+        "summary": "효성 회장님이 자사주 736주를 추가 취득할 계획이며 지분율이 41.52%로 높아질 것이라는 제목입니다.",
+        "topic": "governance",
         "article_ids": [
           "3ce5cbf9b3eb057b29b9"
         ],
@@ -855,9 +885,9 @@
         ]
       },
       {
-        "label": "회장님號 효성중공업, 美생산확대에 3300억 투입...AI發 수요 선점 '집중'",
-        "summary": "회장님號 효성중공업, 美생산확대에 3300억 투입...AI發 수요 선점 '집중'",
-        "topic": "other",
+        "label": "효성중공업 미국 생산 확대 투자",
+        "summary": "효성중공업이 미국 생산 확대에 3300억원을 투입해 AI발 수요 선점을 추진한다는 제목입니다.",
+        "topic": "management",
         "article_ids": [
           "6f43ef51dd00df8b9fb7"
         ],
@@ -869,23 +899,9 @@
         ]
       },
       {
-        "label": "회장님 효성重 회장, 글로벌 공급망 확대 속도...창원 초고압차단기 신공장 준공",
-        "summary": "회장님 효성重 회장, 글로벌 공급망 확대 속도...창원 초고압차단기 신공장 준공",
-        "topic": "other",
-        "article_ids": [
-          "a0fd25f50d995109f300"
-        ],
-        "evidence": [
-          {
-            "article_id": "a0fd25f50d995109f300",
-            "quote": "회장님 효성重 회장, 글로벌 공급망 확대 속도...창원 초고압차단기 신공장 준공"
-          }
-        ]
-      },
-      {
-        "label": "회장님 승부수...효성重 2031년 ‘글로벌 톱3ʼ",
-        "summary": "회장님 승부수...효성重 2031년 ‘글로벌 톱3ʼ",
-        "topic": "other",
+        "label": "효성중공업 2031년 글로벌 톱3 목표",
+        "summary": "효성중공업이 2031년 글로벌 톱3를 목표로 한다는 제목입니다.",
+        "topic": "management",
         "article_ids": [
           "af179616fe2fca4bc19a"
         ],
@@ -897,9 +913,9 @@
         ]
       },
       {
-        "label": "Hyosung Chairman 회장님 Drives Development of Core HVDC Technologies",
-        "summary": "Hyosung Chairman 회장님 Drives Development of Core HVDC Technologies",
-        "topic": "other",
+        "label": "효성중공업 HVDC 핵심 기술 개발",
+        "summary": "효성중공업이 HVDC 핵심 기술 개발을 추진한다는 제목입니다.",
+        "topic": "management",
         "article_ids": [
           "c3ee544a4226c5b03556"
         ],
@@ -907,76 +923,6 @@
           {
             "article_id": "c3ee544a4226c5b03556",
             "quote": "Hyosung Chairman 회장님 Drives Development of Core HVDC Technologies"
-          }
-        ]
-      },
-      {
-        "label": "회장님 Increases Stake in Hyosung Affiliates... Moves to Strengthen Control and Res",
-        "summary": "회장님 Increases Stake in Hyosung Affiliates... Moves to Strengthen Control and Responsible Management",
-        "topic": "other",
-        "article_ids": [
-          "cb08c48c7bcc69be40ad"
-        ],
-        "evidence": [
-          {
-            "article_id": "cb08c48c7bcc69be40ad",
-            "quote": "회장님 Increases Stake in Hyosung Affiliates... Moves to Strengthen Control and Responsible Management"
-          }
-        ]
-      },
-      {
-        "label": "회장님의 '5년 앞선 투자' ... 효성重, 창원에 수출 전용 '초고압차단기 공장' 준공",
-        "summary": "회장님의 '5년 앞선 투자' ... 효성重, 창원에 수출 전용 '초고압차단기 공장' 준공",
-        "topic": "other",
-        "article_ids": [
-          "d9f75008af8159a3b208"
-        ],
-        "evidence": [
-          {
-            "article_id": "d9f75008af8159a3b208",
-            "quote": "회장님의 '5년 앞선 투자' ... 효성重, 창원에 수출 전용 '초고압차단기 공장' 준공"
-          }
-        ]
-      },
-      {
-        "label": "AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로",
-        "summary": "AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로",
-        "topic": "other",
-        "article_ids": [
-          "e0f67d230ff01e3bb5f2"
-        ],
-        "evidence": [
-          {
-            "article_id": "e0f67d230ff01e3bb5f2",
-            "quote": "AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로"
-          }
-        ]
-      },
-      {
-        "label": "효성重, 수출 전용 초고압차단기 신공장 준공...회장님, 글로벌 공급망 ‘드라이브’",
-        "summary": "효성重, 수출 전용 초고압차단기 신공장 준공...회장님, 글로벌 공급망 ‘드라이브’",
-        "topic": "other",
-        "article_ids": [
-          "f2c4eb966ccb6aa8ce84"
-        ],
-        "evidence": [
-          {
-            "article_id": "f2c4eb966ccb6aa8ce84",
-            "quote": "효성重, 수출 전용 초고압차단기 신공장 준공...회장님, 글로벌 공급망 ‘드라이브’"
-          }
-        ]
-      },
-      {
-        "label": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞",
-        "summary": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞",
-        "topic": "other",
-        "article_ids": [
-          "f7af01241e3bc5cf13dc"
-        ],
-        "evidence": [
-          {
-            "article_id": "f7af01241e3bc5cf13dc",
-            "quote": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞"
           }
         ]
       }
@@ -1085,7 +1031,7 @@
           }
         },
         "publisher_count": 5,
-        "issue_count": 5,
+        "issue_count": 1,
         "newly_seen_count": 1,
         "retained_count": 2,
         "daily": [
@@ -1340,7 +1286,7 @@
           }
         },
         "publisher_count": 14,
-        "issue_count": 14,
+        "issue_count": 8,
         "newly_seen_count": 3,
         "retained_count": 8,
         "daily": [
