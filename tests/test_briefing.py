@@ -34,10 +34,9 @@ class BriefingTests(unittest.TestCase):
     def grouped(self):
         return {"groups": [
             {"label": "초고압차단기 생산 확대", "summary": "제목들은 회장님과 초고압차단기 생산 확대·공장 준공 소식을 연결합니다.",
-             "topic": "management", "article_ids": self.ids[:2],
-             "evidence": [{"article_id": row["id"], "quote": "초고압차단기"} for row in self.report["articles"][:2]]},
+             "topic": "management", "article_ids": self.ids[:2]},
             {"label": "계열사 지분 매입", "summary": "제목은 회장님의 계열사 지분 매입 소식을 전합니다.", "topic": "governance",
-             "article_ids": self.ids[2:], "evidence": [{"article_id": self.ids[2], "quote": "계열사 지분 매입"}]},
+             "article_ids": self.ids[2:]},
         ]}
 
     def enrich(self, response=None, runner=None):
@@ -52,6 +51,23 @@ class BriefingTests(unittest.TestCase):
         self.assertTrue(again["insights"]["cache_hit"])
         self.assertEqual(again["insights"]["model_calls"], 0)
 
+    def test_model_selects_ids_and_code_copies_source_headlines_as_evidence(self):
+        document = self.grouped()
+        for group in document["groups"]:
+            group.pop("evidence", None)
+        result = self.enrich(document)
+        self.assertEqual(result["insights"]["status"], "ok")
+        titles = {row["id"]: row["title"] for row in self.report["articles"]}
+        for group in result["insights"]["groups"]:
+            for entry in group["evidence"]:
+                self.assertEqual(entry["quote"], titles[entry["article_id"]][:self.cfg["briefing"]["max_evidence_chars"]])
+
+    def test_fabricated_public_evidence_remains_rejected(self):
+        result = self.enrich()
+        result["insights"]["groups"][0]["evidence"][0]["quote"] = "제목에 없는 문구"
+        with self.assertRaises(ValueError):
+            preflight.check_artifact(result, self.cfg)
+
     def test_invalid_ids_missing_members_and_fabricated_evidence_fall_back(self):
         for kind in ("duplicate", "missing", "unknown", "evidence", "number", "raw"):
             document = self.grouped()
@@ -62,7 +78,7 @@ class BriefingTests(unittest.TestCase):
             elif kind == "unknown":
                 document["groups"][0]["article_ids"].append("not-an-article")
             elif kind == "evidence":
-                document["groups"][0]["evidence"][0]["quote"] = "제목에 없는 주장"
+                document["groups"][0]["evidence"] = [{"article_id": self.ids[0], "quote": "제목에 없는 주장"}]
             elif kind == "number":
                 document["groups"][0]["summary"] = "생산이 999배 늘었다는 제목입니다."
             else:
@@ -124,8 +140,7 @@ class BriefingTests(unittest.TestCase):
             self.assertNotIn("https://", prompt)
             self.assertTrue(str(kwargs["schema"]).endswith("schemas/briefing.json"))
             document = {"groups": [{"label": "가상 제목 보도", "summary": "제목은 회장님 관련 소식을 전합니다.",
-                                     "topic": "other", "article_ids": [row["id"]],
-                                     "evidence": [{"article_id": row["id"], "quote": "효성 회장님"}]}
+                                     "topic": "other", "article_ids": [row["id"]]}
                                     for row in payload["articles"]]}
             return json.dumps(document), {}
 
