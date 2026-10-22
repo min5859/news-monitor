@@ -12,6 +12,7 @@ import time
 from pathlib import Path
 
 from news_monitor.collect import ROOT, atomic_json
+from news_monitor.diagnostics import model_failure
 
 SENTIMENTS = ("positive", "negative", "neutral", "mixed")
 RELEVANCE = ("related", "uncertain", "unrelated")
@@ -72,7 +73,7 @@ def validate_decision(value, title, opts):
 
 def capture_model(command, prompt, workspace, opts, observer=None):
     """Bound combined stdout/stderr, wall time and the whole child process group."""
-    chunks = []
+    chunks, stderr_chunks = [], []
     size = 0
     deadline = time.monotonic() + opts["timeout_seconds"]
     pending = memoryview(prompt.encode())
@@ -110,6 +111,8 @@ def capture_model(command, prompt, workspace, opts, observer=None):
                             chunks.append(block)
                             if observer is not None:
                                 observer(block)
+                        else:
+                            stderr_chunks.append(block)
             remaining = deadline - time.monotonic()
             if remaining <= 0:
                 raise AnalysisError("model_timeout")
@@ -118,7 +121,8 @@ def capture_model(command, prompt, workspace, opts, observer=None):
             except subprocess.TimeoutExpired:
                 raise AnalysisError("model_timeout") from None
             if code:
-                raise AnalysisError("model_cli_failed")
+                # Inspect only bounded in-memory stderr; never persist or expose it.
+                raise AnalysisError(model_failure(b"".join(stderr_chunks).decode("utf-8", errors="replace")))
             return b"".join(chunks).decode("utf-8")
         finally:
             try:
@@ -165,7 +169,7 @@ def run_codex(prompt, opts):
     return result
 
 
-def analyze_articles(articles, config, data_dir, runner=None):
+def analyze_articles(articles, config, data_dir, runner=None, *, cache_only=False):
     template = validate_options(config)
     opts = config["analysis"]
     runner = runner or (run_codex if opts["provider"] == "codex" else run_cursor)
@@ -190,6 +194,8 @@ def analyze_articles(articles, config, data_dir, runner=None):
             except (OSError, ValueError, TypeError):
                 pass
         if decision is None:
+            if cache_only:
+                raise ValueError("classification_cache_required")
             prompt = template + "\n\nINPUT_JSON:\n" + json.dumps(payload, ensure_ascii=False)
             for _ in range(opts["attempts"]):
                 if calls >= opts["max_calls_per_run"]:

@@ -142,6 +142,30 @@ df -h /
 - 실제 조회 범위가 14일인 이전 입력으로 30일 화면을 만들면 부족한 날짜는 자료 범위 밖이다.
   날짜별 표는 현재 확보 기사 발행일 분포이며 과거 일별 수집 스냅샷이 아니다.
 
+## 오류 원인 확인과 제한된 이슈 재검증
+
+- `collection_status.json`의 검색 오류에는 reason/elapsed_seconds가 있다.
+- `data/briefing_status.json`에는 마지막 이슈 실행의 단계·오류 코드·시도 횟수·캐시/강제 갱신
+  여부를 남긴다. `data/diagnostics.json`은 오류만 최대 200개 보존한다. 다음 성공이 과거 오류를
+  지우지 않는다. raw stderr·모델 응답·인증 정보는 기록하지 않는다.
+- 허용된 코드는 시간/출력/검색 한도, 사용량/인증/서비스 오류, JSON·ID·제목 근거·숫자·
+  날짜 간격 등이다. 사용량/인증/고정 스키마 오류는 같은 실행에서 추가 재시도하지 않는다.
+- 이슈 단계만 확인할 때는 아래 명령을 사용한다. 검색은 실행하지 않고 논조는 캐시만 허용하며,
+  캐시가 부족하면 classification_cache_required로 중단한다. 기존 유효기간 검사도 유지한다.
+
+```bash
+sudo -u wiki-publisher -H bash -lc '
+  cd /srv/news-monitor/app
+  python3 -B -m news_monitor.run --briefing-only --refresh-briefing --briefing-attempts 1 \
+    --data-dir /srv/news-monitor/data --output-dir /srv/news-monitor/dist
+'
+sudo -u wiki-publisher python3 -m json.tool /srv/news-monitor/data/briefing_status.json
+```
+
+강제 갱신은 기존 캐시를 삭제하지 않는다. 이 명령은 파일 생성까지이며 공개 배포는 별도다.
+pipeline_status.operation=briefing_only는 수동 이슈 재처리이므로 아침 예약 실행의 성공으로
+오인하지 않는다. 재검증/수정 결과는 [장애 기록](DIAGNOSTICS-REPAIR.md)에 남긴다.
+
 ## 근거
 
 확인일: 2026-10-19.

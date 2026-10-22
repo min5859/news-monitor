@@ -43,6 +43,9 @@
     "attribution_url": "https://developers.openai.com/codex/",
     "tracking_query_parameters": ["fbclid", "gclid"]
   },
+  "diagnostics": {
+    "max_events": 200
+  },
   "briefing": {
     "enabled": true,
     "model": "gpt-6-luna",

@@ -56,6 +56,9 @@ def normalized(value):
 
 def load_config(path):
     config = json.loads(Path(path).read_text())
+    diagnostic_limit = config["diagnostics"]["max_events"]
+    if type(diagnostic_limit) is not int or not 1 <= diagnostic_limit <= 1000:
+        raise ValueError("invalid diagnostics event limit")
     opts = config["collection"]
     if opts["provider"] not in ("gdelt_doc", "codex_web_search"):
         raise ValueError("unsupported provider")
@@ -362,6 +365,10 @@ def _run_collection(config, data_dir, now=None, opener=urlopen, sleeper=time.sle
     atomic_json(state_path, {"retry_not_before": (current + timedelta(seconds=interval)).isoformat(),
                             "reason": "minimum_run_interval"})
     result = collect(config, current, opener=opener, sleeper=sleeper)
+    from news_monitor.diagnostics import record_errors
+
+    record_errors(data_dir, config, "discovery", result["checked_at"],
+                  [error for error in result["errors"] if "reason" in error])
     if config["collection"]["provider"] == "codex_web_search" and (data_dir / "articles.json").exists():
         from news_monitor.discovery import merge_previous
 

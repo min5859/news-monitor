@@ -19,14 +19,15 @@ from news_monitor.report import make_report, prepare_collection
 from news_monitor.site import build_site
 
 
-def process_inputs(config, data_dir, reuse, runner, briefing_runner=None):
+def process_inputs(config, data_dir, reuse, runner, briefing_runner=None, *, briefing_only=False,
+                   refresh_briefing=False, briefing_attempts=None):
     from news_monitor.briefing import options
 
     options(config)  # Validate new settings before spending collection/model budget.
     template = validate_options(config)
     now = datetime.now(UTC)
     try:
-        if reuse:
+        if reuse or briefing_only:
             status = json.loads((data_dir / "collection_status.json").read_text())
         else:
             status = _run_collection(config, data_dir)
@@ -42,20 +43,24 @@ def process_inputs(config, data_dir, reuse, runner, briefing_runner=None):
             "prompt_sha256": hashlib.sha256(template.encode()).hexdigest(),
             "model_calls": 0, "cache_hits": 0, "failed_articles": 0}
     if collection["articles"]:
-        decisions, info = analyze_articles(collection["articles"], config, data_dir, runner)
+        decisions, info = analyze_articles(collection["articles"], config, data_dir, runner, cache_only=briefing_only)
     else:
         decisions = []
     from news_monitor.briefing import enrich
 
-    return enrich(make_report(collection, decisions, info, config, datetime.now(UTC)), config, data_dir, briefing_runner)
+    return enrich(make_report(collection, decisions, info, config, datetime.now(UTC)), config, data_dir, briefing_runner,
+                  refresh=refresh_briefing, max_attempts=briefing_attempts)
 
 
-def run_pipeline(config, data_dir, output_dir, reuse=False, runner=None, briefing_runner=None):
+def run_pipeline(config, data_dir, output_dir, reuse=False, runner=None, briefing_runner=None, *,
+                 briefing_only=False, refresh_briefing=False, briefing_attempts=None):
     with collection_lock(data_dir):
         status_file = data_dir / "pipeline_status.json"
-        atomic_json(status_file, {"status": "running", "started_at": datetime.now(UTC).isoformat()})
+        operation = "briefing_only" if briefing_only else "reuse_collection" if reuse else "pipeline"
+        atomic_json(status_file, {"status": "running", "operation": operation, "started_at": datetime.now(UTC).isoformat()})
         try:
-            report = process_inputs(config, data_dir, reuse, runner, briefing_runner)
+            report = process_inputs(config, data_dir, reuse, runner, briefing_runner, briefing_only=briefing_only,
+                                    refresh_briefing=refresh_briefing, briefing_attempts=briefing_attempts)
             display = report
             if not report["articles"] and (data_dir / "report.json").exists():
                 from news_monitor.preflight import check_artifact
@@ -74,7 +79,7 @@ def run_pipeline(config, data_dir, output_dir, reuse=False, runner=None, briefin
                 atomic_json(data_dir / "report.json", report)
             state = {key: report[key] for key in (
                 "status", "generated_at", "collection_checked_at", "analysis", "article_count")}
-            state.update(display_status=display["status"], display_article_count=display["article_count"])
+            state.update(operation=operation, display_status=display["status"], display_article_count=display["article_count"])
             state["briefing"] = {key: report["insights"][key] for key in ("status", "model_calls", "cache_hit")}
             atomic_json(status_file, state)
             return report
@@ -90,9 +95,16 @@ def main():
     parser.add_argument("--data-dir", type=Path, default=ROOT / "data")
     parser.add_argument("--output-dir", type=Path, default=ROOT / "dist")
     parser.add_argument("--reuse-collection", action="store_true", help="do not request API; still enforce matching/freshness")
+    parser.add_argument("--briefing-only", action="store_true", help="reuse collection and require cached classifications; no discovery/classification calls")
+    parser.add_argument("--refresh-briefing", action="store_true", help="bypass briefing cache once without deleting it")
+    parser.add_argument("--briefing-attempts", type=int, choices=(1, 2), help="cap this replay within the configured attempt budget")
     args = parser.parse_args()
+    if (args.refresh_briefing or args.briefing_attempts is not None) and not args.briefing_only:
+        parser.error("briefing overrides require --briefing-only")
     try:
-        report = run_pipeline(load_config(args.config), args.data_dir, args.output_dir, args.reuse_collection)
+        report = run_pipeline(load_config(args.config), args.data_dir, args.output_dir, args.reuse_collection,
+                              briefing_only=args.briefing_only, refresh_briefing=args.refresh_briefing,
+                              briefing_attempts=args.briefing_attempts)
     except (OSError, ValueError, TypeError, KeyError, OverflowError) as exc:
         if not isinstance(exc, BlockingIOError):
             try:

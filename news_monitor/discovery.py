@@ -10,6 +10,7 @@ from zoneinfo import ZoneInfo
 from news_monitor.analysis import AnalysisError, strict_json
 from news_monitor.codex import execute
 from news_monitor.collect import ROOT, canonical_url, normalized, parse_article
+from news_monitor.diagnostics import error_code
 
 
 def story_key(row):
@@ -55,6 +56,7 @@ def collect_web(config, now, runner=execute):
              "already_found_urls": [item["url"] for item in items if isinstance(item, dict) and "url" in item]},
             ensure_ascii=False)
         result["source_queries"]["attempted"] += 1
+        attempted_at = time.monotonic()
         try:
             raw, trace = runner(prompt, opts["codex_model"], search=True, schema=ROOT / opts["schema_file"],
                                 timeout=remaining / (len(groups) - index), max_bytes=opts["codex_output_bytes"],
@@ -88,8 +90,9 @@ def collect_web(config, now, runner=execute):
             verified.update(group_sources)
             result["web_search_calls"] += calls
             result["source_queries"]["succeeded"] += 1
-        except (AnalysisError, OSError, ValueError, TypeError, KeyError):
-            result["errors"].append({"error": "web_discovery_failed", "group": index + 1})
+        except (AnalysisError, OSError, ValueError, TypeError, KeyError) as exc:
+            result["errors"].append({"error": "web_discovery_failed", "group": index + 1,
+                                     "reason": error_code(exc), "elapsed_seconds": round(time.monotonic() - attempted_at, 3)})
     rows = {}
     stats["fetched"] = len(items) + stats["unverified_url"]
     for item in items:

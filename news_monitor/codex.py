@@ -5,6 +5,8 @@ import json
 import tempfile
 from pathlib import Path
 
+from news_monitor.diagnostics import model_failure
+
 
 def execute(prompt, model, *, search=False, schema=None, timeout=90, max_bytes=65536, max_search_calls=0):
     # Import at call time: analysis owns the bounded CLI transport and uses this adapter.
@@ -36,8 +38,10 @@ def execute(prompt, model, *, search=False, schema=None, timeout=90, max_bytes=6
             event = json.loads(line)
             item = event.get("item", {})
             kind = item.get("type")
-            if event.get("type") == "turn.failed" or kind == "error":
-                raise AnalysisError("codex_turn_failed")
+            if event.get("type") in ("turn.failed", "error") or kind == "error":
+                error = event.get("error") or item.get("error") or (item if kind == "error" else event)
+                message = " ".join(str(error.get(key, "")) for key in ("code", "type", "message")) if isinstance(error, dict) else error
+                raise AnalysisError(model_failure(message, default="codex_turn_failed"))
             if kind and kind not in ("agent_message", "reasoning", "web_search"):
                 raise AnalysisError("codex_unexpected_tool")
             if kind == "web_search":

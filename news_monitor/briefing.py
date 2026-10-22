@@ -4,12 +4,14 @@ import copy
 import hashlib
 import json
 import re
-from datetime import date, timedelta
+import time
+from datetime import UTC, date, datetime, timedelta
 from zoneinfo import ZoneInfo
 
 from news_monitor.analysis import AnalysisError, strict_json
 from news_monitor.codex import execute
 from news_monitor.collect import ROOT, atomic_json, plain_title
+from news_monitor.diagnostics import NON_RETRYABLE, error_code, record_errors
 from news_monitor.display import public_text
 from news_monitor.report import summarize, timestamp
 
@@ -62,9 +64,12 @@ def validate_groups(document, rows, config, *, extractive=False):
         if not isinstance(group, dict) or set(group) != GROUP_FIELDS:
             raise ValueError("unexpected group fields")
         ids = group["article_ids"]
-        if (not isinstance(ids, list) or not ids or any(not isinstance(item, str) for item in ids)
-                or len(set(ids)) != len(ids) or not set(ids).issubset(by_id) or seen.intersection(ids)):
+        if not isinstance(ids, list) or not ids or any(not isinstance(item, str) for item in ids):
             raise ValueError("invalid group identities")
+        if len(set(ids)) != len(ids) or seen.intersection(ids):
+            raise ValueError("duplicate group articles")
+        if not set(ids).issubset(by_id):
+            raise ValueError("unknown group articles")
         members = [by_id[item] for item in ids]
         dates = [date.fromisoformat(article_day(row)) for row in members]
         if (max(dates) - min(dates)).days > opts["max_group_span_days"]:
@@ -72,9 +77,14 @@ def validate_groups(document, rows, config, *, extractive=False):
         group = copy.deepcopy(group)
         for key, limit in (("label", opts["max_label_chars"]), ("summary", opts["max_summary_chars"])):
             text = group[key]
-            if (not isinstance(text, str) or not text.strip() or len(text) > limit or plain_title(text) != text
-                    or any(ord(char) < 32 for char in text) or (not extractive and not re.search(r"[가-힣]", text))):
+            if not isinstance(text, str) or not text.strip():
                 raise ValueError("invalid briefing text")
+            if len(text) > limit:
+                raise ValueError("briefing " + key + " too long")
+            if plain_title(text) != text or any(ord(char) < 32 for char in text):
+                raise ValueError("briefing text markup")
+            if not extractive and not re.search(r"[가-힣]", text):
+                raise ValueError("briefing " + key + " not Korean")
             group[key] = public_text(text, config)
         if group["topic"] not in opts["topics"]:
             raise ValueError("unknown topic")
@@ -163,12 +173,16 @@ def compose(report, config, groups=None, *, status="pending", model_calls=0, cac
     return result
 
 
-def enrich(report, config, data_dir, runner=None):
+def enrich(report, config, data_dir, runner=None, *, refresh=False, max_attempts=None):
     report = copy.deepcopy(report)
     opts = options(config)
     rows = eligible(report)
     status = "disabled" if not opts["enabled"] else "empty" if not rows else "fallback"
     calls, hit, groups = 0, False, None
+    errors = []
+    attempt_limit = opts["attempts"] if max_attempts is None else min(max_attempts, opts["attempts"])
+    if type(attempt_limit) is not int or not 1 <= attempt_limit <= opts["attempts"]:
+        raise ValueError("invalid briefing attempt limit")
     if opts["enabled"] and rows:
         payload = {"articles": [{"id": row["id"], "title": row["title"], "date": article_day(row)} for row in rows],
                    "topics": opts["topics"], "max_group_span_days": opts["max_group_span_days"]}
@@ -179,28 +193,44 @@ def enrich(report, config, data_dir, runner=None):
         cache_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
         cache_file = cache_dir / (key + ".json")
         try:
-            if cache_file.is_file() and not cache_file.is_symlink() and cache_file.stat().st_size <= opts["max_output_bytes"]:
+            if not refresh and cache_file.is_file() and not cache_file.is_symlink() and cache_file.stat().st_size <= opts["max_output_bytes"]:
                 groups = validate_groups(strict_json(cache_file.read_text()), rows, config)
                 status, hit = "ok", True
-        except (OSError, ValueError, TypeError, KeyError):
-            pass
+        except (OSError, ValueError, TypeError, KeyError) as exc:
+            errors.append({"phase": "cache_read", "reason": error_code(exc)})
         if groups is None:
             runner = runner or execute
-            for _ in range(opts["attempts"]):
+            for _ in range(attempt_limit):
                 calls += 1
+                started = time.monotonic()
+                phase = "model_call"
                 try:
                     raw, _trace = runner(template + "\n\nINPUT_JSON:\n" + json.dumps(payload, ensure_ascii=False),
                                          opts["model"], search=False, schema=ROOT / opts["schema_file"],
                                          timeout=opts["timeout_seconds"], max_bytes=opts["max_output_bytes"])
-                    groups = validate_groups(strict_json(raw), rows, config)
+                    phase = "json_parse"
+                    document = strict_json(raw)
+                    phase = "validation"
+                    groups = validate_groups(document, rows, config)
+                    phase = "cache_write"
                     atomic_json(cache_file, {"groups": groups})
                     status = "ok"
                     break
-                except (AnalysisError, OSError, ValueError, TypeError, KeyError):
-                    continue
+                except (AnalysisError, OSError, ValueError, TypeError, KeyError) as exc:
+                    groups = None
+                    reason = error_code(exc)
+                    errors.append({"phase": phase, "attempt": calls, "reason": reason,
+                                   "elapsed_seconds": round(time.monotonic() - started, 3)})
+                    if reason in NON_RETRYABLE:
+                        break
     report["insights"] = compose(report, config, groups, status=status, model_calls=calls, cache_hit=hit)
     if status == "fallback" and report["status"] == "ok":
         report["status"] = "partial"
+    atomic_json(data_dir / "briefing_status.json", {
+        "checked_at": datetime.now(UTC).isoformat(), "collection_checked_at": report["collection_checked_at"],
+        "status": status, "model_calls": calls, "cache_hit": hit, "refresh": refresh,
+        "eligible_articles": len(rows), "attempt_limit": attempt_limit, "errors": errors})
+    record_errors(data_dir, config, "briefing", report["collection_checked_at"], errors)
     return report
 
 
@@ -214,7 +244,7 @@ def validate_insights(report, config):
     status = value["status"]
     calls, hit = value["model_calls"], value["cache_hit"]
     if (status == "ok" and not ((hit and calls == 0) or (not hit and 1 <= calls <= options(config)["attempts"]))
-            or status == "fallback" and (hit or calls != options(config)["attempts"])
+            or status == "fallback" and (hit or not 1 <= calls <= options(config)["attempts"])
             or status in ("empty", "disabled", "pending") and (hit or calls != 0)
             or status == "empty" and eligible(report)):
         raise ValueError("inconsistent insights provenance")
