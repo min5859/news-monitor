@@ -23,6 +23,8 @@ class DailyTests(unittest.TestCase):
 
         def runner(prompt, model, **kwargs):
             payload = json.loads(prompt.split("INPUT_JSON:\n")[1])
+            self.assertEqual(payload["finish_after_web_calls"], 3)
+            self.assertEqual(payload["query_call_budget"] + payload["verification_call_budget"], 3)
             seen.append((payload["query_group"], kwargs["max_search_calls"]))
             row = article(url=f"https://publisher{len(seen)}.example/news/1")
             return json.dumps({"articles": [row]}), {"sources": {row["url"]: row["title"]}, "web_search_calls": 2}

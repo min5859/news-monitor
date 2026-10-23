@@ -51,8 +51,14 @@ def collect_web(config, now, runner=execute):
         if allocation < 1 or remaining < 1:
             result["errors"].append({"error": "search_budget_exhausted", "group": index + 1})
             break
+        # A soft finish target leaves room for output, without raising the event cap.
+        finish_after = max(1, allocation - opts["search_finish_reserve_calls"])
+        query_calls = min(opts["search_query_calls_per_group"], max(1, finish_after - 1))
         prompt = template + "\n\nINPUT_JSON:\n" + json.dumps(
             {**payload, "query_group": group, "max_web_calls": allocation,
+             "finish_after_web_calls": finish_after, "query_call_budget": query_calls,
+             "verification_call_budget": finish_after - query_calls,
+             "publisher_goal_scope": "whole_collection_not_this_group",
              "already_found_urls": [item["url"] for item in items if isinstance(item, dict) and "url" in item]},
             ensure_ascii=False)
         result["source_queries"]["attempted"] += 1

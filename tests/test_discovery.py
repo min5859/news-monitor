@@ -2,12 +2,14 @@
 
 import copy
 import json
+import tempfile
 import unittest
 from datetime import UTC, datetime
+from pathlib import Path
 from unittest.mock import patch
 
 from news_monitor import analysis, codex, discovery, report, site
-from news_monitor.collect import ROOT
+from news_monitor.collect import ROOT, load_config
 
 CONFIG = json.loads((ROOT / "config.json").read_text())
 CONFIG["collection"]["search_groups"] = [["가상 검색"]]
@@ -30,6 +32,56 @@ def run_search(rows, sources=None, calls=1, config=None):
 
 
 class DiscoveryTests(unittest.TestCase):
+    def test_search_plan_reserves_finish_room_without_raising_hard_limit(self):
+        cfg = copy.deepcopy(CONFIG)
+        cfg["collection"].update(max_search_calls=5, search_finish_reserve_calls=1,
+                                 search_query_calls_per_group=1)
+
+        def runner(prompt, model, **kwargs):
+            payload = json.loads(prompt.split("INPUT_JSON:\n")[1])
+            self.assertEqual(kwargs["max_search_calls"], 5)
+            self.assertEqual(payload["max_web_calls"], 5)
+            self.assertEqual(payload["finish_after_web_calls"], 4)
+            self.assertEqual(payload["query_call_budget"], 1)
+            self.assertEqual(payload["verification_call_budget"], 3)
+            self.assertEqual(payload["publisher_goal_scope"], "whole_collection_not_this_group")
+            row = article()
+            return json.dumps({"articles": [row]}), {"sources": {row["url"]: row["title"]}, "web_search_calls": 4}
+
+        result = discovery.collect_web(cfg, NOW, runner=runner)
+        self.assertEqual(result["status"], "ok")
+
+    def test_small_group_budget_never_has_negative_or_unusable_plan(self):
+        cfg = copy.deepcopy(CONFIG)
+        cfg["collection"].update(max_search_calls=1, search_finish_reserve_calls=1,
+                                 search_query_calls_per_group=2)
+
+        def runner(prompt, model, **kwargs):
+            payload = json.loads(prompt.split("INPUT_JSON:\n")[1])
+            self.assertEqual(payload["finish_after_web_calls"], 1)
+            self.assertEqual(payload["query_call_budget"], 1)
+            self.assertEqual(payload["verification_call_budget"], 0)
+            return '{"articles":[]}', {"sources": {}, "web_search_calls": 1}
+
+        self.assertEqual(discovery.collect_web(cfg, NOW, runner=runner)["source_queries"]["succeeded"], 1)
+
+    def test_budget_settings_reject_unsafe_values(self):
+        for key in ("search_finish_reserve_calls", "search_query_calls_per_group"):
+            for value in (-1, True, 31):
+                cfg = copy.deepcopy(CONFIG)
+                cfg["collection"][key] = value
+                with tempfile.TemporaryDirectory() as temp:
+                    path = Path(temp) / "config.json"
+                    path.write_text(json.dumps(cfg))
+                    with self.subTest(key=key, value=value), self.assertRaises(ValueError):
+                        load_config(path)
+
+    def test_soft_finish_target_does_not_relax_or_replace_hard_budget(self):
+        cfg = copy.deepcopy(CONFIG)
+        cfg["collection"]["max_search_calls"] = 5
+        self.assertEqual(run_search([article()], calls=5, config=cfg)["status"], "ok")
+        self.assertEqual(run_search([article()], calls=6, config=cfg)["status"], "failed")
+
     def test_publisher_date_and_actual_collection_time_are_distinct(self):
         result = run_search([article()])
         self.assertEqual(result["status"], "ok")
@@ -124,6 +176,11 @@ class CodexTests(unittest.TestCase):
     def test_web_search_has_a_hard_event_budget(self):
         with self.assertRaisesRegex(analysis.AnalysisError, "budget"):
             self.execute([{"type": "web_search"}, {"type": "web_search"}], search=True, max_search_calls=1)
+
+    def test_final_result_at_exact_budget_is_not_discarded(self):
+        text, trace = self.execute([{"type": "web_search"}] * 5, search=True, max_search_calls=5)
+        self.assertEqual(text, '{"ok":true}')
+        self.assertEqual(trace["web_search_calls"], 5)
 
 
 if __name__ == "__main__":

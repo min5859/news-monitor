@@ -89,7 +89,8 @@ def load_config(path):
     display_name(config)
     if opts["provider"] == "codex_web_search":
         for key, low, high in (("codex_timeout_seconds", 1, 900), ("codex_output_bytes", 1024, 2097152),
-                               ("max_search_calls", 1, 30)):
+                               ("max_search_calls", 1, 30), ("search_finish_reserve_calls", 1, 29),
+                               ("search_query_calls_per_group", 1, 30)):
             if type(opts[key]) is not int or not low <= opts[key] <= high:
                 raise ValueError(f"invalid {key}")
         groups = opts.get("search_groups", [[config["target"]["name"]]])
