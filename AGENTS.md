@@ -6,7 +6,8 @@
 - Google News RSS는 robots 지침 때문에 기본 수집원으로 사용하지 않는다.
 - 수집 실패·정상 0건·판단 보류를 구분하고 실패 시 이전 정상 데이터를 보존한다.
 - GDELT 시각은 발행일이 아니라 관측 시각이다. 제목 기반 분석임을 표시한다.
-- 기본 수집은 codex_web_search다. 검색 이벤트 URL 대조·발행일 필터를 유지하고 GDELT 관측일과 구분한다.
+- 기본 수집은 tavily_feeds(Tavily 뉴스 검색 + robots 허용 언론사 사이트맵·RSS)다. 제목·URL·날짜만 쓰고 검색 요약·기사 페이지는 받지 않는다.
+- 제공 발행일(reported_publication_date)을 원문 확인 발행일·GDELT 관측일과 구분한다. 네이버 검색 API·포털 검색 크롤링은 쓰지 않는다.
 - Codex는 읽기 전용·shell/apps/plugins/하위 에이전트/이미지 비활성화로 실행한다. 분류 중 웹도 끈다.
 - 수집 실패 시 안전한 이전 뉴스가 있으면 stale로 표시하며 새 수집이나 공개 준비 완료로 간주하지 않는다.
 - 설정은 config.json에 두고 Python 표준 라이브러리 위주로 구현한다.
@@ -23,3 +24,7 @@
 - 이슈/브리핑은 공개용 제목과 ID만 사용한다. 제목 근거·ID·숫자·스키마를 검증하며 통계는 코드가 계산한다.
 - 새 공개 스키마는 v2다. 구형 v1은 실패 시 표시만 호환하고 새 게시 준비 완료로 간주하지 않는다.
 - 기간/필터는 브리핑·통계·목록을 함께 갱신한다. 실제 조회 범위 밖 날짜를 0건으로 표시하지 않는다.
+- 개발·검토·테스트는 Mac 저장소에서 하고 원본은 GitHub main이다. OCI 소스를 직접 수정하지 않는다.
+- 작업 전 `git fetch`로 Mac·origin·OCI(`ssh oci`, wiki-publisher로 `git -C /srv/news-monitor/app log -1`) 커밋을 대조한다.
+- 운영 데이터(data/·dist/·status JSON)는 OCI에만 있다. 실행 결과 검토는 `ssh oci`로 읽기 전용 조회한다.
+- 반영은 push 후 OCI에서 실행 중이 아닐 때 wiki-publisher로 `pull --ff-only origin main`만 한다.
