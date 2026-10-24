@@ -17,6 +17,15 @@ from news_monitor.display import display_name, public_text, validate_public_name
 ARTICLE_FIELDS = ("id", "title", "url", "publisher", "language", "indexed_at", "published_at", "analysis_scope", "source")
 WARNINGS = {"publisher_goal_not_met", "upstream_limit_reached", "remaining_queries_skipped_rate_limit",
             "remaining_queries_skipped_retry_after", "retained_articles_only", "previous_collection_rejected"}
+# Publisher-confirmed web-search dates; publisher or search-index dates; GDELT observation times.
+DATE_BASIS = {"codex_web_search": "publisher_date", "tavily_feeds": "reported_publication_date",
+              "gdelt_doc": "gdelt_observation_not_publication"}
+# Verified rows from the previous source stay in the window after a switch; nothing is relabeled.
+SOURCES = {"tavily_feeds": {"tavily_feeds", "codex_web_search"}}
+
+
+def selection(provider):
+    return "latest_observed_target_in_headline" if provider == "gdelt_doc" else "latest_published_target_in_headline"
 
 
 def timestamp(value):
@@ -36,11 +45,11 @@ def prepare_collection(status, dataset, config, now=None):
     if not timedelta(0) <= now - checked <= timedelta(hours=config["analysis"]["max_collection_age_hours"]):
         raise ValueError("collection is stale or from the future")
     state = status["status"]
-    publication_dates = config["collection"]["provider"] == "codex_web_search"
+    provider = config["collection"]["provider"]
+    publication_dates = provider != "gdelt_doc"
     clean = {"status": state, "checked_at": checked.isoformat(), "articles": [],
              "window_start": None, "window_end": None,
-             "date_basis": "publisher_date" if publication_dates else "gdelt_observation_not_publication",
-             "selection": "latest_published_target_in_headline" if publication_dates else "latest_observed_target_in_headline",
+             "date_basis": DATE_BASIS[provider], "selection": selection(provider),
              "warnings": sorted(set(status.get("warnings", [])) & WARNINGS)}
     if state == "failed":
         return clean  # Old articles.json is deliberately not examined or reused.
@@ -103,7 +112,7 @@ def prepare_collection(status, dataset, config, now=None):
         if (not start <= observed <= collected <= checked or not first_seen <= observed
                 or (not publication_dates and collected != checked)
                 or article["analysis_scope"] != "headline_only"
-                or article["source"] != config["collection"]["provider"]):
+                or article["source"] not in SOURCES.get(provider, {provider})):
             raise ValueError("invalid article provenance")
         article.update(first_seen_at=first_seen.isoformat(), collected_at=collected.isoformat())
         seen.add(url)
@@ -181,8 +190,8 @@ def make_report(collection, decisions, info, config, now=None):
                            "article_titles_modified": True, "evidence_may_be_omitted": True},
         "generated_at": now.isoformat(), "collection_checked_at": collection["checked_at"],
         "window_start": collection["window_start"], "window_end": collection["window_end"],
-        "analysis_scope": "headline_only", "date_basis": collection.get("date_basis", "publisher_date" if source["provider"] == "codex_web_search" else "gdelt_observation_not_publication"),
-        "coverage": "search_sample_not_exhaustive", "selection": collection.get("selection", "latest_published_target_in_headline" if source["provider"] == "codex_web_search" else "latest_observed_target_in_headline"),
+        "analysis_scope": "headline_only", "date_basis": collection.get("date_basis", DATE_BASIS[source["provider"]]),
+        "coverage": "search_sample_not_exhaustive", "selection": collection.get("selection", selection(source["provider"])),
         "article_count": None if failed else len(articles), "publisher_count": None if failed else len(publishers),
         "publisher_goal": source["publisher_goal"], "warnings": collection["warnings"],
         "source_attribution": {"name": source["attribution_name"], "url": canonical_url(source["attribution_url"], source)},

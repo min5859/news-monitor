@@ -69,13 +69,22 @@ def publisher_domain(host):
     return host
 
 
+def headline_names_target(title, config):
+    """The person must be named; the organization too unless person-only headlines are allowed."""
+    title = normalized(title)
+    keys = ["person_aliases"]
+    if config["collection"].get("require_organization_in_headline", True):
+        keys.append("organization_aliases")
+    return all(any(normalized(alias) in title for alias in config["target"][key]) for key in keys)
+
+
 def load_config(path):
     config = json.loads(Path(path).read_text())
     diagnostic_limit = config["diagnostics"]["max_events"]
     if type(diagnostic_limit) is not int or not 1 <= diagnostic_limit <= 1000:
         raise ValueError("invalid diagnostics event limit")
     opts = config["collection"]
-    if opts["provider"] not in ("gdelt_doc", "codex_web_search"):
+    if opts["provider"] not in ("gdelt_doc", "codex_web_search", "tavily_feeds"):
         raise ValueError("unsupported provider")
     if not opts["endpoint"].startswith("https://"):
         raise ValueError("collection endpoint must use HTTPS")
@@ -102,6 +111,8 @@ def load_config(path):
         if not isinstance(values, list) or not values or any(not isinstance(v, str) or not v.strip() for v in values):
             raise ValueError("queries and aliases must be nonempty string lists")
     display_name(config)
+    if type(opts.get("require_organization_in_headline", True)) is not bool:
+        raise ValueError("invalid headline selection option")
     if opts["provider"] == "codex_web_search":
         for key, low, high in (("codex_timeout_seconds", 1, 900), ("codex_output_bytes", 1024, 2097152),
                                ("max_search_calls", 1, 30), ("search_finish_reserve_calls", 1, 29),
@@ -114,11 +125,21 @@ def load_config(path):
                        or any(not isinstance(query, str) or not query.strip() or len(query) > 200 for query in group)
                        for group in groups)):
             raise ValueError("invalid search_groups")
-        if type(opts.get("require_organization_in_headline", True)) is not bool:
-            raise ValueError("invalid headline selection option")
         for key, directory in (("schema_file", "schemas"), ("search_prompt_file", "prompts")):
             if not (ROOT / opts[key]).resolve().is_relative_to(ROOT / directory):
                 raise ValueError("unsafe discovery resource path")
+    if opts["provider"] == "tavily_feeds":
+        if not isinstance(opts["tavily_key_file"], str) or not Path(opts["tavily_key_file"]).is_absolute():
+            raise ValueError("Tavily key file must be an absolute path")
+        if type(opts["tavily_max_results"]) is not int or not 1 <= opts["tavily_max_results"] <= 20:
+            raise ValueError("invalid tavily_max_results")
+        for key, low, high in (("tavily_queries", 1, 10), ("feeds", 1, 40), ("excluded_publishers", 0, 100)):
+            values = opts[key]
+            if (not isinstance(values, list) or not low <= len(values) <= high
+                    or any(not isinstance(value, str) or not value.strip() or len(value) > 300 for value in values)):
+                raise ValueError(f"invalid {key}")
+        if any(not feed.startswith("https://") or canonical_url(feed, opts) != feed for feed in opts["feeds"]):
+            raise ValueError("feeds must be canonical HTTPS URLs")
     return config
 
 
@@ -232,6 +253,10 @@ def collect(config, now=None, opener=urlopen, sleeper=time.sleep):
         from news_monitor.discovery import collect_web
 
         return collect_web(config, now)
+    if opts["provider"] == "tavily_feeds":
+        from news_monitor.sources import collect_sources
+
+        return collect_sources(config, now, opener=opener, sleeper=sleeper)
     start = now - timedelta(days=opts["lookback_days"])
     stats = {"fetched": 0, "invalid_metadata": 0, "out_of_window": 0, "not_target": 0,
              "duplicates": 0, "limit_excluded": 0, "selected": 0,
@@ -389,7 +414,7 @@ def _run_collection(config, data_dir, now=None, opener=urlopen, sleeper=time.sle
 
     record_errors(data_dir, config, "discovery", result["checked_at"],
                   [error for error in result["errors"] if "reason" in error])
-    if config["collection"]["provider"] == "codex_web_search" and (data_dir / "articles.json").exists():
+    if config["collection"]["provider"] != "gdelt_doc" and (data_dir / "articles.json").exists():
         from news_monitor.discovery import merge_previous
 
         try:

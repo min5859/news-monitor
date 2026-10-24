@@ -12,6 +12,7 @@ from news_monitor import analysis, codex, discovery, report, site
 from news_monitor.collect import ROOT, load_config
 
 CONFIG = json.loads((ROOT / "config.json").read_text())
+CONFIG["collection"]["provider"] = "codex_web_search"
 CONFIG["collection"]["search_groups"] = [["가상 검색"]]
 CONFIG["collection"]["lookback_days"] = 14
 CONFIG["briefing"]["enabled"] = False

@@ -18,6 +18,10 @@ LABELS = {"positive": "긍정", "negative": "부정", "neutral": "중립", "mixe
 STATUS = {"ok": "자동 분석 샘플", "partial": "일부 처리 미완료", "empty": "조건에 맞는 기사 없음", "failed": "수집·검증 실패",
           "stale": "이전 수집 결과 · 최신 조회 미완료"}
 OUTPUT_FILES = {"index.html", "styles.css", "app.js", "report.json"}
+DATE_NOTES = {"publisher_date": ("기사의 공개 발행일 기준입니다.", "공개 발행일 기준 · AI 웹 검색 수집"),
+              "reported_publication_date": ("언론사 사이트맵·RSS 또는 검색 API가 제공한 발행일입니다. 일부는 갱신일일 수 있습니다.",
+                                            "언론사·검색 API 제공 발행일 기준 · 사이트맵·RSS·뉴스 검색 수집"),
+              "gdelt_observation_not_publication": ("날짜는 KST 관측일이며 발행일이 아닙니다.", "GDELT 관측 시각 기준")}
 
 
 def h(value):
@@ -152,7 +156,7 @@ def render(report):
     if pn and pn["denominator"]:
         ratio_note = f"긍정 대 부정만 비교: {pn['percentages']['positive']:.1f}% / {pn['percentages']['negative']:.1f}% (분모 {pn['denominator']}건 · 중립·혼합·보류 제외)."
     attribution = report["source_attribution"]
-    publication_dates = report["date_basis"] == "publisher_date"
+    publication_dates = report["date_basis"] != "gdelt_observation_not_publication"
     daily_summary = ""
     if publication_dates and report["window_end"]:
         day = timestamp(report["window_end"]).astimezone(ZoneInfo("Asia/Seoul")).date().isoformat()
@@ -177,10 +181,10 @@ def render(report):
               "model": h(f"{report['analysis']['provider']} / {report['analysis']['model']}"),
               "prompt_version": h(report["analysis"]["prompt_sha256"]),
               "generated": h(display_time(report["generated_at"])), "daily_summary": daily_summary}
+    date_filter_note, date_basis_note = DATE_NOTES[report["date_basis"]]
     values.update(window_label="발행일 범위" if publication_dates else "관측 기간",
                   date_filter_label="발행일" if publication_dates else "관측일",
-                  date_filter_note="기사의 공개 발행일 기준입니다." if publication_dates else "날짜는 KST 관측일이며 발행일이 아닙니다.",
-                  date_basis_note="공개 발행일 기준 · AI 웹 검색 수집" if publication_dates else "GDELT 관측 시각 기준")
+                  date_filter_note=date_filter_note, date_basis_note=date_basis_note)
     values.update(dashboard_content(report))
     values["asset_version"] = hashlib.sha256(b"".join((ROOT / "web" / name).read_bytes()
                                                      for name in ("app.js", "styles.css"))).hexdigest()[:12]

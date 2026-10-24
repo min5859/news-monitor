@@ -9,12 +9,33 @@ from zoneinfo import ZoneInfo
 
 from news_monitor.analysis import AnalysisError, strict_json
 from news_monitor.codex import execute
-from news_monitor.collect import ROOT, canonical_url, normalized, parse_article
+from news_monitor.collect import (
+    ROOT,
+    canonical_url,
+    headline_names_target,
+    normalized,
+    parse_article,
+)
 from news_monitor.diagnostics import error_code
 
 
 def story_key(row):
     return row["publisher"], normalized(row["title"]), row["published_at"]
+
+
+def select_stories(rows, stats, limit):
+    """One row per story across subdomain copies, newest publication first, at most limit."""
+    stories = {}
+    for row in rows:
+        key = story_key(row)
+        if key in stories:
+            stats["duplicates"] += 1
+        # Keep the same URL for a story whatever order the sources returned it in.
+        if key not in stories or row["url"] < stories[key]["url"]:
+            stories[key] = row
+    ordered = sorted(stories.values(), key=lambda row: (row["published_at"], row["url"]), reverse=True)
+    stats.update(selected=min(len(ordered), limit), limit_excluded=max(0, len(ordered) - limit))
+    return ordered[:limit]
 
 
 def collect_web(config, now, runner=execute):
@@ -120,28 +141,14 @@ def collect_web(config, now, runner=execute):
         if not first <= published <= today:
             stats["out_of_window"] += 1
             continue
-        title = normalized(article["title"])
-        keys = ["person_aliases"]
-        if opts.get("require_organization_in_headline", True):
-            keys.append("organization_aliases")
-        if any(not any(normalized(alias) in title for alias in config["target"][key]) for key in keys):
+        if not headline_names_target(article["title"], config):
             stats["not_target"] += 1
             continue
         if url in rows:
             stats["duplicates"] += 1
         if url not in rows or article["published_at"] >= rows[url]["published_at"]:
             rows[url] = article
-    stories = {}
-    for row in rows.values():
-        key = story_key(row)
-        if key in stories:
-            stats["duplicates"] += 1
-        # Subdomain copies share a story; keep the same URL whatever the result order.
-        if key not in stories or row["url"] < stories[key]["url"]:
-            stories[key] = row
-    ordered = sorted(stories.values(), key=lambda row: (row["published_at"], row["url"]), reverse=True)
-    selected = ordered[:opts["max_articles"]]
-    stats.update(selected=len(selected), limit_excluded=len(ordered) - len(selected))
+    selected = select_stories(rows.values(), stats, opts["max_articles"])
     result.update(articles=selected, publishers=sorted({row["publisher"] for row in selected}))
     if not result["source_queries"]["succeeded"] or (not selected and (stats["invalid_metadata"] or stats["unverified_url"])):
         result["errors"].append({"error": "no_verified_discovery_metadata"})
