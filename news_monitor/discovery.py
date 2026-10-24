@@ -20,7 +20,8 @@ from news_monitor.diagnostics import error_code
 
 
 def story_key(row):
-    return row["publisher"], normalized(row["title"]), row["published_at"]
+    # Not the date: sources may report the same story a day or an update apart.
+    return row["publisher"], normalized(row["title"])
 
 
 def select_stories(rows, stats, limit):

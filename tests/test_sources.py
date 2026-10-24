@@ -158,6 +158,15 @@ class SourceTests(unittest.TestCase):
         self.assertEqual(merged["statistics"]["retained"], 1)
         self.assertEqual(len(report.prepare_collection(merged, merged, self.config, NOW + timedelta(hours=1))["articles"]), 2)
 
+    def test_same_story_with_a_different_reported_date_is_not_counted_twice(self):
+        previous = run_search([article(url="https://mobile.old.example/view/1", day="2026-10-16")])
+        fresh = self.collect({sources.TAVILY_URL: tavily([{"title": article()["title"], "url": "https://www.old.example/view/1",
+                                                           "published_date": "2026-10-15"}])}, tavily_queries=["a"])
+        merged = discovery.merge_previous(fresh, previous, self.config)
+        self.assertEqual(len(merged["articles"]), 1)
+        self.assertEqual(merged["articles"][0]["first_seen_at"], previous["articles"][0]["first_seen_at"])
+        self.assertEqual(merged["statistics"]["reconfirmed"], 1)
+
     def test_source_settings_reject_unsafe_values(self):
         self.assertEqual(load_config(ROOT / "config.json")["collection"]["provider"], "tavily_feeds")
         for key, value in (("feeds", ["http://www.paper.example/news.xml"]), ("feeds", ["https://www.paper.example/a?b=1&a=2"]),
