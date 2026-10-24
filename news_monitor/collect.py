@@ -161,18 +161,22 @@ def retry_delay(headers, attempt, opts):
     return opts["backoff_seconds"] * 2**attempt
 
 
-def fetch_json(url, opts, opener, sleeper):
+def read_bounded(request, opts, opener):
+    with opener(request, timeout=opts["timeout_seconds"]) as response:
+        raw = response.read(opts["max_response_bytes"] + 1)
+    if len(raw) > opts["max_response_bytes"]:
+        raise CollectionError("response_too_large")
+    return raw
+
+
+def fetch_json(url, opts, opener, sleeper, *, data=None, headers=None, key="articles"):
     for attempt in range(opts["attempts"]):
         try:
-            request = Request(url, headers={"User-Agent": opts["user_agent"]})
-            with opener(request, timeout=opts["timeout_seconds"]) as response:
-                raw = response.read(opts["max_response_bytes"] + 1)
-            if len(raw) > opts["max_response_bytes"]:
-                raise CollectionError("response_too_large")
-            document = json.loads(raw.decode("utf-8-sig"))
-            if not isinstance(document, dict) or not isinstance(document.get("articles"), list):
-                raise CollectionError("invalid_articles_envelope")
-            return document["articles"]
+            request = Request(url, data=data, headers={"User-Agent": opts["user_agent"], **(headers or {})})
+            document = json.loads(read_bounded(request, opts, opener).decode("utf-8-sig"))
+            if not isinstance(document, dict) or not isinstance(document.get(key), list):
+                raise CollectionError(f"invalid_{key}_envelope")
+            return document[key]
         except HTTPError as exc:
             delay = retry_delay(exc.headers, attempt, opts)
             code = exc.code
