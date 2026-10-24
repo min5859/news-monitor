@@ -471,6 +471,20 @@ class PreflightTests(unittest.TestCase):
         self.assertNotIn("조현준", report["articles"][0]["title"])
         self.assertTrue(preflight.check_ready(CONFIG, self.root, self.output)["ready"])
 
+    def test_legacy_subdomain_publisher_is_normalized_and_raw_host_is_display_only(self):
+        value = collection_fixture()
+        url = "https://mobile.publisher0.example/news/1"
+        value["articles"][0].update(url=url, id=hashlib.sha256(url.encode()).hexdigest()[:20],
+                                    publisher="mobile.publisher0.example")
+        write_result(value, self.root)
+        report = run.run_pipeline(CONFIG, self.root, self.output, reuse=True, runner=lambda *args: json.dumps(decision()))
+        self.assertEqual(report["articles"][0]["publisher"], "publisher0.example")
+        self.assertTrue(preflight.check_ready(CONFIG, self.root, self.output)["ready"])
+        report["articles"][0]["publisher"] = report["publishers"][0]["publisher"] = "mobile.publisher0.example"
+        with self.assertRaises(ValueError):
+            preflight.check_artifact(report, CONFIG)
+        preflight.check_artifact(report, CONFIG, allow_legacy=True)
+
     def test_old_success_cannot_hide_latest_collection_failure(self):
         value = collection_fixture(0)
         value["status"] = "failed"

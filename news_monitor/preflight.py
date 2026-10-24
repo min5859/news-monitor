@@ -9,7 +9,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 from news_monitor.analysis import DECISION_KEYS, RELEVANCE, SENTIMENTS, validate_options
-from news_monitor.collect import ROOT, canonical_url, load_config
+from news_monitor.collect import ROOT, canonical_url, load_config, publisher_domain
 from news_monitor.display import public_text, validate_public_names
 from news_monitor.report import ARTICLE_FIELDS, WARNINGS, summarize, timestamp
 from news_monitor.site import OUTPUT_FILES, render
@@ -65,7 +65,10 @@ def check_artifact(report, config, *, allow_legacy=False):
         if not exact_keys(row, expected) or not exact_keys(row["classification"], DECISION_KEYS):
             raise ValueError("unexpected article fields")
         url = canonical_url(row["url"], config["collection"])
-        if (url != row["url"] or url in seen or row["publisher"] != urlsplit(url).hostname.removeprefix("www.")
+        host = urlsplit(url).hostname
+        # Raw hosts from older reports remain displayable, never publishable.
+        publishers = {publisher_domain(host)} | ({host.removeprefix("www.")} if allow_legacy else set())
+        if (url != row["url"] or url in seen or row["publisher"] not in publishers
                 or row["id"] != hashlib.sha256(url.encode()).hexdigest()[:20]):
             raise ValueError("invalid public article URL")
         value = row["classification"]

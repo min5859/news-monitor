@@ -6,7 +6,12 @@ from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 
 from news_monitor.analysis import SENTIMENTS, validate_decision
-from news_monitor.collect import canonical_url, normalized, plain_title
+from news_monitor.collect import (
+    canonical_url,
+    normalized,
+    plain_title,
+    publisher_domain,
+)
 from news_monitor.display import display_name, public_text, validate_public_names
 
 ARTICLE_FIELDS = ("id", "title", "url", "publisher", "language", "indexed_at", "published_at", "analysis_scope", "source")
@@ -78,8 +83,11 @@ def prepare_collection(status, dataset, config, now=None):
                 raise ValueError("headline does not match configured target")
         if article["url"] != url or article["id"] != hashlib.sha256(url.encode()).hexdigest()[:20] or url in seen:
             raise ValueError("invalid article identity")
-        if article["publisher"] != urlsplit(url).hostname.removeprefix("www."):
+        host = urlsplit(url).hostname
+        # Rows saved before registrable-domain grouping kept the raw host; read both, keep one.
+        if article["publisher"] not in (publisher_domain(host), host.removeprefix("www.")):
             raise ValueError("invalid article publisher")
+        article["publisher"] = publisher_domain(host)
         if not isinstance(article["language"], str) or len(article["language"]) > 80:
             raise ValueError("invalid article language")
         if publication_dates:

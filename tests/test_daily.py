@@ -1,6 +1,7 @@
 """Daily collection regressions. Synthetic metadata only, no live requests."""
 
 import copy
+import hashlib
 import json
 import unittest
 from datetime import timedelta
@@ -8,7 +9,7 @@ from unittest.mock import patch
 
 from test_discovery import CONFIG, NOW, article, run_search
 
-from news_monitor import analysis, discovery, report, site
+from news_monitor import analysis, collect, discovery, report, site
 
 
 class DailyTests(unittest.TestCase):
@@ -127,6 +128,40 @@ class DailyTests(unittest.TestCase):
         self.assertEqual(merged["articles"][0]["url"], article()["url"])
         self.assertEqual(merged["statistics"]["reconfirmed"], 1)
         self.assertEqual(run_search([article(), article(url="https://example.com/news/1?ref_sec=stocks")])["statistics"]["selected"], 1)
+
+    def test_publisher_is_the_registrable_domain(self):
+        cases = {"www.paper.example": "paper.example", "mobile.paper.example": "paper.example",
+                 "biz.paper.co.kr": "paper.co.kr", "www.paper.co.kr": "paper.co.kr", "8.8.8.8": "8.8.8.8"}
+        for host, expected in cases.items():
+            with self.subTest(host=host):
+                self.assertEqual(collect.publisher_domain(host), expected)
+
+    def test_subdomain_copies_of_one_story_count_once(self):
+        rows = [article(url="https://www.news.example/view/1"), article(url="https://mobile.news.example/view/1")]
+        result = run_search(rows)
+        self.assertEqual(result["statistics"]["selected"], 1)
+        self.assertEqual(result["statistics"]["duplicates"], 1)
+        self.assertEqual(result["publishers"], ["news.example"])
+        self.assertEqual(run_search(rows[::-1])["articles"][0]["url"], result["articles"][0]["url"])
+
+    def test_legacy_subdomain_rows_merge_and_keep_earliest_first_seen(self):
+        first, second = "https://www.news.example/view/1", "https://mobile.news.example/view/1"
+        previous = run_search([article(url=first)])
+        earlier = (NOW - timedelta(days=1)).isoformat()
+        legacy = {**previous["articles"][0], "url": second, "id": hashlib.sha256(second.encode()).hexdigest()[:20],
+                  "publisher": "mobile.news.example", "first_seen_at": earlier}
+        previous["articles"].append(legacy)
+        previous["statistics"]["selected"] = 2
+        prepared = report.prepare_collection(previous, previous, CONFIG, NOW)
+        self.assertEqual({row["publisher"] for row in prepared["articles"]}, {"news.example"})
+        later = NOW + timedelta(hours=2)
+        fresh = run_search([article(url=first)])
+        fresh.update(checked_at=later.isoformat(), window_end=later.isoformat())
+        fresh["articles"][0].update(indexed_at=later.isoformat(), collected_at=later.isoformat())
+        merged = discovery.merge_previous(fresh, previous, CONFIG)
+        self.assertEqual(len(merged["articles"]), 1)
+        self.assertEqual(merged["articles"][0]["first_seen_at"], earlier)
+        self.assertEqual(merged["publishers"], ["news.example"])
 
     def test_updated_title_at_same_url_does_not_retain_two_versions(self):
         previous = run_search([article()])

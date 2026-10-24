@@ -54,6 +54,21 @@ def normalized(value):
     return re.sub(r"[\W_]+", "", unicodedata.normalize("NFKC", value).casefold())
 
 
+# Publishers register directly below these; the standard library has no public suffix list.
+SECOND_LEVEL_SUFFIXES = {"co.kr", "or.kr", "ne.kr", "go.kr", "ac.kr", "re.kr", "pe.kr", "co.jp", "co.uk"}
+
+
+def publisher_domain(host):
+    """Count www/mobile/section hosts of one outlet as one publisher."""
+    host = host.lower().removeprefix("www.")
+    try:
+        ipaddress.ip_address(host)
+    except ValueError:
+        labels = host.split(".")
+        return ".".join(labels[-3 if ".".join(labels[-2:]) in SECOND_LEVEL_SUFFIXES else -2:])
+    return host
+
+
 def load_config(path):
     config = json.loads(Path(path).read_text())
     diagnostic_limit = config["diagnostics"]["max_events"]
@@ -197,7 +212,7 @@ def parse_article(item, config):
         raise ValueError("invalid language")
     return {
         "id": hashlib.sha256(url.encode()).hexdigest()[:20],
-        "title": title, "url": url, "publisher": domain.lower().removeprefix("www."),
+        "title": title, "url": url, "publisher": publisher_domain(urlsplit(url).hostname),
         "language": language, "indexed_at": observed.isoformat(), "published_at": None,
         "analysis_scope": "headline_only", "source": opts["provider"],
     }

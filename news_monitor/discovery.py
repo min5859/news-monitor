@@ -136,7 +136,9 @@ def collect_web(config, now, runner=execute):
         key = story_key(row)
         if key in stories:
             stats["duplicates"] += 1
-        stories[key] = row
+        # Subdomain copies share a story; keep the same URL whatever the result order.
+        if key not in stories or row["url"] < stories[key]["url"]:
+            stories[key] = row
     ordered = sorted(stories.values(), key=lambda row: (row["published_at"], row["url"]), reverse=True)
     selected = ordered[:opts["max_articles"]]
     stats.update(selected=len(selected), limit_excluded=len(ordered) - len(selected))
@@ -171,7 +173,13 @@ def merge_previous(result, previous, config):
             return result
         start = timestamp(result["window_start"]).astimezone(ZoneInfo("Asia/Seoul")).date()
         end = checked.astimezone(ZoneInfo("Asia/Seoul")).date()
-        old = {story_key(row): row for row in clean["articles"] if start <= date.fromisoformat(row["published_at"]) <= end}
+        old = {}
+        for row in clean["articles"]:
+            key = story_key(row)
+            # Older saves may hold one story per subdomain; the earliest first sighting wins.
+            if (start <= date.fromisoformat(row["published_at"]) <= end
+                    and (key not in old or row["first_seen_at"] < old[key]["first_seen_at"])):
+                old[key] = row
     except (ValueError, KeyError, TypeError, OverflowError):
         result["warnings"].append("previous_collection_rejected")
         return result
