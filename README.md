@@ -50,17 +50,16 @@ python3 -B -m unittest discover -s tests -v
 
 ## AI 분류·화면
 
-- 기본 실행에는 `codex`와 기존 ChatGPT 로그인이 필요하다. 새 API 키를 추가하지 않지만
-  구독 사용량/쿼터를 소비한다. 다른 계정의 인증 파일을 복사하지 않는다.
-- `gpt-6-luna`를 읽기 전용 임시 workspace에서 실행하고 shell·apps/MCP·plugins·하위 에이전트·
-  이미지 생성을 비활성화한다. 사용자 config/rules는 이 호출에서 로드하지 않고 인증만 재사용한다.
-- `codex_web_search` 경로를 쓸 때만 live web search를 허용한다(검색어 6개 묶음, 최대 30회·600초).
-  제목 분류·브리핑에는 웹 검색도 허용하지 않는다. 예상하지 않은 도구 이벤트는 실패 처리한다.
-- `analysis.provider=cursor` 경로도 남아 있으며 ask 모드·강제 샌드박스·도구 거부를 유지한다.
-  이 경로의 기존 OCI AppArmor 제한은 해제하지 않았다.
+- 2026-10-25부터 제목 분류·이슈 브리핑은 Cursor CLI(`agent`)의 `claude-sonnet-5-5-medium`
+  (Sonnet 5.5, medium effort)이다. 기존 `wiki-publisher` Cursor 로그인을 재사용하고 구독 사용량을 소비한다.
+- Cursor는 ask 모드로, 매 호출 새로 만드는 빈 workspace와 도구 전체 거부(Shell·Read·Write·WebFetch·MCP)
+  설정으로 실행한다. OCI AppArmor가 Cursor 샌드박스 helper를 거부하므로 같은 계정의 다른 게시기처럼
+  샌드박스는 끈다(`--sandbox disabled`). 전역 AppArmor는 바꾸지 않았고 서비스는 `~/.cursor`만 추가로 쓴다.
+- 이전 Codex 경로(`provider=codex`, `gpt-6-luna`, 읽기 전용·도구 비활성)는 설정으로 되돌릴 수 있다.
+  `codex_web_search` 수집을 쓸 때만 live web search를 허용한다. 분류·브리핑에는 웹을 허용하지 않는다.
 - 관련성·긍정/부정/중립/혼합/판단 보류·한국어 이유·제목 근거를 검증한다. 응답이 잘못되거나
   실행에 실패하면 판단 보류로 처리한다. 자동 검증이 분류 정확도를 보증하는 것은 아니다.
-- 기본 호출당 90초, 전체 최대 30회(재시도 포함), 응답 합계 64 KiB 제한이다.
+- 기본 호출당 90초, 전체 최대 60회(재시도 포함), 응답 합계 64 KiB 제한이다.
   검증한 결과만 제목·대상·모델·프롬프트 해시 기준으로 캐시한다.
 - 실패한 수집·오래되거나 서로 다른 상태/기사 파일은 AI에 전달하지 않는다.
   정상 검색 뒤에는 기간 안의 이전 검증 기사를 누적하지만 최초·최근 확인 시각을 보존하고

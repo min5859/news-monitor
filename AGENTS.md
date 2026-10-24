@@ -8,7 +8,9 @@
 - GDELT 시각은 발행일이 아니라 관측 시각이다. 제목 기반 분석임을 표시한다.
 - 기본 수집은 tavily_feeds(Tavily 뉴스 검색 + robots 허용 언론사 사이트맵·RSS)다. 제목·URL·날짜만 쓰고 검색 요약·기사 페이지는 받지 않는다.
 - 제공 발행일(reported_publication_date)을 원문 확인 발행일·GDELT 관측일과 구분한다. 네이버 검색 API·포털 검색 크롤링은 쓰지 않는다.
-- Codex는 읽기 전용·shell/apps/plugins/하위 에이전트/이미지 비활성화로 실행한다. 분류 중 웹도 끈다.
+- 분류·브리핑 AI는 Cursor `claude-sonnet-5-5-medium`이다. ask 모드·빈 workspace·도구 전체 거부로 실행하고 웹을 쓰지 않는다.
+- OCI AppArmor가 Cursor 샌드박스를 막으므로 다른 게시기처럼 `--sandbox disabled`를 쓴다. 전역 AppArmor는 바꾸지 않는다.
+- Codex 경로(롤백용)는 읽기 전용·shell/apps/plugins/하위 에이전트/이미지 비활성화로 실행한다.
 - 수집 실패 시 안전한 이전 뉴스가 있으면 stale로 표시하며 새 수집이나 공개 준비 완료로 간주하지 않는다.
 - 설정은 config.json에 두고 Python 표준 라이브러리 위주로 구현한다.
 - 공개 표시명은 target.display_name의 `회장님`을 사용한다. 내부 실명 검색과 표시를 분리한다.

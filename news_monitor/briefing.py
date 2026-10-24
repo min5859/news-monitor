@@ -8,6 +8,7 @@ import time
 from datetime import UTC, date, datetime, timedelta
 from zoneinfo import ZoneInfo
 
+from news_monitor import analysis
 from news_monitor.analysis import AnalysisError, strict_json
 from news_monitor.codex import execute
 from news_monitor.collect import ROOT, atomic_json, plain_title
@@ -29,7 +30,8 @@ def article_day(row):
 
 def options(config):
     opts = config["briefing"]
-    if type(opts["enabled"]) is not bool or not isinstance(opts["model"], str) or not opts["model"].strip():
+    if (type(opts["enabled"]) is not bool or opts["provider"] not in ("codex", "cursor")
+            or not isinstance(opts["model"], str) or not opts["model"].strip()):
         raise ValueError("invalid briefing options")
     for key, low, high in (("attempts", 1, 2), ("timeout_seconds", 1, 180), ("max_output_bytes", 1024, 131072),
                            ("max_label_chars", 10, 200), ("max_summary_chars", 20, 500),
@@ -48,6 +50,11 @@ def options(config):
         if not (ROOT / opts[key]).resolve().is_relative_to(ROOT / folder):
             raise ValueError("unsafe briefing resource")
     return opts
+
+
+def run_cursor(prompt, model, *, timeout, max_bytes, **_):
+    """Cursor has no output-schema option; the prompt states the shape and validation enforces it."""
+    return analysis.run_cursor(prompt, {"model": model, "timeout_seconds": timeout, "max_output_bytes": max_bytes}), {}
 
 
 def eligible(report):
@@ -185,7 +192,7 @@ def compose(report, config, groups=None, *, status="pending", model_calls=0, cac
     groups = groups if groups is not None else singles(report, config)
     groups = sorted(groups, key=lambda group: group["article_ids"])
     prompt_hash = hashlib.sha256((ROOT / opts["prompt_file"]).read_bytes()).hexdigest()
-    result = {"schema_version": 1, "status": status, "provider": "codex", "model": opts["model"],
+    result = {"schema_version": 1, "status": status, "provider": opts["provider"], "model": opts["model"],
               "prompt_sha256": prompt_hash, "model_calls": model_calls, "cache_hit": cache_hit,
               "topics": opts["topics"], "default_period_days": opts["default_period_days"],
               "as_of_day": kst_day(report["window_end"] or report["generated_at"]),
@@ -220,7 +227,7 @@ def enrich(report, config, data_dir, runner=None, *, refresh=False, max_attempts
         except (OSError, ValueError, TypeError, KeyError) as exc:
             errors.append({"phase": "cache_read", "reason": error_code(exc)})
         if groups is None:
-            runner = runner or execute
+            runner = runner or (execute if opts["provider"] == "codex" else run_cursor)
             for _ in range(attempt_limit):
                 calls += 1
                 started = time.monotonic()

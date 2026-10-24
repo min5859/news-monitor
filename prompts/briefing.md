@@ -18,3 +18,6 @@ label은 한국어 이슈명, summary는 제목들에서 확인되는 공통 내
 topic은 입력 topics의 키 중 하나이며 관련 주제를 찾기 어렵다면 other입니다.
 
 스키마의 groups만 반환하세요. 전문·사진·URL·추가 필드·마크다운은 반환하지 마세요.
+아래 형태의 JSON 객체 하나만 출력하세요.
+
+{"groups":[{"label":"한국어 이슈명","summary":"한국어 한 문장","topic":"topics 키","article_ids":["입력 기사 ID"]}]}

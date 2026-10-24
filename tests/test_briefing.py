@@ -8,6 +8,7 @@ import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from test_pipeline import CONFIG, collection_fixture, decision, report_fixture
 
@@ -42,6 +43,19 @@ class BriefingTests(unittest.TestCase):
     def enrich(self, response=None, runner=None):
         return briefing.enrich(self.report, self.cfg, self.data,
                                runner=runner or (lambda *args, **kwargs: (json.dumps(response or self.grouped()), {})))
+
+    def test_cursor_provider_runs_cursor_and_records_it(self):
+        self.cfg["briefing"]["provider"] = "cursor"
+        envelope = json.dumps({"type": "result", "subtype": "success", "is_error": False,
+                               "result": json.dumps(self.grouped())})
+        with patch.object(analysis, "capture_model", return_value=envelope) as capture:
+            result = briefing.enrich(self.report, self.cfg, self.data)
+        self.assertEqual(capture.call_args.args[0][0], "agent")
+        self.assertEqual((result["insights"]["status"], result["insights"]["provider"]), ("ok", "cursor"))
+        briefing.validate_insights(result, self.cfg)
+        self.cfg["briefing"]["provider"] = "other"
+        with self.assertRaises(ValueError):
+            briefing.options(self.cfg)
 
     def test_group_stats_are_computed_and_cache_avoids_second_call(self):
         result = self.enrich()

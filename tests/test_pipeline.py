@@ -131,19 +131,28 @@ class AnalysisTests(unittest.TestCase):
         self.assertEqual(list((self.root / "analysis").iterdir()), [])
 
     def test_cli_has_empty_workspace_denies_tools_and_does_not_pass_prompt_as_arg(self):
+        workspaces = []
+
         def capture(command, prompt, workspace, opts):
             self.assertIn("ask", command)
-            self.assertIn("enabled", command)
+            # As for the account's other publishers: OCI AppArmor blocks Cursor's sandbox helper.
+            self.assertEqual(command[command.index("--sandbox") + 1], "disabled")
             self.assertNotIn(prompt, command)
             self.assertEqual(sorted(p.name for p in workspace.iterdir()), [".cursor"])
             permissions = json.loads((workspace / ".cursor/cli.json").read_text())["permissions"]
             self.assertEqual(permissions["allow"], [])
+            self.assertIn("Shell(*)", permissions["deny"])
             self.assertIn("Mcp(*:*)", permissions["deny"])
+            workspaces.append(workspace)
             return json.dumps({"type": "result", "subtype": "success", "is_error": False,
                                "result": json.dumps(decision())})
 
         with patch.object(a, "capture_model", side_effect=capture):
-            self.assertEqual(json.loads(a.run_cursor("TEST INPUT", CONFIG["analysis"])), decision())
+            for _ in range(2):
+                self.assertEqual(json.loads(a.run_cursor("TEST INPUT", CONFIG["analysis"])), decision())
+        # One reused path: Cursor keeps a project entry per workspace path in its home.
+        self.assertEqual(workspaces[0], workspaces[1])
+        self.assertFalse(workspaces[0].exists())
 
     def test_capture_time_and_output_limits(self):
         opts = {**CONFIG["analysis"], "timeout_seconds": 0.1}

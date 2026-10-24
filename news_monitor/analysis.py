@@ -5,6 +5,7 @@ import json
 import os
 import re
 import selectors
+import shutil
 import signal
 import subprocess
 import tempfile
@@ -136,24 +137,32 @@ def capture_model(command, prompt, workspace, opts, observer=None):
 
 
 def run_cursor(prompt, opts):
-    with tempfile.TemporaryDirectory(prefix="news-monitor-model-") as temp:
-        workspace = Path(temp)
+    # A fixed, recreated empty path: Cursor keeps one project entry per workspace path in its home.
+    workspace = Path(tempfile.gettempdir()) / "news-monitor-cursor"
+    try:
+        if workspace.exists() or workspace.is_symlink():
+            shutil.rmtree(workspace)
+        workspace.mkdir(mode=0o700)
         (workspace / ".cursor").mkdir()
         atomic_json(workspace / ".cursor" / "cli.json", {"permissions": {"allow": [], "deny": [
             "Shell(*)", "Read(**)", "Read(/**)", "Write(**)", "Write(/**)",
             "WebFetch(*)", "Mcp(*:*)",
         ]}})
-        command = ["agent", "-p", "--mode", "ask", "--trust", "--sandbox", "enabled",
+        # OCI AppArmor denies Cursor's sandbox helper; like the account's other publishers,
+        # rely on ask mode, the empty workspace and denied tools instead.
+        command = ["agent", "-p", "--mode", "ask", "--trust", "--sandbox", "disabled",
                    "--output-format", "json", "--model", opts["model"]]
         try:
             envelope = strict_json(capture_model(command, prompt, workspace, opts))
         except FileNotFoundError:
             raise AnalysisError("model_cli_unavailable") from None
-        if (not isinstance(envelope, dict) or envelope.get("type") != "result"
-                or envelope.get("subtype") != "success" or envelope.get("is_error") is not False
-                or not isinstance(envelope.get("result"), str)):
-            raise AnalysisError("model_invalid_envelope")
-        return envelope["result"]
+    finally:
+        shutil.rmtree(workspace, ignore_errors=True)
+    if (not isinstance(envelope, dict) or envelope.get("type") != "result"
+            or envelope.get("subtype") != "success" or envelope.get("is_error") is not False
+            or not isinstance(envelope.get("result"), str)):
+        raise AnalysisError("model_invalid_envelope")
+    return envelope["result"]
 
 
 def abstention():
