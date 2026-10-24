@@ -81,7 +81,10 @@ ubuntu에서 직접 Git을 실행하면 소유자가 달라 보호 오류가 날
 
 ## 일일 Health Check
 
-아래는 OCI의 ubuntu 셸에서 실행한다. Mac에서는 `ssh oci`로 접속한다.
+`oci-publisher-healthcheck` 스킬(Claude·Codex 공통, 읽기 전용)이 news-monitor도 점검한다.
+Mac에서 `python3 <skill-dir>/scripts/healthcheck.py --ssh oci [--date YYYY-MM-DD]`를 실행한다.
+당일 수집의 `published`가 예약 실행 시간 안에 있어야 성공이며, 실패 시 이유와 preflight 실패 항목을 함께 보여 준다.
+직접 확인할 때는 아래 명령을 OCI의 ubuntu 셸에서 실행한다. Mac에서는 `ssh oci`로 접속한다.
 
 ```bash
 sudo systemctl list-timers news-monitor.timer --all --no-pager
