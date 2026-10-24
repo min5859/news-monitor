@@ -7,6 +7,7 @@ import shutil
 import subprocess
 import tempfile
 import unittest
+from datetime import date
 from pathlib import Path
 from unittest.mock import patch
 
@@ -176,13 +177,35 @@ class BriefingTests(unittest.TestCase):
         self.assertNotIn("PRIVATE_TOKEN", json.dumps(result))
         preflight.check_artifact(result, self.cfg)
 
-    def test_unknown_topic_and_dates_too_far_apart_are_not_merged(self):
+    def test_unknown_topic_falls_back(self):
         document = self.grouped()
         document["groups"][0]["topic"] = "invented_topic"
         self.assertEqual(self.enrich(document)["insights"]["status"], "fallback")
+
+    def test_same_issue_beyond_date_span_is_split_not_merged(self):
         self.report["articles"][0]["published_at"] = "2026-01-01"
         self.report["articles"][1]["published_at"] = "2026-02-01"
-        self.assertEqual(self.enrich()["insights"]["status"], "fallback")
+        self.report["articles"][1]["title"] = "가상 효성 회장님 초고압차단기 공장 2곳 준공"
+        document = self.grouped()
+        document["groups"][0]["summary"] = "제목들은 생산 확대와 공장 2곳 준공 소식을 연결합니다."
+        result = self.enrich(document)
+        self.assertEqual(result["insights"]["status"], "ok")
+        groups = result["insights"]["groups"]
+        self.assertEqual(sorted(group["article_ids"] for group in groups), sorted([[identity] for identity in self.ids]))
+        titles = {row["id"]: row["title"] for row in self.report["articles"]}
+        split = [group for group in groups if group["label"] == "초고압차단기 생산 확대"]
+        self.assertEqual([group["summary"] for group in split],
+                         ["선택된 기사 제목: " + titles[group["article_ids"][0]] for group in split])
+        preflight.check_artifact(result, self.cfg)
+        merged = copy.deepcopy(result)
+        first, second = (group for group in merged["insights"]["groups"] if group["label"] == "초고압차단기 생산 확대")
+        first["article_ids"] = sorted(first["article_ids"] + second["article_ids"])
+        first["evidence"] = sorted(first["evidence"] + second["evidence"], key=lambda entry: entry["article_id"])
+        merged["insights"]["groups"].remove(second)
+        with self.assertRaises(ValueError):
+            preflight.check_artifact(merged, self.cfg)
+        days = {"a": date(2026, 1, 1), "b": date(2026, 1, 6), "c": date(2026, 1, 10), "d": date(2026, 1, 1)}
+        self.assertEqual(briefing.split_by_date(["c", "b", "a", "d"], days, 7), [["a", "d", "b"], ["c"]])
 
     def test_no_related_articles_skips_model_instead_of_making_up_a_brief(self):
         for row in self.report["articles"]:
