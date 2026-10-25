@@ -44,7 +44,8 @@ def model_failure(text, default="model_cli_failed"):
     patterns = (
         ("model_usage_limit", r"usage_limit|usage limit|insufficient_quota|quota exceeded|you.ve hit your.*limit"),
         ("model_rate_limited", r"rate_limit|rate limit|\b429\b|too many requests"),
-        ("model_authentication_failed", r"\b401\b|unauthorized|unauthenticated|invalid_api_key|authentication failed|token.*expired"),
+        ("model_authentication_failed", (r"\b401\b|unauthorized|unauthenticated|invalid_api_key|authentication failed|token.*expired"
+                                         r"|authentication required|authentication is invalid|not logged in|log in again")),
         ("model_schema_rejected", r"invalid_json_schema|invalid schema|unsupported.*schema"),
         ("model_unavailable", r"model_not_found|model.*not supported|unsupported model"),
         ("model_service_unavailable", r"\b50[0234]\b|service unavailable|server overloaded"),

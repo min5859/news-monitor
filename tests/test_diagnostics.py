@@ -24,6 +24,11 @@ class DiagnosticsTests(unittest.TestCase):
             for text, expected in (("usage_limit_reached PRIVATE_SECRET", "model_usage_limit"),
                                    ("429 Too Many Requests PRIVATE_SECRET", "model_rate_limited"),
                                    ("401 Unauthorized PRIVATE_SECRET", "model_authentication_failed"),
+                                   # Cursor CLI wording seen on OCI 10/26 after its stored login was revoked.
+                                   ("Your stored authentication is invalid. PRIVATE_SECRET", "model_authentication_failed"),
+                                   ("Error: Authentication required. Please run 'agent login' first. PRIVATE_SECRET",
+                                    "model_authentication_failed"),
+                                   ("Not logged in PRIVATE_SECRET", "model_authentication_failed"),
                                    ("arbitrary PRIVATE_SECRET", "model_cli_failed")):
                 with self.subTest(text=text), self.assertRaises(analysis.AnalysisError) as result:
                     analysis.capture_model([sys.executable, "-c", "import sys;sys.stderr.write(sys.argv[1]);sys.exit(1)", text],
