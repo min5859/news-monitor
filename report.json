@@ -13,10 +13,10 @@
     "article_titles_modified": true,
     "evidence_may_be_omitted": true
   },
-  "generated_at": "2026-10-25T07:43:01.531327+00:00",
-  "collection_checked_at": "2026-10-25T07:40:37.313611+00:00",
+  "generated_at": "2026-10-25T09:00:54.386283+00:00",
+  "collection_checked_at": "2026-10-25T09:00:14.259012+00:00",
   "window_start": "2026-09-25T15:00:00+00:00",
-  "window_end": "2026-10-25T07:40:37.313611+00:00",
+  "window_end": "2026-10-25T09:00:14.259012+00:00",
   "analysis_scope": "headline_only",
   "date_basis": "reported_publication_date",
   "coverage": "search_sample_not_exhaustive",
@@ -33,8 +33,8 @@
     "provider": "cursor",
     "model": "claude-sonnet-5-5-medium",
     "prompt_sha256": "577fb8d45a5b68cdf1276b241a66a8c5c9d9f40961bfeba35f6243ceccac4389",
-    "model_calls": 14,
-    "cache_hits": 16,
+    "model_calls": 0,
+    "cache_hits": 30,
     "failed_articles": 0
   },
   "statistics": {
@@ -694,13 +694,13 @@
       "url": "https://www.asiatime.co.kr/article/20261023500147",
       "publisher": "asiatime.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-10-24",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -718,13 +718,13 @@
       "url": "https://www.koreareport.co.kr/news/articleView.html?idxno=53910",
       "publisher": "koreareport.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-10-23",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-25T07:40:37.313611+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -742,13 +742,13 @@
       "url": "https://www.g-enews.com/article/Industry/2026/10/202610231002323016112616b072_1",
       "publisher": "g-enews.com",
       "language": "ko",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-10-23",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-25T07:40:37.313611+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -766,13 +766,13 @@
       "url": "https://biz.newdaily.co.kr/site/data/html/2026/10/23/2026102300141.html",
       "publisher": "newdaily.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-10-23",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -790,13 +790,13 @@
       "url": "https://www.gurufocus.com/news/9129593/hyosung-chairman-hyunjoon-cho-advances-biobased-materials-strategy-with-commercial-biobdo-production-in-vietnam",
       "publisher": "gurufocus.com",
       "language": "unknown",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-10-20",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -814,13 +814,13 @@
       "url": "https://www.sgieurope.com/csr-and-sustainability/south-koreas-hyosung-makes-bio-materials-a-group-priority/123679.article",
       "publisher": "sgieurope.com",
       "language": "unknown",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-10-19",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -838,13 +838,13 @@
       "url": "https://www.smartbizn.com/news/articleView.html?idxno=156648",
       "publisher": "smartbizn.com",
       "language": "ko",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-10-16",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -862,13 +862,13 @@
       "url": "https://www.newspim.com/news/view/20261016000187",
       "publisher": "newspim.com",
       "language": "ko",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-10-16",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-19T22:00:27.129453+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -941,7 +941,7 @@
       "observation": {
         "first_seen_at": "2026-10-25T07:40:37.313611+00:00",
         "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "회장님 “5년 앞 내다봤다”",
@@ -958,13 +958,13 @@
       "url": "https://www.fortunekorea.co.kr/news/articleView.html?idxno=54419",
       "publisher": "fortunekorea.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-10-16",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -1030,13 +1030,13 @@
       "url": "https://www.asiae.co.kr/en/article/2026101609195369943",
       "publisher": "asiae.co.kr",
       "language": "unknown",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-10-16",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -1078,13 +1078,13 @@
       "url": "https://biz.chosun.com/industry/company/2026/10/16/6UCQ5S46ZJH2ZCHEAKZ4G2L33I",
       "publisher": "chosun.com",
       "language": "ko",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-10-16",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-25T07:40:37.313611+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -1102,13 +1102,13 @@
       "url": "https://www.handmk.com/news/articleView.html?idxno=43944",
       "publisher": "handmk.com",
       "language": "ko",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-10-08",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-25T07:40:37.313611+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -1150,13 +1150,13 @@
       "url": "https://www.koreatimes.co.kr/business/20261006/hyosung-chairman-cho-hyun-joon-completes-bio-spandex-base-in-vietnam",
       "publisher": "koreatimes.co.kr",
       "language": "unknown",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-10-06",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-19T00:20:13.087119+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -1198,13 +1198,13 @@
       "url": "https://www.fntimes.com/html/view.php?ud=2026100209271366517de3572ddd_18",
       "publisher": "fntimes.com",
       "language": "ko",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-10-02",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -1222,13 +1222,13 @@
       "url": "https://www.koreaherald.com/article/10890620",
       "publisher": "koreaherald.com",
       "language": "unknown",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-10-01",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -1246,13 +1246,13 @@
       "url": "https://biz.chosun.com/topics/law_firm/2026/09/30/JLTTPULUORD3FINIH6KEFXHHJQ",
       "publisher": "chosun.com",
       "language": "ko",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-09-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -1270,13 +1270,13 @@
       "url": "http://www.newskr.kr/news/articleView.html?idxno=106796",
       "publisher": "newskr.kr",
       "language": "ko",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-09-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-25T07:40:37.313611+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -1318,13 +1318,13 @@
       "url": "https://www.newsis.com/view/NISX20260928_0003805093",
       "publisher": "newsis.com",
       "language": "ko",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-09-28",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-19T22:00:27.129453+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -1342,13 +1342,13 @@
       "url": "https://www.fntimes.com/html/view.php?ud=202609231751208643dd55077bc2_18",
       "publisher": "fntimes.com",
       "language": "ko",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-09-28",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-19T22:00:27.129453+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -1366,13 +1366,13 @@
       "url": "https://www.newsway.co.kr/news/view?ud=2026092217130137148",
       "publisher": "newsway.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "indexed_at": "2026-10-25T09:00:14.259012+00:00",
       "published_at": "2026-09-27",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T09:00:14.259012+00:00",
         "reused": false
       },
       "classification": {
@@ -1415,8 +1415,8 @@
     "provider": "cursor",
     "model": "claude-sonnet-5-5-medium",
     "prompt_sha256": "1751c7d88f69795eeae3cae1bb2e495b53f05501e344e56ab9fcf7a0f65f8d9c",
-    "model_calls": 1,
-    "cache_hit": false,
+    "model_calls": 0,
+    "cache_hit": true,
     "topics": {
       "management": "경영·투자",
       "governance": "지배구조",
@@ -2110,7 +2110,7 @@
         "publisher_count": 24,
         "issue_count": 17,
         "newly_seen_count": 17,
-        "retained_count": 9,
+        "retained_count": 10,
         "daily": [
           {
             "date": "2026-09-26",
