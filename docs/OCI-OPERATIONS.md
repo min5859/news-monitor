@@ -228,3 +228,15 @@ pipeline_status.operation=briefing_only는 수동 이슈 재처리이므로 정�
 - [GitHub deploy key의 범위와 제한](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys)
 - [GitHub 공개 호스트 키 메타데이터](https://api.github.com/meta)
 - [OpenAI 비대화형 읽기 전용 실행](https://developers.openai.com/codex/noninteractive/)
+
+### 설치와 첫 실행 (10/25)
+
+- `d211a45`를 OCI에 반영(테스트 161개·Node 7개 통과)하고 timer를 설치했다. 다음 예약은 10/25 18:00 KST다.
+- timer를 다시 시작하자 오늘 12:00 회차를 놓친 것으로 보고 16:40:37 KST에 바로 실행했다(`Persistent=true`).
+  계획한 실행은 아니지만 timer가 띄운 정상 실행이라 끊지 않았다. 다음부터는 새 시각이 오기 전에 설치한다.
+- 결과: 16:44:06 성공(exit 0), published(`ef1af38`). 수집원 22/22, 수집 ok, 30건(신규 6·재확인 15·유지 9)·24매체,
+  Cursor 14회·실패 0, 브리핑 ok(17묶음). 헬스체크 news-monitor ok.
+- 신규 6건은 9/30~10/23에 발행됐지만 07시 수집 때는 잡히지 않은 기사다. 하루 1번이었다면 내일 07시에 보였다.
+- Tavily: 이 키의 이번 달 사용량이 16:46 기준 208(검색 192·extract 16)이다. 우리 실행 몫은 약 33으로 계산된다.
+  우리 코드는 extract를 쓰지 않고 OCI의 다른 게시기도 Tavily를 쓰지 않으므로 같은 키를 다른 곳에서 쓰는 것으로 보인다.
+  18:00 회차 전후 사용량 차이로 우리 몫(5)을 확인한다.
