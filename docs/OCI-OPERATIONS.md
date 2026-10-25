@@ -160,10 +160,11 @@ sudo systemctl disable --now news-monitor.timer
   전용 데이터 정리 명령으로 공유 계정의 홈이나 다른 프로젝트 파일을 삭제하지 않는다.
 - Cursor 대화 기록(`~/.cursor/chats`·`projects`)은 계정 공용 `cursor-history-cleanup.timer`가 매주 일 13:17 KST에
   30일 지난 것만 지운다. 원본·검증은 OCI wiki의 `assets/ops/cursor-history-cleanup/`과 운영 노트에 있다.
-- Cursor 로그인은 공유 계정 `wiki-publisher`의 `~/.config/cursor`에 있고 약 30일마다 만료되는 것으로 보인다
-  (9/25 로그인 → 10/26 04:00 무효화). 만료되면 브리핑은 `model_authentication_failed`로 fallback하고,
+- Cursor 로그인은 공유 계정 `wiki-publisher`의 `~/.config/cursor`에 있다. 9/25 로그인이 10/26 04:00에 무효화됐다
+  (유효기간은 문서에 없어 주기를 확정할 수 없다). 무효화되면 브리핑은 `model_authentication_failed`로 fallback하고,
   새 기사가 있는 회차는 분류 실패로 게시가 막힌다. Dev Blog·Research Wiki·OSS Radar도 함께 멈춘다.
-  다시 로그인한 뒤 아래로 확인한다. 로그인 정보를 다른 계정에서 복사하지 않는다.
+  다시 로그인한 뒤 아래로 확인한다. 브라우저가 없으면 `NO_OPEN_BROWSER=1`로 주소만 출력한다.
+  로그인 정보를 다른 계정에서 복사하지 않는다. 무인 실행용으로는 Cursor 문서가 API 키(`CURSOR_API_KEY`)를 안내한다.
 
 ```bash
 sudo -u wiki-publisher -H env PATH=/home/wiki-publisher/.local/bin:/usr/bin:/bin agent login

@@ -11,7 +11,7 @@
 - [x] **10/26 07:23 KST** 정기 점검: 게시는 성공·published(`3e7564f`), 브리핑 fallback. 원인은 Cursor 로그인 만료(아래 '사용자 판단 필요' 1번) → Review 참고
 - [x] **Tavily 키 사용량**: 10/25 16:46 208 → 10/26 07:23 218. 18:00·07:00 회차 5씩만 늘고 다른 사용 없음. 18:23의 0은 API의 일시적인 값. 사용자 조치 불필요
 - [x] Cursor 인증 오류를 `model_authentication_failed`로 분류(`657f488`). 이전에는 `model_cli_failed`로 남고 재시도함
-- [ ] **다시 로그인한 뒤** 다음 정기 회차에서 확인: 브리핑 ok, `agent status` 로그인됨. 결과를 docs/CURSOR-ANALYSIS.md에 한 줄
+- [ ] **12:23 KST** 12:00 회차 브리핑 ok 확인 (세션 예약 4cdcab65). 로그인·짧은 호출은 07:58에 확인함
 - [ ] (제 판단, 낮은 우선순위) 헬스체크 보강. 이번에 07:23 점검이 원인을 바로 보여 주지 못했고 Research Wiki 1/2편을 ok로 판정함
   - 공유 계정 Cursor 로그인 상태(`agent status`), 뉴스 브리핑 오류 코드, Research Wiki·OSS Radar 선정 수 미달을 표시
   - 네 사본(Claude·Mac Codex·OCI Codex·vault)과 테스트를 함께 갱신
@@ -70,13 +70,13 @@
 - [x] 첫 정기 실행 10/25 13:17 KST 결과 확인: 성공·오류 0·삭제 0건(30일 넘은 기록 없음)·보존 2,405개 → wiki `6effd9d`
 
 ## 사용자 판단 필요 (자리 비운 동안 보류)
-- [ ] **1. (급함) OCI Cursor 다시 로그인** — 10/26 04:00 KST부터 공유 계정 `wiki-publisher`의 Cursor 로그인이 풀림
-  - 원인: 9/25 22:37 로그인 후 30일 만에 "stored authentication is invalid"로 무효화. 유효기간 만료로 보임. 우리 정리 timer와 무관
+- [x] **1. (급함) OCI Cursor 다시 로그인** — 사용자가 10/26 07:56 KST에 다시 로그인. `agent status` 로그인됨·짧은 호출 성공 확인
+  - 원인: 9/25 22:37 로그인이 30일 뒤 "stored authentication is invalid"로 무효화. 주기는 확정 못 함(문서에 유효기간 없음, ubuntu의 8/29 로그인은 아직 로그인 표시). 우리 정리 timer와 무관
   - 지금 영향: OSS Radar 05:00 실패, Research Wiki 1/2편만 게시, 뉴스 브리핑 fallback(기사·통계·부정 기사 칸은 정상 게시)
   - 그대로 두면: 뉴스는 새 기사가 나오는 회차부터 게시가 막혀 공개 페이지가 07:00본에 머묾. 내일 03:00 Dev Blog·04:00 Research Wiki·05:00 OSS Radar 모두 실패
   - 할 일(사용자): `ssh oci` 후 `sudo -u wiki-publisher -H env PATH=/home/wiki-publisher/.local/bin:/usr/bin:/bin agent login` → 나오는 주소를 브라우저에서 열어 승인 → 같은 방식으로 `agent status` 확인. 그 뒤는 제가 확인
 - [ ] **2. 오늘 놓친 OSS Radar·Research Wiki 재실행 여부** — 로그인 후 수동으로 다시 돌릴지. 다른 프로젝트라 제가 임의로 돌리지 않음
-- [ ] **3. (선택) 30일마다 다시 로그인하지 않으려면** Cursor API 키(`CURSOR_API_KEY`)를 4개 service에 넣는 방식. 다른 게시기 service 설정을 바꾸는 일이라 승인 필요. 추천은 우선 1번으로 복구하고 다음 만료(11/25 무렵) 전에 결정
+- [ ] **3. (선택) 로그인 무효화 재발 방지** Cursor 문서가 무인 실행용으로 안내하는 API 키(`CURSOR_API_KEY`)를 4개 service에 넣는 방식. 다른 게시기 service 설정을 바꾸는 일이라 승인 필요. 추천: 헬스체크에 로그인 상태 점검을 먼저 넣고(제 일), 다시 풀리면 그때 API 키로 전환
 - [ ] 피드백 초안: Claude Code 알림에서 1(확인)·2(전송)·0(삭제) 선택
 - [x] OCI wiki 기록 (사용자 요청): 뉴스 계획 페이지 `fd067b0`, Health Check 노트·스킬 원본 동기화 `e008548`
 - [x] `~/.cursor/projects`의 10/18 `tmp-news-monitor-model-*` 3개 삭제 (내용은 작업 폴더 신뢰 표식 129바이트뿐)
