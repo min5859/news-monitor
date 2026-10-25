@@ -220,15 +220,6 @@ pipeline_status.operation=briefing_only는 수동 이슈 재처리이므로 정�
   '오늘의 부정 기사'는 그날 모든 회차에서 처음 찾은 기사를 합쳐 보여 준다.
 - 헬스체크는 가장 최근 실행을 본다. 기존 유닛은 `/root/news-monitor.timer.bak-20261025`에 백업했다.
 
-## 근거
-
-확인일: 2026-10-19.
-
-- [GitHub Pages 브랜치 게시](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
-- [GitHub deploy key의 범위와 제한](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys)
-- [GitHub 공개 호스트 키 메타데이터](https://api.github.com/meta)
-- [OpenAI 비대화형 읽기 전용 실행](https://developers.openai.com/codex/noninteractive/)
-
 ### 설치와 첫 실행 (10/25)
 
 - `d211a45`를 OCI에 반영(테스트 161개·Node 7개 통과)하고 timer를 설치했다. 다음 예약은 10/25 18:00 KST다.
@@ -240,3 +231,15 @@ pipeline_status.operation=briefing_only는 수동 이슈 재처리이므로 정�
 - Tavily: 이 키의 이번 달 사용량이 16:46 기준 208(검색 192·extract 16)이다. 우리 실행 몫은 약 33으로 계산된다.
   우리 코드는 extract를 쓰지 않고 OCI의 다른 게시기도 Tavily를 쓰지 않으므로 같은 키를 다른 곳에서 쓰는 것으로 보인다.
   18:00 회차 전후 사용량 차이로 우리 몫(5)을 확인한다.
+- 18:00 첫 정기 회차: 18:00:14–18:02:02 KST 성공, published(`b58b4bf`). 수집 ok·22/22, 30건(신규 0·재확인 20·유지 10),
+  Cursor 0회(캐시 30), 브리핑 ok, 부제 "2026.10.25 18:00 KST 수집 기준". Tavily 사용량은 18:23에 0으로 초기화돼 있어
+  (월 주기 초기화로 보임) 이번 회차 몫은 확인하지 못했다. 10/26 07시 회차 뒤 사용량이 5인지로 확인한다.
+
+## 근거
+
+확인일: 2026-10-19.
+
+- [GitHub Pages 브랜치 게시](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
+- [GitHub deploy key의 범위와 제한](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys)
+- [GitHub 공개 호스트 키 메타데이터](https://api.github.com/meta)
+- [OpenAI 비대화형 읽기 전용 실행](https://developers.openai.com/codex/noninteractive/)
