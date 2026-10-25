@@ -1,8 +1,8 @@
 [Unit]
-Description=Collect news daily at 07:00 KST
+Description=Collect news at 07:00, 12:00 and 18:00 KST
 
 [Timer]
-OnCalendar=*-*-* 07:00:00 Asia/Seoul
+OnCalendar=*-*-* 07,12,18:00:00 Asia/Seoul
 Persistent=true
 AccuracySec=1min
 RandomizedDelaySec=30

@@ -106,19 +106,19 @@ def negative_alert(report):
     """Fixed to the collection day, whatever the filters: an empty list is said only after that day's collection."""
     html = '<section class="panel alert" id="negative-alert" aria-labelledby="alert-title"><p class="eyebrow">NEGATIVE WATCH</p>'
     if report["status"] in ("failed", "stale") or not report["window_end"]:
-        return (html + '<h2 id="alert-title">오늘의 부정 기사</h2><p>오늘 수집이 완료되지 않아 새 부정 기사를 확인하지 못했습니다. '
+        return (html + '<h2 id="alert-title">오늘의 부정 기사</h2><p>최신 수집이 완료되지 않아 새 부정 기사를 확인하지 못했습니다. '
                        '아래 자료는 이번 조회의 새 결과가 아닐 수 있습니다.</p></section>')
     day = kst_day(report["window_end"])
     yesterday, week = ((date.fromisoformat(day) - timedelta(days=offset)).isoformat() for offset in (1, 6))
     fresh = [row for row in report["articles"] if kst_day(row["observation"]["first_seen_at"]) == day]
     watched = [row for row in report["articles"] if row["classification"]["relevance"] == "related"
                and row["classification"]["sentiment"] in ("negative", "mixed")]
-    # "Today" is news first seen this morning and published since yesterday; older first sightings are late finds.
+    # "Today" is news first seen in any of the day's runs and published since yesterday; older first sightings are late finds.
     today = [row for row in watched if row in fresh and yesterday <= article_day(row)]
     recent = [row for row in watched if row not in today and week <= article_day(row) <= day]
     late = [row for row in watched if row in fresh and article_day(row) < week]
     unsure = sum(row["classification"]["sentiment"] == "abstain" and row["classification"]["relevance"] != "unrelated" for row in fresh)
-    html += f'<h2 id="alert-title">오늘의 부정 기사</h2><p class="unit">어제·오늘 발행 · {h(day)} 아침 수집 기준</p>'
+    html += f'<h2 id="alert-title">오늘의 부정 기사</h2><p class="unit">어제·오늘 발행 · {h(display_time(report["window_end"]))} 수집 기준</p>'
     html += (f"<p><strong>{len(today)}건</strong>을 새로 확인했습니다.</p>" + alert_items(today) if today
              else "<p>어제·오늘 발행된 새 부정·혼합 기사는 없습니다.</p>")
     if recent:

@@ -17,7 +17,7 @@
 - 제목·AI 이유·근거의 인명은 공개 export 때 치환한다. 원문 링크/기존 Git 이력의 익명화를 보장하지 않는다.
 - 테스트 자료는 가상이며 실제 수집/공개 통계와 섞지 않는다.
 - 새 수집원·공개 배포·정기 타이머는 단계별 검증 결과를 기록한다.
-- OCI는 /srv/news-monitor, 기존 wiki-publisher 계정, 매일 07:00 KST timer를 사용한다.
+- OCI는 /srv/news-monitor, 기존 wiki-publisher 계정, 매일 07:00·12:00·18:00 KST timer를 사용한다.
 - 소스와 프로젝트 디렉터리 소유자는 기존 게시기와 동일하게 wiki-publisher다. Git 작업도 해당 계정으로 수행한다.
 - 서비스의 ProtectSystem=strict/기존 ReadWritePaths는 유지한다. 계정·소유권·배포 정책을 임의로 다르게 만들지 않는다.
 - 공개 배포는 preflight를 통과한 정적 파일 4개만 pages-data로 push한다. force push/reset은 금지한다.

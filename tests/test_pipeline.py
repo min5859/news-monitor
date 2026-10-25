@@ -362,6 +362,13 @@ class SiteTests(unittest.TestCase):
         failed = r.make_report(prepare(value), [], report_fixture()["analysis"], CONFIG)
         self.assertIn("확인하지 못했습니다", self.alert(site.render(failed)))
 
+    def test_negative_alert_names_the_run_time_because_collection_runs_three_times_a_day(self):
+        report = report_fixture()
+        report["window_end"] = "2026-10-25T03:00:20+00:00"
+        alert = self.alert(site.render(report))
+        self.assertIn("2026.10.25 12:00 KST 수집 기준", alert)
+        self.assertNotIn("아침", alert)
+
     def test_failed_collection_shows_unknown_not_zero_articles(self):
         value = collection_fixture()
         value["status"] = "failed"
