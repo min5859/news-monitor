@@ -2,7 +2,7 @@
   "schema_version": 2,
   "sample": true,
   "human_reviewed": false,
-  "status": "partial",
+  "status": "ok",
   "target": {
     "name": "회장님",
     "organization": "효성"
@@ -13,20 +13,18 @@
     "article_titles_modified": true,
     "evidence_may_be_omitted": true
   },
-  "generated_at": "2026-10-24T22:04:22.585741+00:00",
-  "collection_checked_at": "2026-10-24T22:00:27.137568+00:00",
+  "generated_at": "2026-10-25T07:43:01.531327+00:00",
+  "collection_checked_at": "2026-10-25T07:40:37.313611+00:00",
   "window_start": "2026-09-25T15:00:00+00:00",
-  "window_end": "2026-10-24T22:00:27.137568+00:00",
+  "window_end": "2026-10-25T07:40:37.313611+00:00",
   "analysis_scope": "headline_only",
   "date_basis": "reported_publication_date",
   "coverage": "search_sample_not_exhaustive",
   "selection": "latest_published_target_in_headline",
-  "article_count": 25,
-  "publisher_count": 19,
+  "article_count": 30,
+  "publisher_count": 24,
   "publisher_goal": 5,
-  "warnings": [
-    "upstream_limit_reached"
-  ],
+  "warnings": [],
   "source_attribution": {
     "name": "Tavily 뉴스 검색 · 언론사 사이트맵·RSS · 원문 언론사",
     "url": "https://tavily.com/"
@@ -35,31 +33,31 @@
     "provider": "cursor",
     "model": "claude-sonnet-5-5-medium",
     "prompt_sha256": "577fb8d45a5b68cdf1276b241a66a8c5c9d9f40961bfeba35f6243ceccac4389",
-    "model_calls": 25,
-    "cache_hits": 0,
+    "model_calls": 14,
+    "cache_hits": 16,
     "failed_articles": 0
   },
   "statistics": {
     "counts": {
-      "positive": 22,
+      "positive": 27,
       "negative": 1,
       "neutral": 2,
       "mixed": 0
     },
-    "denominator": 25,
+    "denominator": 30,
     "percentages": {
-      "positive": 88.0,
-      "negative": 4.0,
-      "neutral": 8.0,
+      "positive": 90.0,
+      "negative": 3.3,
+      "neutral": 6.7,
       "mixed": 0.0
     },
     "abstained": 0,
     "unrelated": 0,
     "positive_negative_only": {
-      "denominator": 23,
+      "denominator": 28,
       "percentages": {
-        "positive": 95.7,
-        "negative": 4.3
+        "positive": 96.4,
+        "negative": 3.6
       }
     }
   },
@@ -144,27 +142,27 @@
     },
     {
       "publisher": "chosun.com",
-      "article_count": 1,
+      "article_count": 2,
       "counts": {
-        "positive": 0,
+        "positive": 1,
         "negative": 1,
         "neutral": 0,
         "mixed": 0
       },
-      "denominator": 1,
+      "denominator": 2,
       "percentages": {
-        "positive": 0.0,
-        "negative": 100.0,
+        "positive": 50.0,
+        "negative": 50.0,
         "neutral": 0.0,
         "mixed": 0.0
       },
       "abstained": 0,
       "unrelated": 0,
       "positive_negative_only": {
-        "denominator": 1,
+        "denominator": 2,
         "percentages": {
-          "positive": 0.0,
-          "negative": 100.0
+          "positive": 50.0,
+          "negative": 50.0
         }
       }
     },
@@ -273,7 +271,85 @@
       }
     },
     {
+      "publisher": "g-enews.com",
+      "article_count": 1,
+      "counts": {
+        "positive": 1,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 0
+      },
+      "denominator": 1,
+      "percentages": {
+        "positive": 100.0,
+        "negative": 0.0,
+        "neutral": 0.0,
+        "mixed": 0.0
+      },
+      "abstained": 0,
+      "unrelated": 0,
+      "positive_negative_only": {
+        "denominator": 1,
+        "percentages": {
+          "positive": 100.0,
+          "negative": 0.0
+        }
+      }
+    },
+    {
+      "publisher": "greenpostkorea.co.kr",
+      "article_count": 1,
+      "counts": {
+        "positive": 1,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 0
+      },
+      "denominator": 1,
+      "percentages": {
+        "positive": 100.0,
+        "negative": 0.0,
+        "neutral": 0.0,
+        "mixed": 0.0
+      },
+      "abstained": 0,
+      "unrelated": 0,
+      "positive_negative_only": {
+        "denominator": 1,
+        "percentages": {
+          "positive": 100.0,
+          "negative": 0.0
+        }
+      }
+    },
+    {
       "publisher": "gurufocus.com",
+      "article_count": 1,
+      "counts": {
+        "positive": 1,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 0
+      },
+      "denominator": 1,
+      "percentages": {
+        "positive": 100.0,
+        "negative": 0.0,
+        "neutral": 0.0,
+        "mixed": 0.0
+      },
+      "abstained": 0,
+      "unrelated": 0,
+      "positive_negative_only": {
+        "denominator": 1,
+        "percentages": {
+          "positive": 100.0,
+          "negative": 0.0
+        }
+      }
+    },
+    {
+      "publisher": "handmk.com",
       "article_count": 1,
       "counts": {
         "positive": 1,
@@ -325,19 +401,45 @@
       }
     },
     {
-      "publisher": "koreatimes.co.kr",
-      "article_count": 2,
+      "publisher": "koreareport.co.kr",
+      "article_count": 1,
       "counts": {
         "positive": 1,
         "negative": 0,
-        "neutral": 1,
+        "neutral": 0,
         "mixed": 0
       },
-      "denominator": 2,
+      "denominator": 1,
       "percentages": {
-        "positive": 50.0,
+        "positive": 100.0,
         "negative": 0.0,
-        "neutral": 50.0,
+        "neutral": 0.0,
+        "mixed": 0.0
+      },
+      "abstained": 0,
+      "unrelated": 0,
+      "positive_negative_only": {
+        "denominator": 1,
+        "percentages": {
+          "positive": 100.0,
+          "negative": 0.0
+        }
+      }
+    },
+    {
+      "publisher": "koreatimes.co.kr",
+      "article_count": 1,
+      "counts": {
+        "positive": 1,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 0
+      },
+      "denominator": 1,
+      "percentages": {
+        "positive": 100.0,
+        "negative": 0.0,
+        "neutral": 0.0,
         "mixed": 0.0
       },
       "abstained": 0,
@@ -425,6 +527,32 @@
         "percentages": {
           "positive": 100.0,
           "negative": 0.0
+        }
+      }
+    },
+    {
+      "publisher": "newskr.kr",
+      "article_count": 1,
+      "counts": {
+        "positive": 0,
+        "negative": 0,
+        "neutral": 1,
+        "mixed": 0
+      },
+      "denominator": 1,
+      "percentages": {
+        "positive": 0.0,
+        "negative": 0.0,
+        "neutral": 100.0,
+        "mixed": 0.0
+      },
+      "abstained": 0,
+      "unrelated": 0,
+      "positive_negative_only": {
+        "denominator": 0,
+        "percentages": {
+          "positive": null,
+          "negative": null
         }
       }
     },
@@ -566,13 +694,13 @@
       "url": "https://www.asiatime.co.kr/article/20261023500147",
       "publisher": "asiatime.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-24T22:00:27.137568+00:00",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
       "published_at": "2026-10-24",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-24T22:00:27.137568+00:00",
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
         "reused": false
       },
       "classification": {
@@ -585,18 +713,66 @@
       "evidence_omitted_for_display": false
     },
     {
+      "id": "ac85d34f3dd84520bfcc",
+      "title": "회장님 효성 회장, 섬유 폐기물 해결에 앞장",
+      "url": "https://www.koreareport.co.kr/news/articleView.html?idxno=53910",
+      "publisher": "koreareport.co.kr",
+      "language": "ko",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "published_at": "2026-10-23",
+      "analysis_scope": "headline_only",
+      "source": "tavily_feeds",
+      "observation": {
+        "first_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "회장님 효성 회장, 섬유 폐기물 해결에 앞장",
+        "reason": "제목만 보면 회장님 효성 회장이 섬유 폐기물 문제 해결에 앞장선다고 전해, 대상 인물의 활동을 긍정적으로 보도한 것으로 판단함.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "c34b3b8f649d05197262",
+      "title": "회장님 효성 회장, 환경 보전·지역 상생 잇는다...ESG 경영 강화",
+      "url": "https://www.g-enews.com/article/Industry/2026/10/202610231002323016112616b072_1",
+      "publisher": "g-enews.com",
+      "language": "ko",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "published_at": "2026-10-23",
+      "analysis_scope": "headline_only",
+      "source": "tavily_feeds",
+      "observation": {
+        "first_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "회장님 효성 회장, 환경 보전·지역 상생 잇는다...ESG 경영 강화",
+        "reason": "제목만 보면 효성 회장님이 환경 보전과 지역 상생을 이어 ESG 경영을 강화한다는 긍정적 활동을 전하고 있어 대상 인물에 대한 보도로 판단했습니다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
       "id": "b81439d0632b44c54d1c",
       "title": "회장님의 '나눔경영' 실천하는 효성 ... 환경 보전·지역사회 상생 앞장선다",
       "url": "https://biz.newdaily.co.kr/site/data/html/2026/10/23/2026102300141.html",
       "publisher": "newdaily.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-24T22:00:27.137568+00:00",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
       "published_at": "2026-10-23",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-24T22:00:27.137568+00:00",
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
         "reused": false
       },
       "classification": {
@@ -614,13 +790,13 @@
       "url": "https://www.gurufocus.com/news/9129593/hyosung-chairman-hyunjoon-cho-advances-biobased-materials-strategy-with-commercial-biobdo-production-in-vietnam",
       "publisher": "gurufocus.com",
       "language": "unknown",
-      "indexed_at": "2026-10-24T22:00:27.137568+00:00",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
       "published_at": "2026-10-20",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-24T22:00:27.137568+00:00",
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
         "reused": false
       },
       "classification": {
@@ -634,22 +810,22 @@
     },
     {
       "id": "df891b587fddf19f2650",
-      "title": "Hyosung Chairman 회장님: bio-BDO production starts in Vietnam | Sporting Goods Intelligence",
+      "title": "Hyosung Chairman 회장님: bio-BDO production starts in Vietnam",
       "url": "https://www.sgieurope.com/csr-and-sustainability/south-koreas-hyosung-makes-bio-materials-a-group-priority/123679.article",
       "publisher": "sgieurope.com",
       "language": "unknown",
-      "indexed_at": "2026-10-24T22:00:27.137568+00:00",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
       "published_at": "2026-10-19",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-24T22:00:27.137568+00:00",
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
         "reused": false
       },
       "classification": {
         "evidence": "Hyosung Chairman 회장님: bio-BDO production starts in Vietnam",
-        "reason": "제목만 보면 효성 회장 회장님(회장님)이 언급되며, 베트남에서 바이오 BDO 생산이 시작됐다는 사업 성과를 전하는 긍정적 보도로 판단했습니다.",
+        "reason": "제목만 보면 효성 회장님 회장(회장님)이 언급되며, 베트남에서 바이오 BDO 생산이 시작됐다는 사업상 성과를 전달하므로 긍정적 보도로 판단했습니다.",
         "relevance": "related",
         "sentiment": "positive"
       },
@@ -658,22 +834,22 @@
     },
     {
       "id": "43280f9607626b5ffb2a",
-      "title": "회장님의 공급망 투자 결실···효성重, 수출 전용 차단기 공장 준공 < 에너지·화학 < 산업 < 기사본문 - 스마트비즈",
+      "title": "회장님의 공급망 투자 결실···효성重, 수출 전용 차단기 공장 준공",
       "url": "https://www.smartbizn.com/news/articleView.html?idxno=156648",
       "publisher": "smartbizn.com",
       "language": "ko",
-      "indexed_at": "2026-10-24T22:00:27.137568+00:00",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
       "published_at": "2026-10-16",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-24T22:00:27.137568+00:00",
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
         "reused": false
       },
       "classification": {
         "evidence": "회장님의 공급망 투자 결실",
-        "reason": "제목만 보면 회장님의 공급망 투자가 결실을 맺어 효성重이 수출 전용 차단기 공장을 준공했다는 긍정적 보도로, 대상 인물과 직접 연결되어 있습니다.",
+        "reason": "제목만 보면 회장님의 공급망 투자가 결실을 맺어 효성중공업이 수출 전용 차단기 공장을 준공했다고 전해 대상 인물에게 우호적인 보도 내용이다. 본문은 확인하지 않았다.",
         "relevance": "related",
         "sentiment": "positive"
       },
@@ -686,13 +862,13 @@
       "url": "https://www.newspim.com/news/view/20261016000187",
       "publisher": "newspim.com",
       "language": "ko",
-      "indexed_at": "2026-10-24T22:00:27.137568+00:00",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
       "published_at": "2026-10-16",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-19T22:00:27.129453+00:00",
-        "last_seen_at": "2026-10-24T22:00:27.137568+00:00",
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
         "reused": false
       },
       "classification": {
@@ -753,23 +929,47 @@
       "evidence_omitted_for_display": false
     },
     {
+      "id": "9f7d23728322859433f6",
+      "title": "회장님 “5년 앞 내다봤다”··· 효성重, 초고압 설비 2배 증설",
+      "url": "https://www.greenpostkorea.co.kr/news/articleView.html?idxno=307724",
+      "publisher": "greenpostkorea.co.kr",
+      "language": "ko",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "published_at": "2026-10-16",
+      "analysis_scope": "headline_only",
+      "source": "tavily_feeds",
+      "observation": {
+        "first_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "회장님 “5년 앞 내다봤다”",
+        "reason": "제목만 보면 회장님이 5년 앞을 내다봤다는 발언과 함께 효성重의 초고압 설비 2배 증설이 소개됩니다. 회장의 선견과 성과를 부각하는 우호적 보도로 판단했습니다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
       "id": "69ac98e42b8917ab0d88",
-      "title": "회장님 “AI 병목 푼다”... 효성중공업, 초고압차단기 공급 확대 < Industry < 기사본문 - 포춘코리아",
+      "title": "회장님 “AI 병목 푼다”... 효성중공업, 초고압차단기 공급 확대",
       "url": "https://www.fortunekorea.co.kr/news/articleView.html?idxno=54419",
       "publisher": "fortunekorea.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-24T22:00:27.137568+00:00",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
       "published_at": "2026-10-16",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-24T22:00:27.137568+00:00",
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
         "reused": false
       },
       "classification": {
         "evidence": "회장님 “AI 병목 푼다”... 효성중공업, 초고압차단기 공급 확대",
-        "reason": "제목만 보면 회장님이 'AI 병목 푼다'고 밝히고 효성중공업이 초고압차단기 공급을 확대한다는 긍정적 보도로 읽힙니다. 회장이 직접 거론되고 소속 조직도 일치해 인물 관련성이 있다고 판단했습니다.",
+        "reason": "제목만 보면 회장님이 \"AI 병목 푼다\"고 밝히고 효성중공업이 초고압차단기 공급을 확대한다는 긍정적 사업 행보를 전하는 보도입니다. 인물 발언과 사업 확대가 함께 나오므로 관련성이 있고 논조는 긍정으로 판단했습니다.",
         "relevance": "related",
         "sentiment": "positive"
       },
@@ -826,22 +1026,22 @@
     },
     {
       "id": "ae261af030146b88ba9f",
-      "title": "회장님 Speeds Up Push into AI Power Grid Market... Hyosung Heavy Industries Doubles Ultra-High-Voltage Circuit Breaker Capacity - The Asia Business Daily",
+      "title": "회장님 Speeds Up Push into AI Power Grid Market... Hyosung Heavy Industries Doubles Ultra-High-Voltage Circuit Breaker Capacity",
       "url": "https://www.asiae.co.kr/en/article/2026101609195369943",
       "publisher": "asiae.co.kr",
       "language": "unknown",
-      "indexed_at": "2026-10-24T22:00:27.137568+00:00",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
       "published_at": "2026-10-16",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-24T22:00:27.137568+00:00",
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
         "reused": false
       },
       "classification": {
         "evidence": "회장님 Speeds Up Push into AI Power Grid Market",
-        "reason": "제목만 보면 회장님이 AI 전력망 시장 진출을 가속하고 효성중공업이 초고압 차단기 생산능력을 두 배로 늘린다는 성장·확장 중심의 보도입니다. 제목은 대상 인물의 사업 행보를 긍정적으로 전달합니다.",
+        "reason": "제목만 보면 회장님이 AI 전력망 시장 진출을 가속하고 효성중공업이 초고압 차단기 생산능력을 두 배로 늘린다는 성장·투자 성과 중심의 보도입니다. 본문은 확인하지 않았고 제목만 근거로 판단했습니다.",
         "relevance": "related",
         "sentiment": "positive"
       },
@@ -866,6 +1066,54 @@
       "classification": {
         "evidence": "회장님의 '5년 앞선 투자'",
         "reason": "제목만 보면 회장님의 '5년 앞선 투자'를 선견지명처럼 전하고 효성重 공장 준공을 성과로 다룬다. 대상 인물에 우호적인 보도로 판단했다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "d6ae5f2fe6b561ddc025",
+      "title": "회장님 “AI 병목 해결할 핵심 파트너 되자”... 효성重, 수출 전용 초고압차단기 신공장 준공",
+      "url": "https://biz.chosun.com/industry/company/2026/10/16/6UCQ5S46ZJH2ZCHEAKZ4G2L33I",
+      "publisher": "chosun.com",
+      "language": "ko",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "published_at": "2026-10-16",
+      "analysis_scope": "headline_only",
+      "source": "tavily_feeds",
+      "observation": {
+        "first_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "회장님 “AI 병목 해결할 핵심 파트너 되자”... 효성重, 수출 전용 초고압차단기 신공장 준공",
+        "reason": "제목만 보면 회장님이 AI 병목 해결을 위한 핵심 파트너를 강조하는 발언과 효성重 신공장 준공이 함께 나옵니다. 대상 인물의 사업 성과와 비전을 긍정적으로 전하는 제목으로 판단했습니다. 본문은 확인하지 않았습니다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "04205b5915fdbba1ed93",
+      "title": "효성 회장님, ‘기술 경영’으로 美 AI 데이터 센터 전력 시장 선점",
+      "url": "https://www.handmk.com/news/articleView.html?idxno=43944",
+      "publisher": "handmk.com",
+      "language": "ko",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "published_at": "2026-10-08",
+      "analysis_scope": "headline_only",
+      "source": "tavily_feeds",
+      "observation": {
+        "first_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "회장님, ‘기술 경영’으로 美 AI 데이터 센터 전력 시장 선점",
+        "reason": "제목만 보면 효성 회장님이 기술 경영으로 미국 AI 데이터센터 전력 시장을 선점했다고 전하고 있어 대상 인물에게 우호적인 보도로 판단했습니다. 본문은 확인하지 않았습니다.",
         "relevance": "related",
         "sentiment": "positive"
       },
@@ -898,42 +1146,18 @@
     },
     {
       "id": "597495a20a0aa1878d4e",
-      "title": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam - The Korea Times",
+      "title": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam",
       "url": "https://www.koreatimes.co.kr/business/20261006/hyosung-chairman-cho-hyun-joon-completes-bio-spandex-base-in-vietnam",
       "publisher": "koreatimes.co.kr",
       "language": "unknown",
-      "indexed_at": "2026-10-24T22:00:27.137568+00:00",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
       "published_at": "2026-10-06",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
-        "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "reused": false
-      },
-      "classification": {
-        "evidence": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam",
-        "reason": "제목만 보면 효성 회장님이 베트남 바이오 스판덱스 생산기지를 완공했다는 사실 전달이며, 평가나 비판·칭찬 표현은 없어 중립으로 판단함.",
-        "relevance": "related",
-        "sentiment": "neutral"
-      },
-      "analysis_failed": false,
-      "evidence_omitted_for_display": false
-    },
-    {
-      "id": "35a8dc963c308a6f0364",
-      "title": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam",
-      "url": "https://www.koreatimes.co.kr/amp/business/20261006/hyosung-chairman-cho-hyun-joon-completes-bio-spandex-base-in-vietnam",
-      "publisher": "koreatimes.co.kr",
-      "language": "en",
-      "indexed_at": "2026-10-19T00:20:13.087119+00:00",
-      "published_at": "2026-10-06",
-      "analysis_scope": "headline_only",
-      "source": "codex_web_search",
-      "observation": {
         "first_seen_at": "2026-10-19T00:20:13.087119+00:00",
-        "last_seen_at": "2026-10-19T00:20:13.087119+00:00",
-        "reused": true
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "reused": false
       },
       "classification": {
         "evidence": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam",
@@ -974,13 +1198,13 @@
       "url": "https://www.fntimes.com/html/view.php?ud=2026100209271366517de3572ddd_18",
       "publisher": "fntimes.com",
       "language": "ko",
-      "indexed_at": "2026-10-24T22:00:27.137568+00:00",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
       "published_at": "2026-10-02",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-24T22:00:27.137568+00:00",
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
         "reused": false
       },
       "classification": {
@@ -994,22 +1218,22 @@
     },
     {
       "id": "82e84b8f2bd7db319e62",
-      "title": "회장님 sees bio-materials powering Hyosung’s next century - The Korea Herald",
+      "title": "회장님 sees bio-materials powering Hyosung’s next century",
       "url": "https://www.koreaherald.com/article/10890620",
       "publisher": "koreaherald.com",
       "language": "unknown",
-      "indexed_at": "2026-10-24T22:00:27.137568+00:00",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
       "published_at": "2026-10-01",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-24T22:00:27.137568+00:00",
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
         "reused": false
       },
       "classification": {
         "evidence": "회장님 sees bio-materials powering Hyosung’s next century",
-        "reason": "제목만 보면 회장님이 바이오 소재를 효성의 다음 100년 동력으로 본다는 전망을 전하는 보도로, 대상 인물에 대해 우호적인 논조입니다. 본문은 확인하지 않았습니다.",
+        "reason": "제목만 보면 효성 회장님(회장님)이 바이오 소재로 회사의 다음 100년을 이끌 것으로 전망한다고 우호적으로 전달하고 있어 대상 인물에 대한 긍정적 보도로 판단했습니다.",
         "relevance": "related",
         "sentiment": "positive"
       },
@@ -1018,24 +1242,48 @@
     },
     {
       "id": "7637bfe9a55aa0b6757e",
-      "title": "조현문 측 “회장님 법정증언, 과거 녹취와 배치”...강요미수 재판 공방 - 조선비즈",
+      "title": "조현문 측 “회장님 법정증언, 과거 녹취와 배치”...강요미수 재판 공방",
       "url": "https://biz.chosun.com/topics/law_firm/2026/09/30/JLTTPULUORD3FINIH6KEFXHHJQ",
       "publisher": "chosun.com",
       "language": "ko",
-      "indexed_at": "2026-10-24T22:00:27.137568+00:00",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
       "published_at": "2026-09-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-24T22:00:27.137568+00:00",
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
         "reused": false
       },
       "classification": {
-        "evidence": "회장님 법정증언, 과거 녹취와 배치",
-        "reason": "제목만 보면 조현문 측이 회장님의 법정증언이 과거 녹취와 배치된다고 주장하는 내용이라 대상 인물의 신빙성에 부정적인 보도입니다. 다만 이는 한쪽의 주장이고 확정 사실은 아닙니다.",
+        "evidence": "조현문 측 “회장님 법정증언, 과거 녹취와 배치”",
+        "reason": "제목만 보면 조현문 측이 회장님의 법정 증언이 과거 녹취와 배치된다고 주장하는 내용이다. 이는 확정 사실이 아니라 한쪽의 주장이지만, 대상 인물의 신빙성에 불리한 보도 논조다. 본문은 확인하지 않았다.",
         "relevance": "related",
         "sentiment": "negative"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "73e42444ec0c2ea59de3",
+      "title": "회장님, 효성중공업 지분 10% 복귀...배우자 보유분까지 매입",
+      "url": "http://www.newskr.kr/news/articleView.html?idxno=106796",
+      "publisher": "newskr.kr",
+      "language": "ko",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
+      "published_at": "2026-09-30",
+      "analysis_scope": "headline_only",
+      "source": "tavily_feeds",
+      "observation": {
+        "first_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "회장님, 효성중공업 지분 10% 복귀...배우자 보유분까지 매입",
+        "reason": "제목만 보면 회장님이 효성중공업 지분을 다시 취득했다는 사실을 전합니다. 이 내용에는 뚜렷한 긍정 또는 부정 평가가 없어 중립으로 판단했습니다.",
+        "relevance": "related",
+        "sentiment": "neutral"
       },
       "analysis_failed": false,
       "evidence_omitted_for_display": false
@@ -1066,22 +1314,22 @@
     },
     {
       "id": "04befdf786d1fa911834",
-      "title": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞",
+      "title": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞 :: 공감언론 뉴시스 ::",
       "url": "https://www.newsis.com/view/NISX20260928_0003805093",
       "publisher": "newsis.com",
       "language": "ko",
-      "indexed_at": "2026-10-22T22:00:27.130576+00:00",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
       "published_at": "2026-09-28",
       "analysis_scope": "headline_only",
-      "source": "codex_web_search",
+      "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-19T22:00:27.129453+00:00",
-        "last_seen_at": "2026-10-22T22:00:27.130576+00:00",
-        "reused": true
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
+        "reused": false
       },
       "classification": {
         "evidence": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞",
-        "reason": "제목만 근거로 판단했습니다. 회장님이 이끄는 효성중공업을 '회장님號'로 표현했고, '고속 성장'과 '사상 첫 연간 영업익 1조원 눈앞'이라는 긍정적 실적 보도가 대상 인물의 경영 성과로 연결됩니다.",
+        "reason": "제목만 보면 '회장님號 효성중공업'으로 회장님이 이끄는 회사를 가리키고, 3분기 고속 성장과 사상 첫 연간 영업익 1조원 눈앞이라는 긍정적 성과를 전하고 있어 대상 인물에 우호적인 보도로 판단했습니다.",
         "relevance": "related",
         "sentiment": "positive"
       },
@@ -1094,13 +1342,13 @@
       "url": "https://www.fntimes.com/html/view.php?ud=202609231751208643dd55077bc2_18",
       "publisher": "fntimes.com",
       "language": "ko",
-      "indexed_at": "2026-10-24T22:00:27.137568+00:00",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
       "published_at": "2026-09-28",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-19T22:00:27.129453+00:00",
-        "last_seen_at": "2026-10-24T22:00:27.137568+00:00",
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
         "reused": false
       },
       "classification": {
@@ -1114,22 +1362,22 @@
     },
     {
       "id": "9a2e34694b30e7773c4a",
-      "title": "효성 실적 효자된 '티앤씨'···배경엔 회장님 '리사이클' 철학 - 뉴스웨이",
+      "title": "효성 실적 효자된 '티앤씨'···배경엔 회장님 '리사이클' 철학",
       "url": "https://www.newsway.co.kr/news/view?ud=2026092217130137148",
       "publisher": "newsway.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-24T22:00:27.137568+00:00",
+      "indexed_at": "2026-10-25T07:40:37.313611+00:00",
       "published_at": "2026-09-27",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-24T22:00:27.137568+00:00",
+        "last_seen_at": "2026-10-25T07:40:37.313611+00:00",
         "reused": false
       },
       "classification": {
         "evidence": "배경엔 회장님 '리사이클' 철학",
-        "reason": "제목만으로 보면 효성 티앤씨의 실적 호조 배경을 회장님의 '리사이클' 철학으로 설명하며 대상 인물을 긍정적으로 조명한다.",
+        "reason": "제목만 보면 효성 실적 호조의 배경으로 회장님의 '리사이클' 철학을 꼽아 대상 인물을 긍정적으로 조명한다. 본문은 확인하지 않았다.",
         "relevance": "related",
         "sentiment": "positive"
       },
@@ -1163,11 +1411,11 @@
   ],
   "insights": {
     "schema_version": 1,
-    "status": "fallback",
+    "status": "ok",
     "provider": "cursor",
     "model": "claude-sonnet-5-5-medium",
     "prompt_sha256": "1751c7d88f69795eeae3cae1bb2e495b53f05501e344e56ab9fcf7a0f65f8d9c",
-    "model_calls": 2,
+    "model_calls": 1,
     "cache_hit": false,
     "topics": {
       "management": "경영·투자",
@@ -1181,65 +1429,120 @@
     "available_start": "2026-09-26",
     "groups": [
       {
-        "label": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞",
-        "summary": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞",
-        "topic": "other",
+        "label": "효성 미국 AI 데이터센터 전력 시장",
+        "summary": "효성이 기술 경영으로 미국 AI 데이터센터 전력 시장을 선점한다는 보도입니다.",
+        "topic": "management",
+        "article_ids": [
+          "04205b5915fdbba1ed93"
+        ],
+        "evidence": [
+          {
+            "article_id": "04205b5915fdbba1ed93",
+            "quote": "효성 회장님, ‘기술 경영’으로 美 AI 데이터 센터 전력 시장 선점"
+          }
+        ]
+      },
+      {
+        "label": "효성중공업 3분기 실적",
+        "summary": "효성중공업의 3분기 고속 성장과 연간 영업이익 1조원 전망을 다룬 보도입니다.",
+        "topic": "management",
         "article_ids": [
           "04befdf786d1fa911834"
         ],
         "evidence": [
           {
             "article_id": "04befdf786d1fa911834",
-            "quote": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞"
+            "quote": "회장님號 효성중공업, 3분기도 '고속 성장'...사상 첫 연간 영업익 1조원 눈앞 :: 공감언론 뉴시스 ::"
           }
         ]
       },
       {
-        "label": "효성重, 수출 전용 ‘초고압차단기 신공장’ 준공...회장님, 글로벌 공급망 ‘드라이브’",
-        "summary": "효성重, 수출 전용 ‘초고압차단기 신공장’ 준공...회장님, 글로벌 공급망 ‘드라이브’",
-        "topic": "other",
+        "label": "효성중공업 창원 초고압차단기 신공장 준공",
+        "summary": "효성중공업이 창원에 수출 전용 초고압차단기 신공장을 준공하고 생산 능력을 2배로 늘린다는 보도입니다.",
+        "topic": "management",
         "article_ids": [
-          "04c8ac344b177f3e1f44"
+          "04c8ac344b177f3e1f44",
+          "178f082cd48c34a7d9e7",
+          "43280f9607626b5ffb2a",
+          "69ac98e42b8917ab0d88",
+          "9f7d23728322859433f6",
+          "ae261af030146b88ba9f",
+          "bb47701f278e9ed5444b",
+          "d6ae5f2fe6b561ddc025",
+          "d9f75008af8159a3b208",
+          "e0f67d230ff01e3bb5f2",
+          "f2c4eb966ccb6aa8ce84"
         ],
         "evidence": [
           {
             "article_id": "04c8ac344b177f3e1f44",
             "quote": "효성重, 수출 전용 ‘초고압차단기 신공장’ 준공...회장님, 글로벌 공급망 ‘드라이브’"
+          },
+          {
+            "article_id": "178f082cd48c34a7d9e7",
+            "quote": "회장님 효성重 회장, 글로벌 공급망 확대 속도...창원 초고압차단기 신공장 준공"
+          },
+          {
+            "article_id": "43280f9607626b5ffb2a",
+            "quote": "회장님의 공급망 투자 결실···효성重, 수출 전용 차단기 공장 준공"
+          },
+          {
+            "article_id": "69ac98e42b8917ab0d88",
+            "quote": "회장님 “AI 병목 푼다”... 효성중공업, 초고압차단기 공급 확대"
+          },
+          {
+            "article_id": "9f7d23728322859433f6",
+            "quote": "회장님 “5년 앞 내다봤다”··· 효성重, 초고압 설비 2배 증설"
+          },
+          {
+            "article_id": "ae261af030146b88ba9f",
+            "quote": "회장님 Speeds Up Push into AI Power Grid Market... Hyosung Heavy Industries Doubles Ultra-High-Voltage Circuit Breaker Capacity"
+          },
+          {
+            "article_id": "bb47701f278e9ed5444b",
+            "quote": "회장님號 효성중공업, 창원 초고압차단기 신공장 준공...\"전력기기 초호황 대응 강화\""
+          },
+          {
+            "article_id": "d6ae5f2fe6b561ddc025",
+            "quote": "회장님 “AI 병목 해결할 핵심 파트너 되자”... 효성重, 수출 전용 초고압차단기 신공장 준공"
+          },
+          {
+            "article_id": "d9f75008af8159a3b208",
+            "quote": "회장님의 '5년 앞선 투자' ... 효성重, 창원에 수출 전용 '초고압차단기 공장' 준공"
+          },
+          {
+            "article_id": "e0f67d230ff01e3bb5f2",
+            "quote": "AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로"
+          },
+          {
+            "article_id": "f2c4eb966ccb6aa8ce84",
+            "quote": "효성重, 수출 전용 초고압차단기 신공장 준공...회장님, 글로벌 공급망 ‘드라이브’"
           }
         ]
       },
       {
-        "label": "회장님, 효성 계열사 지분 확대...지배력 강화·책임경영 행보",
-        "summary": "회장님, 효성 계열사 지분 확대...지배력 강화·책임경영 행보",
-        "topic": "other",
+        "label": "효성 계열사 지분 확대",
+        "summary": "회장이 효성 계열사 지분을 확대해 지배력 강화와 책임경영 행보를 보인다는 보도입니다.",
+        "topic": "governance",
         "article_ids": [
-          "14361f68b39f4521a4e0"
+          "14361f68b39f4521a4e0",
+          "cb08c48c7bcc69be40ad"
         ],
         "evidence": [
           {
             "article_id": "14361f68b39f4521a4e0",
             "quote": "회장님, 효성 계열사 지분 확대...지배력 강화·책임경영 행보"
-          }
-        ]
-      },
-      {
-        "label": "회장님 효성重 회장, 글로벌 공급망 확대 속도...창원 초고압차단기 신공장 준공",
-        "summary": "회장님 효성重 회장, 글로벌 공급망 확대 속도...창원 초고압차단기 신공장 준공",
-        "topic": "other",
-        "article_ids": [
-          "178f082cd48c34a7d9e7"
-        ],
-        "evidence": [
+          },
           {
-            "article_id": "178f082cd48c34a7d9e7",
-            "quote": "회장님 효성重 회장, 글로벌 공급망 확대 속도...창원 초고압차단기 신공장 준공"
+            "article_id": "cb08c48c7bcc69be40ad",
+            "quote": "회장님 Increases Stake in Hyosung Affiliates... Moves to Strengthen Control and Responsible Management"
           }
         ]
       },
       {
-        "label": "[힘내라 K산업]2 회장님 美 전력망 투자 결실...효성중공업 상반기 수주 7.5조 中 71%가 미국",
-        "summary": "[힘내라 K산업]2 회장님 美 전력망 투자 결실...효성중공업 상반기 수주 7.5조 中 71%가 미국",
-        "topic": "other",
+        "label": "효성중공업 상반기 미국 수주",
+        "summary": "효성중공업의 상반기 수주와 미국 전력망 투자 결실을 다룬 보도입니다.",
+        "topic": "management",
         "article_ids": [
           "22a673bf402a0d2a240b"
         ],
@@ -1251,23 +1554,9 @@
         ]
       },
       {
-        "label": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam",
-        "summary": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam",
-        "topic": "other",
-        "article_ids": [
-          "35a8dc963c308a6f0364"
-        ],
-        "evidence": [
-          {
-            "article_id": "35a8dc963c308a6f0364",
-            "quote": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam"
-          }
-        ]
-      },
-      {
-        "label": "Hyosung Chairman 회장님 Plans to Acquire Additional 736 Treasury Shares... Stake to",
-        "summary": "Hyosung Chairman 회장님 Plans to Acquire Additional 736 Treasury Shares... Stake to Rise to 41.52%",
-        "topic": "other",
+        "label": "회장 자기주식 추가 취득 계획",
+        "summary": "회장이 추가 자기주식 736주를 취득해 지분이 41.52%로 오를 계획이라는 보도입니다.",
+        "topic": "governance",
         "article_ids": [
           "3ce5cbf9b3eb057b29b9"
         ],
@@ -1279,51 +1568,23 @@
         ]
       },
       {
-        "label": "회장님의 공급망 투자 결실···효성重, 수출 전용 차단기 공장 준공 < 에너지·화학 < 산업 < 기사본문 - 스마트비즈",
-        "summary": "회장님의 공급망 투자 결실···효성重, 수출 전용 차단기 공장 준공 < 에너지·화학 < 산업 < 기사본문 - 스마트비즈",
-        "topic": "other",
-        "article_ids": [
-          "43280f9607626b5ffb2a"
-        ],
-        "evidence": [
-          {
-            "article_id": "43280f9607626b5ffb2a",
-            "quote": "회장님의 공급망 투자 결실···효성重, 수출 전용 차단기 공장 준공 < 에너지·화학 < 산업 < 기사본문 - 스마트비즈"
-          }
-        ]
-      },
-      {
-        "label": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam - The Korea Times",
-        "summary": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam - The Korea Times",
-        "topic": "other",
+        "label": "효성 베트남 바이오 스판덱스 기지 완공",
+        "summary": "효성이 베트남에 바이오 스판덱스 기지를 완공했다는 보도입니다.",
+        "topic": "management",
         "article_ids": [
           "597495a20a0aa1878d4e"
         ],
         "evidence": [
           {
             "article_id": "597495a20a0aa1878d4e",
-            "quote": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam - The Korea Times"
+            "quote": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam"
           }
         ]
       },
       {
-        "label": "회장님 “AI 병목 푼다”... 효성중공업, 초고압차단기 공급 확대 < Industry < 기사본문 - 포춘코리아",
-        "summary": "회장님 “AI 병목 푼다”... 효성중공업, 초고압차단기 공급 확대 < Industry < 기사본문 - 포춘코리아",
-        "topic": "other",
-        "article_ids": [
-          "69ac98e42b8917ab0d88"
-        ],
-        "evidence": [
-          {
-            "article_id": "69ac98e42b8917ab0d88",
-            "quote": "회장님 “AI 병목 푼다”... 효성중공업, 초고압차단기 공급 확대 < Industry < 기사본문 - 포춘코리아"
-          }
-        ]
-      },
-      {
-        "label": "회장님號 효성중공업, 美생산확대에 3300억 투입...AI發 수요 선점 '집중'",
-        "summary": "회장님號 효성중공업, 美생산확대에 3300억 투입...AI發 수요 선점 '집중'",
-        "topic": "other",
+        "label": "효성중공업 미국 생산 확대 투자",
+        "summary": "효성중공업이 미국 생산 확대에 3300억을 투입한다는 보도입니다.",
+        "topic": "management",
         "article_ids": [
           "6f43ef51dd00df8b9fb7"
         ],
@@ -1335,9 +1596,23 @@
         ]
       },
       {
-        "label": "Hyosung Chairman 회장님 Advances Bio-Based Materials Stra",
-        "summary": "Hyosung Chairman 회장님 Advances Bio-Based Materials Stra",
-        "topic": "other",
+        "label": "효성중공업 지분 매입",
+        "summary": "회장이 효성중공업 지분 10%를 복귀시키며 배우자 보유분까지 매입했다는 보도입니다.",
+        "topic": "governance",
+        "article_ids": [
+          "73e42444ec0c2ea59de3"
+        ],
+        "evidence": [
+          {
+            "article_id": "73e42444ec0c2ea59de3",
+            "quote": "회장님, 효성중공업 지분 10% 복귀...배우자 보유분까지 매입"
+          }
+        ]
+      },
+      {
+        "label": "효성 바이오 소재 전략",
+        "summary": "효성 회장의 바이오 기반 소재 전략 추진을 다룬 보도입니다.",
+        "topic": "management",
         "article_ids": [
           "74578f6c19a90e5e1d6a"
         ],
@@ -1349,37 +1624,37 @@
         ]
       },
       {
-        "label": "조현문 측 “회장님 법정증언, 과거 녹취와 배치”...강요미수 재판 공방 - 조선비즈",
-        "summary": "조현문 측 “회장님 법정증언, 과거 녹취와 배치”...강요미수 재판 공방 - 조선비즈",
-        "topic": "other",
+        "label": "조현문 측 강요미수 재판 공방",
+        "summary": "조현문 측이 회장의 법정 증언이 과거 녹취와 배치된다고 주장한 재판 공방 보도입니다.",
+        "topic": "legal_regulation",
         "article_ids": [
           "7637bfe9a55aa0b6757e"
         ],
         "evidence": [
           {
             "article_id": "7637bfe9a55aa0b6757e",
-            "quote": "조현문 측 “회장님 법정증언, 과거 녹취와 배치”...강요미수 재판 공방 - 조선비즈"
+            "quote": "조현문 측 “회장님 법정증언, 과거 녹취와 배치”...강요미수 재판 공방"
           }
         ]
       },
       {
-        "label": "회장님 sees bio-materials powering Hyosung’s next century - The Korea Herald",
-        "summary": "회장님 sees bio-materials powering Hyosung’s next century - The Korea Herald",
-        "topic": "other",
+        "label": "효성 바이오 소재 차세대 성장",
+        "summary": "바이오 소재가 효성의 다음 성장 동력이 될 것이라는 보도입니다.",
+        "topic": "management",
         "article_ids": [
           "82e84b8f2bd7db319e62"
         ],
         "evidence": [
           {
             "article_id": "82e84b8f2bd7db319e62",
-            "quote": "회장님 sees bio-materials powering Hyosung’s next century - The Korea Herald"
+            "quote": "회장님 sees bio-materials powering Hyosung’s next century"
           }
         ]
       },
       {
-        "label": "효성 회장님, 장애인 사회참여 돕는 나눔 이어간다",
-        "summary": "효성 회장님, 장애인 사회참여 돕는 나눔 이어간다",
-        "topic": "other",
+        "label": "효성 장애인 사회참여 나눔",
+        "summary": "효성 회장이 장애인 사회참여를 돕는 나눔을 이어간다는 보도입니다.",
+        "topic": "external",
         "article_ids": [
           "8c0496730a04a5b77fea"
         ],
@@ -1391,37 +1666,47 @@
         ]
       },
       {
-        "label": "효성 실적 효자된 '티앤씨'···배경엔 회장님 '리사이클' 철학 - 뉴스웨이",
-        "summary": "효성 실적 효자된 '티앤씨'···배경엔 회장님 '리사이클' 철학 - 뉴스웨이",
-        "topic": "other",
+        "label": "효성티앤씨 리사이클 철학",
+        "summary": "효성티앤씨의 실적 배경에 회장의 리사이클 철학이 있다는 보도입니다.",
+        "topic": "management",
         "article_ids": [
           "9a2e34694b30e7773c4a"
         ],
         "evidence": [
           {
             "article_id": "9a2e34694b30e7773c4a",
-            "quote": "효성 실적 효자된 '티앤씨'···배경엔 회장님 '리사이클' 철학 - 뉴스웨이"
+            "quote": "효성 실적 효자된 '티앤씨'···배경엔 회장님 '리사이클' 철학"
           }
         ]
       },
       {
-        "label": "회장님 Speeds Up Push into AI Power Grid Market... Hyosung Heavy Industries Doubles",
-        "summary": "회장님 Speeds Up Push into AI Power Grid Market... Hyosung Heavy Industries Doubles Ultra-High-Voltage Circuit Breaker Capacity - The Asia Business Daily",
-        "topic": "other",
+        "label": "효성 환경·지역 상생 ESG 경영",
+        "summary": "효성 회장의 섬유 폐기물 해결, 환경 보전, 지역 상생 등 ESG·나눔경영 행보를 다룬 보도입니다.",
+        "topic": "external",
         "article_ids": [
-          "ae261af030146b88ba9f"
+          "ac85d34f3dd84520bfcc",
+          "b81439d0632b44c54d1c",
+          "c34b3b8f649d05197262"
         ],
         "evidence": [
           {
-            "article_id": "ae261af030146b88ba9f",
-            "quote": "회장님 Speeds Up Push into AI Power Grid Market... Hyosung Heavy Industries Doubles Ultra-High-Voltage Circuit Breaker Capacity - The Asia Business Daily"
+            "article_id": "ac85d34f3dd84520bfcc",
+            "quote": "회장님 효성 회장, 섬유 폐기물 해결에 앞장"
+          },
+          {
+            "article_id": "b81439d0632b44c54d1c",
+            "quote": "회장님의 '나눔경영' 실천하는 효성 ... 환경 보전·지역사회 상생 앞장선다"
+          },
+          {
+            "article_id": "c34b3b8f649d05197262",
+            "quote": "회장님 효성 회장, 환경 보전·지역 상생 잇는다...ESG 경영 강화"
           }
         ]
       },
       {
-        "label": "회장님 승부수...효성重 2031년 ‘글로벌 톱3ʼ",
-        "summary": "회장님 승부수...효성重 2031년 ‘글로벌 톱3ʼ",
-        "topic": "other",
+        "label": "효성중공업 2031년 글로벌 톱3 목표",
+        "summary": "효성중공업이 2031년 글로벌 톱3를 목표로 한다는 보도입니다.",
+        "topic": "management",
         "article_ids": [
           "af179616fe2fca4bc19a"
         ],
@@ -1433,100 +1718,16 @@
         ]
       },
       {
-        "label": "회장님의 '나눔경영' 실천하는 효성 ... 환경 보전·지역사회 상생 앞장선다",
-        "summary": "회장님의 '나눔경영' 실천하는 효성 ... 환경 보전·지역사회 상생 앞장선다",
-        "topic": "other",
-        "article_ids": [
-          "b81439d0632b44c54d1c"
-        ],
-        "evidence": [
-          {
-            "article_id": "b81439d0632b44c54d1c",
-            "quote": "회장님의 '나눔경영' 실천하는 효성 ... 환경 보전·지역사회 상생 앞장선다"
-          }
-        ]
-      },
-      {
-        "label": "회장님號 효성중공업, 창원 초고압차단기 신공장 준공...\"전력기기 초호황 대응 강화\"",
-        "summary": "회장님號 효성중공업, 창원 초고압차단기 신공장 준공...\"전력기기 초호황 대응 강화\"",
-        "topic": "other",
-        "article_ids": [
-          "bb47701f278e9ed5444b"
-        ],
-        "evidence": [
-          {
-            "article_id": "bb47701f278e9ed5444b",
-            "quote": "회장님號 효성중공업, 창원 초고압차단기 신공장 준공...\"전력기기 초호황 대응 강화\""
-          }
-        ]
-      },
-      {
-        "label": "회장님 Increases Stake in Hyosung Affiliates... Moves to Strengthen Control and Res",
-        "summary": "회장님 Increases Stake in Hyosung Affiliates... Moves to Strengthen Control and Responsible Management",
-        "topic": "other",
-        "article_ids": [
-          "cb08c48c7bcc69be40ad"
-        ],
-        "evidence": [
-          {
-            "article_id": "cb08c48c7bcc69be40ad",
-            "quote": "회장님 Increases Stake in Hyosung Affiliates... Moves to Strengthen Control and Responsible Management"
-          }
-        ]
-      },
-      {
-        "label": "회장님의 '5년 앞선 투자' ... 효성重, 창원에 수출 전용 '초고압차단기 공장' 준공",
-        "summary": "회장님의 '5년 앞선 투자' ... 효성重, 창원에 수출 전용 '초고압차단기 공장' 준공",
-        "topic": "other",
-        "article_ids": [
-          "d9f75008af8159a3b208"
-        ],
-        "evidence": [
-          {
-            "article_id": "d9f75008af8159a3b208",
-            "quote": "회장님의 '5년 앞선 투자' ... 효성重, 창원에 수출 전용 '초고압차단기 공장' 준공"
-          }
-        ]
-      },
-      {
-        "label": "Hyosung Chairman 회장님: bio-BDO production starts in Vietnam | Sporting Goods Inte",
-        "summary": "Hyosung Chairman 회장님: bio-BDO production starts in Vietnam | Sporting Goods Intelligence",
-        "topic": "other",
+        "label": "효성 베트남 바이오 BDO 생산 개시",
+        "summary": "효성의 베트남 바이오 BDO 생산 시작을 다룬 보도입니다.",
+        "topic": "management",
         "article_ids": [
           "df891b587fddf19f2650"
         ],
         "evidence": [
           {
             "article_id": "df891b587fddf19f2650",
-            "quote": "Hyosung Chairman 회장님: bio-BDO production starts in Vietnam | Sporting Goods Intelligence"
-          }
-        ]
-      },
-      {
-        "label": "AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로",
-        "summary": "AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로",
-        "topic": "other",
-        "article_ids": [
-          "e0f67d230ff01e3bb5f2"
-        ],
-        "evidence": [
-          {
-            "article_id": "e0f67d230ff01e3bb5f2",
-            "quote": "AI 시대 내다본 회장님...효성重, 초고압차단기 생산 2배로"
-          }
-        ]
-      },
-      {
-        "label": "효성重, 수출 전용 초고압차단기 신공장 준공...회장님, 글로벌 공급망 ‘드라이브’",
-        "summary": "효성重, 수출 전용 초고압차단기 신공장 준공...회장님, 글로벌 공급망 ‘드라이브’",
-        "topic": "other",
-        "article_ids": [
-          "f2c4eb966ccb6aa8ce84"
-        ],
-        "evidence": [
-          {
-            "article_id": "f2c4eb966ccb6aa8ce84",
-            "quote": "효성重, 수출 전용 초고압차단기 신공장 준공...회장님, 글로벌 공급망 ‘드라이브’"
+            "quote": "Hyosung Chairman 회장님: bio-BDO production starts in Vietnam"
           }
         ]
       }
@@ -1605,18 +1806,20 @@
         "coverage_complete": true,
         "article_ids": [
           "22a673bf402a0d2a240b",
+          "ac85d34f3dd84520bfcc",
+          "c34b3b8f649d05197262",
           "b81439d0632b44c54d1c",
           "74578f6c19a90e5e1d6a",
           "df891b587fddf19f2650"
         ],
         "statistics": {
           "counts": {
-            "positive": 4,
+            "positive": 6,
             "negative": 0,
             "neutral": 0,
             "mixed": 0
           },
-          "denominator": 4,
+          "denominator": 6,
           "percentages": {
             "positive": 100.0,
             "negative": 0.0,
@@ -1626,16 +1829,16 @@
           "abstained": 0,
           "unrelated": 0,
           "positive_negative_only": {
-            "denominator": 4,
+            "denominator": 6,
             "percentages": {
               "positive": 100.0,
               "negative": 0.0
             }
           }
         },
-        "publisher_count": 4,
+        "publisher_count": 6,
         "issue_count": 4,
-        "newly_seen_count": 4,
+        "newly_seen_count": 6,
         "retained_count": 0,
         "daily": [
           {
@@ -1757,15 +1960,15 @@
           {
             "date": "2026-10-23",
             "covered": true,
-            "article_count": 1,
+            "article_count": 3,
             "statistics": {
               "counts": {
-                "positive": 1,
+                "positive": 3,
                 "negative": 0,
                 "neutral": 0,
                 "mixed": 0
               },
-              "denominator": 1,
+              "denominator": 3,
               "percentages": {
                 "positive": 100.0,
                 "negative": 0.0,
@@ -1775,7 +1978,7 @@
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 1,
+                "denominator": 3,
                 "percentages": {
                   "positive": 100.0,
                   "negative": 0.0
@@ -1850,6 +2053,8 @@
         "coverage_complete": true,
         "article_ids": [
           "22a673bf402a0d2a240b",
+          "ac85d34f3dd84520bfcc",
+          "c34b3b8f649d05197262",
           "b81439d0632b44c54d1c",
           "74578f6c19a90e5e1d6a",
           "df891b587fddf19f2650",
@@ -1857,18 +2062,21 @@
           "178f082cd48c34a7d9e7",
           "bb47701f278e9ed5444b",
           "04c8ac344b177f3e1f44",
+          "9f7d23728322859433f6",
           "69ac98e42b8917ab0d88",
           "e0f67d230ff01e3bb5f2",
           "f2c4eb966ccb6aa8ce84",
           "ae261af030146b88ba9f",
           "d9f75008af8159a3b208",
+          "d6ae5f2fe6b561ddc025",
+          "04205b5915fdbba1ed93",
           "14361f68b39f4521a4e0",
           "597495a20a0aa1878d4e",
-          "35a8dc963c308a6f0364",
           "cb08c48c7bcc69be40ad",
           "8c0496730a04a5b77fea",
           "82e84b8f2bd7db319e62",
           "7637bfe9a55aa0b6757e",
+          "73e42444ec0c2ea59de3",
           "3ce5cbf9b3eb057b29b9",
           "04befdf786d1fa911834",
           "af179616fe2fca4bc19a",
@@ -1877,32 +2085,32 @@
         ],
         "statistics": {
           "counts": {
-            "positive": 22,
+            "positive": 27,
             "negative": 1,
             "neutral": 2,
             "mixed": 0
           },
-          "denominator": 25,
+          "denominator": 30,
           "percentages": {
-            "positive": 88.0,
-            "negative": 4.0,
-            "neutral": 8.0,
+            "positive": 90.0,
+            "negative": 3.3,
+            "neutral": 6.7,
             "mixed": 0.0
           },
           "abstained": 0,
           "unrelated": 0,
           "positive_negative_only": {
-            "denominator": 23,
+            "denominator": 28,
             "percentages": {
-              "positive": 95.7,
-              "negative": 4.3
+              "positive": 96.4,
+              "negative": 3.6
             }
           }
         },
-        "publisher_count": 19,
-        "issue_count": 25,
-        "newly_seen_count": 12,
-        "retained_count": 11,
+        "publisher_count": 24,
+        "issue_count": 17,
+        "newly_seen_count": 17,
+        "retained_count": 9,
         "daily": [
           {
             "date": "2026-09-26",
@@ -2023,19 +2231,19 @@
           {
             "date": "2026-09-30",
             "covered": true,
-            "article_count": 1,
+            "article_count": 2,
             "statistics": {
               "counts": {
                 "positive": 0,
                 "negative": 1,
-                "neutral": 0,
+                "neutral": 1,
                 "mixed": 0
               },
-              "denominator": 1,
+              "denominator": 2,
               "percentages": {
                 "positive": 0.0,
-                "negative": 100.0,
-                "neutral": 0.0,
+                "negative": 50.0,
+                "neutral": 50.0,
                 "mixed": 0.0
               },
               "abstained": 0,
@@ -2197,19 +2405,19 @@
           {
             "date": "2026-10-06",
             "covered": true,
-            "article_count": 4,
+            "article_count": 3,
             "statistics": {
               "counts": {
                 "positive": 3,
                 "negative": 0,
-                "neutral": 1,
+                "neutral": 0,
                 "mixed": 0
               },
-              "denominator": 4,
+              "denominator": 3,
               "percentages": {
-                "positive": 75.0,
+                "positive": 100.0,
                 "negative": 0.0,
-                "neutral": 25.0,
+                "neutral": 0.0,
                 "mixed": 0.0
               },
               "abstained": 0,
@@ -2255,28 +2463,28 @@
           {
             "date": "2026-10-08",
             "covered": true,
-            "article_count": 0,
+            "article_count": 1,
             "statistics": {
               "counts": {
-                "positive": 0,
+                "positive": 1,
                 "negative": 0,
                 "neutral": 0,
                 "mixed": 0
               },
-              "denominator": 0,
+              "denominator": 1,
               "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
+                "positive": 100.0,
+                "negative": 0.0,
+                "neutral": 0.0,
+                "mixed": 0.0
               },
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 0,
+                "denominator": 1,
                 "percentages": {
-                  "positive": null,
-                  "negative": null
+                  "positive": 100.0,
+                  "negative": 0.0
                 }
               }
             }
@@ -2487,15 +2695,15 @@
           {
             "date": "2026-10-16",
             "covered": true,
-            "article_count": 9,
+            "article_count": 11,
             "statistics": {
               "counts": {
-                "positive": 9,
+                "positive": 11,
                 "negative": 0,
                 "neutral": 0,
                 "mixed": 0
               },
-              "denominator": 9,
+              "denominator": 11,
               "percentages": {
                 "positive": 100.0,
                 "negative": 0.0,
@@ -2505,7 +2713,7 @@
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 9,
+                "denominator": 11,
                 "percentages": {
                   "positive": 100.0,
                   "negative": 0.0
@@ -2690,15 +2898,15 @@
           {
             "date": "2026-10-23",
             "covered": true,
-            "article_count": 1,
+            "article_count": 3,
             "statistics": {
               "counts": {
-                "positive": 1,
+                "positive": 3,
                 "negative": 0,
                 "neutral": 0,
                 "mixed": 0
               },
-              "denominator": 1,
+              "denominator": 3,
               "percentages": {
                 "positive": 100.0,
                 "negative": 0.0,
@@ -2708,7 +2916,7 @@
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 1,
+                "denominator": 3,
                 "percentages": {
                   "positive": 100.0,
                   "negative": 0.0

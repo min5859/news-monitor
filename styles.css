@@ -205,6 +205,31 @@ h2 {
 .mixed {
   color: #8d6a2d;
 }
+.alert {
+  border-left: 4px solid #974753;
+}
+.alert h3 {
+  font-size: 15px;
+  margin: 20px 0 0;
+}
+.alert-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+.alert-list li {
+  display: grid;
+  gap: 4px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+.alert-list a {
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+.alert-list .footnote {
+  margin: 0;
+}
 meter {
   width: 100%;
   height: 13px;
