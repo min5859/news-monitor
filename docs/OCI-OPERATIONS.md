@@ -158,6 +158,8 @@ sudo systemctl disable --now news-monitor.timer
   큰 증가가 있으면 실제 파일을 확인한 뒤 별도 정리한다. 무검증 자동 삭제를 넣지 않았다.
 - Cursor·Codex 자체의 인증/로그/캐시(`~/.cursor`, `~/.codex`)와 CLI 업데이트는 공유 계정 기존 구성이다. 뉴스 서비스
   전용 데이터 정리 명령으로 공유 계정의 홈이나 다른 프로젝트 파일을 삭제하지 않는다.
+- Cursor 대화 기록(`~/.cursor/chats`·`projects`)은 계정 공용 `cursor-history-cleanup.timer`가 매주 일 13:17 KST에
+  30일 지난 것만 지운다. 원본·검증은 OCI wiki의 `assets/ops/cursor-history-cleanup/`과 운영 노트에 있다.
 
 ```bash
 sudo du -sh /srv/news-monitor/{app,data,dist,publish}
