@@ -69,3 +69,21 @@
 
 - 하루 3번 timer 설치 직후 따라잡기 실행에서 처음 적용됐다.
 - 브리핑 ok(17묶음), fallback 없음. 분류는 Cursor 14회(신규 6건과 제목이 정리된 기사 재분류)·캐시 16·실패 0이다.
+- 10/25 18:00 회차도 브리핑 ok였다(기사 목록이 같아 이슈 캐시 재사용).
+
+## 10/26 07:00 정기 실행: Cursor 로그인 만료
+
+- 결과: 성공(exit 0)·published(`3e7564f`), 29건·24매체, 공개 전 검사 통과. 브리핑은 fallback(제목별 29묶음)이다.
+- 원인은 날짜 간격이 아니라 Cursor 로그인이다. 브리핑 호출 2회가 각각 1초 안에 실패했다.
+  - 04:00:47 KST Research Wiki 실행 중 Cursor CLI가 "Your stored authentication is invalid"를 내고 저장된 로그인을 지웠다.
+    그 뒤 공유 계정 `wiki-publisher`의 `agent status`는 "Not logged in"이다.
+  - 로그인 폴더(`~/.config/cursor`)는 9/25 22:37 KST에 만들어졌고 무효화는 정확히 30일 뒤다. 로그인 유효기간 만료로 보인다.
+  - Cursor 기록 정리 timer는 원인이 아니다. 10/25 13:17에 0건을 지웠고 `~/.config`는 쓸 수 없게 막혀 있다.
+- 분류는 29건 모두 캐시라 Cursor를 부르지 않아 게시는 됐다. 새 기사가 한 건이라도 나오면 분류가 실패하고
+  공개 전 검사(`all_model_calls_completed`)가 게시를 막는다. 공개 페이지는 마지막 성공본에 머문다.
+- 같은 원인으로 OSS Radar 05:00 실행이 실패했고, Research Wiki는 논문 2편 중 1편만 게시했다.
+- 코드 결함: 인증 오류 판별이 Codex 문구("401", "unauthorized")만 알아서 Cursor 문구를 `model_cli_failed`로 기록하고
+  재시도했다. Cursor 문구를 `model_authentication_failed`로 분류하도록 고쳤다(`657f488`, 실패 테스트 먼저, Mac·OCI 161개 통과).
+  이제 같은 실행에서 재시도하지 않고 원인이 상태 파일에 그대로 남는다.
+- 복구는 사용자 작업이다. 공유 계정으로 다시 로그인해야 한다([운영 가이드](OCI-OPERATIONS.md#자격-증명보존점검-범위)).
+- 날짜 분할(`d25f305`)은 10/25 16:40·18:00 회차에서 이미 확인했다. 10/26 07:00 fallback과는 무관하다.

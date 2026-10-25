@@ -160,6 +160,15 @@ sudo systemctl disable --now news-monitor.timer
   전용 데이터 정리 명령으로 공유 계정의 홈이나 다른 프로젝트 파일을 삭제하지 않는다.
 - Cursor 대화 기록(`~/.cursor/chats`·`projects`)은 계정 공용 `cursor-history-cleanup.timer`가 매주 일 13:17 KST에
   30일 지난 것만 지운다. 원본·검증은 OCI wiki의 `assets/ops/cursor-history-cleanup/`과 운영 노트에 있다.
+- Cursor 로그인은 공유 계정 `wiki-publisher`의 `~/.config/cursor`에 있고 약 30일마다 만료되는 것으로 보인다
+  (9/25 로그인 → 10/26 04:00 무효화). 만료되면 브리핑은 `model_authentication_failed`로 fallback하고,
+  새 기사가 있는 회차는 분류 실패로 게시가 막힌다. Dev Blog·Research Wiki·OSS Radar도 함께 멈춘다.
+  다시 로그인한 뒤 아래로 확인한다. 로그인 정보를 다른 계정에서 복사하지 않는다.
+
+```bash
+sudo -u wiki-publisher -H env PATH=/home/wiki-publisher/.local/bin:/usr/bin:/bin agent login
+sudo -u wiki-publisher -H env PATH=/home/wiki-publisher/.local/bin:/usr/bin:/bin agent status
+```
 
 ```bash
 sudo du -sh /srv/news-monitor/{app,data,dist,publish}
@@ -232,8 +241,9 @@ pipeline_status.operation=briefing_only는 수동 이슈 재처리이므로 정�
   우리 코드는 extract를 쓰지 않고 OCI의 다른 게시기도 Tavily를 쓰지 않으므로 같은 키를 다른 곳에서 쓰는 것으로 보인다.
   18:00 회차 전후 사용량 차이로 우리 몫(5)을 확인한다.
 - 18:00 첫 정기 회차: 18:00:14–18:02:02 KST 성공, published(`b58b4bf`). 수집 ok·22/22, 30건(신규 0·재확인 20·유지 10),
-  Cursor 0회(캐시 30), 브리핑 ok, 부제 "2026.10.25 18:00 KST 수집 기준". Tavily 사용량은 18:23에 0으로 초기화돼 있어
-  (월 주기 초기화로 보임) 이번 회차 몫은 확인하지 못했다. 10/26 07시 회차 뒤 사용량이 5인지로 확인한다.
+  Cursor 0회(캐시 30), 브리핑 ok, 부제 "2026.10.25 18:00 KST 수집 기준".
+- Tavily 사용량: 10/25 16:46 208 → 10/26 07:23 218로, 18:00·07:00 회차 몫 5씩만 늘었다. 밤사이 다른 사용은 없었다.
+  10/25 18:23에 사용량 API가 0을 돌려준 것은 일시적인 값이었다. 208 중 우리 몫이 아닌 약 175는 10/25 이전 사용이다.
 
 ## 근거
 

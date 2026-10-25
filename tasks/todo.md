@@ -8,11 +8,13 @@
 - [x] 하루 3번 갱신(07·12·18시, `d211a45`) 설치. 설치 직후 따라잡기 실행(16:40)에서 브리핑 날짜 분할(`d25f305`)·
   '오늘의 부정 기사'(`d89532a`)·제목 꼬리표 정리(`e077a7c`) 첫 적용 확인: 성공·published, 브리핑 ok, 꼬리표 0, Korea Times 1건, Cursor 14회
 - [x] **10/25 18:23 KST** 첫 18:00 정기 회차 확인: 성공·published(`b58b4bf`), 수집 ok 22/22, 신규 0·재확인 20, Cursor 0회(캐시), 브리핑 ok, 부제 "18:00 KST 수집 기준"
-- [ ] **10/26 07:23 KST** 정기 점검 (세션 예약 95a17172). 헬스체크 ok·fallback 없음 + 아래 Tavily 사용량
-- [ ] **Tavily 키 사용량 확인** (10/26 07:23 점검 때 함께)
-  - 사실: 16:46에 이 키의 사용량이 208(우리 몫 약 33, extract 16은 우리 코드가 쓰지 않음)이었고, 18:23에는 0으로 초기화돼 있었다(월 주기 초기화로 보임)
-  - 확인: 07:00 회차 뒤 사용량이 5면 우리만 쓰는 것(18:00 회차 몫은 초기화 전이었음). 5보다 크면 다른 곳에서도 쓰는 것
-  - 다른 곳에서 쓰면 영향: 하루 3번이면 우리 몫만 월 약 465라 합치면 1,000을 넘을 수 있고, 넘으면 Tavily 검색이 막혀(`http_432`) 사이트맵·RSS 기사만 남음 → 사용자에게 전용 키 발급 요청
+- [x] **10/26 07:23 KST** 정기 점검: 게시는 성공·published(`3e7564f`), 브리핑 fallback. 원인은 Cursor 로그인 만료(아래 '사용자 판단 필요' 1번) → Review 참고
+- [x] **Tavily 키 사용량**: 10/25 16:46 208 → 10/26 07:23 218. 18:00·07:00 회차 5씩만 늘고 다른 사용 없음. 18:23의 0은 API의 일시적인 값. 사용자 조치 불필요
+- [x] Cursor 인증 오류를 `model_authentication_failed`로 분류(`657f488`). 이전에는 `model_cli_failed`로 남고 재시도함
+- [ ] **다시 로그인한 뒤** 다음 정기 회차에서 확인: 브리핑 ok, `agent status` 로그인됨. 결과를 docs/CURSOR-ANALYSIS.md에 한 줄
+- [ ] (제 판단, 낮은 우선순위) 헬스체크 보강. 이번에 07:23 점검이 원인을 바로 보여 주지 못했고 Research Wiki 1/2편을 ok로 판정함
+  - 공유 계정 Cursor 로그인 상태(`agent status`), 뉴스 브리핑 오류 코드, Research Wiki·OSS Radar 선정 수 미달을 표시
+  - 네 사본(Claude·Mac Codex·OCI Codex·vault)과 테스트를 함께 갱신
 - [ ] **11/8 무렵** 예전 수집 방식 코드(`codex_web_search`·GDELT) 정리
   - 조건: 10/25~11/8 정기 실행이 계속 정상(수집 실패·게시 실패 없음)
   - 영향: 지우면 예전 방식으로 되돌리는 경로가 없어짐. 그 전까지는 설정만 바꿔 되돌릴 수 있음
@@ -68,6 +70,13 @@
 - [x] 첫 정기 실행 10/25 13:17 KST 결과 확인: 성공·오류 0·삭제 0건(30일 넘은 기록 없음)·보존 2,405개 → wiki `6effd9d`
 
 ## 사용자 판단 필요 (자리 비운 동안 보류)
+- [ ] **1. (급함) OCI Cursor 다시 로그인** — 10/26 04:00 KST부터 공유 계정 `wiki-publisher`의 Cursor 로그인이 풀림
+  - 원인: 9/25 22:37 로그인 후 30일 만에 "stored authentication is invalid"로 무효화. 유효기간 만료로 보임. 우리 정리 timer와 무관
+  - 지금 영향: OSS Radar 05:00 실패, Research Wiki 1/2편만 게시, 뉴스 브리핑 fallback(기사·통계·부정 기사 칸은 정상 게시)
+  - 그대로 두면: 뉴스는 새 기사가 나오는 회차부터 게시가 막혀 공개 페이지가 07:00본에 머묾. 내일 03:00 Dev Blog·04:00 Research Wiki·05:00 OSS Radar 모두 실패
+  - 할 일(사용자): `ssh oci` 후 `sudo -u wiki-publisher -H env PATH=/home/wiki-publisher/.local/bin:/usr/bin:/bin agent login` → 나오는 주소를 브라우저에서 열어 승인 → 같은 방식으로 `agent status` 확인. 그 뒤는 제가 확인
+- [ ] **2. 오늘 놓친 OSS Radar·Research Wiki 재실행 여부** — 로그인 후 수동으로 다시 돌릴지. 다른 프로젝트라 제가 임의로 돌리지 않음
+- [ ] **3. (선택) 30일마다 다시 로그인하지 않으려면** Cursor API 키(`CURSOR_API_KEY`)를 4개 service에 넣는 방식. 다른 게시기 service 설정을 바꾸는 일이라 승인 필요. 추천은 우선 1번으로 복구하고 다음 만료(11/25 무렵) 전에 결정
 - [ ] 피드백 초안: Claude Code 알림에서 1(확인)·2(전송)·0(삭제) 선택
 - [x] OCI wiki 기록 (사용자 요청): 뉴스 계획 페이지 `fd067b0`, Health Check 노트·스킬 원본 동기화 `e008548`
 - [x] `~/.cursor/projects`의 10/18 `tmp-news-monitor-model-*` 3개 삭제 (내용은 작업 폴더 신뢰 표식 129바이트뿐)
@@ -85,6 +94,14 @@
 - 10/25 수동 재게시 안 함: 정기 실행은 성공했고 fallback은 설계된 안전 표시. 수동 게시는 정기 실행 검증과 섞임
 
 ## Review
+
+### 10/26 07:00 KST 정기 실행
+- 헬스체크: Dev Blog ok(11/11), Research Wiki ok(단 1/2편), OSS Radar failed, News Monitor ok(경고 `collection_partial`·`briefing_fallback`)
+- 뉴스: 07:00:27–07:02:22 성공, 공개 전 검사 통과, published(`3e7564f`). 수집원 22/22, 29건·24매체(신규 0·재확인 13·유지 16), partial은 `upstream_limit_reached`(오류 아님)
+- 브리핑 fallback: Cursor 호출 2회 각 1초 안 실패. 04:00:47 Research Wiki 실행 중 Cursor 로그인 무효화 → 이후 "Not logged in". 날짜 분할(`d25f305`)과 무관(10/25 16:40·18:00 ok)
+- 분류는 29건 모두 캐시라 게시는 됐음. 공개 페이지 부제 "2026.10.26 07:00 KST 수집 기준", 오늘 부정 기사 없음
+- 조치: 인증 오류 분류 수정(`657f488`, 실패 테스트 → Mac 3.12/3.14 161개·Node 7·ruff → OCI 반영·161개 통과). 로그인 복구는 사용자 작업. 수집·게시는 성공했으므로 수동 재시도 안 함
+- Tavily: 우리 회차당 5크레딧 확인, 다른 사용 없음
 
 ### 10/25 07:00 KST 첫 정기 실행
 - 결과: 4개 파이프라인 모두 ok. news-monitor는 성공(exit 0), preflight 13개 통과, pushed → published(`ac555a3`)
