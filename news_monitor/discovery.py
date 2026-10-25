@@ -15,6 +15,7 @@ from news_monitor.collect import (
     headline_names_target,
     normalized,
     parse_article,
+    strip_site_suffix,
 )
 from news_monitor.diagnostics import error_code
 
@@ -183,6 +184,7 @@ def merge_previous(result, previous, config):
         end = checked.astimezone(ZoneInfo("Asia/Seoul")).date()
         old = {}
         for row in clean["articles"]:
+            row["title"] = strip_site_suffix(row["title"])  # Saved before search page titles were trimmed.
             key = story_key(row)
             # Older saves may hold one story per subdomain; the earliest first sighting wins.
             if (start <= date.fromisoformat(row["published_at"]) <= end

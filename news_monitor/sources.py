@@ -27,6 +27,7 @@ from news_monitor.collect import (
     parse_article,
     publisher_domain,
     read_bounded,
+    strip_site_suffix,
 )
 from news_monitor.discovery import select_stories
 
@@ -59,6 +60,7 @@ def candidate(item, config, now, first, last):
                                  "seendate": now.strftime("%Y%m%dT%H%M%SZ"), "language": "unknown"}, config)
     except (KeyError, TypeError, ValueError):
         return None, "invalid_metadata"
+    article["title"] = strip_site_suffix(article["title"])
     if not headline_names_target(article["title"], config):
         return None, "not_target"
     if article["publisher"] in opts["excluded_publishers"]:

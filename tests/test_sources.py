@@ -12,7 +12,7 @@ from urllib.error import HTTPError
 from test_discovery import CONFIG, NOW, article, run_search
 
 from news_monitor import discovery, report, site, sources
-from news_monitor.collect import ROOT, load_config
+from news_monitor.collect import ROOT, load_config, strip_site_suffix
 
 TITLE = "가상 테스트: 조현준 회장 소식"
 BASE = "https://www.paper.example/"
@@ -166,6 +166,29 @@ class SourceTests(unittest.TestCase):
         self.assertEqual(len(merged["articles"]), 1)
         self.assertEqual(merged["articles"][0]["first_seen_at"], previous["articles"][0]["first_seen_at"])
         self.assertEqual(merged["statistics"]["reconfirmed"], 1)
+
+    def test_search_page_title_suffixes_are_dropped_but_headline_text_is_kept(self):
+        base = article()["title"]
+        for raw, clean in ((base + " < 에너지·화학 < 산업 < 기사본문 - 가상비즈", base), (base + " - 가상일보", base),
+                           (base + " - The Virtual Times", base), (base + " | 가상뉴스", base), (base + " - 뉴스1", base),
+                           (base + " - The Virtual Business Daily", base), (base + " | Virtual Goods Intelligence", base),
+                           (base + " - 3분기 1조 돌파", None), (base + " - 매출 감소에도 투자 늘린 이유는", None),
+                           (base + " - 현장 경영", None), (base + " - expands in Vietnam", None), ("짧은 제목 - 가상일보", None)):
+            with self.subTest(raw=raw):
+                self.assertEqual(strip_site_suffix(raw), clean or raw)
+
+    def test_saved_and_new_copies_with_site_suffixes_are_one_clean_story(self):
+        title = article()["title"]
+        previous = run_search([article(title=title + " - 가상일보", url="https://www.old.example/amp/view/1")])
+        fresh = self.collect({sources.TAVILY_URL: tavily([{"title": title + " < 산업 < 기사본문 - 가상일보",
+                                                           "url": "https://www.old.example/view/1", "published_date": "2026-10-16"}])},
+                             tavily_queries=["a"])
+        self.assertEqual([row["title"] for row in fresh["articles"]], [title])
+        merged = discovery.merge_previous(fresh, previous, self.config)
+        self.assertEqual([row["title"] for row in merged["articles"]], [title])
+        self.assertEqual(merged["articles"][0]["first_seen_at"], previous["articles"][0]["first_seen_at"])
+        retained = discovery.merge_previous(self.collect({sources.TAVILY_URL: tavily([])}, tavily_queries=["a"]), previous, self.config)
+        self.assertEqual([row["title"] for row in retained["articles"]], [title])
 
     def test_source_settings_reject_unsafe_values(self):
         self.assertEqual(load_config(ROOT / "config.json")["collection"]["provider"], "tavily_feeds")

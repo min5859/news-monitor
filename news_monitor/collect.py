@@ -50,6 +50,19 @@ def plain_title(value):
     return " ".join(unescape("".join(parser.parts)).split())
 
 
+# A site name is one Korean/Latin word ("조선비즈", "뉴스1") or up to five capitalized words ("The Korea Times").
+SITE_NAME = re.compile(r"[가-힣A-Za-z0-9]{2,12}|(?:[A-Z][A-Za-z&.]*)(?: (?:of |and |& )?[A-Z][A-Za-z&.]*){0,4}")
+
+
+def strip_site_suffix(title):
+    """Search APIs return page titles: drop a "< 섹션 < 기사본문 - 매체" breadcrumb or a trailing " - 매체" site name."""
+    stripped = re.sub(r"\s+<\s.*<\s*기사본문\s*-\s*[^<>]+$", "", title)
+    match = re.search(r"\s+[-|]\s+([^-|<>]+)$", stripped)
+    if match and SITE_NAME.fullmatch(match[1]):
+        stripped = stripped[:match.start()]
+    return stripped if len(stripped) >= 10 else title
+
+
 def normalized(value):
     return re.sub(r"[\W_]+", "", unicodedata.normalize("NFKC", value).casefold())
 
