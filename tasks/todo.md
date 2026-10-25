@@ -3,10 +3,8 @@
 ## 남은 작업 (여기만 보면 됨)
 세션 예약은 Claude 창을 닫으면 사라진다. 그때는 "오늘 동작 확인해 줘"로 같은 확인을 요청한다.
 
-- [ ] **10/25 13:24 KST** Cursor 기록 정리 첫 정기 실행 확인 (세션 예약 5acd6799)
-  - 확인: `ssh oci 'sudo journalctl -u cursor-history-cleanup.service -n 5 --no-pager -o cat'`에서 errors 0·삭제 건수
-  - 실패 시 영향: 기록이 예전처럼 쌓일 뿐, 게시 영향 없음
-  - 할 일: 결과를 OCI wiki 운영 노트 '2026-10-25 Cursor 대화 기록 정리 timer' 절에 한 줄 추가·커밋
+- [x] **10/25 13:24 KST** Cursor 기록 정리 첫 정기 실행 확인: 성공·오류 0, 삭제 0건(가장 오래된 기록 9/25 22:39 KST라 30일 미만), 보존 2,405개 → wiki `6effd9d`
+  - 11/1 13:17 KST 실행에서 약 231개·24MB가 처음 삭제될 예정. 그 주 헬스체크 때 journal의 errors 0만 보면 됨
 - [ ] **10/26 07:23 KST** 뉴스 모니터 브리핑 날짜 분할 수정(`d25f305`) 첫 적용 확인 (세션 예약 95a17172)
   - 확인: 헬스체크 news-monitor에 `briefing_fallback` 경고가 없고 briefing_status.json이 ok
   - 실패 시 영향: 이슈 묶음만 제목별 표시로 대체, 기사·통계 게시는 정상
@@ -65,7 +63,7 @@
 - [x] OCI 시험 실행: 30일 기준 0건(보존 2,405), 7일 기준 1,429건·140MB
 - [x] 원본은 wiki vault `assets/ops/cursor-history-cleanup/`, 설치는 root 소유 `/usr/local/libexec` + systemd service/timer(주 1회 일 13:17 KST, 게시기 시간과 겹치지 않음) — wiki `871d258`
 - [x] 시험 항목 1개로 실제 service 실행: 그 1개만 삭제·오류 0·실기록 보존 → wiki 운영 노트 기록
-- [ ] 첫 정기 실행 10/25 13:17 KST 결과 확인 (journal 건수·오류 0)
+- [x] 첫 정기 실행 10/25 13:17 KST 결과 확인: 성공·오류 0·삭제 0건(30일 넘은 기록 없음)·보존 2,405개 → wiki `6effd9d`
 
 ## 사용자 판단 필요 (자리 비운 동안 보류)
 - [ ] 피드백 초안: Claude Code 알림에서 1(확인)·2(전송)·0(삭제) 선택
