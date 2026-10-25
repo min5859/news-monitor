@@ -322,6 +322,46 @@ class SiteTests(unittest.TestCase):
             (root / ".env").write_text("TEST_ONLY")
             self.assertRaises(ValueError, site.build_site, report_fixture(), root)
 
+    @staticmethod
+    def alert(html):
+        start = html.index('id="negative-alert"')
+        return html[start:html.index("</section>", start)]
+
+    def test_negative_alert_separates_today_the_past_week_and_late_finds(self):
+        report = report_fixture(5)
+        rows = report["articles"]
+        end = r.timestamp(report["window_end"])
+        for row, sentiment, seen_days_ago, day_days_ago in ((rows[0], "negative", 0, 0), (rows[1], "mixed", 3, 3),
+                                                             (rows[2], "abstain", 0, 0), (rows[3], "positive", 0, 0),
+                                                             (rows[4], "negative", 0, 10)):
+            row["classification"]["sentiment"] = sentiment
+            row["observation"]["first_seen_at"] = (end - timedelta(days=seen_days_ago)).isoformat()
+            row["indexed_at"] = (end - timedelta(days=day_days_ago)).isoformat()
+        html = site.render(report)
+        alert = self.alert(html)
+        self.assertLess(html.index('id="negative-alert"'), html.index('id="briefing-title"'))
+        today, rest = alert.split("최근 7일")
+        recent, late = rest.split("이번 수집에서 처음 찾은")
+        self.assertIn("1건", today)
+        self.assertIn(rows[0]["title"], today)
+        self.assertIn(rows[1]["title"], recent)
+        self.assertIn(rows[4]["title"], late)
+        for part, absent in ((recent, rows[0]), (today, rows[4]), (recent, rows[4]), (alert, rows[3])):
+            self.assertNotIn(absent["title"], part)
+        self.assertIn("판단하지 못한 새 기사 1건", alert)
+
+    def test_negative_alert_says_none_only_after_todays_collection(self):
+        report = report_fixture()
+        self.assertIn("어제·오늘 발행된 새 부정·혼합 기사는 없습니다", self.alert(site.render(report)))
+        report.update(status="stale", latest_attempt={"status": "failed", "checked_at": report["generated_at"]})
+        stale = self.alert(site.render(report))
+        self.assertIn("확인하지 못했습니다", stale)
+        self.assertNotIn("없습니다", stale)
+        value = collection_fixture()
+        value["status"] = "failed"
+        failed = r.make_report(prepare(value), [], report_fixture()["analysis"], CONFIG)
+        self.assertIn("확인하지 못했습니다", self.alert(site.render(failed)))
+
     def test_failed_collection_shows_unknown_not_zero_articles(self):
         value = collection_fixture()
         value["status"] = "failed"

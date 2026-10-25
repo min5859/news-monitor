@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 import tempfile
+from datetime import date, timedelta
 from html import escape
 from pathlib import Path
 from string import Template
@@ -88,6 +89,48 @@ def dashboard_content(report):
             "briefing_lines": "".join(lines) or "<li>선택 범위에서 핵심 이슈로 정리할 관련 기사를 확보하지 못했습니다.</li>",
             "briefing_meta": h(meta), "issue_cards": "".join(cards), "issue_count": f'{view["issue_count"]}개 이슈 / {len(rows)}건 기사',
             "trend_rows": "".join(trend), "dashboard_data": data}
+
+
+def alert_items(rows):
+    items = []
+    for row in sorted(rows, key=lambda row: (article_day(row), row["id"]), reverse=True):
+        decision = row["classification"]
+        when = f"발행 {row['published_at']}" if row["published_at"] else f"관측 {display_time(row['indexed_at'])}"
+        items.append(f'<li><span><span class="label {h(decision["sentiment"])}">{LABELS[decision["sentiment"]]}</span> '
+                     f'<a href="{h(row["url"])}" target="_blank" rel="noopener noreferrer">{h(row["title"])} ↗</a></span>'
+                     f'<span class="footnote">{h(row["publisher"])} · {h(when)} · {h(decision["reason"])}</span></li>')
+    return '<ul class="alert-list">' + "".join(items) + "</ul>"
+
+
+def negative_alert(report):
+    """Fixed to the collection day, whatever the filters: an empty list is said only after that day's collection."""
+    html = '<section class="panel alert" id="negative-alert" aria-labelledby="alert-title"><p class="eyebrow">NEGATIVE WATCH</p>'
+    if report["status"] in ("failed", "stale") or not report["window_end"]:
+        return (html + '<h2 id="alert-title">오늘의 부정 기사</h2><p>오늘 수집이 완료되지 않아 새 부정 기사를 확인하지 못했습니다. '
+                       '아래 자료는 이번 조회의 새 결과가 아닐 수 있습니다.</p></section>')
+    day = kst_day(report["window_end"])
+    yesterday, week = ((date.fromisoformat(day) - timedelta(days=offset)).isoformat() for offset in (1, 6))
+    fresh = [row for row in report["articles"] if kst_day(row["observation"]["first_seen_at"]) == day]
+    watched = [row for row in report["articles"] if row["classification"]["relevance"] == "related"
+               and row["classification"]["sentiment"] in ("negative", "mixed")]
+    # "Today" is news first seen this morning and published since yesterday; older first sightings are late finds.
+    today = [row for row in watched if row in fresh and yesterday <= article_day(row)]
+    recent = [row for row in watched if row not in today and week <= article_day(row) <= day]
+    late = [row for row in watched if row in fresh and article_day(row) < week]
+    unsure = sum(row["classification"]["sentiment"] == "abstain" and row["classification"]["relevance"] != "unrelated" for row in fresh)
+    html += f'<h2 id="alert-title">오늘의 부정 기사</h2><p class="unit">어제·오늘 발행 · {h(day)} 아침 수집 기준</p>'
+    html += (f"<p><strong>{len(today)}건</strong>을 새로 확인했습니다.</p>" + alert_items(today) if today
+             else "<p>어제·오늘 발행된 새 부정·혼합 기사는 없습니다.</p>")
+    if recent:
+        html += f"<h3>최근 7일 부정·혼합 기사 {len(recent)}건</h3>" + alert_items(recent)
+    if late:
+        html += f"<h3>이번 수집에서 처음 찾은 이전 부정·혼합 기사 {len(late)}건</h3>" + alert_items(late)
+    if unsure:
+        html += f"<p>제목만으로 판단하지 못한 새 기사 {unsure}건이 있습니다. 기사 목록의 '판단 보류'에서 직접 확인해 주세요.</p>"
+    if report["status"] == "partial":
+        html += '<p class="footnote">일부 수집·분류가 완료되지 않아 빠진 기사가 있을 수 있습니다.</p>'
+    return html + ('<p class="footnote">제목에 대상 인물이 나온 기사만 대상이며 AI가 제목만으로 분류한 미검토 결과입니다. '
+                   '기간·분류 필터와 관계없이 수집일 기준으로 표시합니다.</p></section>')
 
 
 def render(report):
@@ -180,7 +223,8 @@ def render(report):
               "attribution": f'<a href="{h(attribution["url"])}" target="_blank" rel="noopener noreferrer">{h(attribution["name"])}</a>',
               "model": h(f"{report['analysis']['provider']} / {report['analysis']['model']}"),
               "prompt_version": h(report["analysis"]["prompt_sha256"]),
-              "generated": h(display_time(report["generated_at"])), "daily_summary": daily_summary}
+              "generated": h(display_time(report["generated_at"])), "daily_summary": daily_summary,
+              "negative_alert": negative_alert(report)}
     date_filter_note, date_basis_note = DATE_NOTES[report["date_basis"]]
     values.update(window_label="발행일 범위" if publication_dates else "관측 기간",
                   date_filter_label="발행일" if publication_dates else "관측일",
