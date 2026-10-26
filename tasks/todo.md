@@ -13,7 +13,7 @@
 - [x] Cursor 인증 오류를 `model_authentication_failed`로 분류(`657f488`). 이전에는 `model_cli_failed`로 남고 재시도함
 - [x] **12:23 KST** 12:00 회차 확인: 로그인 복구 확인(새 기사 1건 Cursor 분류 성공). 게시 성공·published(`ae27445`).
   브리핑은 다른 원인(제목에 없는 숫자)으로 fallback → 수정 `f2821fc` → Review 참고
-- [ ] **18:23 KST** 18:00 회차 브리핑 ok 확인 (`f2821fc` 첫 적용)
+- [x] **18:23 KST** 18:00 회차 확인: 브리핑 ok(호출 1회·오류 0), 33건(신규 3), published(`ba646f7`). `f2821fc` 첫 적용 확인
 - [ ] (제 판단, 낮은 우선순위) 헬스체크 보강. 이번에 07:23 점검이 원인을 바로 보여 주지 못했고 Research Wiki 1/2편을 ok로 판정함
   - 공유 계정 Cursor 로그인 상태(`agent status`), 뉴스 브리핑 오류 코드, Research Wiki·OSS Radar 선정 수 미달을 표시
   - 네 사본(Claude·Mac Codex·OCI Codex·vault)과 테스트를 함께 갱신
