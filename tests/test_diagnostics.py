@@ -59,14 +59,14 @@ class DiagnosticsTests(unittest.TestCase):
         fixture.setUp()
         self.addCleanup(fixture.doCleanups)
         invalid = fixture.grouped()
-        invalid["groups"][0]["summary"] = "생산이 999배 늘었다는 제목입니다."
+        invalid["groups"][0]["label"] = "PRIVATE LABEL"
         result = fixture.enrich(invalid)
         status = json.loads((fixture.data / "briefing_status.json").read_text())
         self.assertEqual(result["insights"]["status"], "fallback")
         self.assertEqual(len(status["errors"]), 2)
         self.assertEqual(status["errors"][0]["phase"], "validation")
-        self.assertEqual(status["errors"][0]["reason"], "group_number_not_grounded")
-        self.assertNotIn("999", json.dumps(status))
+        self.assertEqual(status["errors"][0]["reason"], "group_label_not_korean")
+        self.assertNotIn("PRIVATE", json.dumps(status))
 
     def test_briefing_only_never_collects_or_reclassifies_articles(self):
         cfg = copy.deepcopy(PIPELINE_CONFIG)

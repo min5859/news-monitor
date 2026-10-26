@@ -61,6 +61,10 @@ def eligible(report):
     return [row for row in report["articles"] if row["classification"]["relevance"] == "related" and not row["analysis_failed"]]
 
 
+def numbers(text):
+    return set(re.findall(r"\d+(?:[.,]\d+)*", text)) if isinstance(text, str) else set()
+
+
 def validate_groups(document, rows, config, *, extractive=False):
     opts = options(config)
     if not isinstance(document, dict) or set(document) != {"groups"} or not isinstance(document["groups"], list):
@@ -95,8 +99,7 @@ def validate_groups(document, rows, config, *, extractive=False):
             group[key] = public_text(text, config)
         if group["topic"] not in opts["topics"]:
             raise ValueError("unknown topic")
-        source_numbers = set(re.findall(r"\d+(?:[.,]\d+)*", " ".join(row["title"] for row in members)))
-        if not extractive and not set(re.findall(r"\d+(?:[.,]\d+)*", group["label"] + " " + group["summary"])).issubset(source_numbers):
+        if not extractive and not numbers(group["label"] + " " + group["summary"]) <= numbers(" ".join(row["title"] for row in members)):
             raise ValueError("unsupported summary number")
         evidence = group["evidence"]
         if not isinstance(evidence, list) or len(evidence) != len(ids):
@@ -151,8 +154,13 @@ def ground_model_groups(document, rows, config):
             evidence = [{"article_id": identity, "quote": by_id[identity]["title"][:opts["max_evidence_chars"]].rstrip()}
                         for identity in chunk]
             value = {**group, "article_ids": chunk, "evidence": evidence}
-            if len(chunks) > 1:  # The summary covers the whole group, so each part shows its own headline.
-                value["summary"] = ("선택된 기사 제목: " + by_id[chunk[0]]["title"])[:opts["max_summary_chars"]].rstrip()
+            headline, source = by_id[chunk[0]]["title"], numbers(" ".join(by_id[identity]["title"] for identity in chunk))
+            # The summary covers the whole group, so each part shows its own headline. Text with a number no member
+            # headline has gets a headline too, instead of discarding every issue (the prompt rule alone did not stop it).
+            if len(chunks) > 1 or not numbers(group["summary"]) <= source:
+                value["summary"] = ("선택된 기사 제목: " + headline)[:opts["max_summary_chars"]].rstrip()
+            if not numbers(group["label"]) <= source:
+                value["label"] = headline[:opts["max_label_chars"]].rstrip()
             grounded.append(value)
     return validate_groups({"groups": grounded}, rows, config)
 

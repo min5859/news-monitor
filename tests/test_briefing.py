@@ -84,7 +84,7 @@ class BriefingTests(unittest.TestCase):
             preflight.check_artifact(result, self.cfg)
 
     def test_invalid_ids_missing_members_and_fabricated_evidence_fall_back(self):
-        for kind in ("duplicate", "missing", "unknown", "evidence", "number", "raw"):
+        for kind in ("duplicate", "missing", "unknown", "evidence", "raw"):
             document = self.grouped()
             if kind == "duplicate":
                 document["groups"][1]["article_ids"] = self.ids[:1]
@@ -94,8 +94,6 @@ class BriefingTests(unittest.TestCase):
                 document["groups"][0]["article_ids"].append("not-an-article")
             elif kind == "evidence":
                 document["groups"][0]["evidence"] = [{"article_id": self.ids[0], "quote": "제목에 없는 주장"}]
-            elif kind == "number":
-                document["groups"][0]["summary"] = "생산이 999배 늘었다는 제목입니다."
             else:
                 document["raw"] = "MUST_NOT_PERSIST"
             with self.subTest(kind=kind):
@@ -206,6 +204,20 @@ class BriefingTests(unittest.TestCase):
             preflight.check_artifact(merged, self.cfg)
         days = {"a": date(2026, 1, 1), "b": date(2026, 1, 6), "c": date(2026, 1, 10), "d": date(2026, 1, 1)}
         self.assertEqual(briefing.split_by_date(["c", "b", "a", "d"], days, 7), [["a", "d", "b"], ["c"]])
+
+    def test_number_missing_from_headlines_replaces_only_that_issue_text(self):
+        # OCI 10/26 12:00: the model added "100" to one single-headline issue in 3/3 calls despite the prompt rule.
+        document = self.grouped()
+        document["groups"][1]["label"] = "계열사 지분 100% 매입"
+        document["groups"][1]["summary"] = "제목은 회장님이 계열사 지분 100%를 매입했다고 전합니다."
+        result = self.enrich(document)
+        self.assertEqual(result["insights"]["status"], "ok")
+        kept, replaced = sorted(result["insights"]["groups"], key=lambda group: group["article_ids"] != self.ids[:2])
+        self.assertEqual(kept["summary"], self.grouped()["groups"][0]["summary"])
+        title = self.report["articles"][2]["title"]
+        self.assertEqual((replaced["label"], replaced["summary"]), (title, "선택된 기사 제목: " + title))
+        self.assertNotIn("100", json.dumps(result["insights"]["groups"], ensure_ascii=False))
+        preflight.check_artifact(result, self.cfg)
 
     def test_no_related_articles_skips_model_instead_of_making_up_a_brief(self):
         for row in self.report["articles"]:
