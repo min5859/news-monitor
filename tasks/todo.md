@@ -11,7 +11,9 @@
 - [x] **10/26 07:23 KST** 정기 점검: 게시는 성공·published(`3e7564f`), 브리핑 fallback. 원인은 Cursor 로그인 만료(아래 '사용자 판단 필요' 1번) → Review 참고
 - [x] **Tavily 키 사용량**: 10/25 16:46 208 → 10/26 07:23 218. 18:00·07:00 회차 5씩만 늘고 다른 사용 없음. 18:23의 0은 API의 일시적인 값. 사용자 조치 불필요
 - [x] Cursor 인증 오류를 `model_authentication_failed`로 분류(`657f488`). 이전에는 `model_cli_failed`로 남고 재시도함
-- [ ] **12:23 KST** 12:00 회차 브리핑 ok 확인 (세션 예약 4cdcab65). 로그인·짧은 호출은 07:58에 확인함
+- [x] **12:23 KST** 12:00 회차 확인: 로그인 복구 확인(새 기사 1건 Cursor 분류 성공). 게시 성공·published(`ae27445`).
+  브리핑은 다른 원인(제목에 없는 숫자)으로 fallback → 수정 `f2821fc` → Review 참고
+- [ ] **18:23 KST** 18:00 회차 브리핑 ok 확인 (`f2821fc` 첫 적용)
 - [ ] (제 판단, 낮은 우선순위) 헬스체크 보강. 이번에 07:23 점검이 원인을 바로 보여 주지 못했고 Research Wiki 1/2편을 ok로 판정함
   - 공유 계정 Cursor 로그인 상태(`agent status`), 뉴스 브리핑 오류 코드, Research Wiki·OSS Radar 선정 수 미달을 표시
   - 네 사본(Claude·Mac Codex·OCI Codex·vault)과 테스트를 함께 갱신
@@ -94,6 +96,13 @@
 - 10/25 수동 재게시 안 함: 정기 실행은 성공했고 fallback은 설계된 안전 표시. 수동 게시는 정기 실행 검증과 섞임
 
 ## Review
+
+### 10/26 12:00 KST 정기 실행
+- 헬스체크: News Monitor ok(경고 `briefing_fallback`). 서비스 12:00:15–12:03:05 성공, published(`ae27445`)
+- 로그인: `agent status` 로그인됨. 새 기사 1건 Cursor 분류 성공(실패 0) → 서비스 안에서도 복구 확인
+- 브리핑 fallback: 2회 모두 `group_number_not_grounded`. 새 기사 한 건짜리 묶음에 모델이 제목에 없는 "100"을 넣음(운영 입력 재현 3/3)
+- 조치: 그 묶음의 문구만 기사 제목으로 바꾸도록 수정(`f2821fc`). 실패 테스트 → Mac 3.12/3.14 162개·Node 7·ruff → OCI 반영·테스트 통과 → 운영 입력 2/2 ok
+- 수동 재게시 안 함(정기 실행 성공, 18:00부터 적용)
 
 ### 10/26 07:00 KST 정기 실행
 - 헬스체크: Dev Blog ok(11/11), Research Wiki ok(단 1/2편), OSS Radar failed, News Monitor ok(경고 `collection_partial`·`briefing_fallback`)
