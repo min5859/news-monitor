@@ -14,6 +14,9 @@
 - [x] **12:23 KST** 12:00 회차 확인: 로그인 복구 확인(새 기사 1건 Cursor 분류 성공). 게시 성공·published(`ae27445`).
   브리핑은 다른 원인(제목에 없는 숫자)으로 fallback → 수정 `f2821fc` → Review 참고
 - [x] **18:23 KST** 18:00 회차 확인: 브리핑 ok(호출 1회·오류 0), 33건(신규 3), published(`ba646f7`). `f2821fc` 첫 적용 확인
+- [x] **10/27** 당일 기사 안내 문구(`47144a7`): '오늘의 부정 기사'·당일 발행 요약·발행일별 표에 "대개 다음 날 수집에서 추가" 안내
+- [x] **10/27** 최신 기사 확보 보강(`3d5b9ad`): robots 허용 사이트맵 20개 추가(총 37), 뉴데일리 `+00:00` 날짜 보정. Mac·OCI 피드 실측 37/37 → docs/SOURCE-EVALUATION.md
+- [ ] **18:23 KST** 18:00 회차에서 위 두 가지 첫 적용 확인 (수집원 42/42, 안내 문구 게시)
 - [ ] (제 판단, 낮은 우선순위) 헬스체크 보강. 이번에 07:23 점검이 원인을 바로 보여 주지 못했고 Research Wiki 1/2편을 ok로 판정함
   - 공유 계정 Cursor 로그인 상태(`agent status`), 뉴스 브리핑 오류 코드, Research Wiki·OSS Radar 선정 수 미달을 표시
   - 네 사본(Claude·Mac Codex·OCI Codex·vault)과 테스트를 함께 갱신
@@ -78,6 +81,7 @@
   - 그대로 두면: 뉴스는 새 기사가 나오는 회차부터 게시가 막혀 공개 페이지가 07:00본에 머묾. 내일 03:00 Dev Blog·04:00 Research Wiki·05:00 OSS Radar 모두 실패
   - 할 일(사용자): `ssh oci` 후 `sudo -u wiki-publisher -H env PATH=/home/wiki-publisher/.local/bin:/usr/bin:/bin agent login` → 나오는 주소를 브라우저에서 열어 승인 → 같은 방식으로 `agent status` 확인. 그 뒤는 제가 확인
 - [ ] **2. 오늘 놓친 OSS Radar·Research Wiki 재실행 여부** — 로그인 후 수동으로 다시 돌릴지. 다른 프로젝트라 제가 임의로 돌리지 않음
+- [ ] **4. (선택) 보존 폭이 짧은 피드를 매시간 확인** m-i.kr·asiatime·asiatoday는 사이트맵에 2~3시간분만 있어 하루 3번으로는 놓침. 피드만 매시간 읽는 timer를 따로 두는 방식이라 정기 timer 정책(AGENTS.md) 변경 승인 필요. 추천: 이번 사이트맵 추가 효과를 1주 본 뒤 결정
 - [ ] **3. (선택) 로그인 무효화 재발 방지** Cursor 문서가 무인 실행용으로 안내하는 API 키(`CURSOR_API_KEY`)를 4개 service에 넣는 방식. 다른 게시기 service 설정을 바꾸는 일이라 승인 필요. 추천: 헬스체크에 로그인 상태 점검을 먼저 넣고(제 일), 다시 풀리면 그때 API 키로 전환
 - [ ] 피드백 초안: Claude Code 알림에서 1(확인)·2(전송)·0(삭제) 선택
 - [x] OCI wiki 기록 (사용자 요청): 뉴스 계획 페이지 `fd067b0`, Health Check 노트·스킬 원본 동기화 `e008548`
