@@ -19,6 +19,8 @@ LABELS = {"positive": "긍정", "negative": "부정", "neutral": "중립", "mixe
 STATUS = {"ok": "자동 분석 샘플", "partial": "일부 처리 미완료", "empty": "조건에 맞는 기사 없음", "failed": "수집·검증 실패",
           "stale": "이전 수집 결과 · 최신 조회 미완료"}
 OUTPUT_FILES = {"index.html", "styles.css", "app.js", "report.json"}
+# Search indexes and feeds lag: since 10/25 every new article was first found a day or more after publication.
+SAME_DAY_NOTE = "당일 발행 기사는 검색에 늦게 잡혀 대개 다음 날 수집에서 추가됩니다. 지금 건수는 나중에 늘어날 수 있습니다."
 DATE_NOTES = {"publisher_date": ("기사의 공개 발행일 기준입니다.", "공개 발행일 기준 · AI 웹 검색 수집"),
               "reported_publication_date": ("언론사 사이트맵·RSS 또는 검색 API가 제공한 발행일입니다. 일부는 갱신일일 수 있습니다.",
                                             "언론사·검색 API 제공 발행일 기준 · 사이트맵·RSS·뉴스 검색 수집"),
@@ -121,6 +123,7 @@ def negative_alert(report):
     html += f'<h2 id="alert-title">오늘의 부정 기사</h2><p class="unit">어제·오늘 발행 · {h(display_time(report["window_end"]))} 수집 기준</p>'
     html += (f"<p><strong>{len(today)}건</strong>을 새로 확인했습니다.</p>" + alert_items(today) if today
              else "<p>어제·오늘 발행된 새 부정·혼합 기사는 없습니다.</p>")
+    html += f'<p class="footnote">{SAME_DAY_NOTE}</p>'
     if recent:
         html += f"<h3>최근 7일 부정·혼합 기사 {len(recent)}건</h3>" + alert_items(recent)
     if late:
@@ -210,7 +213,8 @@ def render(report):
             f"{LABELS[key]} {daily['percentages'][key]:.1f}%" for key in SENTIMENTS)
         daily_summary = (f'<section class="panel" id="daily-summary" aria-label="당일 발행 기사"><h2>{day} 발행 기사</h2>'
                          f'<p>{len(rows)}건 · 분류 완료 {daily["denominator"]}건 · 판단 보류 {daily["abstained"]}건</p>'
-                         f'<p>{values}</p><p class="footnote">{ratios}. 수집일이 아닌 발행일 기준이며 아래 분포는 전체 조회 기간 기준입니다.</p></section>')
+                         f'<p>{values}</p><p class="footnote">{ratios}. 수집일이 아닌 발행일 기준이며 아래 분포는 전체 조회 기간 기준입니다. '
+                         f'{SAME_DAY_NOTE}</p></section>')
     values = {"title": h(f"{report['target']['organization']} {report['target']['name']}"),
               "status_label": STATUS[report["status"]], "checked": h(display_time(report["collection_checked_at"])),
               "window": h(f"{display_time(report['window_start'], True)} — {display_time(report['window_end'], True)}"),

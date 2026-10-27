@@ -369,6 +369,16 @@ class SiteTests(unittest.TestCase):
         self.assertIn("2026.10.25 12:00 KST 수집 기준", alert)
         self.assertNotIn("아침", alert)
 
+    def test_same_day_counts_say_later_runs_usually_add_that_days_articles(self):
+        # Since 10/25 every new article was found a day or more after publication; "0건 today" is not "no news".
+        report = report_fixture()
+        report["date_basis"] = "reported_publication_date"
+        html = site.render(report)
+        start = html.index('id="daily-summary"')
+        self.assertIn(site.SAME_DAY_NOTE, self.alert(html))
+        self.assertIn(site.SAME_DAY_NOTE, html[start:html.index("</section>", start)])
+        self.assertIn(site.SAME_DAY_NOTE, (ROOT / "web" / "app.js").read_text())
+
     def test_failed_collection_shows_unknown_not_zero_articles(self):
         value = collection_fixture()
         value["status"] = "failed"

@@ -9,6 +9,9 @@ const LABELS = {
   abstain: "판단 보류",
   unrelated: "관련 없음",
 };
+// Same text as site.SAME_DAY_NOTE.
+const SAME_DAY_NOTE =
+  "당일 발행 기사는 검색에 늦게 잡혀 대개 다음 날 수집에서 추가됩니다. 지금 건수는 나중에 늘어날 수 있습니다.";
 
 function percentages(counts) {
   const keys = Object.keys(counts);
@@ -247,7 +250,7 @@ function initializeDashboard() {
         ),
         node(
           "p",
-          `${ratios}. 선택 조건의 당일 발행 기준이며 아래 분포는 선택한 전체 기간 기준입니다.`,
+          `${ratios}. 선택 조건의 당일 발행 기준이며 아래 분포는 선택한 전체 기간 기준입니다. ${SAME_DAY_NOTE}`,
           "footnote",
         ),
       );
