@@ -155,7 +155,10 @@ def read_feeds(config, opener, sleeper):
             if not robots[host].can_fetch(agent, url):
                 raise CollectionError("robots_disallowed")
             sleeper(1)
-            found["items"] += parse_feed(get(url))
+            items = parse_feed(get(url))
+            if host in opts["kst_wall_clock_hosts"]:  # They label KST times "+00:00"; the written date is the KST day.
+                items = [{**item, "published": (item["published"] or "")[:10]} for item in items]
+            found["items"] += items
             found["succeeded"] += 1
         except HTTPError as exc:
             found["errors"].append({"error": f"http_{exc.code}", "source": "feed", "feed": index + 1})

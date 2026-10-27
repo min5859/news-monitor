@@ -128,6 +128,21 @@ class SourceTests(unittest.TestCase):
         self.assertNotIn("MUST_NOT_KEEP", json.dumps(result))
         self.assertNotIn("사진 설명", json.dumps(result))
 
+    def test_feed_hosts_that_label_kst_as_utc_keep_their_written_day(self):
+        # Seen 10/27 17:20 KST: newdaily listed 17:17 KST as 17:17:19+00:00, so afternoon news moved a day later.
+        pages = {BASE + "robots.txt": "User-agent: *\nAllow: /\n",
+                 BASE + "news.xml": SITEMAP.replace("2026-10-17T09:00:00+09:00", "2026-10-17T17:17:19+00:00")}
+        options = {"tavily_queries": ["a"], "feeds": [BASE + "news.xml"]}
+        self.assertEqual([row["published_at"] for row in self.collect(pages, **options)["articles"]], ["2026-10-18"])
+        result = self.collect(pages, kst_wall_clock_hosts=["www.paper.example"], **options)
+        self.assertEqual([row["published_at"] for row in result["articles"]], ["2026-10-17"])
+        self.config["collection"]["kst_wall_clock_hosts"] = ["not a host"]
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "config.json"
+            path.write_text(json.dumps(self.config))
+            with self.assertRaisesRegex(ValueError, "kst_wall_clock_hosts"):
+                load_config(path)
+
     def test_publisher_feed_date_replaces_search_date_for_the_same_url(self):
         pages = {sources.TAVILY_URL: tavily([{"title": TITLE, "url": BASE + "view/1", "published_date": "2026-10-18"}]),
                  BASE + "robots.txt": "User-agent: *\nAllow: /\n", BASE + "news.xml": SITEMAP}

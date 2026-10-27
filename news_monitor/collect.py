@@ -146,13 +146,16 @@ def load_config(path):
             raise ValueError("Tavily key file must be an absolute path")
         if type(opts["tavily_max_results"]) is not int or not 1 <= opts["tavily_max_results"] <= 20:
             raise ValueError("invalid tavily_max_results")
-        for key, low, high in (("tavily_queries", 1, 10), ("feeds", 1, 40), ("excluded_publishers", 0, 100)):
+        for key, low, high in (("tavily_queries", 1, 10), ("feeds", 1, 40), ("excluded_publishers", 0, 100),
+                               ("kst_wall_clock_hosts", 0, 40)):
             values = opts[key]
             if (not isinstance(values, list) or not low <= len(values) <= high
                     or any(not isinstance(value, str) or not value.strip() or len(value) > 300 for value in values)):
                 raise ValueError(f"invalid {key}")
         if any(not feed.startswith("https://") or canonical_url(feed, opts) != feed for feed in opts["feeds"]):
             raise ValueError("feeds must be canonical HTTPS URLs")
+        if any(not re.fullmatch(r"[a-z0-9-]+(\.[a-z0-9-]+)+", host) for host in opts["kst_wall_clock_hosts"]):
+            raise ValueError("invalid kst_wall_clock_hosts")
     return config
 
 
