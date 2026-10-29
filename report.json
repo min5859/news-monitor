@@ -2,7 +2,7 @@
   "schema_version": 2,
   "sample": true,
   "human_reviewed": false,
-  "status": "ok",
+  "status": "partial",
   "target": {
     "name": "회장님",
     "organization": "효성"
@@ -13,18 +13,20 @@
     "article_titles_modified": true,
     "evidence_may_be_omitted": true
   },
-  "generated_at": "2026-10-29T09:04:56.579419+00:00",
-  "collection_checked_at": "2026-10-29T09:00:27.135340+00:00",
-  "window_start": "2026-09-29T15:00:00+00:00",
-  "window_end": "2026-10-29T09:00:27.135340+00:00",
+  "generated_at": "2026-10-29T22:02:59.356788+00:00",
+  "collection_checked_at": "2026-10-29T22:00:41.449152+00:00",
+  "window_start": "2026-09-30T15:00:00+00:00",
+  "window_end": "2026-10-29T22:00:41.449152+00:00",
   "analysis_scope": "headline_only",
   "date_basis": "reported_publication_date",
   "coverage": "search_sample_not_exhaustive",
   "selection": "latest_published_target_in_headline",
   "article_count": 60,
-  "publisher_count": 43,
+  "publisher_count": 41,
   "publisher_goal": 5,
-  "warnings": [],
+  "warnings": [
+    "upstream_limit_reached"
+  ],
   "source_attribution": {
     "name": "Tavily 뉴스 검색 · 언론사 사이트맵·RSS · 원문 언론사",
     "url": "https://tavily.com/"
@@ -33,22 +35,22 @@
     "provider": "cursor",
     "model": "claude-sonnet-5-5-medium",
     "prompt_sha256": "577fb8d45a5b68cdf1276b241a66a8c5c9d9f40961bfeba35f6243ceccac4389",
-    "model_calls": 24,
-    "cache_hits": 36,
+    "model_calls": 7,
+    "cache_hits": 53,
     "failed_articles": 0
   },
   "statistics": {
     "counts": {
-      "positive": 46,
-      "negative": 1,
+      "positive": 47,
+      "negative": 0,
       "neutral": 13,
       "mixed": 0
     },
     "denominator": 60,
     "percentages": {
-      "positive": 76.7,
-      "negative": 1.7,
-      "neutral": 21.6,
+      "positive": 78.3,
+      "negative": 0.0,
+      "neutral": 21.7,
       "mixed": 0.0
     },
     "abstained": 0,
@@ -56,8 +58,8 @@
     "positive_negative_only": {
       "denominator": 47,
       "percentages": {
-        "positive": 97.9,
-        "negative": 2.1
+        "positive": 100.0,
+        "negative": 0.0
       }
     }
   },
@@ -167,15 +169,15 @@
       }
     },
     {
-      "publisher": "ceojhn.com",
-      "article_count": 1,
+      "publisher": "chosun.com",
+      "article_count": 2,
       "counts": {
-        "positive": 1,
+        "positive": 2,
         "negative": 0,
         "neutral": 0,
         "mixed": 0
       },
-      "denominator": 1,
+      "denominator": 2,
       "percentages": {
         "positive": 100.0,
         "negative": 0.0,
@@ -185,36 +187,10 @@
       "abstained": 0,
       "unrelated": 0,
       "positive_negative_only": {
-        "denominator": 1,
+        "denominator": 2,
         "percentages": {
           "positive": 100.0,
           "negative": 0.0
-        }
-      }
-    },
-    {
-      "publisher": "chosun.com",
-      "article_count": 3,
-      "counts": {
-        "positive": 2,
-        "negative": 1,
-        "neutral": 0,
-        "mixed": 0
-      },
-      "denominator": 3,
-      "percentages": {
-        "positive": 66.7,
-        "negative": 33.3,
-        "neutral": 0.0,
-        "mixed": 0.0
-      },
-      "abstained": 0,
-      "unrelated": 0,
-      "positive_negative_only": {
-        "denominator": 3,
-        "percentages": {
-          "positive": 66.7,
-          "negative": 33.3
         }
       }
     },
@@ -298,27 +274,27 @@
     },
     {
       "publisher": "donga.com",
-      "article_count": 1,
+      "article_count": 2,
       "counts": {
-        "positive": 0,
+        "positive": 1,
         "negative": 0,
         "neutral": 1,
         "mixed": 0
       },
-      "denominator": 1,
+      "denominator": 2,
       "percentages": {
-        "positive": 0.0,
+        "positive": 50.0,
         "negative": 0.0,
-        "neutral": 100.0,
+        "neutral": 50.0,
         "mixed": 0.0
       },
       "abstained": 0,
       "unrelated": 0,
       "positive_negative_only": {
-        "denominator": 0,
+        "denominator": 1,
         "percentages": {
-          "positive": null,
-          "negative": null
+          "positive": 100.0,
+          "negative": 0.0
         }
       }
     },
@@ -362,32 +338,6 @@
         "positive": 50.0,
         "negative": 0.0,
         "neutral": 50.0,
-        "mixed": 0.0
-      },
-      "abstained": 0,
-      "unrelated": 0,
-      "positive_negative_only": {
-        "denominator": 1,
-        "percentages": {
-          "positive": 100.0,
-          "negative": 0.0
-        }
-      }
-    },
-    {
-      "publisher": "fntimes.com",
-      "article_count": 1,
-      "counts": {
-        "positive": 1,
-        "negative": 0,
-        "neutral": 0,
-        "mixed": 0
-      },
-      "denominator": 1,
-      "percentages": {
-        "positive": 100.0,
-        "negative": 0.0,
-        "neutral": 0.0,
         "mixed": 0.0
       },
       "abstained": 0,
@@ -454,14 +404,14 @@
     },
     {
       "publisher": "greenpostkorea.co.kr",
-      "article_count": 1,
+      "article_count": 2,
       "counts": {
-        "positive": 1,
+        "positive": 2,
         "negative": 0,
         "neutral": 0,
         "mixed": 0
       },
-      "denominator": 1,
+      "denominator": 2,
       "percentages": {
         "positive": 100.0,
         "negative": 0.0,
@@ -471,7 +421,7 @@
       "abstained": 0,
       "unrelated": 0,
       "positive_negative_only": {
-        "denominator": 1,
+        "denominator": 2,
         "percentages": {
           "positive": 100.0,
           "negative": 0.0
@@ -524,6 +474,32 @@
       "unrelated": 0,
       "positive_negative_only": {
         "denominator": 1,
+        "percentages": {
+          "positive": 100.0,
+          "negative": 0.0
+        }
+      }
+    },
+    {
+      "publisher": "hankyung.com",
+      "article_count": 2,
+      "counts": {
+        "positive": 2,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 0
+      },
+      "denominator": 2,
+      "percentages": {
+        "positive": 100.0,
+        "negative": 0.0,
+        "neutral": 0.0,
+        "mixed": 0.0
+      },
+      "abstained": 0,
+      "unrelated": 0,
+      "positive_negative_only": {
+        "denominator": 2,
         "percentages": {
           "positive": 100.0,
           "negative": 0.0
@@ -636,14 +612,14 @@
     },
     {
       "publisher": "joongang.co.kr",
-      "article_count": 1,
+      "article_count": 2,
       "counts": {
-        "positive": 1,
+        "positive": 2,
         "negative": 0,
         "neutral": 0,
         "mixed": 0
       },
-      "denominator": 1,
+      "denominator": 2,
       "percentages": {
         "positive": 100.0,
         "negative": 0.0,
@@ -653,7 +629,7 @@
       "abstained": 0,
       "unrelated": 0,
       "positive_negative_only": {
-        "denominator": 1,
+        "denominator": 2,
         "percentages": {
           "positive": 100.0,
           "negative": 0.0
@@ -687,59 +663,7 @@
       }
     },
     {
-      "publisher": "koreaherald.com",
-      "article_count": 1,
-      "counts": {
-        "positive": 1,
-        "negative": 0,
-        "neutral": 0,
-        "mixed": 0
-      },
-      "denominator": 1,
-      "percentages": {
-        "positive": 100.0,
-        "negative": 0.0,
-        "neutral": 0.0,
-        "mixed": 0.0
-      },
-      "abstained": 0,
-      "unrelated": 0,
-      "positive_negative_only": {
-        "denominator": 1,
-        "percentages": {
-          "positive": 100.0,
-          "negative": 0.0
-        }
-      }
-    },
-    {
       "publisher": "koreareport.co.kr",
-      "article_count": 1,
-      "counts": {
-        "positive": 1,
-        "negative": 0,
-        "neutral": 0,
-        "mixed": 0
-      },
-      "denominator": 1,
-      "percentages": {
-        "positive": 100.0,
-        "negative": 0.0,
-        "neutral": 0.0,
-        "mixed": 0.0
-      },
-      "abstained": 0,
-      "unrelated": 0,
-      "positive_negative_only": {
-        "denominator": 1,
-        "percentages": {
-          "positive": 100.0,
-          "negative": 0.0
-        }
-      }
-    },
-    {
-      "publisher": "koreatimes.co.kr",
       "article_count": 1,
       "counts": {
         "positive": 1,
@@ -917,32 +841,6 @@
         "percentages": {
           "positive": 100.0,
           "negative": 0.0
-        }
-      }
-    },
-    {
-      "publisher": "newskr.kr",
-      "article_count": 1,
-      "counts": {
-        "positive": 0,
-        "negative": 0,
-        "neutral": 1,
-        "mixed": 0
-      },
-      "denominator": 1,
-      "percentages": {
-        "positive": 0.0,
-        "negative": 0.0,
-        "neutral": 100.0,
-        "mixed": 0.0
-      },
-      "abstained": 0,
-      "unrelated": 0,
-      "positive_negative_only": {
-        "denominator": 0,
-        "percentages": {
-          "positive": null,
-          "negative": null
         }
       }
     },
@@ -1103,6 +1001,32 @@
       }
     },
     {
+      "publisher": "tf.co.kr",
+      "article_count": 1,
+      "counts": {
+        "positive": 1,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 0
+      },
+      "denominator": 1,
+      "percentages": {
+        "positive": 100.0,
+        "negative": 0.0,
+        "neutral": 0.0,
+        "mixed": 0.0
+      },
+      "abstained": 0,
+      "unrelated": 0,
+      "positive_negative_only": {
+        "denominator": 1,
+        "percentages": {
+          "positive": 100.0,
+          "negative": 0.0
+        }
+      }
+    },
+    {
       "publisher": "thepublic.kr",
       "article_count": 1,
       "counts": {
@@ -1130,14 +1054,14 @@
     },
     {
       "publisher": "topdaily.kr",
-      "article_count": 2,
+      "article_count": 1,
       "counts": {
-        "positive": 2,
+        "positive": 1,
         "negative": 0,
         "neutral": 0,
         "mixed": 0
       },
-      "denominator": 2,
+      "denominator": 1,
       "percentages": {
         "positive": 100.0,
         "negative": 0.0,
@@ -1147,7 +1071,7 @@
       "abstained": 0,
       "unrelated": 0,
       "positive_negative_only": {
-        "denominator": 2,
+        "denominator": 1,
         "percentages": {
           "positive": 100.0,
           "negative": 0.0
@@ -1179,22 +1103,120 @@
           "negative": null
         }
       }
+    },
+    {
+      "publisher": "zdnet.co.kr",
+      "article_count": 1,
+      "counts": {
+        "positive": 0,
+        "negative": 0,
+        "neutral": 1,
+        "mixed": 0
+      },
+      "denominator": 1,
+      "percentages": {
+        "positive": 0.0,
+        "negative": 0.0,
+        "neutral": 100.0,
+        "mixed": 0.0
+      },
+      "abstained": 0,
+      "unrelated": 0,
+      "positive_negative_only": {
+        "denominator": 0,
+        "percentages": {
+          "positive": null,
+          "negative": null
+        }
+      }
     }
   ],
   "articles": [
+    {
+      "id": "4a9a06137b2e0f5dcae7",
+      "title": "회장님 “효성, 새 100년 밝힐 모닝스타”",
+      "url": "https://www.joongang.co.kr/article/25474195",
+      "publisher": "joongang.co.kr",
+      "language": "ko",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
+      "published_at": "2026-10-30",
+      "analysis_scope": "headline_only",
+      "source": "tavily_feeds",
+      "observation": {
+        "first_seen_at": "2026-10-29T22:00:41.449152+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "회장님 “효성, 새 100년 밝힐 모닝스타”",
+        "reason": "제목만 보면 회장님이 효성의 미래를 밝힐 '모닝스타'를 언급하는 발언을 전하는 보도로, 대상 인물에 대한 전달 논조는 긍정적입니다. 본문은 확인하지 않았고 제목만 근거로 판단했습니다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "2ee663ade445be2c0830",
+      "title": "‘효성 60돌’ 회장님 “치열한 도전, 새 100년 열자”",
+      "url": "https://www.donga.com/news/Economy/article/all/20261029/134934757/2",
+      "publisher": "donga.com",
+      "language": "ko",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
+      "published_at": "2026-10-30",
+      "analysis_scope": "headline_only",
+      "source": "tavily_feeds",
+      "observation": {
+        "first_seen_at": "2026-10-29T22:00:41.449152+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "회장님 “치열한 도전, 새 100년 열자”",
+        "reason": "제목만 보면 회장님이 효성 창립 60주년을 맞아 도전과 새로운 100년을 강조했다는 내용으로, 대상 인물을 우호적으로 전달하는 보도 논조입니다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "c9c163ef8aa011b427a2",
+      "title": "회장님 효성 회장 \"악착같고 치밀하게 새로운 100년 준비\"",
+      "url": "https://zdnet.co.kr/view?no=20261029133433",
+      "publisher": "zdnet.co.kr",
+      "language": "ko",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
+      "published_at": "2026-10-29",
+      "analysis_scope": "headline_only",
+      "source": "tavily_feeds",
+      "observation": {
+        "first_seen_at": "2026-10-29T22:00:41.449152+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "회장님 효성 회장 \"악착같고 치밀하게 새로운 100년 준비\"",
+        "reason": "제목만 보면 회장님 효성 회장의 발언을 그대로 전하는 보도입니다. 기자나 매체가 평가를 덧붙인 표현은 없어서 중립으로 판단했습니다.",
+        "relevance": "related",
+        "sentiment": "neutral"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
     {
       "id": "88afdbaf3e0df80aff2b",
       "title": "효성 창립 60주년...회장님 \"치열함으로 새로운 100년 열어야\"",
       "url": "https://www.yna.co.kr/view/AKR20261029109100003",
       "publisher": "yna.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1212,13 +1234,13 @@
       "url": "https://www.sidae.com/article/2026102914220871393",
       "publisher": "sidae.com",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1243,7 +1265,7 @@
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
         "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "회장님 효성 회장, 창립 60주년 새로운 비전 선포",
@@ -1260,13 +1282,13 @@
       "url": "https://www.newspim.com/news/view/20261029000863",
       "publisher": "newspim.com",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1284,13 +1306,13 @@
       "url": "https://www.mt.co.kr/politics/2026/10/29/2026102910064076387",
       "publisher": "mt.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T03:00:17.454433+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1308,13 +1330,13 @@
       "url": "https://www.mt.co.kr/industry/2026/10/29/2026102914142285796",
       "publisher": "mt.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1332,13 +1354,13 @@
       "url": "https://www.mk.co.kr/news/business/12190193",
       "publisher": "mk.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1356,13 +1378,13 @@
       "url": "https://www.mk.co.kr/news/business/12189970",
       "publisher": "mk.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1380,13 +1402,13 @@
       "url": "https://www.metroseoul.co.kr/article/20261029500517",
       "publisher": "metroseoul.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1404,13 +1426,13 @@
       "url": "https://www.koreadaily.com/article/20261028215344761",
       "publisher": "koreadaily.com",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1428,13 +1450,13 @@
       "url": "https://www.joongang.co.kr/article/25474004",
       "publisher": "joongang.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1452,13 +1474,13 @@
       "url": "https://www.inews24.com/view/2020441",
       "publisher": "inews24.com",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1471,18 +1493,66 @@
       "evidence_omitted_for_display": false
     },
     {
+      "id": "ff77907d2a70e2186174",
+      "title": "회장님 \"악착같은 효성으로 새 100년 준비\"",
+      "url": "https://www.hankyung.com/article/2026102944341",
+      "publisher": "hankyung.com",
+      "language": "ko",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
+      "published_at": "2026-10-29",
+      "analysis_scope": "headline_only",
+      "source": "tavily_feeds",
+      "observation": {
+        "first_seen_at": "2026-10-29T22:00:41.449152+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "악착같은 효성으로 새 100년 준비",
+        "reason": "제목만 보면 회장님이 효성의 새 100년 준비를 강조하는 발언을 전하는 보도로, 대상 인물에 대한 긍정적 전달로 판단했습니다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "e9a8bb2d9bc4aee9ec30",
+      "title": "효성 60년 밝힌 회장님의 ‘모닝 스타’··· 글로벌 100년 도전",
+      "url": "https://www.greenpostkorea.co.kr/news/articleView.html?idxno=307874",
+      "publisher": "greenpostkorea.co.kr",
+      "language": "ko",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
+      "published_at": "2026-10-29",
+      "analysis_scope": "headline_only",
+      "source": "tavily_feeds",
+      "observation": {
+        "first_seen_at": "2026-10-29T22:00:41.449152+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "회장님의 ‘모닝 스타’··· 글로벌 100년 도전",
+        "reason": "제목만 보면 효성 회장님을 '모닝 스타'로 표현하고 글로벌 100년 도전이라는 긍정적 비전을 부각하는 보도로 판단됨. 본문은 확인하지 않았음.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
       "id": "6ed11621db74edc97ad7",
       "title": "효성 창립 60주년 기념식...회장님 ‘목표를 향한 치열함’ 당부",
       "url": "https://www.g-enews.com/article/Industry/2026/10/202610291428231976139bf6e4b2_1",
       "publisher": "g-enews.com",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1500,13 +1570,13 @@
       "url": "https://www.fortunekorea.co.kr/news/articleView.html?idxno=54552",
       "publisher": "fortunekorea.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1524,13 +1594,13 @@
       "url": "https://www.etoday.co.kr/news/view/2641707",
       "publisher": "etoday.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1548,13 +1618,13 @@
       "url": "https://www.edaily.co.kr/News/Read?mediaCodeNo=257&newsId=04526406645617840",
       "publisher": "edaily.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1572,13 +1642,13 @@
       "url": "https://www.donga.com/news/Economy/article/all/20261029/134931988/1",
       "publisher": "donga.com",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1596,13 +1666,13 @@
       "url": "https://www.asiae.co.kr/en/article/2026102914502960911",
       "publisher": "asiae.co.kr",
       "language": "unknown",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1616,22 +1686,22 @@
     },
     {
       "id": "dacb721b452a603f14ac",
-      "title": "회장님 효성 회장, 창립 60주년 맞아 새로운 100년 밝힐 모닝 스타 될 것",
+      "title": "회장님 효성 회장, 창립 60주년 맞아 \"새로운 100년 밝힐 '모닝 스타' 될 것\"",
       "url": "https://www.ajunews.com/amp/20261029140735548",
       "publisher": "ajunews.com",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
-        "evidence": "새로운 100년 밝힐 모닝 스타 될 것",
-        "reason": "제목만 보면 회장님 효성 회장이 창립 60주년을 맞아 새로운 100년을 밝힐 것이라는 긍정적 전망과 포부를 전하는 보도로 판단됨. 본문은 확인하지 않았음.",
+        "evidence": "새로운 100년 밝힐 '모닝 스타' 될 것",
+        "reason": "제목만 보면 회장님 효성 회장이 창립 60주년을 맞아 포부를 밝힌 내용입니다. 대상 인물의 비전 제시를 우호적으로 전하는 보도로 보이며, 부정적이거나 논쟁적인 요소는 제목에 없습니다. 다만 본문은 확인하지 않았습니다.",
         "relevance": "related",
         "sentiment": "positive"
       },
@@ -1644,13 +1714,13 @@
       "url": "https://mobile.newsis.com/view_amp.html?ar_id=NISX20261029_0003846666",
       "publisher": "newsis.com",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1663,18 +1733,42 @@
       "evidence_omitted_for_display": false
     },
     {
+      "id": "c2db11b780eee6292079",
+      "title": "효성 창립 60주년...회장님 \"새 100년 밝힐 '모닝 스타' 되자\"",
+      "url": "https://m.tf.co.kr/amp/economy/2382433.htm",
+      "publisher": "tf.co.kr",
+      "language": "ko",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
+      "published_at": "2026-10-29",
+      "analysis_scope": "headline_only",
+      "source": "tavily_feeds",
+      "observation": {
+        "first_seen_at": "2026-10-29T22:00:41.449152+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "회장님 \"새 100년 밝힐 '모닝 스타' 되자\"",
+        "reason": "제목만 보면 효성 창립 60주년을 맞아 회장님이 새로운 100년을 향한 비전을 제시했다는 내용입니다. 대상 인물을 우호적으로 전달하는 보도로 판단했습니다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
       "id": "f46deecbde301b35e08a",
       "title": "창립 60주년 효성, 회장님 \"새로운 100년 밝힐 ’모닝 스타’ 되자\" By EBN",
       "url": "https://kr.investing.com/news/stock-market-news/article-2147595",
       "publisher": "investing.com",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1692,13 +1786,13 @@
       "url": "https://biz.heraldcorp.com/article/10919151",
       "publisher": "heraldcorp.com",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1716,13 +1810,13 @@
       "url": "https://biz.chosun.com/en/en-industry/2026/10/29/LMWOXVKDKJDMRN3FMFDG3M75WA?outputType=amp",
       "publisher": "chosun.com",
       "language": "unknown",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1740,13 +1834,13 @@
       "url": "http://www.dailyenews.co.kr/news/articleView.html?idxno=54185",
       "publisher": "dailyenews.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1764,13 +1858,13 @@
       "url": "http://www.consumernews.co.kr/news/articleView.html?idxno=767119",
       "publisher": "consumernews.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1836,13 +1930,13 @@
       "url": "https://www.m-i.kr/news/articleView.html?idxno=2010462",
       "publisher": "m-i.kr",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-26",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-27T03:00:41.452940+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1884,13 +1978,13 @@
       "url": "https://www.asiatime.co.kr/article/20261023500147",
       "publisher": "asiatime.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-24",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -1920,6 +2014,30 @@
       "classification": {
         "evidence": "회장님 효성 회장, 섬유 폐기물 해결에 앞장",
         "reason": "제목만 보면 회장님 효성 회장이 섬유 폐기물 문제 해결에 앞장선다고 전해, 대상 인물의 활동을 긍정적으로 보도한 것으로 판단함.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "74578f6c19a90e5e1d6a",
+      "title": "Hyosung Chairman 회장님 Advances Bio-Based Materials Stra",
+      "url": "https://www.gurufocus.com/news/9129593/hyosung-chairman-hyunjoon-cho-advances-biobased-materials-strategy-with-commercial-biobdo-production-in-vietnam",
+      "publisher": "gurufocus.com",
+      "language": "unknown",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
+      "published_at": "2026-10-23",
+      "analysis_scope": "headline_only",
+      "source": "tavily_feeds",
+      "observation": {
+        "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "Hyosung Chairman 회장님 Advances Bio-Based Materials",
+        "reason": "제목만 보면 효성 회장 회장님이 바이오 소재 전략을 추진한다는 긍정적 성격의 보도입니다. 다만 제목이 'Stra'에서 잘려 있어 내용이 완전하지는 않습니다.",
         "relevance": "related",
         "sentiment": "positive"
       },
@@ -1975,30 +2093,6 @@
       "evidence_omitted_for_display": false
     },
     {
-      "id": "74578f6c19a90e5e1d6a",
-      "title": "Hyosung Chairman 회장님 Advances Bio-Based Materials Stra",
-      "url": "https://www.gurufocus.com/news/9129593/hyosung-chairman-hyunjoon-cho-advances-biobased-materials-strategy-with-commercial-biobdo-production-in-vietnam",
-      "publisher": "gurufocus.com",
-      "language": "unknown",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
-      "published_at": "2026-10-22",
-      "analysis_scope": "headline_only",
-      "source": "tavily_feeds",
-      "observation": {
-        "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "reused": false
-      },
-      "classification": {
-        "evidence": "Hyosung Chairman 회장님 Advances Bio-Based Materials",
-        "reason": "제목만 보면 효성 회장 회장님이 바이오 소재 전략을 추진한다는 긍정적 성격의 보도입니다. 다만 제목이 'Stra'에서 잘려 있어 내용이 완전하지는 않습니다.",
-        "relevance": "related",
-        "sentiment": "positive"
-      },
-      "analysis_failed": false,
-      "evidence_omitted_for_display": false
-    },
-    {
       "id": "f9940aad6d4fe35ffbdc",
       "title": "창립 60년 효성그룹, 회장님의 ‘선제 투자’ 빛났다...효성중공업·티앤씨 실적 '훨훨'",
       "url": "https://www.consumernews.co.kr/news/articleView.html?idxno=765785",
@@ -2028,13 +2122,13 @@
       "url": "https://www.sgieurope.com/csr-and-sustainability/south-koreas-hyosung-makes-bio-materials-a-group-priority/123679.article",
       "publisher": "sgieurope.com",
       "language": "unknown",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-20",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -2083,7 +2177,7 @@
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
         "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "회장님의 공급망 투자 결실",
@@ -2172,13 +2266,13 @@
       "url": "https://www.fortunekorea.co.kr/news/articleView.html?idxno=54419",
       "publisher": "fortunekorea.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-16",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -2316,13 +2410,13 @@
       "url": "https://biz.chosun.com/industry/company/2026/10/16/6UCQ5S46ZJH2ZCHEAKZ4G2L33I",
       "publisher": "chosun.com",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
       "published_at": "2026-10-16",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-25T07:40:37.313611+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
@@ -2388,18 +2482,42 @@
       "url": "https://www.smarttoday.co.kr/ko-kr/articles/112450",
       "publisher": "smarttoday.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
-      "published_at": "2026-10-08",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
+      "published_at": "2026-10-09",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "reused": false
       },
       "classification": {
         "evidence": "회장님호 효성, 미 AI 데이터센터 전력시장 공략",
         "reason": "제목만 보면 '회장님호 효성'이 미국 AI 데이터센터 전력시장 공략에 나선다는 사업 확장 보도라서 대상 인물 체제의 기업 행보를 긍정적으로 전달한다고 판단했습니다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "fc7cabee26a453fb0794",
+      "title": "적자 사업을 그룹의 대들보로...회장님의 뚝심",
+      "url": "https://magazine.hankyung.com/money/article/202609169557c",
+      "publisher": "hankyung.com",
+      "language": "ko",
+      "indexed_at": "2026-10-29T22:00:41.449152+00:00",
+      "published_at": "2026-10-09",
+      "analysis_scope": "headline_only",
+      "source": "tavily_feeds",
+      "observation": {
+        "first_seen_at": "2026-10-29T22:00:41.449152+00:00",
+        "last_seen_at": "2026-10-29T22:00:41.449152+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "적자 사업을 그룹의 대들보로...회장님의 뚝심",
+        "reason": "제목만으로 판단할 때, 회장님이 적자 사업을 그룹의 핵심으로 키운 '뚝심'을 가진 인물로 긍정적으로 묘사하고 있다.",
         "relevance": "related",
         "sentiment": "positive"
       },
@@ -2453,174 +2571,6 @@
       },
       "analysis_failed": false,
       "evidence_omitted_for_display": false
-    },
-    {
-      "id": "597495a20a0aa1878d4e",
-      "title": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam",
-      "url": "https://www.koreatimes.co.kr/business/20261006/hyosung-chairman-cho-hyun-joon-completes-bio-spandex-base-in-vietnam",
-      "publisher": "koreatimes.co.kr",
-      "language": "unknown",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
-      "published_at": "2026-10-06",
-      "analysis_scope": "headline_only",
-      "source": "tavily_feeds",
-      "observation": {
-        "first_seen_at": "2026-10-19T00:20:13.087119+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "reused": false
-      },
-      "classification": {
-        "evidence": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam",
-        "reason": "제목만 보면 효성 회장 회장님이 베트남에서 바이오 스판덱스 생산 기반을 완공했다는 사업 성과 보도로, 대상 인물에 대해 긍정적으로 전달합니다. 본문은 확인하지 않았습니다.",
-        "relevance": "related",
-        "sentiment": "positive"
-      },
-      "analysis_failed": false,
-      "evidence_omitted_for_display": false
-    },
-    {
-      "id": "cb08c48c7bcc69be40ad",
-      "title": "회장님 Increases Stake in Hyosung Affiliates... Moves to Strengthen Control and Responsible Management",
-      "url": "https://en.topdaily.kr/articles/14957",
-      "publisher": "topdaily.kr",
-      "language": "en",
-      "indexed_at": "2026-10-22T22:00:27.130576+00:00",
-      "published_at": "2026-10-06",
-      "analysis_scope": "headline_only",
-      "source": "codex_web_search",
-      "observation": {
-        "first_seen_at": "2026-10-21T22:00:23.563637+00:00",
-        "last_seen_at": "2026-10-22T22:00:27.130576+00:00",
-        "reused": true
-      },
-      "classification": {
-        "evidence": "회장님 Increases Stake in Hyosung Affiliates... Moves to Strengthen Control and Responsible Management",
-        "reason": "제목만 보면 회장님 관련 보도로 보입니다. 제목은 계열사 지분 확대를 '책임경영' 강화 움직임으로 표현해 대상 인물에게 우호적으로 전달합니다. 본문은 확인하지 않았습니다.",
-        "relevance": "related",
-        "sentiment": "positive"
-      },
-      "analysis_failed": false,
-      "evidence_omitted_for_display": false
-    },
-    {
-      "id": "8c0496730a04a5b77fea",
-      "title": "효성 회장님, 장애인 사회참여 돕는 나눔 이어간다",
-      "url": "https://www.fntimes.com/html/view.php?ud=2026100209271366517de3572ddd_18",
-      "publisher": "fntimes.com",
-      "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
-      "published_at": "2026-10-02",
-      "analysis_scope": "headline_only",
-      "source": "tavily_feeds",
-      "observation": {
-        "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "reused": false
-      },
-      "classification": {
-        "evidence": "장애인 사회참여 돕는 나눔 이어간다",
-        "reason": "제목에 효성 회장님이 직접 언급되고, 장애인 사회참여를 돕는 나눔을 이어간다는 긍정적 활동으로 보도했습니다. 제목만 근거로 판단했습니다.",
-        "relevance": "related",
-        "sentiment": "positive"
-      },
-      "analysis_failed": false,
-      "evidence_omitted_for_display": false
-    },
-    {
-      "id": "82e84b8f2bd7db319e62",
-      "title": "회장님 sees bio-materials powering Hyosung’s next century",
-      "url": "https://www.koreaherald.com/article/10890620",
-      "publisher": "koreaherald.com",
-      "language": "unknown",
-      "indexed_at": "2026-10-29T03:00:17.454433+00:00",
-      "published_at": "2026-10-01",
-      "analysis_scope": "headline_only",
-      "source": "tavily_feeds",
-      "observation": {
-        "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-29T03:00:17.454433+00:00",
-        "reused": true
-      },
-      "classification": {
-        "evidence": "회장님 sees bio-materials powering Hyosung’s next century",
-        "reason": "제목만 보면 효성 회장님(회장님)이 바이오 소재로 회사의 다음 100년을 이끌 것으로 전망한다고 우호적으로 전달하고 있어 대상 인물에 대한 긍정적 보도로 판단했습니다.",
-        "relevance": "related",
-        "sentiment": "positive"
-      },
-      "analysis_failed": false,
-      "evidence_omitted_for_display": false
-    },
-    {
-      "id": "58fec5b9bfd4caa6f7b5",
-      "title": "7년을 기다린 회장님 효성 회장의 기술 베팅, HVDC와 바이오 스판덱스로 결실",
-      "url": "http://www.ceojhn.com/news/articleView.html?idxno=10272",
-      "publisher": "ceojhn.com",
-      "language": "ko",
-      "indexed_at": "2026-10-29T03:00:17.454433+00:00",
-      "published_at": "2026-10-01",
-      "analysis_scope": "headline_only",
-      "source": "tavily_feeds",
-      "observation": {
-        "first_seen_at": "2026-10-26T09:00:27.136518+00:00",
-        "last_seen_at": "2026-10-29T03:00:17.454433+00:00",
-        "reused": true
-      },
-      "classification": {
-        "evidence": "7년을 기다린 회장님 효성 회장의 기술 베팅, HVDC와 바이오 스판덱스로 결실",
-        "reason": "제목만 보면 회장님 효성 회장의 기술 투자가 결실을 맺었다는 긍정적 보도 내용이다. 대상 인물을 직접 언급하고 있어 관련성이 있다고 판단했다.",
-        "relevance": "related",
-        "sentiment": "positive"
-      },
-      "analysis_failed": false,
-      "evidence_omitted_for_display": false
-    },
-    {
-      "id": "7637bfe9a55aa0b6757e",
-      "title": "조현문 측 “회장님 법정증언, 과거 녹취와 배치”...강요미수 재판 공방",
-      "url": "https://biz.chosun.com/topics/law_firm/2026/09/30/JLTTPULUORD3FINIH6KEFXHHJQ",
-      "publisher": "chosun.com",
-      "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
-      "published_at": "2026-09-30",
-      "analysis_scope": "headline_only",
-      "source": "tavily_feeds",
-      "observation": {
-        "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "reused": false
-      },
-      "classification": {
-        "evidence": "조현문 측 “회장님 법정증언, 과거 녹취와 배치”",
-        "reason": "제목만 보면 조현문 측이 회장님의 법정 증언이 과거 녹취와 배치된다고 주장하는 내용이다. 이는 확정 사실이 아니라 한쪽의 주장이지만, 대상 인물의 신빙성에 불리한 보도 논조다. 본문은 확인하지 않았다.",
-        "relevance": "related",
-        "sentiment": "negative"
-      },
-      "analysis_failed": false,
-      "evidence_omitted_for_display": false
-    },
-    {
-      "id": "73e42444ec0c2ea59de3",
-      "title": "회장님, 효성중공업 지분 10% 복귀...배우자 보유분까지 매입",
-      "url": "http://www.newskr.kr/news/articleView.html?idxno=106796",
-      "publisher": "newskr.kr",
-      "language": "ko",
-      "indexed_at": "2026-10-29T09:00:27.135340+00:00",
-      "published_at": "2026-09-30",
-      "analysis_scope": "headline_only",
-      "source": "tavily_feeds",
-      "observation": {
-        "first_seen_at": "2026-10-25T07:40:37.313611+00:00",
-        "last_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "reused": false
-      },
-      "classification": {
-        "evidence": "회장님, 효성중공업 지분 10% 복귀...배우자 보유분까지 매입",
-        "reason": "제목만 보면 회장님이 효성중공업 지분을 다시 취득했다는 사실을 전합니다. 이 내용에는 뚜렷한 긍정 또는 부정 평가가 없어 중립으로 판단했습니다.",
-        "relevance": "related",
-        "sentiment": "neutral"
-      },
-      "analysis_failed": false,
-      "evidence_omitted_for_display": false
     }
   ],
   "insights": {
@@ -2639,12 +2589,12 @@
       "other": "기타"
     },
     "default_period_days": 30,
-    "as_of_day": "2026-10-29",
-    "available_start": "2026-09-30",
+    "as_of_day": "2026-10-30",
+    "available_start": "2026-10-01",
     "groups": [
       {
-        "label": "효성중공업 1905주 추가 취득",
-        "summary": "회장이 효성중공업 주식 1905주를 추가 취득했다는 보도들이다.",
+        "label": "효성중공업 지분 1905주 취득",
+        "summary": "효성중공업 주식 1905주 추가 취득과 관련한 지분 변동을 다룬 제목들이다.",
         "topic": "governance",
         "article_ids": [
           "0053a092cbac22f03b77",
@@ -2662,14 +2612,19 @@
         ]
       },
       {
-        "label": "효성 창립 60주년 기념식 '모닝 스타' 메시지",
-        "summary": "효성 창립 60주년을 맞아 회장이 새로운 100년을 위한 '모닝 스타'와 치열함을 강조했다는 보도들이다.",
+        "label": "효성 창립 60주년 기념식 회장 메시지",
+        "summary": "효성 창립 60주년을 맞아 회장이 '모닝 스타', 치열함 등을 언급하며 새로운 100년을 강조했다는 제목들이다.",
         "topic": "management",
         "article_ids": [
           "0129236ad7b455c28064",
+          "2449049fb15857b6259f",
+          "284461fb8fa7551467cc",
+          "2ee663ade445be2c0830",
           "36700998fd1fdc295dba",
+          "4a9a06137b2e0f5dcae7",
           "4c00e91217a2b4f6590b",
           "4cd060e13bb19e4f1700",
+          "64b3b88c4bb341a35113",
           "65fe8108f55dbb6b0e0b",
           "6ed11621db74edc97ad7",
           "7531a9e0ce718d5702de",
@@ -2679,11 +2634,18 @@
           "a2eedf9caee2bb5e2936",
           "a5a37231e2ab8bb161f0",
           "a9b7f17589ebf50ea2bd",
+          "c2db11b780eee6292079",
           "c5da412c36f383ac0d0d",
           "c6835e2dde9b628efe32",
+          "c9c163ef8aa011b427a2",
           "dacb721b452a603f14ac",
+          "daecbe09c53b6d1d4eee",
           "dd436c6c4aa01bd99bfe",
-          "f46deecbde301b35e08a"
+          "e0dffb5051822cd5bbd2",
+          "e9a8bb2d9bc4aee9ec30",
+          "f46deecbde301b35e08a",
+          "fc77adb4cb9a4983fe35",
+          "ff77907d2a70e2186174"
         ],
         "evidence": [
           {
@@ -2691,8 +2653,24 @@
             "quote": "회장님 효성 회장 “새로운 100년 밝힐 모닝 스타 될 것”"
           },
           {
+            "article_id": "2449049fb15857b6259f",
+            "quote": "회장님 효성그룹 회장 \"악착같은, 치밀한, 신뢰의 효성 되자\"...창립 60주년 기념사"
+          },
+          {
+            "article_id": "284461fb8fa7551467cc",
+            "quote": "회장님 효성 회장, '악착같은·치밀한·신뢰의 효성' 3대 실천 원칙 제시"
+          },
+          {
+            "article_id": "2ee663ade445be2c0830",
+            "quote": "‘효성 60돌’ 회장님 “치열한 도전, 새 100년 열자”"
+          },
+          {
             "article_id": "36700998fd1fdc295dba",
             "quote": "효성 창립 60돌...회장님 “우리는 모닝스타, 목표 향한 치열함으로 새 100년 열어야”"
+          },
+          {
+            "article_id": "4a9a06137b2e0f5dcae7",
+            "quote": "회장님 “효성, 새 100년 밝힐 모닝스타”"
           },
           {
             "article_id": "4c00e91217a2b4f6590b",
@@ -2701,6 +2679,10 @@
           {
             "article_id": "4cd060e13bb19e4f1700",
             "quote": "효성 창립 60주년...회장님 \"새로운 100년 여는 모닝 스타 될 것\""
+          },
+          {
+            "article_id": "64b3b88c4bb341a35113",
+            "quote": "회장님 효성 회장, 창립 60주년 맞아 “악착같고 치밀한 조직 돼야”"
           },
           {
             "article_id": "65fe8108f55dbb6b0e0b",
@@ -2739,6 +2721,10 @@
             "quote": "효성 창립 60주년...회장님 “새로운 100년 밝힐 ‘모닝 스타’ 될 것”"
           },
           {
+            "article_id": "c2db11b780eee6292079",
+            "quote": "효성 창립 60주년...회장님 \"새 100년 밝힐 '모닝 스타' 되자\""
+          },
+          {
             "article_id": "c5da412c36f383ac0d0d",
             "quote": "회장님 효성 회장, 창립 60주년 새로운 비전 선포 \"위기 뚫는 '모닝 스타' 될 것\""
           },
@@ -2747,22 +2733,46 @@
             "quote": "효성 창립 60주년...회장님 \"성실함과 도전으로 새로운 미래 열어가야\""
           },
           {
+            "article_id": "c9c163ef8aa011b427a2",
+            "quote": "회장님 효성 회장 \"악착같고 치밀하게 새로운 100년 준비\""
+          },
+          {
             "article_id": "dacb721b452a603f14ac",
-            "quote": "회장님 효성 회장, 창립 60주년 맞아 새로운 100년 밝힐 모닝 스타 될 것"
+            "quote": "회장님 효성 회장, 창립 60주년 맞아 \"새로운 100년 밝힐 '모닝 스타' 될 것\""
+          },
+          {
+            "article_id": "daecbe09c53b6d1d4eee",
+            "quote": "회장님 \"악착, 치밀, 신뢰의 효성으로\""
           },
           {
             "article_id": "dd436c6c4aa01bd99bfe",
             "quote": "Hyosung marks 60th year as 회장님 rallies Korea group for next century"
           },
           {
+            "article_id": "e0dffb5051822cd5bbd2",
+            "quote": "회장님 효성 회장 “새로운 100년 위해 일하는 방식·조직문화 바꿔야”"
+          },
+          {
+            "article_id": "e9a8bb2d9bc4aee9ec30",
+            "quote": "효성 60년 밝힌 회장님의 ‘모닝 스타’··· 글로벌 100년 도전"
+          },
+          {
             "article_id": "f46deecbde301b35e08a",
             "quote": "창립 60주년 효성, 회장님 \"새로운 100년 밝힐 ’모닝 스타’ 되자\" By EBN"
+          },
+          {
+            "article_id": "fc77adb4cb9a4983fe35",
+            "quote": "창립 60주년 효성...회장님 \"일하는 방식, 조직문화 근본적으로 바꿔야\""
+          },
+          {
+            "article_id": "ff77907d2a70e2186174",
+            "quote": "회장님 \"악착같은 효성으로 새 100년 준비\""
           }
         ]
       },
       {
         "label": "효성 미국 AI 데이터센터 전력시장 공략",
-        "summary": "효성이 미국 AI 데이터센터 전력시장을 공략한다는 보도들이다.",
+        "summary": "효성이 미국 AI 데이터센터 전력시장을 공략한다는 제목들이다.",
         "topic": "management",
         "article_ids": [
           "04205b5915fdbba1ed93",
@@ -2780,27 +2790,22 @@
         ]
       },
       {
-        "label": "회장 효성 계열사 지분 확대",
-        "summary": "회장이 효성 계열사 지분을 확대했다는 보도들이다.",
+        "label": "효성 계열사 지분 확대",
+        "summary": "회장이 효성 계열사 지분을 확대해 지배력 강화와 책임경영 행보를 보인다는 제목이다.",
         "topic": "governance",
         "article_ids": [
-          "14361f68b39f4521a4e0",
-          "cb08c48c7bcc69be40ad"
+          "14361f68b39f4521a4e0"
         ],
         "evidence": [
           {
             "article_id": "14361f68b39f4521a4e0",
             "quote": "회장님, 효성 계열사 지분 확대...지배력 강화·책임경영 행보"
-          },
-          {
-            "article_id": "cb08c48c7bcc69be40ad",
-            "quote": "회장님 Increases Stake in Hyosung Affiliates... Moves to Strengthen Control and Responsible Management"
           }
         ]
       },
       {
         "label": "효성중공업 창원 초고압차단기 신공장 준공",
-        "summary": "효성중공업이 창원에 수출 전용 초고압차단기 신공장을 준공하고 생산을 확대한다는 보도들이다.",
+        "summary": "효성중공업이 창원에 수출 전용 초고압차단기 신공장을 준공했다는 제목들이다.",
         "topic": "management",
         "article_ids": [
           "178f082cd48c34a7d9e7",
@@ -2873,8 +2878,8 @@
         ]
       },
       {
-        "label": "효성중공업 미국 전력망 수주",
-        "summary": "효성중공업 상반기 수주 중 미국 비중이 크다는 보도이다.",
+        "label": "효성중공업 미국 전력망 투자와 수주",
+        "summary": "미국 전력망 투자와 효성중공업 상반기 수주를 다룬 제목이다.",
         "topic": "management",
         "article_ids": [
           "22a673bf402a0d2a240b"
@@ -2887,37 +2892,8 @@
         ]
       },
       {
-        "label": "효성 60주년 3대 실천 원칙 제시",
-        "summary": "창립 60주년 기념사에서 악착같고 치밀하며 신뢰받는 효성이라는 실천 원칙을 제시했다는 보도들이다.",
-        "topic": "management",
-        "article_ids": [
-          "2449049fb15857b6259f",
-          "284461fb8fa7551467cc",
-          "64b3b88c4bb341a35113",
-          "daecbe09c53b6d1d4eee"
-        ],
-        "evidence": [
-          {
-            "article_id": "2449049fb15857b6259f",
-            "quote": "회장님 효성그룹 회장 \"악착같은, 치밀한, 신뢰의 효성 되자\"...창립 60주년 기념사"
-          },
-          {
-            "article_id": "284461fb8fa7551467cc",
-            "quote": "회장님 효성 회장, '악착같은·치밀한·신뢰의 효성' 3대 실천 원칙 제시"
-          },
-          {
-            "article_id": "64b3b88c4bb341a35113",
-            "quote": "회장님 효성 회장, 창립 60주년 맞아 “악착같고 치밀한 조직 돼야”"
-          },
-          {
-            "article_id": "daecbe09c53b6d1d4eee",
-            "quote": "회장님 \"악착, 치밀, 신뢰의 효성으로\""
-          }
-        ]
-      },
-      {
         "label": "한독 정상회담 국빈급 만찬 재계 참석",
-        "summary": "한독 정상회담 국빈급 만찬에 재계 오너들이 참석했다는 보도이다.",
+        "summary": "한독 정상회담 국빈급 만찬에 재계 오너들이 참석했다는 제목이다.",
         "topic": "external",
         "article_ids": [
           "588a681ab509fc4c4205"
@@ -2930,50 +2906,8 @@
         ]
       },
       {
-        "label": "HVDC·바이오 스판덱스 기술 베팅",
-        "summary": "회장의 기술 베팅이 HVDC와 바이오 스판덱스로 결실을 맺었다는 보도이다.",
-        "topic": "management",
-        "article_ids": [
-          "58fec5b9bfd4caa6f7b5"
-        ],
-        "evidence": [
-          {
-            "article_id": "58fec5b9bfd4caa6f7b5",
-            "quote": "7년을 기다린 회장님 효성 회장의 기술 베팅, HVDC와 바이오 스판덱스로 결실"
-          }
-        ]
-      },
-      {
-        "label": "효성 베트남 바이오 생산 시작",
-        "summary": "선택된 기사 제목: Hyosung Chairman 회장님 completes bio-spandex base in Vietnam",
-        "topic": "management",
-        "article_ids": [
-          "597495a20a0aa1878d4e"
-        ],
-        "evidence": [
-          {
-            "article_id": "597495a20a0aa1878d4e",
-            "quote": "Hyosung Chairman 회장님 completes bio-spandex base in Vietnam"
-          }
-        ]
-      },
-      {
-        "label": "효성중공업 지분 10% 복귀",
-        "summary": "회장이 효성중공업 지분 10%에 복귀하며 배우자 보유분을 매입했다는 보도이다.",
-        "topic": "governance",
-        "article_ids": [
-          "73e42444ec0c2ea59de3"
-        ],
-        "evidence": [
-          {
-            "article_id": "73e42444ec0c2ea59de3",
-            "quote": "회장님, 효성중공업 지분 10% 복귀...배우자 보유분까지 매입"
-          }
-        ]
-      },
-      {
-        "label": "효성 바이오 소재 전략",
-        "summary": "선택된 기사 제목: Hyosung Chairman 회장님 Advances Bio-Based Materials Stra",
+        "label": "효성 바이오 기반 소재 전략",
+        "summary": "효성 회장이 바이오 기반 소재 전략을 추진한다는 제목이다.",
         "topic": "management",
         "article_ids": [
           "74578f6c19a90e5e1d6a"
@@ -2986,80 +2920,42 @@
         ]
       },
       {
-        "label": "강요미수 재판 공방",
-        "summary": "조현문 측이 회장의 법정증언이 과거 녹취와 배치된다고 주장했다는 보도이다.",
-        "topic": "legal_regulation",
-        "article_ids": [
-          "7637bfe9a55aa0b6757e"
-        ],
-        "evidence": [
-          {
-            "article_id": "7637bfe9a55aa0b6757e",
-            "quote": "조현문 측 “회장님 법정증언, 과거 녹취와 배치”...강요미수 재판 공방"
-          }
-        ]
-      },
-      {
-        "label": "효성 바이오 소재 전략",
-        "summary": "선택된 기사 제목: 회장님 sees bio-materials powering Hyosung’s next century",
+        "label": "회장님 시대 상편: 토탈 인프라 100년 기업",
+        "summary": "소재부터 AI까지 토탈 인프라로 100년 기업을 향한다는 기획 제목이다.",
         "topic": "management",
         "article_ids": [
-          "82e84b8f2bd7db319e62"
-        ],
-        "evidence": [
-          {
-            "article_id": "82e84b8f2bd7db319e62",
-            "quote": "회장님 sees bio-materials powering Hyosung’s next century"
-          }
-        ]
-      },
-      {
-        "label": "회장 시대 연재 기획",
-        "summary": "회장의 리더십과 100년 기업 비전을 다룬 연재 기사이다.",
-        "topic": "management",
-        "article_ids": [
-          "8b98b6c8229e610f0693",
-          "fb5b3640ae84494b599c"
+          "8b98b6c8229e610f0693"
         ],
         "evidence": [
           {
             "article_id": "8b98b6c8229e610f0693",
             "quote": "[회장님 시대上]소재부터 AI까지...토탈 인프라로 '100년 기업' 향한다"
-          },
-          {
-            "article_id": "fb5b3640ae84494b599c",
-            "quote": "[회장님 시대下]통찰은 책에서, 해답은 현장에서...'인문학적 기술 리더십'"
           }
         ]
       },
       {
-        "label": "효성 장애인 사회참여 나눔",
-        "summary": "효성이 장애인 사회참여를 돕는 나눔을 이어간다는 보도이다.",
-        "topic": "other",
-        "article_ids": [
-          "8c0496730a04a5b77fea"
-        ],
-        "evidence": [
-          {
-            "article_id": "8c0496730a04a5b77fea",
-            "quote": "효성 회장님, 장애인 사회참여 돕는 나눔 이어간다"
-          }
-        ]
-      },
-      {
-        "label": "효성 ESG·환경·지역 상생",
-        "summary": "효성이 섬유 폐기물 해결과 환경 보전·지역 상생 활동을 이어간다는 보도들이다.",
+        "label": "효성 섬유 폐기물 해결",
+        "summary": "효성 회장이 섬유 폐기물 해결에 앞장선다는 제목이다.",
         "topic": "management",
         "article_ids": [
-          "ac85d34f3dd84520bfcc",
-          "b81439d0632b44c54d1c",
-          "c34b3b8f649d05197262"
+          "ac85d34f3dd84520bfcc"
         ],
         "evidence": [
           {
             "article_id": "ac85d34f3dd84520bfcc",
             "quote": "회장님 효성 회장, 섬유 폐기물 해결에 앞장"
-          },
+          }
+        ]
+      },
+      {
+        "label": "효성 환경 보전·지역 상생 ESG 경영",
+        "summary": "효성의 환경 보전과 지역사회 상생 활동을 다룬 제목들이다.",
+        "topic": "management",
+        "article_ids": [
+          "b81439d0632b44c54d1c",
+          "c34b3b8f649d05197262"
+        ],
+        "evidence": [
           {
             "article_id": "b81439d0632b44c54d1c",
             "quote": "회장님의 '나눔경영' 실천하는 효성 ... 환경 보전·지역사회 상생 앞장선다"
@@ -3071,8 +2967,8 @@
         ]
       },
       {
-        "label": "효성 베트남 바이오 생산 시작",
-        "summary": "선택된 기사 제목: Hyosung Chairman 회장님: bio-BDO production starts in Vietnam",
+        "label": "베트남 바이오 BDO 생산 시작",
+        "summary": "효성의 베트남 바이오 BDO 생산 시작을 다룬 제목이다.",
         "topic": "management",
         "article_ids": [
           "df891b587fddf19f2650"
@@ -3085,27 +2981,8 @@
         ]
       },
       {
-        "label": "효성 일하는 방식·조직문화 변화 강조",
-        "summary": "창립 60주년을 맞아 일하는 방식과 조직문화를 바꿔야 한다는 발언을 전한 보도들이다.",
-        "topic": "management",
-        "article_ids": [
-          "e0dffb5051822cd5bbd2",
-          "fc77adb4cb9a4983fe35"
-        ],
-        "evidence": [
-          {
-            "article_id": "e0dffb5051822cd5bbd2",
-            "quote": "회장님 효성 회장 “새로운 100년 위해 일하는 방식·조직문화 바꿔야”"
-          },
-          {
-            "article_id": "fc77adb4cb9a4983fe35",
-            "quote": "창립 60주년 효성...회장님 \"일하는 방식, 조직문화 근본적으로 바꿔야\""
-          }
-        ]
-      },
-      {
         "label": "회장의 인재 보는 힘",
-        "summary": "회장의 사람을 읽는 힘이 효성 성장에 영향을 줬다는 보도이다.",
+        "summary": "회장의 사람을 읽는 힘이 효성의 성장을 바꿨다는 제목이다.",
         "topic": "management",
         "article_ids": [
           "f36ad8a9e41a8b55485c"
@@ -3118,8 +2995,8 @@
         ]
       },
       {
-        "label": "효성중공업·티앤씨 실적과 선제 투자",
-        "summary": "창립 60년 효성그룹의 선제 투자로 효성중공업과 티앤씨 실적이 좋다는 보도이다.",
+        "label": "효성 선제 투자와 실적",
+        "summary": "효성그룹의 선제 투자와 효성중공업·티앤씨 실적을 다룬 제목이다.",
         "topic": "management",
         "article_ids": [
           "f9940aad6d4fe35ffbdc"
@@ -3130,92 +3007,97 @@
             "quote": "창립 60년 효성그룹, 회장님의 ‘선제 투자’ 빛났다...효성중공업·티앤씨 실적 '훨훨'"
           }
         ]
+      },
+      {
+        "label": "회장님 시대 하편: 인문학적 기술 리더십",
+        "summary": "통찰과 현장을 강조하는 인문학적 기술 리더십을 다룬 기획 제목이다.",
+        "topic": "management",
+        "article_ids": [
+          "fb5b3640ae84494b599c"
+        ],
+        "evidence": [
+          {
+            "article_id": "fb5b3640ae84494b599c",
+            "quote": "[회장님 시대下]통찰은 책에서, 해답은 현장에서...'인문학적 기술 리더십'"
+          }
+        ]
+      },
+      {
+        "label": "적자 사업을 그룹 대들보로 키운 뚝심",
+        "summary": "적자 사업을 그룹의 대들보로 만든 회장의 뚝심을 다룬 제목이다.",
+        "topic": "management",
+        "article_ids": [
+          "fc7cabee26a453fb0794"
+        ],
+        "evidence": [
+          {
+            "article_id": "fc7cabee26a453fb0794",
+            "quote": "적자 사업을 그룹의 대들보로...회장님의 뚝심"
+          }
+        ]
       }
     ],
     "periods": [
       {
         "days": 1,
-        "start": "2026-10-29",
-        "end": "2026-10-29",
+        "start": "2026-10-30",
+        "end": "2026-10-30",
         "coverage_complete": true,
         "article_ids": [
-          "88afdbaf3e0df80aff2b",
-          "9eda4f2a1e75bcf6aa29",
-          "c5da412c36f383ac0d0d",
-          "284461fb8fa7551467cc",
-          "588a681ab509fc4c4205",
-          "939d137df55e9a0f18ae",
-          "daecbe09c53b6d1d4eee",
-          "4c00e91217a2b4f6590b",
-          "4cd060e13bb19e4f1700",
-          "a2eedf9caee2bb5e2936",
-          "a5a37231e2ab8bb161f0",
-          "65fe8108f55dbb6b0e0b",
-          "6ed11621db74edc97ad7",
-          "0129236ad7b455c28064",
-          "e0dffb5051822cd5bbd2",
-          "c6835e2dde9b628efe32",
-          "64b3b88c4bb341a35113",
-          "7531a9e0ce718d5702de",
-          "dacb721b452a603f14ac",
-          "2449049fb15857b6259f",
-          "f46deecbde301b35e08a",
-          "36700998fd1fdc295dba",
-          "dd436c6c4aa01bd99bfe",
-          "a9b7f17589ebf50ea2bd",
-          "fc77adb4cb9a4983fe35"
+          "4a9a06137b2e0f5dcae7",
+          "2ee663ade445be2c0830"
         ],
         "statistics": {
           "counts": {
-            "positive": 15,
+            "positive": 2,
             "negative": 0,
-            "neutral": 10,
+            "neutral": 0,
             "mixed": 0
           },
-          "denominator": 25,
+          "denominator": 2,
           "percentages": {
-            "positive": 60.0,
+            "positive": 100.0,
             "negative": 0.0,
-            "neutral": 40.0,
+            "neutral": 0.0,
             "mixed": 0.0
           },
           "abstained": 0,
           "unrelated": 0,
           "positive_negative_only": {
-            "denominator": 15,
+            "denominator": 2,
             "percentages": {
               "positive": 100.0,
               "negative": 0.0
             }
           }
         },
-        "publisher_count": 23,
-        "issue_count": 4,
-        "newly_seen_count": 25,
+        "publisher_count": 2,
+        "issue_count": 1,
+        "newly_seen_count": 2,
         "retained_count": 0,
         "daily": [
           {
-            "date": "2026-10-29",
+            "date": "2026-10-30",
             "covered": true,
-            "article_count": 25,
+            "article_count": 2,
             "statistics": {
               "counts": {
-                "positive": 15,
+                "positive": 2,
                 "negative": 0,
-                "neutral": 10,
+                "neutral": 0,
                 "mixed": 0
               },
-              "denominator": 25,
+              "denominator": 2,
               "percentages": {
-                "positive": 60.0,
+                "positive": 100.0,
                 "negative": 0.0,
-                "neutral": 40.0,
+                "neutral": 0.0,
                 "mixed": 0.0
               },
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 15,
+                "denominator": 2,
                 "percentages": {
                   "positive": 100.0,
                   "negative": 0.0
@@ -3227,10 +3109,13 @@
       },
       {
         "days": 7,
-        "start": "2026-10-23",
-        "end": "2026-10-29",
+        "start": "2026-10-24",
+        "end": "2026-10-30",
         "coverage_complete": true,
         "article_ids": [
+          "4a9a06137b2e0f5dcae7",
+          "2ee663ade445be2c0830",
+          "c9c163ef8aa011b427a2",
           "88afdbaf3e0df80aff2b",
           "9eda4f2a1e75bcf6aa29",
           "c5da412c36f383ac0d0d",
@@ -3243,6 +3128,8 @@
           "a2eedf9caee2bb5e2936",
           "a5a37231e2ab8bb161f0",
           "65fe8108f55dbb6b0e0b",
+          "ff77907d2a70e2186174",
+          "e9a8bb2d9bc4aee9ec30",
           "6ed11621db74edc97ad7",
           "0129236ad7b455c28064",
           "e0dffb5051822cd5bbd2",
@@ -3251,6 +3138,7 @@
           "7531a9e0ce718d5702de",
           "dacb721b452a603f14ac",
           "2449049fb15857b6259f",
+          "c2db11b780eee6292079",
           "f46deecbde301b35e08a",
           "36700998fd1fdc295dba",
           "dd436c6c4aa01bd99bfe",
@@ -3260,69 +3148,37 @@
           "fb5b3640ae84494b599c",
           "0053a092cbac22f03b77",
           "8b98b6c8229e610f0693",
-          "22a673bf402a0d2a240b",
-          "ac85d34f3dd84520bfcc",
-          "c34b3b8f649d05197262",
-          "b81439d0632b44c54d1c"
+          "22a673bf402a0d2a240b"
         ],
         "statistics": {
           "counts": {
-            "positive": 21,
+            "positive": 23,
             "negative": 0,
-            "neutral": 12,
+            "neutral": 13,
             "mixed": 0
           },
-          "denominator": 33,
+          "denominator": 36,
           "percentages": {
-            "positive": 63.6,
+            "positive": 63.9,
             "negative": 0.0,
-            "neutral": 36.4,
+            "neutral": 36.1,
             "mixed": 0.0
           },
           "abstained": 0,
           "unrelated": 0,
           "positive_negative_only": {
-            "denominator": 21,
+            "denominator": 23,
             "percentages": {
               "positive": 100.0,
               "negative": 0.0
             }
           }
         },
-        "publisher_count": 28,
-        "issue_count": 8,
-        "newly_seen_count": 25,
-        "retained_count": 6,
+        "publisher_count": 30,
+        "issue_count": 6,
+        "newly_seen_count": 6,
+        "retained_count": 4,
         "daily": [
-          {
-            "date": "2026-10-23",
-            "covered": true,
-            "article_count": 3,
-            "statistics": {
-              "counts": {
-                "positive": 3,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 3,
-              "percentages": {
-                "positive": 100.0,
-                "negative": 0.0,
-                "neutral": 0.0,
-                "mixed": 0.0
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 3,
-                "percentages": {
-                  "positive": 100.0,
-                  "negative": 0.0
-                }
-              }
-            }
-          },
           {
             "date": "2026-10-24",
             "covered": true,
@@ -3471,161 +3327,34 @@
           {
             "date": "2026-10-29",
             "covered": true,
-            "article_count": 25,
+            "article_count": 29,
             "statistics": {
               "counts": {
-                "positive": 15,
+                "positive": 18,
                 "negative": 0,
-                "neutral": 10,
+                "neutral": 11,
                 "mixed": 0
               },
-              "denominator": 25,
+              "denominator": 29,
               "percentages": {
-                "positive": 60.0,
+                "positive": 62.1,
                 "negative": 0.0,
-                "neutral": 40.0,
+                "neutral": 37.9,
                 "mixed": 0.0
               },
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 15,
+                "denominator": 18,
                 "percentages": {
                   "positive": 100.0,
                   "negative": 0.0
                 }
               }
             }
-          }
-        ]
-      },
-      {
-        "days": 30,
-        "start": "2026-09-30",
-        "end": "2026-10-29",
-        "coverage_complete": true,
-        "article_ids": [
-          "88afdbaf3e0df80aff2b",
-          "9eda4f2a1e75bcf6aa29",
-          "c5da412c36f383ac0d0d",
-          "284461fb8fa7551467cc",
-          "588a681ab509fc4c4205",
-          "939d137df55e9a0f18ae",
-          "daecbe09c53b6d1d4eee",
-          "4c00e91217a2b4f6590b",
-          "4cd060e13bb19e4f1700",
-          "a2eedf9caee2bb5e2936",
-          "a5a37231e2ab8bb161f0",
-          "65fe8108f55dbb6b0e0b",
-          "6ed11621db74edc97ad7",
-          "0129236ad7b455c28064",
-          "e0dffb5051822cd5bbd2",
-          "c6835e2dde9b628efe32",
-          "64b3b88c4bb341a35113",
-          "7531a9e0ce718d5702de",
-          "dacb721b452a603f14ac",
-          "2449049fb15857b6259f",
-          "f46deecbde301b35e08a",
-          "36700998fd1fdc295dba",
-          "dd436c6c4aa01bd99bfe",
-          "a9b7f17589ebf50ea2bd",
-          "fc77adb4cb9a4983fe35",
-          "b486cfe20a841cbd02c0",
-          "fb5b3640ae84494b599c",
-          "0053a092cbac22f03b77",
-          "8b98b6c8229e610f0693",
-          "22a673bf402a0d2a240b",
-          "ac85d34f3dd84520bfcc",
-          "c34b3b8f649d05197262",
-          "b81439d0632b44c54d1c",
-          "74578f6c19a90e5e1d6a",
-          "f9940aad6d4fe35ffbdc",
-          "df891b587fddf19f2650",
-          "f36ad8a9e41a8b55485c",
-          "43280f9607626b5ffb2a",
-          "178f082cd48c34a7d9e7",
-          "bb47701f278e9ed5444b",
-          "9f7d23728322859433f6",
-          "69ac98e42b8917ab0d88",
-          "e0f67d230ff01e3bb5f2",
-          "f2c4eb966ccb6aa8ce84",
-          "ae261af030146b88ba9f",
-          "a97bd6896bb9f90f5aa7",
-          "d9f75008af8159a3b208",
-          "d6ae5f2fe6b561ddc025",
-          "997941fe904633a90d8a",
-          "b575474215264d5385f6",
-          "4c71af1146dd528d0f87",
-          "04205b5915fdbba1ed93",
-          "14361f68b39f4521a4e0",
-          "597495a20a0aa1878d4e",
-          "cb08c48c7bcc69be40ad",
-          "8c0496730a04a5b77fea",
-          "82e84b8f2bd7db319e62",
-          "58fec5b9bfd4caa6f7b5",
-          "7637bfe9a55aa0b6757e",
-          "73e42444ec0c2ea59de3"
-        ],
-        "statistics": {
-          "counts": {
-            "positive": 46,
-            "negative": 1,
-            "neutral": 13,
-            "mixed": 0
-          },
-          "denominator": 60,
-          "percentages": {
-            "positive": 76.7,
-            "negative": 1.7,
-            "neutral": 21.6,
-            "mixed": 0.0
-          },
-          "abstained": 0,
-          "unrelated": 0,
-          "positive_negative_only": {
-            "denominator": 47,
-            "percentages": {
-              "positive": 97.9,
-              "negative": 2.1
-            }
-          }
-        },
-        "publisher_count": 43,
-        "issue_count": 21,
-        "newly_seen_count": 27,
-        "retained_count": 23,
-        "daily": [
-          {
-            "date": "2026-09-30",
-            "covered": true,
-            "article_count": 2,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 1,
-                "neutral": 1,
-                "mixed": 0
-              },
-              "denominator": 2,
-              "percentages": {
-                "positive": 0.0,
-                "negative": 50.0,
-                "neutral": 50.0,
-                "mixed": 0.0
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 1,
-                "percentages": {
-                  "positive": 0.0,
-                  "negative": 100.0
-                }
-              }
-            }
           },
           {
-            "date": "2026-10-01",
+            "date": "2026-10-30",
             "covered": true,
             "article_count": 2,
             "statistics": {
@@ -3652,32 +3381,159 @@
                 }
               }
             }
+          }
+        ]
+      },
+      {
+        "days": 30,
+        "start": "2026-10-01",
+        "end": "2026-10-30",
+        "coverage_complete": true,
+        "article_ids": [
+          "4a9a06137b2e0f5dcae7",
+          "2ee663ade445be2c0830",
+          "c9c163ef8aa011b427a2",
+          "88afdbaf3e0df80aff2b",
+          "9eda4f2a1e75bcf6aa29",
+          "c5da412c36f383ac0d0d",
+          "284461fb8fa7551467cc",
+          "588a681ab509fc4c4205",
+          "939d137df55e9a0f18ae",
+          "daecbe09c53b6d1d4eee",
+          "4c00e91217a2b4f6590b",
+          "4cd060e13bb19e4f1700",
+          "a2eedf9caee2bb5e2936",
+          "a5a37231e2ab8bb161f0",
+          "65fe8108f55dbb6b0e0b",
+          "ff77907d2a70e2186174",
+          "e9a8bb2d9bc4aee9ec30",
+          "6ed11621db74edc97ad7",
+          "0129236ad7b455c28064",
+          "e0dffb5051822cd5bbd2",
+          "c6835e2dde9b628efe32",
+          "64b3b88c4bb341a35113",
+          "7531a9e0ce718d5702de",
+          "dacb721b452a603f14ac",
+          "2449049fb15857b6259f",
+          "c2db11b780eee6292079",
+          "f46deecbde301b35e08a",
+          "36700998fd1fdc295dba",
+          "dd436c6c4aa01bd99bfe",
+          "a9b7f17589ebf50ea2bd",
+          "fc77adb4cb9a4983fe35",
+          "b486cfe20a841cbd02c0",
+          "fb5b3640ae84494b599c",
+          "0053a092cbac22f03b77",
+          "8b98b6c8229e610f0693",
+          "22a673bf402a0d2a240b",
+          "ac85d34f3dd84520bfcc",
+          "74578f6c19a90e5e1d6a",
+          "c34b3b8f649d05197262",
+          "b81439d0632b44c54d1c",
+          "f9940aad6d4fe35ffbdc",
+          "df891b587fddf19f2650",
+          "f36ad8a9e41a8b55485c",
+          "43280f9607626b5ffb2a",
+          "178f082cd48c34a7d9e7",
+          "bb47701f278e9ed5444b",
+          "9f7d23728322859433f6",
+          "69ac98e42b8917ab0d88",
+          "e0f67d230ff01e3bb5f2",
+          "f2c4eb966ccb6aa8ce84",
+          "ae261af030146b88ba9f",
+          "a97bd6896bb9f90f5aa7",
+          "d9f75008af8159a3b208",
+          "d6ae5f2fe6b561ddc025",
+          "997941fe904633a90d8a",
+          "b575474215264d5385f6",
+          "4c71af1146dd528d0f87",
+          "fc7cabee26a453fb0794",
+          "04205b5915fdbba1ed93",
+          "14361f68b39f4521a4e0"
+        ],
+        "statistics": {
+          "counts": {
+            "positive": 47,
+            "negative": 0,
+            "neutral": 13,
+            "mixed": 0
           },
+          "denominator": 60,
+          "percentages": {
+            "positive": 78.3,
+            "negative": 0.0,
+            "neutral": 21.7,
+            "mixed": 0.0
+          },
+          "abstained": 0,
+          "unrelated": 0,
+          "positive_negative_only": {
+            "denominator": 47,
+            "percentages": {
+              "positive": 100.0,
+              "negative": 0.0
+            }
+          }
+        },
+        "publisher_count": 41,
+        "issue_count": 16,
+        "newly_seen_count": 7,
+        "retained_count": 22,
+        "daily": [
           {
-            "date": "2026-10-02",
+            "date": "2026-10-01",
             "covered": true,
-            "article_count": 1,
+            "article_count": 0,
             "statistics": {
               "counts": {
-                "positive": 1,
+                "positive": 0,
                 "negative": 0,
                 "neutral": 0,
                 "mixed": 0
               },
-              "denominator": 1,
+              "denominator": 0,
               "percentages": {
-                "positive": 100.0,
-                "negative": 0.0,
-                "neutral": 0.0,
-                "mixed": 0.0
+                "positive": null,
+                "negative": null,
+                "neutral": null,
+                "mixed": null
               },
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 1,
+                "denominator": 0,
                 "percentages": {
-                  "positive": 100.0,
-                  "negative": 0.0
+                  "positive": null,
+                  "negative": null
+                }
+              }
+            }
+          },
+          {
+            "date": "2026-10-02",
+            "covered": true,
+            "article_count": 0,
+            "statistics": {
+              "counts": {
+                "positive": 0,
+                "negative": 0,
+                "neutral": 0,
+                "mixed": 0
+              },
+              "denominator": 0,
+              "percentages": {
+                "positive": null,
+                "negative": null,
+                "neutral": null,
+                "mixed": null
+              },
+              "abstained": 0,
+              "unrelated": 0,
+              "positive_negative_only": {
+                "denominator": 0,
+                "percentages": {
+                  "positive": null,
+                  "negative": null
                 }
               }
             }
@@ -3772,15 +3628,15 @@
           {
             "date": "2026-10-06",
             "covered": true,
-            "article_count": 3,
+            "article_count": 1,
             "statistics": {
               "counts": {
-                "positive": 3,
+                "positive": 1,
                 "negative": 0,
                 "neutral": 0,
                 "mixed": 0
               },
-              "denominator": 3,
+              "denominator": 1,
               "percentages": {
                 "positive": 100.0,
                 "negative": 0.0,
@@ -3790,7 +3646,7 @@
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 3,
+                "denominator": 1,
                 "percentages": {
                   "positive": 100.0,
                   "negative": 0.0
@@ -3830,6 +3686,35 @@
           {
             "date": "2026-10-08",
             "covered": true,
+            "article_count": 1,
+            "statistics": {
+              "counts": {
+                "positive": 1,
+                "negative": 0,
+                "neutral": 0,
+                "mixed": 0
+              },
+              "denominator": 1,
+              "percentages": {
+                "positive": 100.0,
+                "negative": 0.0,
+                "neutral": 0.0,
+                "mixed": 0.0
+              },
+              "abstained": 0,
+              "unrelated": 0,
+              "positive_negative_only": {
+                "denominator": 1,
+                "percentages": {
+                  "positive": 100.0,
+                  "negative": 0.0
+                }
+              }
+            }
+          },
+          {
+            "date": "2026-10-09",
+            "covered": true,
             "article_count": 2,
             "statistics": {
               "counts": {
@@ -3852,35 +3737,6 @@
                 "percentages": {
                   "positive": 100.0,
                   "negative": 0.0
-                }
-              }
-            }
-          },
-          {
-            "date": "2026-10-09",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
                 }
               }
             }
@@ -4236,28 +4092,28 @@
           {
             "date": "2026-10-22",
             "covered": true,
-            "article_count": 1,
+            "article_count": 0,
             "statistics": {
               "counts": {
-                "positive": 1,
+                "positive": 0,
                 "negative": 0,
                 "neutral": 0,
                 "mixed": 0
               },
-              "denominator": 1,
+              "denominator": 0,
               "percentages": {
-                "positive": 100.0,
-                "negative": 0.0,
-                "neutral": 0.0,
-                "mixed": 0.0
+                "positive": null,
+                "negative": null,
+                "neutral": null,
+                "mixed": null
               },
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 1,
+                "denominator": 0,
                 "percentages": {
-                  "positive": 100.0,
-                  "negative": 0.0
+                  "positive": null,
+                  "negative": null
                 }
               }
             }
@@ -4265,15 +4121,15 @@
           {
             "date": "2026-10-23",
             "covered": true,
-            "article_count": 3,
+            "article_count": 4,
             "statistics": {
               "counts": {
-                "positive": 3,
+                "positive": 4,
                 "negative": 0,
                 "neutral": 0,
                 "mixed": 0
               },
-              "denominator": 3,
+              "denominator": 4,
               "percentages": {
                 "positive": 100.0,
                 "negative": 0.0,
@@ -4283,7 +4139,7 @@
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 3,
+                "denominator": 4,
                 "percentages": {
                   "positive": 100.0,
                   "negative": 0.0
@@ -4439,25 +4295,54 @@
           {
             "date": "2026-10-29",
             "covered": true,
-            "article_count": 25,
+            "article_count": 29,
             "statistics": {
               "counts": {
-                "positive": 15,
+                "positive": 18,
                 "negative": 0,
-                "neutral": 10,
+                "neutral": 11,
                 "mixed": 0
               },
-              "denominator": 25,
+              "denominator": 29,
               "percentages": {
-                "positive": 60.0,
+                "positive": 62.1,
                 "negative": 0.0,
-                "neutral": 40.0,
+                "neutral": 37.9,
                 "mixed": 0.0
               },
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 15,
+                "denominator": 18,
+                "percentages": {
+                  "positive": 100.0,
+                  "negative": 0.0
+                }
+              }
+            }
+          },
+          {
+            "date": "2026-10-30",
+            "covered": true,
+            "article_count": 2,
+            "statistics": {
+              "counts": {
+                "positive": 2,
+                "negative": 0,
+                "neutral": 0,
+                "mixed": 0
+              },
+              "denominator": 2,
+              "percentages": {
+                "positive": 100.0,
+                "negative": 0.0,
+                "neutral": 0.0,
+                "mixed": 0.0
+              },
+              "abstained": 0,
+              "unrelated": 0,
+              "positive_negative_only": {
+                "denominator": 2,
                 "percentages": {
                   "positive": 100.0,
                   "negative": 0.0
