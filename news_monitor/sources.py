@@ -190,7 +190,7 @@ def collect_sources(config, now, opener=urlopen, sleeper=time.sleep):
         if article["url"] in rows:
             stats["duplicates"] += 1
         rows[article["url"]] = article
-    selected = select_stories(rows.values(), stats, opts["max_articles"])
+    selected, start = select_stories(rows.values(), stats, opts["max_articles"], start)
     succeeded = searched["succeeded"] + feeds["succeeded"]
     warnings = ["upstream_limit_reached"] if searched["limit_reached"] else []
     publishers = sorted({row["publisher"] for row in selected})

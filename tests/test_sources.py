@@ -173,6 +173,19 @@ class SourceTests(unittest.TestCase):
         self.assertEqual(merged["statistics"]["retained"], 1)
         self.assertEqual(len(report.prepare_collection(merged, merged, self.config, NOW + timedelta(hours=1))["articles"]), 2)
 
+    def test_cap_on_one_run_drops_the_split_day_and_starts_the_window_after_it(self):
+        results = [{"title": f"{TITLE} {name}", "url": BASE + name, "published_date": day}
+                   for name, day in (("a", "2026-10-17"), ("b", "2026-10-15"), ("c", "2026-10-15"))]
+        result = self.collect({sources.TAVILY_URL: tavily(results)}, tavily_queries=["a"], max_articles=2)
+        self.assertEqual([row["url"] for row in result["articles"]], [BASE + "a"])
+        self.assertEqual(result["window_start"], "2026-10-15T15:00:00+00:00")
+        self.assertEqual((result["status"], result["statistics"]["limit_excluded"]), ("partial", 2))
+        report.prepare_collection(result, result, self.config, NOW)
+        # One day alone over the cap keeps its newest rows and the window starts on that day.
+        same_day = self.collect({sources.TAVILY_URL: tavily(results[1:])}, tavily_queries=["a"], max_articles=1)
+        self.assertEqual((len(same_day["articles"]), same_day["window_start"]), (1, "2026-10-14T15:00:00+00:00"))
+        report.prepare_collection(same_day, same_day, self.config, NOW)
+
     def test_same_story_with_a_different_reported_date_is_not_counted_twice(self):
         previous = run_search([article(url="https://mobile.old.example/view/1", day="2026-10-16")])
         fresh = self.collect({sources.TAVILY_URL: tavily([{"title": article()["title"], "url": "https://www.old.example/view/1",

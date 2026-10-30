@@ -180,6 +180,38 @@ class DailyTests(unittest.TestCase):
         self.assertEqual(merged["statistics"]["limit_excluded"], 1)
         self.assertEqual(merged["status"], "partial")
 
+    def test_cap_drops_a_split_day_whole_and_later_runs_keep_the_shorter_window(self):
+        # A day the cap emptied or split would otherwise show fewer articles than were found.
+        cfg = copy.deepcopy(CONFIG)
+        cfg["collection"]["max_articles"] = 2
+        previous = run_search([article(url="https://a.example/news/1", day="2026-10-12"),
+                               article(url="https://b.example/news/1", day="2026-10-12")], config=cfg)
+        merged = discovery.merge_previous(run_search([article(url="https://c.example/news/1")], config=cfg), previous, cfg)
+        self.assertEqual([row["url"] for row in merged["articles"]], ["https://c.example/news/1"])
+        self.assertEqual(merged["window_start"], "2026-10-12T15:00:00+00:00")
+        self.assertEqual((merged["status"], merged["statistics"]["limit_excluded"]), ("partial", 2))
+        report.prepare_collection(merged, merged, cfg, NOW)
+        cfg["collection"]["max_articles"] = 5  # Room again, but the 10/11 article is outside the kept window.
+        fresh = run_search([article(url="https://d.example/news/1", day="2026-10-11"),
+                            article(url="https://e.example/news/1", day="2026-10-17")], config=cfg)
+        later = discovery.merge_previous(fresh, merged, cfg)
+        self.assertEqual([row["url"] for row in later["articles"]], ["https://e.example/news/1", "https://c.example/news/1"])
+        self.assertEqual(later["window_start"], merged["window_start"])
+        report.prepare_collection(later, later, cfg, NOW)
+
+    def test_window_saved_before_whole_day_trimming_starts_after_its_oldest_day(self):
+        cfg = copy.deepcopy(CONFIG)
+        cfg["collection"]["max_articles"] = 2
+        previous = run_search([article(url="https://a.example/news/1", day="2026-10-12"),
+                               article(url="https://b.example/news/1")], config=cfg)
+        previous["statistics"]["limit_excluded"] = 3  # The old cut could have split its oldest day.
+        cfg["collection"]["max_articles"] = 5
+        merged = discovery.merge_previous(run_search([article(url="https://c.example/news/1", day="2026-10-17")], config=cfg),
+                                          previous, cfg)
+        self.assertEqual([row["url"] for row in merged["articles"]], ["https://c.example/news/1", "https://b.example/news/1"])
+        self.assertEqual(merged["window_start"], "2026-10-12T15:00:00+00:00")
+        report.prepare_collection(merged, merged, cfg, NOW)
+
     def test_response_cap_is_not_silent_full_success(self):
         cfg = copy.deepcopy(CONFIG)
         cfg["collection"]["max_results_per_query"] = 1
