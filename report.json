@@ -13,18 +13,20 @@
     "article_titles_modified": true,
     "evidence_may_be_omitted": true
   },
-  "generated_at": "2026-10-30T09:03:01.928868+00:00",
-  "collection_checked_at": "2026-10-30T09:00:27.127758+00:00",
-  "window_start": "2026-09-30T15:00:00+00:00",
-  "window_end": "2026-10-30T09:00:27.127758+00:00",
+  "generated_at": "2026-10-30T22:02:13.453597+00:00",
+  "collection_checked_at": "2026-10-30T22:00:27.876227+00:00",
+  "window_start": "2026-10-20T15:00:00+00:00",
+  "window_end": "2026-10-30T22:00:27.876227+00:00",
   "analysis_scope": "headline_only",
   "date_basis": "reported_publication_date",
   "coverage": "search_sample_not_exhaustive",
   "selection": "latest_published_target_in_headline",
-  "article_count": 60,
-  "publisher_count": 44,
+  "article_count": 59,
+  "publisher_count": 43,
   "publisher_goal": 5,
-  "warnings": [],
+  "warnings": [
+    "upstream_limit_reached"
+  ],
   "source_attribution": {
     "name": "Tavily 뉴스 검색 · 언론사 사이트맵·RSS · 원문 언론사",
     "url": "https://tavily.com/"
@@ -33,28 +35,28 @@
     "provider": "cursor",
     "model": "claude-sonnet-5-5-medium",
     "prompt_sha256": "577fb8d45a5b68cdf1276b241a66a8c5c9d9f40961bfeba35f6243ceccac4389",
-    "model_calls": 7,
-    "cache_hits": 53,
+    "model_calls": 0,
+    "cache_hits": 59,
     "failed_articles": 0
   },
   "statistics": {
     "counts": {
-      "positive": 45,
+      "positive": 44,
       "negative": 0,
       "neutral": 15,
       "mixed": 0
     },
-    "denominator": 60,
+    "denominator": 59,
     "percentages": {
-      "positive": 75.0,
+      "positive": 74.6,
       "negative": 0.0,
-      "neutral": 25.0,
+      "neutral": 25.4,
       "mixed": 0.0
     },
     "abstained": 0,
     "unrelated": 0,
     "positive_negative_only": {
-      "denominator": 45,
+      "denominator": 44,
       "percentages": {
         "positive": 100.0,
         "negative": 0.0
@@ -999,32 +1001,6 @@
       }
     },
     {
-      "publisher": "sgieurope.com",
-      "article_count": 1,
-      "counts": {
-        "positive": 1,
-        "negative": 0,
-        "neutral": 0,
-        "mixed": 0
-      },
-      "denominator": 1,
-      "percentages": {
-        "positive": 100.0,
-        "negative": 0.0,
-        "neutral": 0.0,
-        "mixed": 0.0
-      },
-      "abstained": 0,
-      "unrelated": 0,
-      "positive_negative_only": {
-        "denominator": 1,
-        "percentages": {
-          "positive": 100.0,
-          "negative": 0.0
-        }
-      }
-    },
-    {
       "publisher": "sidae.com",
       "article_count": 1,
       "counts": {
@@ -1214,13 +1190,13 @@
       "url": "https://www.smartbizn.com/news/articleView.html?idxno=158050",
       "publisher": "smartbizn.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T09:00:27.127758+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1238,13 +1214,13 @@
       "url": "https://www.newsis.com/view/NISX20261030_0003848477",
       "publisher": "newsis.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T09:00:27.127758+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1262,13 +1238,13 @@
       "url": "https://www.koreadaily.com/article/20261029080205444",
       "publisher": "koreadaily.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1293,7 +1269,7 @@
       "observation": {
         "first_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "회장님 “효성, 새 100년 밝힐 모닝스타”",
@@ -1310,13 +1286,13 @@
       "url": "https://www.handmk.com/news/articleView.html?idxno=44625",
       "publisher": "handmk.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1334,13 +1310,13 @@
       "url": "https://www.fntimes.com/html/view.php?ud=2026103008340770817de3572ddd_18",
       "publisher": "fntimes.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1354,22 +1330,22 @@
     },
     {
       "id": "2ee663ade445be2c0830",
-      "title": "‘효성 60돌’ 회장님 “치열한 도전, 새 100년 열자”|동아일보",
+      "title": "‘효성 60돌’ 회장님 “치열한 도전, 새 100년 열자”",
       "url": "https://www.donga.com/news/Economy/article/all/20261029/134934757/2",
       "publisher": "donga.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T22:00:41.449152+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
         "evidence": "회장님 “치열한 도전, 새 100년 열자”",
-        "reason": "제목만 보면 효성 창립 60주년을 맞아 회장님이 도전과 새로운 100년을 말했다는 내용이다. 대상 인물의 포부를 우호적으로 전달하는 보도로 판단했다.",
+        "reason": "제목만 보면 회장님이 효성 창립 60주년을 맞아 도전과 새로운 100년을 강조했다는 내용으로, 대상 인물을 우호적으로 전달하는 보도 논조입니다.",
         "relevance": "related",
         "sentiment": "positive"
       },
@@ -1382,13 +1358,13 @@
       "url": "https://www.ceojhn.com/news/articleView.html?idxno=10472",
       "publisher": "ceojhn.com",
       "language": "unknown",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T09:00:27.127758+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1406,13 +1382,13 @@
       "url": "https://www.ceojhn.com/news/articleView.html?idxno=10464",
       "publisher": "ceojhn.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T09:00:27.127758+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1430,13 +1406,13 @@
       "url": "https://en.koreadaily.com/hyosung-group-60th-anniversary-cho-hyun-joon",
       "publisher": "koreadaily.com",
       "language": "unknown",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1454,13 +1430,13 @@
       "url": "https://biz.heraldcorp.com/article/10920385",
       "publisher": "heraldcorp.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1478,13 +1454,13 @@
       "url": "https://zdnet.co.kr/view?no=20261029133433",
       "publisher": "zdnet.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T22:00:41.449152+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1502,13 +1478,13 @@
       "url": "https://www.yna.co.kr/view/AKR20261029109100003",
       "publisher": "yna.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1526,13 +1502,13 @@
       "url": "https://www.speconomy.com/news/articleView.html?idxno=419469",
       "publisher": "speconomy.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1550,13 +1526,13 @@
       "url": "https://www.sidae.com/article/2026102914220871393",
       "publisher": "sidae.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1598,13 +1574,13 @@
       "url": "https://www.newstopkorea.com/news/articleView.html?idxno=48602",
       "publisher": "newstopkorea.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1622,13 +1598,13 @@
       "url": "https://www.newspim.com/news/view/20261029000863",
       "publisher": "newspim.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1677,7 +1653,7 @@
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
         "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "회장님 \"목표 향한 치열함으로 새로운 도약\"",
@@ -1694,13 +1670,13 @@
       "url": "https://www.mt.co.kr/index.php/en/industry/2026/10/29/2026102914142285796",
       "publisher": "mt.co.kr",
       "language": "unknown",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1718,13 +1694,13 @@
       "url": "https://www.mk.co.kr/news/business/12190193",
       "publisher": "mk.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1742,13 +1718,13 @@
       "url": "https://www.mk.co.kr/news/business/12189970",
       "publisher": "mk.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1766,13 +1742,13 @@
       "url": "https://www.mk.co.kr/en/business/12189970",
       "publisher": "mk.co.kr",
       "language": "unknown",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1862,13 +1838,13 @@
       "url": "https://www.insidevina.com/news/articleView.html?idxno=44384",
       "publisher": "insidevina.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1886,13 +1862,13 @@
       "url": "https://www.hankyung.com/article/2026102944341",
       "publisher": "hankyung.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T22:00:41.449152+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1910,13 +1886,13 @@
       "url": "https://www.greenpostkorea.co.kr/news/articleView.html?idxno=307874",
       "publisher": "greenpostkorea.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T22:00:41.449152+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1934,13 +1910,13 @@
       "url": "https://www.g-enews.com/article/Industry/2026/10/202610291428231976139bf6e4b2_1",
       "publisher": "g-enews.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1958,13 +1934,13 @@
       "url": "https://www.fortunekorea.co.kr/news/articleView.html?idxno=54552",
       "publisher": "fortunekorea.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -1982,13 +1958,13 @@
       "url": "https://www.etoday.co.kr/news/view/2641707",
       "publisher": "etoday.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -2054,13 +2030,13 @@
       "url": "https://www.chosun.com/economy/industry-company/2026/10/29/5RP6B7AJ7RGY3KZISEBUZNWPJA",
       "publisher": "chosun.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -2133,7 +2109,7 @@
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
         "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "효성 회장님 “치열함으로 새 100년 열어야”...창립 60주년 행사서 조직문화 개선 강조",
@@ -2150,13 +2126,13 @@
       "url": "https://mobile.newsis.com/view_amp.html?ar_id=NISX20261029_0003846666",
       "publisher": "newsis.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -2198,13 +2174,13 @@
       "url": "https://livesnews.com/news/article.html?no=65476",
       "publisher": "livesnews.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -2222,13 +2198,13 @@
       "url": "https://kr.investing.com/news/stock-market-news/article-2147595",
       "publisher": "investing.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -2246,13 +2222,13 @@
       "url": "https://biz.heraldcorp.com/article/10919151",
       "publisher": "heraldcorp.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -2265,18 +2241,18 @@
       "evidence_omitted_for_display": false
     },
     {
-      "id": "dd436c6c4aa01bd99bfe",
+      "id": "12991cfd03eab70969bd",
       "title": "Hyosung marks 60th year as 회장님 rallies Korea group for next century",
-      "url": "https://biz.chosun.com/en/en-industry/2026/10/29/LMWOXVKDKJDMRN3FMFDG3M75WA?outputType=amp",
+      "url": "https://biz.chosun.com/en/en-industry/2026/10/29/LMWOXVKDKJDMRN3FMFDG3M75WA",
       "publisher": "chosun.com",
       "language": "unknown",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -2294,13 +2270,13 @@
       "url": "http://www.inews24.com/view/2020441",
       "publisher": "inews24.com",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -2318,13 +2294,13 @@
       "url": "http://www.dailyenews.co.kr/news/articleView.html?idxno=54185",
       "publisher": "dailyenews.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -2342,13 +2318,13 @@
       "url": "http://www.consumernews.co.kr/news/articleView.html?idxno=767119",
       "publisher": "consumernews.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -2414,13 +2390,13 @@
       "url": "https://www.m-i.kr/news/articleView.html?idxno=2010462",
       "publisher": "m-i.kr",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-26",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-27T03:00:41.452940+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -2462,13 +2438,13 @@
       "url": "https://www.asiatime.co.kr/article/20261023500147",
       "publisher": "asiatime.co.kr",
       "language": "ko",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
+      "indexed_at": "2026-10-30T22:00:27.876227+00:00",
       "published_at": "2026-10-24",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
+        "last_seen_at": "2026-10-30T22:00:27.876227+00:00",
         "reused": false
       },
       "classification": {
@@ -2565,7 +2541,7 @@
       "observation": {
         "first_seen_at": "2026-10-26T09:00:27.136518+00:00",
         "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "회장님의 사람을 읽는 힘... 효성 백년 성장판 바꿨다",
@@ -2623,30 +2599,6 @@
       },
       "analysis_failed": false,
       "evidence_omitted_for_display": false
-    },
-    {
-      "id": "df891b587fddf19f2650",
-      "title": "Hyosung Chairman 회장님: bio-BDO production starts in Vietnam",
-      "url": "https://www.sgieurope.com/csr-and-sustainability/south-koreas-hyosung-makes-bio-materials-a-group-priority/123679.article",
-      "publisher": "sgieurope.com",
-      "language": "unknown",
-      "indexed_at": "2026-10-30T09:00:27.127758+00:00",
-      "published_at": "2026-10-20",
-      "analysis_scope": "headline_only",
-      "source": "tavily_feeds",
-      "observation": {
-        "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-10-30T09:00:27.127758+00:00",
-        "reused": false
-      },
-      "classification": {
-        "evidence": "Hyosung Chairman 회장님: bio-BDO production starts in Vietnam",
-        "reason": "제목만 보면 효성 회장님 회장(회장님)이 언급되며, 베트남에서 바이오 BDO 생산이 시작됐다는 사업상 성과를 전달하므로 긍정적 보도로 판단했습니다.",
-        "relevance": "related",
-        "sentiment": "positive"
-      },
-      "analysis_failed": false,
-      "evidence_omitted_for_display": false
     }
   ],
   "insights": {
@@ -2665,12 +2617,12 @@
       "other": "기타"
     },
     "default_period_days": 30,
-    "as_of_day": "2026-10-30",
-    "available_start": "2026-10-01",
+    "as_of_day": "2026-10-31",
+    "available_start": "2026-10-21",
     "groups": [
       {
         "label": "효성중공업 지분 1905주 취득",
-        "summary": "회장이 효성중공업 주식 1905주를 추가 취득했다는 제목의 보도입니다.",
+        "summary": "회장이 효성중공업 주식 1905주를 추가 취득했다는 보도다.",
         "topic": "governance",
         "article_ids": [
           "0053a092cbac22f03b77",
@@ -2688,11 +2640,12 @@
         ]
       },
       {
-        "label": "효성 창립 60주년 기념사",
-        "summary": "효성 회장이 창립 60주년을 맞아 '모닝 스타', 치열함, 악착같고 치밀한 일하는 방식 등을 강조하며 새로운 100년을 말했다는 보도입니다.",
+        "label": "효성 창립 60주년 기념식 회장 메시지",
+        "summary": "효성 창립 60주년을 맞아 회장이 '모닝 스타'와 치열함, 악착·치밀·신뢰, 일하는 방식 변화를 언급하며 새로운 100년을 강조했다.",
         "topic": "management",
         "article_ids": [
           "0129236ad7b455c28064",
+          "12991cfd03eab70969bd",
           "1ceb82c2966ea0f58c0f",
           "2449049fb15857b6259f",
           "284461fb8fa7551467cc",
@@ -2728,7 +2681,6 @@
           "d8c4154460709c51eeb8",
           "dacb721b452a603f14ac",
           "daecbe09c53b6d1d4eee",
-          "dd436c6c4aa01bd99bfe",
           "e0dffb5051822cd5bbd2",
           "e277adae3224cead540a",
           "e9a8bb2d9bc4aee9ec30",
@@ -2745,6 +2697,10 @@
             "quote": "회장님 효성 회장 “새로운 100년 밝힐 모닝 스타 될 것”"
           },
           {
+            "article_id": "12991cfd03eab70969bd",
+            "quote": "Hyosung marks 60th year as 회장님 rallies Korea group for next century"
+          },
+          {
             "article_id": "1ceb82c2966ea0f58c0f",
             "quote": "회장님 효성 회장 \"목표 향한 치열함이 다음 100년 만든다\""
           },
@@ -2758,7 +2714,7 @@
           },
           {
             "article_id": "2ee663ade445be2c0830",
-            "quote": "‘효성 60돌’ 회장님 “치열한 도전, 새 100년 열자”|동아일보"
+            "quote": "‘효성 60돌’ 회장님 “치열한 도전, 새 100년 열자”"
           },
           {
             "article_id": "35f9a312975fadd1eadc",
@@ -2885,10 +2841,6 @@
             "quote": "회장님 \"악착, 치밀, 신뢰의 효성으로\""
           },
           {
-            "article_id": "dd436c6c4aa01bd99bfe",
-            "quote": "Hyosung marks 60th year as 회장님 rallies Korea group for next century"
-          },
-          {
             "article_id": "e0dffb5051822cd5bbd2",
             "quote": "회장님 효성 회장 “새로운 100년 위해 일하는 방식·조직문화 바꿔야”"
           },
@@ -2927,8 +2879,8 @@
         ]
       },
       {
-        "label": "효성중공업 상반기 수주와 미국 전력망 투자",
-        "summary": "효성중공업의 상반기 수주 7.5조 중 71%가 미국이라는 제목의 보도입니다.",
+        "label": "효성중공업 미국 전력망 투자와 수주",
+        "summary": "효성중공업의 미국 전력망 투자와 상반기 수주 성과를 다룬 보도다.",
         "topic": "management",
         "article_ids": [
           "22a673bf402a0d2a240b"
@@ -2942,7 +2894,7 @@
       },
       {
         "label": "한독 정상회담 국빈급 만찬 재계 참석",
-        "summary": "한독 정상회담 국빈급 만찬에 재계 오너들이 참석했다는 제목의 보도입니다.",
+        "summary": "한독 정상회담 국빈급 만찬에 재계 오너들이 참석했다는 보도다.",
         "topic": "external",
         "article_ids": [
           "588a681ab509fc4c4205"
@@ -2955,8 +2907,8 @@
         ]
       },
       {
-        "label": "섬유 폐기물·바이오 소재 전략",
-        "summary": "효성 회장이 섬유 폐기물 해결과 바이오 기반 소재 전략을 추진한다는 제목의 보도입니다.",
+        "label": "효성 섬유 폐기물·바이오 소재 전략",
+        "summary": "효성 회장이 섬유 폐기물 해결과 바이오 기반 소재 전략을 추진한다는 보도다.",
         "topic": "management",
         "article_ids": [
           "74578f6c19a90e5e1d6a",
@@ -2974,8 +2926,8 @@
         ]
       },
       {
-        "label": "효성중공업·지멘스 디지털 전력·데이터센터 협력",
-        "summary": "효성중공업이 디지털 전력과 데이터센터 기술 분야에서 독일 지멘스와 협력한다는 제목의 보도입니다.",
+        "label": "효성중공업 디지털 전력·데이터센터 지멘스 협력",
+        "summary": "효성중공업이 디지털 전력·데이터센터 기술 분야에서 독일 지멘스와 협력한다는 보도다.",
         "topic": "management",
         "article_ids": [
           "7989979f4456a4210c6a"
@@ -2988,22 +2940,27 @@
         ]
       },
       {
-        "label": "회장님 시대 연재: 토탈 인프라 100년 기업",
-        "summary": "소재부터 AI까지 토탈 인프라로 100년 기업을 향한다는 제목의 연재 기사입니다.",
+        "label": "회장 시대 기획 연재",
+        "summary": "회장의 기술 리더십과 100년 기업을 향한 토탈 인프라 전략을 다룬 연재 기사다.",
         "topic": "management",
         "article_ids": [
-          "8b98b6c8229e610f0693"
+          "8b98b6c8229e610f0693",
+          "fb5b3640ae84494b599c"
         ],
         "evidence": [
           {
             "article_id": "8b98b6c8229e610f0693",
             "quote": "[회장님 시대上]소재부터 AI까지...토탈 인프라로 '100년 기업' 향한다"
+          },
+          {
+            "article_id": "fb5b3640ae84494b599c",
+            "quote": "[회장님 시대下]통찰은 책에서, 해답은 현장에서...'인문학적 기술 리더십'"
           }
         ]
       },
       {
         "label": "효성 ESG·나눔경영",
-        "summary": "효성이 환경 보전과 지역 상생을 잇는 ESG·나눔경영을 강화한다는 제목의 보도입니다.",
+        "summary": "효성이 환경 보전과 지역 상생을 잇는 ESG·나눔경영을 강화한다는 보도다.",
         "topic": "management",
         "article_ids": [
           "b81439d0632b44c54d1c",
@@ -3021,23 +2978,9 @@
         ]
       },
       {
-        "label": "베트남 바이오 BDO 생산 시작",
-        "summary": "베트남에서 바이오 BDO 생산이 시작된다는 제목의 보도입니다.",
-        "topic": "management",
-        "article_ids": [
-          "df891b587fddf19f2650"
-        ],
-        "evidence": [
-          {
-            "article_id": "df891b587fddf19f2650",
-            "quote": "Hyosung Chairman 회장님: bio-BDO production starts in Vietnam"
-          }
-        ]
-      },
-      {
-        "label": "회장님의 인재 보는 힘과 효성 성장",
-        "summary": "회장의 사람을 읽는 힘이 효성의 성장판을 바꿨다는 제목의 보도입니다.",
-        "topic": "management",
+        "label": "회장의 인재 보는 안목과 성장",
+        "summary": "회장의 사람을 읽는 힘이 효성의 성장에 영향을 줬다는 평가를 다룬 기사다.",
+        "topic": "other",
         "article_ids": [
           "f36ad8a9e41a8b55485c"
         ],
@@ -3049,8 +2992,8 @@
         ]
       },
       {
-        "label": "효성중공업·티앤씨 선제 투자와 실적",
-        "summary": "회장의 선제 투자와 함께 효성중공업·티앤씨 실적이 좋다는 제목의 보도입니다.",
+        "label": "효성 선제 투자와 실적",
+        "summary": "회장의 선제 투자와 효성중공업·티앤씨 실적을 다룬 보도다.",
         "topic": "management",
         "article_ids": [
           "f9940aad6d4fe35ffbdc"
@@ -3061,95 +3004,69 @@
             "quote": "창립 60년 효성그룹, 회장님의 ‘선제 투자’ 빛났다...효성중공업·티앤씨 실적 '훨훨'"
           }
         ]
-      },
-      {
-        "label": "회장님 시대 연재: 인문학적 기술 리더십",
-        "summary": "통찰은 책에서, 해답은 현장에서 찾는 인문학적 기술 리더십을 다룬 연재 기사입니다.",
-        "topic": "management",
-        "article_ids": [
-          "fb5b3640ae84494b599c"
-        ],
-        "evidence": [
-          {
-            "article_id": "fb5b3640ae84494b599c",
-            "quote": "[회장님 시대下]통찰은 책에서, 해답은 현장에서...'인문학적 기술 리더십'"
-          }
-        ]
       }
     ],
     "periods": [
       {
         "days": 1,
-        "start": "2026-10-30",
-        "end": "2026-10-30",
+        "start": "2026-10-31",
+        "end": "2026-10-31",
         "coverage_complete": true,
-        "article_ids": [
-          "65c5710bcb2a7adb51dc",
-          "7989979f4456a4210c6a",
-          "fb14698422b9b4acb033",
-          "4a9a06137b2e0f5dcae7",
-          "b23fa840424f1240b658",
-          "1ceb82c2966ea0f58c0f",
-          "2ee663ade445be2c0830",
-          "92507af66c49661f2086",
-          "675417fc07ffad97b418",
-          "70a50d5060882949a81b",
-          "35f9a312975fadd1eadc"
-        ],
+        "article_ids": [],
         "statistics": {
           "counts": {
-            "positive": 9,
+            "positive": 0,
             "negative": 0,
-            "neutral": 2,
+            "neutral": 0,
             "mixed": 0
           },
-          "denominator": 11,
+          "denominator": 0,
           "percentages": {
-            "positive": 81.8,
-            "negative": 0.0,
-            "neutral": 18.2,
-            "mixed": 0.0
+            "positive": null,
+            "negative": null,
+            "neutral": null,
+            "mixed": null
           },
           "abstained": 0,
           "unrelated": 0,
           "positive_negative_only": {
-            "denominator": 9,
+            "denominator": 0,
             "percentages": {
-              "positive": 100.0,
-              "negative": 0.0
+              "positive": null,
+              "negative": null
             }
           }
         },
-        "publisher_count": 9,
-        "issue_count": 2,
-        "newly_seen_count": 11,
+        "publisher_count": 0,
+        "issue_count": 0,
+        "newly_seen_count": 0,
         "retained_count": 0,
         "daily": [
           {
-            "date": "2026-10-30",
+            "date": "2026-10-31",
             "covered": true,
-            "article_count": 11,
+            "article_count": 0,
             "statistics": {
               "counts": {
-                "positive": 9,
+                "positive": 0,
                 "negative": 0,
-                "neutral": 2,
+                "neutral": 0,
                 "mixed": 0
               },
-              "denominator": 11,
+              "denominator": 0,
               "percentages": {
-                "positive": 81.8,
-                "negative": 0.0,
-                "neutral": 18.2,
-                "mixed": 0.0
+                "positive": null,
+                "negative": null,
+                "neutral": null,
+                "mixed": null
               },
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 9,
+                "denominator": 0,
                 "percentages": {
-                  "positive": 100.0,
-                  "negative": 0.0
+                  "positive": null,
+                  "negative": null
                 }
               }
             }
@@ -3158,8 +3075,8 @@
       },
       {
         "days": 7,
-        "start": "2026-10-24",
-        "end": "2026-10-30",
+        "start": "2026-10-25",
+        "end": "2026-10-31",
         "coverage_complete": true,
         "article_ids": [
           "65c5710bcb2a7adb51dc",
@@ -3206,74 +3123,44 @@
           "c152eb05a3acdf350129",
           "f46deecbde301b35e08a",
           "36700998fd1fdc295dba",
-          "dd436c6c4aa01bd99bfe",
+          "12991cfd03eab70969bd",
           "e277adae3224cead540a",
           "a9b7f17589ebf50ea2bd",
           "fc77adb4cb9a4983fe35",
           "b486cfe20a841cbd02c0",
           "fb5b3640ae84494b599c",
           "0053a092cbac22f03b77",
-          "8b98b6c8229e610f0693",
-          "22a673bf402a0d2a240b"
+          "8b98b6c8229e610f0693"
         ],
         "statistics": {
           "counts": {
-            "positive": 38,
+            "positive": 37,
             "negative": 0,
             "neutral": 15,
             "mixed": 0
           },
-          "denominator": 53,
+          "denominator": 52,
           "percentages": {
-            "positive": 71.7,
+            "positive": 71.2,
             "negative": 0.0,
-            "neutral": 28.3,
+            "neutral": 28.8,
             "mixed": 0.0
           },
           "abstained": 0,
           "unrelated": 0,
           "positive_negative_only": {
-            "denominator": 38,
+            "denominator": 37,
             "percentages": {
               "positive": 100.0,
               "negative": 0.0
             }
           }
         },
-        "publisher_count": 39,
-        "issue_count": 7,
-        "newly_seen_count": 23,
-        "retained_count": 13,
+        "publisher_count": 38,
+        "issue_count": 5,
+        "newly_seen_count": 0,
+        "retained_count": 16,
         "daily": [
-          {
-            "date": "2026-10-24",
-            "covered": true,
-            "article_count": 1,
-            "statistics": {
-              "counts": {
-                "positive": 1,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 1,
-              "percentages": {
-                "positive": 100.0,
-                "negative": 0.0,
-                "neutral": 0.0,
-                "mixed": 0.0
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 1,
-                "percentages": {
-                  "positive": 100.0,
-                  "negative": 0.0
-                }
-              }
-            }
-          },
           {
             "date": "2026-10-25",
             "covered": true,
@@ -3447,14 +3334,43 @@
                 }
               }
             }
+          },
+          {
+            "date": "2026-10-31",
+            "covered": true,
+            "article_count": 0,
+            "statistics": {
+              "counts": {
+                "positive": 0,
+                "negative": 0,
+                "neutral": 0,
+                "mixed": 0
+              },
+              "denominator": 0,
+              "percentages": {
+                "positive": null,
+                "negative": null,
+                "neutral": null,
+                "mixed": null
+              },
+              "abstained": 0,
+              "unrelated": 0,
+              "positive_negative_only": {
+                "denominator": 0,
+                "percentages": {
+                  "positive": null,
+                  "negative": null
+                }
+              }
+            }
           }
         ]
       },
       {
         "days": 30,
-        "start": "2026-10-01",
-        "end": "2026-10-30",
-        "coverage_complete": true,
+        "start": "2026-10-02",
+        "end": "2026-10-31",
+        "coverage_complete": false,
         "article_ids": [
           "65c5710bcb2a7adb51dc",
           "7989979f4456a4210c6a",
@@ -3500,7 +3416,7 @@
           "c152eb05a3acdf350129",
           "f46deecbde301b35e08a",
           "36700998fd1fdc295dba",
-          "dd436c6c4aa01bd99bfe",
+          "12991cfd03eab70969bd",
           "e277adae3224cead540a",
           "a9b7f17589ebf50ea2bd",
           "fc77adb4cb9a4983fe35",
@@ -3514,617 +3430,150 @@
           "c34b3b8f649d05197262",
           "f36ad8a9e41a8b55485c",
           "b81439d0632b44c54d1c",
-          "f9940aad6d4fe35ffbdc",
-          "df891b587fddf19f2650"
+          "f9940aad6d4fe35ffbdc"
         ],
         "statistics": {
           "counts": {
-            "positive": 45,
+            "positive": 44,
             "negative": 0,
             "neutral": 15,
             "mixed": 0
           },
-          "denominator": 60,
+          "denominator": 59,
           "percentages": {
-            "positive": 75.0,
+            "positive": 74.6,
             "negative": 0.0,
-            "neutral": 25.0,
+            "neutral": 25.4,
             "mixed": 0.0
           },
           "abstained": 0,
           "unrelated": 0,
           "positive_negative_only": {
-            "denominator": 45,
+            "denominator": 44,
             "percentages": {
               "positive": 100.0,
               "negative": 0.0
             }
           }
         },
-        "publisher_count": 44,
-        "issue_count": 12,
-        "newly_seen_count": 23,
-        "retained_count": 18,
+        "publisher_count": 43,
+        "issue_count": 10,
+        "newly_seen_count": 0,
+        "retained_count": 22,
         "daily": [
           {
-            "date": "2026-10-01",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
-          },
-          {
             "date": "2026-10-02",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
+            "covered": false,
+            "article_count": null,
+            "statistics": null
           },
           {
             "date": "2026-10-03",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
+            "covered": false,
+            "article_count": null,
+            "statistics": null
           },
           {
             "date": "2026-10-04",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
+            "covered": false,
+            "article_count": null,
+            "statistics": null
           },
           {
             "date": "2026-10-05",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
+            "covered": false,
+            "article_count": null,
+            "statistics": null
           },
           {
             "date": "2026-10-06",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
+            "covered": false,
+            "article_count": null,
+            "statistics": null
           },
           {
             "date": "2026-10-07",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
+            "covered": false,
+            "article_count": null,
+            "statistics": null
           },
           {
             "date": "2026-10-08",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
+            "covered": false,
+            "article_count": null,
+            "statistics": null
           },
           {
             "date": "2026-10-09",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
+            "covered": false,
+            "article_count": null,
+            "statistics": null
           },
           {
             "date": "2026-10-10",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
+            "covered": false,
+            "article_count": null,
+            "statistics": null
           },
           {
             "date": "2026-10-11",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
+            "covered": false,
+            "article_count": null,
+            "statistics": null
           },
           {
             "date": "2026-10-12",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
+            "covered": false,
+            "article_count": null,
+            "statistics": null
           },
           {
             "date": "2026-10-13",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
+            "covered": false,
+            "article_count": null,
+            "statistics": null
           },
           {
             "date": "2026-10-14",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
+            "covered": false,
+            "article_count": null,
+            "statistics": null
           },
           {
             "date": "2026-10-15",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
+            "covered": false,
+            "article_count": null,
+            "statistics": null
           },
           {
             "date": "2026-10-16",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
+            "covered": false,
+            "article_count": null,
+            "statistics": null
           },
           {
             "date": "2026-10-17",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
+            "covered": false,
+            "article_count": null,
+            "statistics": null
           },
           {
             "date": "2026-10-18",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
+            "covered": false,
+            "article_count": null,
+            "statistics": null
           },
           {
             "date": "2026-10-19",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
+            "covered": false,
+            "article_count": null,
+            "statistics": null
           },
           {
             "date": "2026-10-20",
-            "covered": true,
-            "article_count": 1,
-            "statistics": {
-              "counts": {
-                "positive": 1,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 1,
-              "percentages": {
-                "positive": 100.0,
-                "negative": 0.0,
-                "neutral": 0.0,
-                "mixed": 0.0
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 1,
-                "percentages": {
-                  "positive": 100.0,
-                  "negative": 0.0
-                }
-              }
-            }
+            "covered": false,
+            "article_count": null,
+            "statistics": null
           },
           {
             "date": "2026-10-21",
@@ -4412,6 +3861,35 @@
                 "percentages": {
                   "positive": 100.0,
                   "negative": 0.0
+                }
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "covered": true,
+            "article_count": 0,
+            "statistics": {
+              "counts": {
+                "positive": 0,
+                "negative": 0,
+                "neutral": 0,
+                "mixed": 0
+              },
+              "denominator": 0,
+              "percentages": {
+                "positive": null,
+                "negative": null,
+                "neutral": null,
+                "mixed": null
+              },
+              "abstained": 0,
+              "unrelated": 0,
+              "positive_negative_only": {
+                "denominator": 0,
+                "percentages": {
+                  "positive": null,
+                  "negative": null
                 }
               }
             }
