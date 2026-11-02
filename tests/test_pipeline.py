@@ -204,6 +204,27 @@ class ReportTests(unittest.TestCase):
         self.assertEqual(public_text("조현준 회장 회장님, 행사", CONFIG), "회장님, 행사")
         self.assertEqual(public_text("조현준 회장의 투자", CONFIG), "회장님의 투자")
 
+    def test_display_name_reads_naturally_next_to_titles(self):
+        from news_monitor.display import public_text
+
+        for value, expected in (
+            ('조현준 효성 회장 "새로운 100년"', '효성 회장님 "새로운 100년"'),
+            ("조현준 효성그룹 회장, 행사 참석", "효성그룹 회장님, 행사 참석"),
+            ("조현준 효성 회장의 메시지", "효성 회장님의 메시지"),
+            ("조현준 효성 회장님", "효성 회장님"),
+            ("Hyosung Chairman Cho Hyun-joon: “Let’s”", "Hyosung Chairman: “Let’s”"),
+            ("Hyosung Group — Chairman Cho Hyun-joon Celebrates", "Hyosung Group — Chairman Celebrates"),
+            ("Hyosung chairman Cho Hyun-joon’s vision", "Hyosung chairman’s vision"),
+            # Other organizations and positions keep the display name where it was.
+            ("조현준 한국경제인협회 회장", "회장님 한국경제인협회 회장"),
+            ("조현준 효성 부회장", "회장님 효성 부회장"),
+            ("Vice Chairman Cho Hyun-joon", "Vice Chairman 회장님"),
+            ("Hyosung marks 60th year as Cho Hyun-joon rallies group", "Hyosung marks 60th year as 회장님 rallies group"),
+        ):
+            with self.subTest(value=value):
+                self.assertEqual(public_text(value, CONFIG), expected)
+                self.assertEqual(public_text(expected, CONFIG), expected)
+
     def test_invalid_display_name_never_falls_back_to_real_name(self):
         from news_monitor.display import display_name
 

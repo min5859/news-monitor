@@ -35,13 +35,25 @@ def public_text(value, config):
     replacement = display_name(config)
     for pattern in name_patterns(config):
         value = pattern.sub(lambda _: replacement, value)
-    # Avoid duplicated honorifics in common headlines, e.g. "회장님 회장, ...".
-    pattern = re.escape(replacement) + r"\s*회장(?:님)?(?=\s|[,.!?…，。은는이가의과와을를께도에으]|$)"
+    name = re.escape(replacement)
+    title_end = r"(?=\s|[,.!?…，。은는이가의과와을를께도에으]|$)"
+    organizations = "|".join(re.escape(alias) for alias in sorted(set(config["target"]["organization_aliases"]),
+                                                                  key=len, reverse=True))
+    rules = (
+        # "회장님 회장, ..." -> "회장님, ..."
+        (re.compile(name + r"\s*회장(?:님)?" + title_end), lambda _: replacement),
+        # "회장님 효성 회장 ..." -> "효성 회장님 ..."
+        (re.compile(name + r"\s+((?:" + organizations + r")(?:\s*그룹)?)\s*회장(?:님)?" + title_end),
+         lambda match: match[1] + " " + replacement),
+        # "Hyosung Chairman 회장님: ..." -> "Hyosung Chairman: ..."
+        (re.compile(r"(?<!vice )(?<!vice-)\b(chairman)\s+" + name, re.IGNORECASE), lambda match: match[1]),
+    )
     while True:
-        shortened = re.sub(pattern, lambda _: replacement, value)
-        if shortened == value:
+        previous = value
+        for pattern, repl in rules:
+            value = pattern.sub(repl, value)
+        if value == previous:
             return value
-        value = shortened
 
 
 def validate_public_names(report, config):
