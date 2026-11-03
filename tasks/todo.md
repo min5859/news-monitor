@@ -98,8 +98,11 @@
   - **11/3 보고**(docs/SOURCE-EVALUATION.md '1주 정리'): 당일 확보 39/51건(76%), 늦은 12건 중 11건은 다음 날 오전·낮 회차에 확보.
     웹 검색에만 있던 13건은 모두 수집원에 없는 매체의 같은 60주년 기사. 보존 폭이 짧은 4곳에서 놓친 기사는 news1 1건뿐
   - 추천: 매시간 timer 도입 안 함(정책 변경 불필요), AI 웹 검색 수집원 안 씀 → 사용자 확인되면 이 항목 닫음
-- [ ] (제 판단, 다음 단계) 웹 검색에만 있던 매체 사이트맵 실측·추가: fnnews·seoul.co.kr·newstomato·businesskorea·SBS Biz·insightkorea·ddaily
-  - 10/27과 같은 방식: robots·사이트맵만 우리 UA로 조회, 보존 폭 확인, Tavily 크레딧 미사용 → 실패 테스트 → Mac·OCI 실측 → 반영·첫 회차 기록
+- [x] **(11/3 사용자 요청) 웹 검색에만 있던 매체 추가** → docs/SOURCE-EVALUATION.md '웹 검색에만 있던 매체 추가'
+  - [x] 10곳 실측(robots·사이트맵만, Tavily 미사용): 7곳 추가(fnnews·서울신문·businesskorea·insightkorea·ddaily·wolyo·zdnet), 3곳 제외(newstomato·SBS Biz·tf)
+  - [x] 함께 발견한 버그: 제목 끝 `M&A`·`R&D`면 기사가 빠짐 → 실패 테스트 → 수정 `8a563ce`
+  - [x] 피드 상한 40 → 60(44개). Mac 3.12/3.14 169개·Node·ruff, Mac·OCI 새 7곳 7/7 성공
+  - [ ] **11/4 07:23 KST** 첫 적용 확인: 수집원 49/49(Tavily 5 + 피드 44)·오류 0, published, insightkorea 11/3 기사 포함, 07시 회차에서 fnnews·ddaily 목록이 전날 18시 기사까지 남아 있는지
 - [ ] **3. (선택) 로그인 무효화 재발 방지** Cursor 문서가 무인 실행용으로 안내하는 API 키(`CURSOR_API_KEY`)를 4개 service에 넣는 방식. 다른 게시기 service 설정을 바꾸는 일이라 승인 필요. 추천: 헬스체크에 로그인 상태 점검을 먼저 넣고(제 일), 다시 풀리면 그때 API 키로 전환
 - [ ] 피드백 초안: Claude Code 알림에서 1(확인)·2(전송)·0(삭제) 선택
 - [x] OCI wiki 기록 (사용자 요청): 뉴스 계획 페이지 `fd067b0`, Health Check 노트·스킬 원본 동기화 `e008548`

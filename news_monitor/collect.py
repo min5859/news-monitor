@@ -147,7 +147,7 @@ def load_config(path):
             raise ValueError("Tavily key file must be an absolute path")
         if type(opts["tavily_max_results"]) is not int or not 1 <= opts["tavily_max_results"] <= 20:
             raise ValueError("invalid tavily_max_results")
-        for key, low, high in (("tavily_queries", 1, 10), ("feeds", 1, 40), ("excluded_publishers", 0, 100),
+        for key, low, high in (("tavily_queries", 1, 10), ("feeds", 1, 60), ("excluded_publishers", 0, 100),
                                ("kst_wall_clock_hosts", 0, 40)):
             values = opts[key]
             if (not isinstance(values, list) or not low <= len(values) <= high

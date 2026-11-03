@@ -221,7 +221,8 @@ class SourceTests(unittest.TestCase):
     def test_source_settings_reject_unsafe_values(self):
         self.assertEqual(load_config(ROOT / "config.json")["collection"]["provider"], "tavily_feeds")
         for key, value in (("feeds", ["http://www.paper.example/news.xml"]), ("feeds", ["https://www.paper.example/a?b=1&a=2"]),
-                           ("feeds", []), ("tavily_key_file", "tavily.json"), ("tavily_max_results", 21),
+                           ("feeds", []), ("feeds", [f"https://www.paper.example/{n}.xml" for n in range(61)]),
+                           ("tavily_key_file", "tavily.json"), ("tavily_max_results", 21),
                            ("tavily_queries", ["q"] * 11)):
             cfg = copy.deepcopy(self.config)
             cfg["collection"].update(feeds=[BASE + "news.xml"])

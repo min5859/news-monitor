@@ -49,7 +49,14 @@
       "https://www.donga.com/sitemap/donga-newsmap.xml",
       "https://www.joongang.co.kr/sitemap/latest-articles",
       "https://www.inews24.com/sitemap.xml",
-      "https://news.bizwatch.co.kr/sitemap/sitemap_cur_news.xml"
+      "https://news.bizwatch.co.kr/sitemap/sitemap_cur_news.xml",
+      "https://www.fnnews.com/sitemap/news/latest.xml",
+      "https://www.seoul.co.kr/sitemap/sitemap_latestArticle",
+      "https://www.businesskorea.co.kr/sitemap.xml",
+      "https://www.insightkorea.co.kr/sitemap.xml",
+      "https://www.ddaily.co.kr/sitemap.xml",
+      "https://www.wolyo.co.kr/sitemap.xml",
+      "https://zdnet.co.kr/feed/article_list2.xml"
     ],
     "kst_wall_clock_hosts": ["biz.newdaily.co.kr", "www.newdaily.co.kr"],
     "codex_model": "gpt-6-luna",
