@@ -47,6 +47,7 @@ def plain_title(value):
         raise TypeError("invalid title")
     parser = PlainText()
     parser.feed(value)
+    parser.close()  # Flush text held back as a possibly unfinished entity, e.g. a trailing "M&A".
     return " ".join(unescape("".join(parser.parts)).split())
 
 

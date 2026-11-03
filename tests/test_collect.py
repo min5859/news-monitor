@@ -56,6 +56,15 @@ class CollectionTests(unittest.TestCase):
         result = self.run_collection([article("Hyosung chairman Cho Hyun-joon visits plant")])
         self.assertEqual(len(result["articles"]), 1)
 
+    def test_title_ending_with_ampersand_word_is_kept(self):
+        # HTMLParser holds back a trailing "&X" as a possibly unfinished entity until close().
+        for title in ("효성 조현준 회장, 美 HVDC M&A", "Hyosung Chairman Cho Hyun-joon Expands R&D", "효성 조현준 회장 &amp; R&D"):
+            with self.subTest(title=title):
+                self.assertEqual(c.plain_title(title), title.replace("&amp;", "&"))
+        self.assertEqual(c.plain_title("<b>효성</b> 조현준 &lt;회장&gt;"), "효성 조현준 <회장>")
+        result = self.run_collection([article("효성 조현준 회장, 美 HVDC M&A")])
+        self.assertEqual(len(result["articles"]), 1)
+
     def test_tracking_urls_deduplicate(self):
         result = self.run_collection([article(url="https://example.com/news/1?utm_source=a#top"), article()])
         self.assertEqual(len(result["articles"]), 1)
