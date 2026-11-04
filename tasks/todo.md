@@ -102,7 +102,7 @@
   - [x] 10곳 실측(robots·사이트맵만, Tavily 미사용): 7곳 추가(fnnews·서울신문·businesskorea·insightkorea·ddaily·wolyo·zdnet), 3곳 제외(newstomato·SBS Biz·tf)
   - [x] 함께 발견한 버그: 제목 끝 `M&A`·`R&D`면 기사가 빠짐 → 실패 테스트 → 수정 `8a563ce`
   - [x] 피드 상한 40 → 60(44개). Mac 3.12/3.14 169개·Node·ruff, Mac·OCI 새 7곳 7/7 성공
-  - [ ] **11/4 07:23 KST** 첫 적용 확인: 수집원 49/49(Tavily 5 + 피드 44)·오류 0, published, insightkorea 11/3 기사 포함, 07시 회차에서 fnnews·ddaily 목록이 전날 18시 기사까지 남아 있는지
+  - [x] **11/4 09:23 KST** 첫 적용 확인: 07:00 회차 수집원 49/49·오류 0, 선정 62건(신규 1), published(pages-data `0670ebb`). 신규 1건이 insightkorea '[효성 60년①]'. 09:40 측정에서 ddaily는 아직 11/3 13:39 기사까지, fnnews는 11/3 18:11까지 남아 있어 07시 목록은 전날 18시 이후를 덮었다
 - [ ] **3. (선택) 로그인 무효화 재발 방지** Cursor 문서가 무인 실행용으로 안내하는 API 키(`CURSOR_API_KEY`)를 4개 service에 넣는 방식. 다른 게시기 service 설정을 바꾸는 일이라 승인 필요. 추천: 헬스체크에 로그인 상태 점검을 먼저 넣고(제 일), 다시 풀리면 그때 API 키로 전환
 - [ ] 피드백 초안: Claude Code 알림에서 1(확인)·2(전송)·0(삭제) 선택
 - [x] OCI wiki 기록 (사용자 요청): 뉴스 계획 페이지 `fd067b0`, Health Check 노트·스킬 원본 동기화 `e008548`
