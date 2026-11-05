@@ -24,6 +24,10 @@ def article(title="효성 조현준 회장, 테스트 행사 참석", url="https
 
 
 class Response(io.BytesIO):
+    @property
+    def headers(self):  # like http.client.HTTPResponse with no Content-Encoding
+        return {}
+
     def __enter__(self):
         return self
 

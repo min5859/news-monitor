@@ -11,6 +11,7 @@ import re
 import tempfile
 import time
 import unicodedata
+import zlib
 from contextlib import contextmanager
 from datetime import UTC, datetime, timedelta
 from email.utils import parsedate_to_datetime
@@ -200,10 +201,23 @@ def retry_delay(headers, attempt, opts):
 
 
 def read_bounded(request, opts, opener):
+    """The byte limit holds for the body as sent and, when gzipped, as inflated."""
+    limit = opts["max_response_bytes"]
     with opener(request, timeout=opts["timeout_seconds"]) as response:
-        raw = response.read(opts["max_response_bytes"] + 1)
-    if len(raw) > opts["max_response_bytes"]:
+        raw = response.read(limit + 1)
+        gzipped = (response.headers.get("Content-Encoding") or "").strip().lower() == "gzip"
+    if len(raw) > limit:
         raise CollectionError("response_too_large")
+    if gzipped:
+        inflater = zlib.decompressobj(16 + zlib.MAX_WBITS)
+        try:
+            raw = inflater.decompress(raw, limit + 1)
+        except zlib.error:
+            raise CollectionError("invalid_gzip") from None
+        if len(raw) > limit:
+            raise CollectionError("response_too_large")
+        if not inflater.eof:
+            raise CollectionError("invalid_gzip")
     return raw
 
 

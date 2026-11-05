@@ -1,6 +1,7 @@
 """Synthetic source documents only. No network, real credentials or writes outside temp dirs."""
 
 import copy
+import gzip
 import io
 import json
 import tempfile
@@ -19,6 +20,10 @@ BASE = "https://www.paper.example/"
 
 
 class Response(io.BytesIO):
+    def __init__(self, body, headers=None):
+        super().__init__(body)
+        self.headers = headers or {}
+
     def __enter__(self):
         return self
 
@@ -34,6 +39,8 @@ def opener_for(pages, log):
             raise HTTPError(request.full_url, body, "synthetic", {}, None)
         if body is None:
             raise HTTPError(request.full_url, 404, "missing", {}, None)
+        if isinstance(body, tuple):
+            return Response(*body)
         return Response(body.encode())
     return opener
 
@@ -127,6 +134,23 @@ class SourceTests(unittest.TestCase):
         self.assertEqual(result["status"], "partial")
         self.assertNotIn("MUST_NOT_KEEP", json.dumps(result))
         self.assertNotIn("사진 설명", json.dumps(result))
+
+    def test_feeds_are_asked_for_gzip_and_stay_bounded_after_inflating(self):
+        # Seen 11/4-11/5: donga's 577 KB sitemap stalled from OCI until timeout; asked gzipped it was 37 KB in seconds.
+        feed, packed = BASE + "news.xml", gzip.compress(SITEMAP.encode())
+        pages = {BASE + "robots.txt": "User-agent: *\nAllow: /\n", feed: (packed, {"Content-Encoding": "gzip"})}
+        log = []
+        result = self.collect(pages, log, tavily_queries=[], feeds=[feed])
+        self.assertEqual([row["url"] for row in result["articles"]], [BASE + "view/1"])
+        self.assertEqual({request.get_header("Accept-encoding") for request in log}, {"gzip"})
+
+        def feed_errors(body, **options):
+            pages[feed] = (body, {"Content-Encoding": "gzip"})
+            return [error["error"] for error in self.collect(pages, tavily_queries=[], feeds=[feed], **options)["errors"]
+                    if error.get("source") == "feed"]
+        self.assertEqual(feed_errors(packed, max_response_bytes=len(SITEMAP.encode()) - 1), ["response_too_large"])
+        self.assertEqual(feed_errors(packed[:-12]), ["invalid_gzip"])
+        self.assertEqual(feed_errors(b"not gzip"), ["invalid_gzip"])
 
     def test_feed_hosts_that_label_kst_as_utc_keep_their_written_day(self):
         # Seen 10/27 17:20 KST: newdaily listed 17:17 KST as 17:17:19+00:00, so afternoon news moved a day later.

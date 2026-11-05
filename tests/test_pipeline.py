@@ -25,6 +25,10 @@ CONFIG["analysis"].update(provider="cursor", model="synthetic-cursor-test")
 
 
 class Response(io.BytesIO):
+    @property
+    def headers(self):  # like http.client.HTTPResponse with no Content-Encoding
+        return {}
+
     def __enter__(self):
         return self
 

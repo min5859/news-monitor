@@ -138,7 +138,7 @@ def read_feeds(config, opener, sleeper):
     robots = {}
 
     def get(url):
-        return read_bounded(Request(url, headers={"User-Agent": agent}), opts, opener)
+        return read_bounded(Request(url, headers={"User-Agent": agent, "Accept-Encoding": "gzip"}), opts, opener)
 
     for index, url in enumerate(opts["feeds"]):
         host = urlsplit(url).hostname
