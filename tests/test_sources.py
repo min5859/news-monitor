@@ -7,6 +7,7 @@ import json
 import tempfile
 import unittest
 from datetime import timedelta
+from http.client import IncompleteRead
 from pathlib import Path
 from urllib.error import HTTPError
 
@@ -151,6 +152,34 @@ class SourceTests(unittest.TestCase):
         self.assertEqual(feed_errors(packed, max_response_bytes=len(SITEMAP.encode()) - 1), ["response_too_large"])
         self.assertEqual(feed_errors(packed[:-12]), ["invalid_gzip"])
         self.assertEqual(feed_errors(b"not gzip"), ["invalid_gzip"])
+
+    def test_a_feed_that_stalls_or_drops_is_read_once_more_after_a_pause(self):
+        # Seen 11/4-11/5 from OCI: donga's sitemap sometimes stalled past the timeout or ended early, then read fine seconds later.
+        # 11/6 18:00: edaily's sitemap did not parse once and parsed fine on every read afterwards.
+        feed, gone = BASE + "news.xml", BASE + "gone.xml"
+        pages = {BASE + "robots.txt": "User-agent: *\nAllow: /\n", feed: SITEMAP, gone: 404}
+
+        def run(failures, url):
+            log, waits, inner = [], [], opener_for(pages, [])
+
+            def opener(request, timeout):
+                log.append(request.full_url)
+                if request.full_url == feed and failures:
+                    failure = failures.pop(0)
+                    if isinstance(failure, bytes):
+                        return Response(failure)
+                    raise failure
+                return inner(request, timeout)
+            self.config["collection"].update(tavily_queries=[], feeds=[url])
+            result = sources.collect_sources(self.config, NOW, opener=opener, sleeper=waits.append)
+            return result, log.count(url), waits, [error["error"] for error in result["errors"] if error.get("source") == "feed"]
+
+        result, fetches, waits, errors = run([TimeoutError()], feed)
+        self.assertEqual(([row["url"] for row in result["articles"]], fetches, errors), ([BASE + "view/1"], 2, []))
+        self.assertIn(self.config["collection"]["backoff_seconds"], waits)
+        self.assertEqual(run([b"<urlset><url>"], feed)[1:4:2], (2, []))
+        self.assertEqual(run([IncompleteRead(b""), IncompleteRead(b"")], feed)[1:4:2], (2, ["network_IncompleteRead"]))
+        self.assertEqual(run([], gone)[1:4:2], (1, ["http_404"]))
 
     def test_feed_hosts_that_label_kst_as_utc_keep_their_written_day(self):
         # Seen 10/27 17:20 KST: newdaily listed 17:17 KST as 17:17:19+00:00, so afternoon news moved a day later.

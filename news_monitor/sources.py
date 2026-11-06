@@ -155,7 +155,13 @@ def read_feeds(config, opener, sleeper):
             if not robots[host].can_fetch(agent, url):
                 raise CollectionError("robots_disallowed")
             sleeper(1)
-            items = parse_feed(get(url))
+            try:
+                items = parse_feed(get(url))
+            except HTTPError:
+                raise
+            except (OSError, HTTPException, ET.ParseError, ValueError):  # Stalled, cut off or half-written: one more try.
+                sleeper(opts["backoff_seconds"])
+                items = parse_feed(get(url))
             if host in opts["kst_wall_clock_hosts"]:  # They label KST times "+00:00"; the written date is the KST day.
                 items = [{**item, "published": (item["published"] or "")[:10]} for item in items]
             found["items"] += items
