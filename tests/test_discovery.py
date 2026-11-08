@@ -1,6 +1,7 @@
 """Synthetic search events only. Never contact a model or web endpoint."""
 
-import copy
+import atexit
+import io
 import json
 import tempfile
 import unittest
@@ -8,13 +9,16 @@ from datetime import UTC, datetime
 from pathlib import Path
 from unittest.mock import patch
 
-from news_monitor import analysis, codex, discovery, report, site
-from news_monitor.collect import ROOT, load_config
+from news_monitor import analysis, codex, report, site, sources
+from news_monitor.collect import ROOT
+
+KEY_DIR = tempfile.TemporaryDirectory()
+atexit.register(KEY_DIR.cleanup)
+KEY_FILE = Path(KEY_DIR.name) / "tavily.json"
+KEY_FILE.write_text(json.dumps({"api_key": "tvly-synthetic"}))
 
 CONFIG = json.loads((ROOT / "config.json").read_text())
-CONFIG["collection"]["provider"] = "codex_web_search"
-CONFIG["collection"]["search_groups"] = [["가상 검색"]]
-CONFIG["collection"]["lookback_days"] = 14
+CONFIG["collection"].update(tavily_key_file=str(KEY_FILE), tavily_queries=["가상 검색"], feeds=[], lookback_days=14)
 CONFIG["briefing"]["enabled"] = False
 NOW = datetime(2026, 10, 18, 12, tzinfo=UTC)
 
@@ -23,113 +27,40 @@ def article(title="가상 테스트: 효성 조현준 회장, 새 사업 추진"
     return {"title": title, "url": url, "published_date": day, "language": "ko"}
 
 
-def run_search(rows, sources=None, calls=1, config=None):
-    sources = sources if sources is not None else {row["url"]: row["title"] for row in rows}
-    if not rows and not sources:
-        sources = {"https://example.com/search": "검색 페이지"}
-    return discovery.collect_web(config or CONFIG, NOW,
-                                 runner=lambda *args, **kwargs: (json.dumps({"articles": rows}),
-                                                                {"sources": sources, "web_search_calls": calls}))
+class Response(io.BytesIO):
+    def __init__(self, body, headers=None):
+        super().__init__(body)
+        self.headers = headers or {}
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        self.close()
+
+
+def tavily_opener(rows):
+    """An opener whose only answer is a synthetic Tavily result list."""
+    results = [{"title": row["title"], "url": row["url"], "published_date": row["published_date"]} for row in rows]
+    body = json.dumps({"query": "q", "results": results}).encode()
+    return lambda request, timeout: Response(body)
+
+
+def run_search(rows, config=None, now=NOW):
+    """One tavily_feeds collection whose only source is a synthetic Tavily answer."""
+    return sources.collect_sources(config or CONFIG, now, opener=tavily_opener(rows), sleeper=lambda _: None)
 
 
 class DiscoveryTests(unittest.TestCase):
-    def test_search_plan_reserves_finish_room_without_raising_hard_limit(self):
-        cfg = copy.deepcopy(CONFIG)
-        cfg["collection"].update(max_search_calls=5, search_finish_reserve_calls=1,
-                                 search_query_calls_per_group=1)
-
-        def runner(prompt, model, **kwargs):
-            payload = json.loads(prompt.split("INPUT_JSON:\n")[1])
-            self.assertEqual(kwargs["max_search_calls"], 5)
-            self.assertEqual(payload["max_web_calls"], 5)
-            self.assertEqual(payload["finish_after_web_calls"], 4)
-            self.assertEqual(payload["query_call_budget"], 1)
-            self.assertEqual(payload["verification_call_budget"], 3)
-            self.assertEqual(payload["publisher_goal_scope"], "whole_collection_not_this_group")
-            row = article()
-            return json.dumps({"articles": [row]}), {"sources": {row["url"]: row["title"]}, "web_search_calls": 4}
-
-        result = discovery.collect_web(cfg, NOW, runner=runner)
-        self.assertEqual(result["status"], "ok")
-
-    def test_small_group_budget_never_has_negative_or_unusable_plan(self):
-        cfg = copy.deepcopy(CONFIG)
-        cfg["collection"].update(max_search_calls=1, search_finish_reserve_calls=1,
-                                 search_query_calls_per_group=2)
-
-        def runner(prompt, model, **kwargs):
-            payload = json.loads(prompt.split("INPUT_JSON:\n")[1])
-            self.assertEqual(payload["finish_after_web_calls"], 1)
-            self.assertEqual(payload["query_call_budget"], 1)
-            self.assertEqual(payload["verification_call_budget"], 0)
-            return '{"articles":[]}', {"sources": {}, "web_search_calls": 1}
-
-        self.assertEqual(discovery.collect_web(cfg, NOW, runner=runner)["source_queries"]["succeeded"], 1)
-
-    def test_budget_settings_reject_unsafe_values(self):
-        for key in ("search_finish_reserve_calls", "search_query_calls_per_group"):
-            for value in (-1, True, 31):
-                cfg = copy.deepcopy(CONFIG)
-                cfg["collection"][key] = value
-                with tempfile.TemporaryDirectory() as temp:
-                    path = Path(temp) / "config.json"
-                    path.write_text(json.dumps(cfg))
-                    with self.subTest(key=key, value=value), self.assertRaises(ValueError):
-                        load_config(path)
-
-    def test_soft_finish_target_does_not_relax_or_replace_hard_budget(self):
-        cfg = copy.deepcopy(CONFIG)
-        cfg["collection"]["max_search_calls"] = 5
-        self.assertEqual(run_search([article()], calls=5, config=cfg)["status"], "ok")
-        self.assertEqual(run_search([article()], calls=6, config=cfg)["status"], "failed")
-
-    def test_publisher_date_and_actual_collection_time_are_distinct(self):
+    def test_publication_date_and_actual_collection_time_are_distinct(self):
         result = run_search([article()])
         self.assertEqual(result["status"], "ok")
-        self.assertEqual(result["date_basis"], "publisher_date")
+        self.assertEqual(result["date_basis"], "reported_publication_date")
         self.assertEqual(result["articles"][0]["published_at"], "2026-10-16")
-        self.assertEqual(result["articles"][0]["source"], "codex_web_search")
+        self.assertEqual(result["articles"][0]["collected_at"], NOW.isoformat())
+        self.assertEqual(result["articles"][0]["source"], "tavily_feeds")
         prepared = report.prepare_collection(result, result, CONFIG, NOW)
-        self.assertEqual(prepared["date_basis"], "publisher_date")
-
-    def test_old_future_and_untargeted_results_are_not_selected(self):
-        rows = [article(), article(day="2025-10-16"), article(day="2026-10-19"), article(title="다른 기업 소식")]
-        result = run_search(rows)
-        self.assertEqual(result["statistics"]["selected"], 1)
-        self.assertEqual(result["statistics"]["out_of_window"], 2)
-        self.assertEqual(result["statistics"]["not_target"], 1)
-
-    def test_unseen_url_and_absent_search_events_are_rejected(self):
-        result = run_search([article()], sources={"https://example.com/other": "다른 기사"})
-        self.assertEqual(result["statistics"]["selected"], 0)
-        self.assertEqual(result["statistics"]["unverified_url"], 1)
-        self.assertNotEqual(result["status"], "ok")
-        self.assertEqual(result["status"], "failed")
-        self.assertEqual(run_search([article()], calls=0)["status"], "failed")
-
-    def test_invalid_dates_private_urls_and_extra_fields_fail(self):
-        for row in ({**article(), "published_date": "unknown"}, {**article(), "url": "http://127.0.0.1/a"},
-                    {**article(), "body": "MUST_NOT_STORE"}):
-            with self.subTest(row=row):
-                result = run_search([row])
-                self.assertEqual(result["status"], "failed")
-                self.assertEqual(result["articles"], [])
-
-    def test_dedup_and_latest_publication_selection(self):
-        cfg = copy.deepcopy(CONFIG)
-        cfg["collection"]["max_articles"] = 1
-        result = run_search([article(day="2026-10-10"), article(),
-                             article(url="https://other.example/news/2", day="2026-10-17")], config=cfg)
-        self.assertEqual(result["statistics"]["duplicates"], 1)
-        self.assertEqual(result["articles"][0]["published_at"], "2026-10-17")
-
-    def test_valid_no_articles_is_empty_and_failure_is_distinct(self):
-        self.assertEqual(run_search([])["status"], "empty")
-        result = discovery.collect_web(CONFIG, NOW, runner=lambda *args, **kwargs: ('{"articles":[]}',
-                                                                                 {"sources": {}, "web_search_calls": 1}))
-        self.assertEqual(result["status"], "empty")
-        result = discovery.collect_web(CONFIG, NOW, runner=lambda *args, **kwargs: ("invalid", {}))
-        self.assertEqual(result["status"], "failed")
+        self.assertEqual(prepared["date_basis"], "reported_publication_date")
 
     def test_site_uses_publication_not_collection_date_for_filter(self):
         result = run_search([article()])

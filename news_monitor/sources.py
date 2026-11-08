@@ -216,12 +216,17 @@ def collect_sources(config, now, opener=urlopen, sleeper=time.sleep):
         "checked_at": now.isoformat(), "window_start": start.isoformat(), "window_end": now.isoformat(),
         "date_basis": "reported_publication_date", "coverage": "search_sample_not_exhaustive",
         "selection": "latest_published_target_in_headline", "statistics": stats, "publishers": publishers,
-        "source_queries": {"planned": len(opts["tavily_queries"]) + len(opts["feeds"]),
+        "source_queries": {"planned": planned_sources(config),
                            "attempted": searched["attempted"] + feeds["attempted"], "succeeded": succeeded},
         "source_attribution": {"name": opts["attribution_name"], "url": opts["attribution_url"]},
         "retry_after_seconds": None, "warnings": sorted(set(warnings)), "errors": errors,
         "articles": selected,
     }
+
+
+def planned_sources(config):
+    opts = config["collection"]
+    return len(opts["tavily_queries"]) + len(opts["feeds"])
 
 
 def compare(rows, baseline, since=None):
@@ -250,8 +255,6 @@ def main():
     parser.add_argument("--baseline", type=Path, help="read-only articles.json to compare against")
     args = parser.parse_args()
     config = load_config(args.config)
-    if config["collection"]["provider"] != "tavily_feeds":
-        parser.error("config provider must be tavily_feeds")
     result = collect_sources(config, datetime.now(UTC))
     summary = {key: result[key] for key in ("checked_at", "status", "statistics", "source_queries", "warnings",
                                             "errors", "publishers")}

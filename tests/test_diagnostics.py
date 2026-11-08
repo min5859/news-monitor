@@ -9,11 +9,11 @@ from pathlib import Path
 from unittest.mock import patch
 
 import test_briefing
-from test_discovery import CONFIG, NOW
+from test_discovery import NOW
 from test_pipeline import CONFIG as PIPELINE_CONFIG
 from test_pipeline import collection_fixture, decision
 
-from news_monitor import analysis, briefing, codex, discovery, run
+from news_monitor import analysis, briefing, codex, run
 from news_monitor.collect import write_result
 from news_monitor.diagnostics import record_errors
 
@@ -45,14 +45,6 @@ class DiagnosticsTests(unittest.TestCase):
 
         with patch.object(analysis, "capture_model", side_effect=capture), self.assertRaisesRegex(analysis.AnalysisError, "model_usage_limit"):
             codex.execute("synthetic", "synthetic-model")
-
-    def test_discovery_retains_reason_but_not_untrusted_error_text(self):
-        def failure(*args, **kwargs):
-            raise analysis.AnalysisError("model_timeout")
-
-        result = discovery.collect_web(CONFIG, NOW, runner=failure)
-        self.assertEqual(result["errors"][0]["reason"], "model_timeout")
-        self.assertIn("elapsed_seconds", result["errors"][0])
 
     def test_briefing_diagnostics_identify_validation_phase_and_reason(self):
         fixture = test_briefing.BriefingTests()

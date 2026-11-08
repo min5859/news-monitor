@@ -1,4 +1,4 @@
-"""Bounded GDELT metadata collection; never fetch article bodies or images."""
+"""Bounded title/URL/date collection through the tavily_feeds provider; never fetch article bodies or images."""
 
 import argparse
 import fcntl
@@ -99,12 +99,9 @@ def load_config(path):
     if type(diagnostic_limit) is not int or not 1 <= diagnostic_limit <= 1000:
         raise ValueError("invalid diagnostics event limit")
     opts = config["collection"]
-    if opts["provider"] not in ("gdelt_doc", "codex_web_search", "tavily_feeds"):
+    if opts["provider"] != "tavily_feeds":
         raise ValueError("unsupported provider")
-    if not opts["endpoint"].startswith("https://"):
-        raise ValueError("collection endpoint must use HTTPS")
-    for name, lower, upper in (("lookback_days", 1, 90), ("max_results_per_query", 1, 250),
-                                ("max_articles", 1, 250), ("attempts", 1, 3),
+    for name, lower, upper in (("lookback_days", 1, 90), ("max_articles", 1, 250), ("attempts", 1, 3),
                                 ("publisher_goal", 1, 250)):
         value = opts[name]
         if type(value) is not int or not lower <= value <= upper:
@@ -115,49 +112,32 @@ def load_config(path):
         if type(opts[name]) not in (int, float) or not math.isfinite(opts[name]) or opts[name] <= 0:
             raise ValueError(f"invalid {name}")
     if opts["query_interval_seconds"] < 5:
-        raise ValueError("GDELT query interval must be at least five seconds")
+        raise ValueError("query interval must be at least five seconds")
     if min(opts["minimum_run_interval_seconds"], opts["rate_limit_cooldown_seconds"]) < opts["query_interval_seconds"]:
         raise ValueError("run interval and cooldown must not be shorter than query interval")
     for name in ("max_response_bytes", "max_title_chars"):
         if type(opts[name]) is not int:
             raise ValueError(f"{name} must be an integer")
-    for values in (opts["queries"], config["target"]["person_aliases"],
-                   config["target"]["organization_aliases"]):
+    for values in (config["target"]["person_aliases"], config["target"]["organization_aliases"]):
         if not isinstance(values, list) or not values or any(not isinstance(v, str) or not v.strip() for v in values):
-            raise ValueError("queries and aliases must be nonempty string lists")
+            raise ValueError("aliases must be nonempty string lists")
     display_name(config)
     if type(opts.get("require_organization_in_headline", True)) is not bool:
         raise ValueError("invalid headline selection option")
-    if opts["provider"] == "codex_web_search":
-        for key, low, high in (("codex_timeout_seconds", 1, 900), ("codex_output_bytes", 1024, 2097152),
-                               ("max_search_calls", 1, 30), ("search_finish_reserve_calls", 1, 29),
-                               ("search_query_calls_per_group", 1, 30)):
-            if type(opts[key]) is not int or not low <= opts[key] <= high:
-                raise ValueError(f"invalid {key}")
-        groups = opts.get("search_groups", [[config["target"]["name"]]])
-        if (not isinstance(groups, list) or not 1 <= len(groups) <= min(6, opts["max_search_calls"])
-                or any(not isinstance(group, list) or not 1 <= len(group) <= 4
-                       or any(not isinstance(query, str) or not query.strip() or len(query) > 200 for query in group)
-                       for group in groups)):
-            raise ValueError("invalid search_groups")
-        for key, directory in (("schema_file", "schemas"), ("search_prompt_file", "prompts")):
-            if not (ROOT / opts[key]).resolve().is_relative_to(ROOT / directory):
-                raise ValueError("unsafe discovery resource path")
-    if opts["provider"] == "tavily_feeds":
-        if not isinstance(opts["tavily_key_file"], str) or not Path(opts["tavily_key_file"]).is_absolute():
-            raise ValueError("Tavily key file must be an absolute path")
-        if type(opts["tavily_max_results"]) is not int or not 1 <= opts["tavily_max_results"] <= 20:
-            raise ValueError("invalid tavily_max_results")
-        for key, low, high in (("tavily_queries", 1, 10), ("feeds", 1, 60), ("excluded_publishers", 0, 100),
-                               ("kst_wall_clock_hosts", 0, 40)):
-            values = opts[key]
-            if (not isinstance(values, list) or not low <= len(values) <= high
-                    or any(not isinstance(value, str) or not value.strip() or len(value) > 300 for value in values)):
-                raise ValueError(f"invalid {key}")
-        if any(not feed.startswith("https://") or canonical_url(feed, opts) != feed for feed in opts["feeds"]):
-            raise ValueError("feeds must be canonical HTTPS URLs")
-        if any(not re.fullmatch(r"[a-z0-9-]+(\.[a-z0-9-]+)+", host) for host in opts["kst_wall_clock_hosts"]):
-            raise ValueError("invalid kst_wall_clock_hosts")
+    if not isinstance(opts["tavily_key_file"], str) or not Path(opts["tavily_key_file"]).is_absolute():
+        raise ValueError("Tavily key file must be an absolute path")
+    if type(opts["tavily_max_results"]) is not int or not 1 <= opts["tavily_max_results"] <= 20:
+        raise ValueError("invalid tavily_max_results")
+    for key, low, high in (("tavily_queries", 1, 10), ("feeds", 1, 60), ("excluded_publishers", 0, 100),
+                           ("kst_wall_clock_hosts", 0, 40)):
+        values = opts[key]
+        if (not isinstance(values, list) or not low <= len(values) <= high
+                or any(not isinstance(value, str) or not value.strip() or len(value) > 300 for value in values)):
+            raise ValueError(f"invalid {key}")
+    if any(not feed.startswith("https://") or canonical_url(feed, opts) != feed for feed in opts["feeds"]):
+        raise ValueError("feeds must be canonical HTTPS URLs")
+    if any(not re.fullmatch(r"[a-z0-9-]+(\.[a-z0-9-]+)+", host) for host in opts["kst_wall_clock_hosts"]):
+        raise ValueError("invalid kst_wall_clock_hosts")
     return config
 
 
@@ -275,103 +255,12 @@ def parse_article(item, config):
 
 
 def collect(config, now=None, opener=urlopen, sleeper=time.sleep):
+    from news_monitor.sources import collect_sources
+
     now = now or datetime.now(UTC)
     if now.tzinfo is None:
         raise ValueError("collection time must be timezone-aware")
-    now = now.astimezone(UTC)
-    opts = config["collection"]
-    if opts["provider"] == "codex_web_search":
-        from news_monitor.discovery import collect_web
-
-        return collect_web(config, now)
-    if opts["provider"] == "tavily_feeds":
-        from news_monitor.sources import collect_sources
-
-        return collect_sources(config, now, opener=opener, sleeper=sleeper)
-    start = now - timedelta(days=opts["lookback_days"])
-    stats = {"fetched": 0, "invalid_metadata": 0, "out_of_window": 0, "not_target": 0,
-             "duplicates": 0, "limit_excluded": 0, "selected": 0,
-             "person_only": 0, "organization_only": 0, "neither_target": 0}
-    rows, errors, warnings = {}, [], []
-    successes = valid_metadata = 0
-    retry_after_seconds = None
-    attempted_queries = 0
-    person = [normalized(v) for v in config["target"]["person_aliases"]]
-    organization = [normalized(v) for v in config["target"]["organization_aliases"]]
-    for index, query in enumerate(opts["queries"]):
-        if index:
-            sleeper(opts["query_interval_seconds"])
-        params = {"query": query, "mode": "artlist", "format": "json",
-                  "maxrecords": opts["max_results_per_query"],
-                  "timespan": f"{opts['lookback_days']}d", "sort": "datedesc"}
-        try:
-            attempted_queries += 1
-            items = fetch_json(opts["endpoint"] + "?" + urlencode(params), opts, opener, sleeper)
-        except CollectionError as exc:
-            errors.append({"query": query, "error": str(exc)})
-            if exc.retry_after_seconds is not None:
-                retry_after_seconds = exc.retry_after_seconds
-                if index + 1 < len(opts["queries"]):
-                    warning = "remaining_queries_skipped_rate_limit" if str(exc) == "http_429" else "remaining_queries_skipped_retry_after"
-                    warnings.append(warning)
-                break
-            continue
-        successes += 1
-        stats["fetched"] += len(items)
-        if len(items) >= opts["max_results_per_query"]:
-            warnings.append("upstream_limit_reached")
-        for item in items:
-            try:
-                article = parse_article(item, config)
-            except (ValueError, KeyError, TypeError):
-                stats["invalid_metadata"] += 1
-                continue
-            valid_metadata += 1
-            indexed = datetime.fromisoformat(article["indexed_at"])
-            if not start <= indexed <= now:
-                stats["out_of_window"] += 1
-                continue
-            title = normalized(article["title"])
-            has_person = any(v in title for v in person)
-            has_organization = any(v in title for v in organization)
-            if not has_person or not has_organization:
-                stats["not_target"] += 1
-                reason = "person_only" if has_person else "organization_only" if has_organization else "neither_target"
-                stats[reason] += 1
-                continue
-            article["collected_at"] = now.isoformat()
-            old = rows.get(article["url"])
-            if old:
-                stats["duplicates"] += 1
-            if old is None or article["indexed_at"] > old["indexed_at"]:
-                rows[article["url"]] = article
-    ordered = sorted(rows.values(), key=lambda a: (a["indexed_at"], a["url"]), reverse=True)
-    selected = ordered[:opts["max_articles"]]
-    stats["selected"] = len(selected)
-    stats["limit_excluded"] = len(ordered) - len(selected)
-    if successes == 0 or (stats["fetched"] and valid_metadata == 0):
-        status = "failed"
-    elif errors or warnings or stats["invalid_metadata"]:
-        status = "partial"
-    else:
-        status = "ok" if selected else "empty"
-    publishers = sorted({a["publisher"] for a in selected})
-    goal_met = len(publishers) >= opts["publisher_goal"]
-    if successes and not goal_met:
-        warnings.append("publisher_goal_not_met")
-    return {
-        "schema_version": 1, "status": status, "target": config["target"]["name"],
-        "checked_at": now.isoformat(), "window_start": start.isoformat(), "window_end": now.isoformat(),
-        "date_basis": "gdelt_observation_not_publication", "coverage": "search_sample_not_exhaustive",
-        "selection": "latest_observed_target_in_headline", "statistics": stats,
-        "publishers": publishers,
-        "coverage_goals": {"publisher_goal": opts["publisher_goal"],
-                           "actual_publishers": len(publishers), "publisher_goal_met": goal_met},
-        "source_queries": {"planned": len(opts["queries"]), "attempted": attempted_queries, "succeeded": successes},
-        "retry_after_seconds": retry_after_seconds,
-        "source_attribution": {"name": opts["attribution_name"], "url": opts["attribution_url"]},
-        "warnings": sorted(set(warnings)), "errors": errors, "articles": selected,
-    }
+    return collect_sources(config, now.astimezone(UTC), opener=opener, sleeper=sleeper)
 
 
 def atomic_json(path, data):
@@ -431,10 +320,12 @@ def _run_collection(config, data_dir, now=None, opener=urlopen, sleeper=time.sle
         if until.tzinfo is None:
             raise ValueError("request state must be timezone-aware")
         if current < until:
+            from news_monitor.sources import planned_sources
+
             result = failure_result("request_cooldown", current)
             result["errors"][0]["reason"] = state.get("reason", "previous_run_cooldown")
             result["retry_not_before"] = until.isoformat()
-            result["source_queries"] = {"planned": len(config["collection"]["queries"]), "attempted": 0, "succeeded": 0}
+            result["source_queries"] = {"planned": planned_sources(config), "attempted": 0, "succeeded": 0}
             write_result(result, data_dir)
             return result
     interval = config["collection"]["minimum_run_interval_seconds"]
@@ -445,7 +336,7 @@ def _run_collection(config, data_dir, now=None, opener=urlopen, sleeper=time.sle
 
     record_errors(data_dir, config, "discovery", result["checked_at"],
                   [error for error in result["errors"] if "reason" in error])
-    if config["collection"]["provider"] != "gdelt_doc" and (data_dir / "articles.json").exists():
+    if (data_dir / "articles.json").exists():
         from news_monitor.discovery import merge_previous
 
         try:

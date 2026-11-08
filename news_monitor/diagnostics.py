@@ -23,9 +23,6 @@ VALIDATION_CODES = {
     "invalid evidence": "group_evidence_invalid",
     "fabricated evidence": "group_evidence_not_grounded",
     "missing related articles": "group_articles_missing",
-    "invalid discovery schema": "response_schema_invalid",
-    "missing real search provenance": "search_provenance_missing",
-    "too many discovery results": "search_result_limit_exceeded",
     "duplicate JSON key": "response_duplicate_key",
 }
 MODEL_CODES = {

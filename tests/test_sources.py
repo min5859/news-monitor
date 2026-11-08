@@ -203,6 +203,14 @@ class SourceTests(unittest.TestCase):
         self.assertEqual([(row["url"], row["published_at"]) for row in result["articles"]], [(BASE + "view/1", "2026-10-17")])
         self.assertEqual(result["statistics"]["duplicates"], 1)
 
+    def test_html_or_envelope_less_search_responses_are_fixed_failures(self):
+        # Kept from the GDELT tests: the shared reader must not treat an error page or a changed envelope as "no news".
+        for body, code in (("<html>busy</html>", "invalid_response_JSONDecodeError"),
+                           (json.dumps({"query": "q"}), "invalid_results_envelope")):
+            result = self.collect({sources.TAVILY_URL: body}, tavily_queries=["a"])
+            self.assertEqual([error["error"] for error in result["errors"]], [code, "no_source_succeeded"])
+            self.assertEqual((result["status"], result["articles"]), ("failed", []))
+
     def test_quota_missing_key_and_unreadable_robots_are_fixed_codes(self):
         result = self.collect({sources.TAVILY_URL: 432}, tavily_queries=["a", "b"])
         self.assertEqual([error["error"] for error in result["errors"]], ["http_432", "http_432", "no_source_succeeded"])
@@ -215,13 +223,14 @@ class SourceTests(unittest.TestCase):
                          {"tavily_key_unavailable", "robots_unavailable", "no_source_succeeded"})
         self.assertEqual((result["status"], result["articles"]), ("failed", []))
 
-    def test_verified_rows_from_the_previous_source_are_retained_not_relabeled(self):
+    def test_verified_rows_from_an_earlier_run_are_retained_with_their_first_sighting(self):
         previous = run_search([article(url="https://old.example/news/1")])
         fresh = self.collect({sources.TAVILY_URL: tavily([{"title": TITLE, "url": BASE + "a", "published_date": "2026-10-17"}])},
                              tavily_queries=["a"])
         merged = discovery.merge_previous(fresh, previous, self.config)
-        self.assertEqual(sorted(row["source"] for row in merged["articles"]), ["codex_web_search", "tavily_feeds"])
-        old = next(row for row in merged["articles"] if row["source"] == "codex_web_search")
+        self.assertEqual({row["source"] for row in merged["articles"]}, {"tavily_feeds"})
+        self.assertEqual(len(merged["articles"]), 2)
+        old = next(row for row in merged["articles"] if row["url"] == "https://old.example/news/1")
         self.assertEqual(old["first_seen_at"], previous["articles"][0]["first_seen_at"])
         self.assertEqual(merged["statistics"]["retained"], 1)
         self.assertEqual(len(report.prepare_collection(merged, merged, self.config, NOW + timedelta(hours=1))["articles"]), 2)

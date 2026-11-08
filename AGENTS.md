@@ -5,9 +5,9 @@
 - 기사 전문·사진·인증 정보는 저장하거나 배포하지 않는다. 원문 사이트를 우회 수집하지 않는다.
 - Google News RSS는 robots 지침 때문에 기본 수집원으로 사용하지 않는다.
 - 수집 실패·정상 0건·판단 보류를 구분하고 실패 시 이전 정상 데이터를 보존한다.
-- GDELT 시각은 발행일이 아니라 관측 시각이다. 제목 기반 분석임을 표시한다.
+- 제목 기반 분석임을 표시한다.
 - 기본 수집은 tavily_feeds(Tavily 뉴스 검색 + robots 허용 언론사 사이트맵·RSS)다. 제목·URL·날짜만 쓰고 검색 요약·기사 페이지는 받지 않는다.
-- 제공 발행일(reported_publication_date)을 원문 확인 발행일·GDELT 관측일과 구분한다. 네이버 검색 API·포털 검색 크롤링은 쓰지 않는다.
+- 제공 발행일(reported_publication_date)을 원문 확인 발행일과 구분한다. 네이버 검색 API·포털 검색 크롤링은 쓰지 않는다.
 - 분류·브리핑 AI는 Cursor `claude-sonnet-5-5-medium`이다. ask 모드·빈 workspace·도구 전체 거부로 실행하고 웹을 쓰지 않는다.
 - OCI AppArmor가 Cursor 샌드박스를 막으므로 다른 게시기처럼 `--sandbox disabled`를 쓴다. 전역 AppArmor는 바꾸지 않는다.
 - Codex 경로(롤백용)는 읽기 전용·shell/apps/plugins/하위 에이전트/이미지 비활성화로 실행한다.

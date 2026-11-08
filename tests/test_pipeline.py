@@ -12,37 +12,27 @@ from datetime import UTC, datetime, timedelta
 from html.parser import HTMLParser
 from pathlib import Path
 from unittest.mock import patch
+from zoneinfo import ZoneInfo
+
+from test_discovery import KEY_FILE, article, run_search
 
 from news_monitor import analysis as a
 from news_monitor import preflight, run, site
 from news_monitor import report as r
-from news_monitor.collect import ROOT, collect, write_result
+from news_monitor.collect import ROOT, write_result
 
 CONFIG = json.loads((ROOT / "config.json").read_text())
-CONFIG["collection"].update(provider="gdelt_doc", queries=['"Hyosung"'], lookback_days=14)
+CONFIG["collection"].update(tavily_key_file=str(KEY_FILE), tavily_queries=["가상 검색"], feeds=[], lookback_days=14)
 CONFIG["briefing"]["enabled"] = False
 CONFIG["analysis"].update(provider="cursor", model="synthetic-cursor-test")
 
 
-class Response(io.BytesIO):
-    @property
-    def headers(self):  # like http.client.HTTPResponse with no Content-Encoding
-        return {}
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, *args):
-        self.close()
-
-
 def collection_fixture(count=1, now=None):
     now = now or datetime.now(UTC)
-    articles = [{"title": f"가상 테스트: 효성 조현준 회장 소식 {index}",
-                 "url": f"https://publisher{index}.example/news/1", "domain": f"publisher{index}.example",
-                 "language": "Korean", "seendate": (now - timedelta(hours=1)).strftime("%Y%m%dT%H%M%SZ")}
-                for index in range(count)]
-    return collect(CONFIG, now, opener=lambda *args, **kwargs: Response(json.dumps({"articles": articles}).encode()), sleeper=lambda _: None)
+    day = (now - timedelta(hours=1)).astimezone(ZoneInfo("Asia/Seoul")).date().isoformat()
+    rows = [article(f"가상 테스트: 효성 조현준 회장 소식 {index}", f"https://publisher{index}.example/news/1", day)
+            for index in range(count)]
+    return run_search(rows, CONFIG, now)
 
 
 def decision(sentiment="neutral", relevance="related"):
@@ -286,6 +276,7 @@ class ReportTests(unittest.TestCase):
                        lambda value: value["articles"][0].update(url="javascript:alert(1)"),
                        lambda value: value["articles"][0].update(publisher="wrong.example"),
                        lambda value: value["articles"][0].update(published_at=value["checked_at"]),
+                       lambda value: value["articles"][0].update(source="gdelt_doc"),
                        lambda value: value["articles"].append(value["articles"][0])):
             candidate = copy.deepcopy(source)
             mutate(candidate)
@@ -304,7 +295,7 @@ class ReportTests(unittest.TestCase):
         results = [{"id": clean["articles"][0]["id"], "decision": decision(), "error": None}]
         report = r.make_report(clean, results, info, CONFIG)
         self.assertNotIn("PRIVATE_", json.dumps(report))
-        self.assertIsNone(report["articles"][0]["published_at"])
+        self.assertEqual(report["articles"][0]["published_at"], clean["articles"][0]["published_at"])
         self.assertFalse(report["human_reviewed"])
 
 
@@ -362,6 +353,7 @@ class SiteTests(unittest.TestCase):
             row["classification"]["sentiment"] = sentiment
             row["observation"]["first_seen_at"] = (end - timedelta(days=seen_days_ago)).isoformat()
             row["indexed_at"] = (end - timedelta(days=day_days_ago)).isoformat()
+            row["published_at"] = (end - timedelta(days=day_days_ago)).astimezone(ZoneInfo("Asia/Seoul")).date().isoformat()
         html = site.render(report)
         alert = self.alert(html)
         self.assertLess(html.index('id="negative-alert"'), html.index('id="briefing-title"'))

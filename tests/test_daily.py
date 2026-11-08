@@ -2,57 +2,15 @@
 
 import copy
 import hashlib
-import json
 import unittest
 from datetime import timedelta
-from unittest.mock import patch
 
 from test_discovery import CONFIG, NOW, article, run_search
 
-from news_monitor import analysis, collect, discovery, report, site
+from news_monitor import collect, discovery, report, site
 
 
 class DailyTests(unittest.TestCase):
-    def config(self):
-        cfg = copy.deepcopy(CONFIG)
-        cfg["collection"].update(search_groups=[['가상 인물 회사'], ['가상 인물 회장'], ['가상 영문명']],
-                                 max_search_calls=12)
-        return cfg
-
-    def test_each_query_group_runs_with_a_shared_budget_and_union(self):
-        seen = []
-
-        def runner(prompt, model, **kwargs):
-            payload = json.loads(prompt.split("INPUT_JSON:\n")[1])
-            self.assertEqual(payload["finish_after_web_calls"], 3)
-            self.assertEqual(payload["query_call_budget"] + payload["verification_call_budget"], 3)
-            seen.append((payload["query_group"], kwargs["max_search_calls"]))
-            row = article(url=f"https://publisher{len(seen)}.example/news/1")
-            return json.dumps({"articles": [row]}), {"sources": {row["url"]: row["title"]}, "web_search_calls": 2}
-
-        result = discovery.collect_web(self.config(), NOW, runner=runner)
-        self.assertEqual(len(seen), 3)
-        self.assertLessEqual(sum(limit for _, limit in seen), 12)
-        self.assertEqual(result["statistics"]["selected"], 3)
-        self.assertEqual(result["source_queries"], {"planned": 3, "attempted": 3, "succeeded": 3})
-        self.assertEqual(result["web_search_calls"], 6)
-
-    def test_one_failed_group_is_partial_and_does_not_leak_raw_errors(self):
-        counter = 0
-
-        def runner(*args, **kwargs):
-            nonlocal counter
-            counter += 1
-            if counter == 2:
-                raise analysis.AnalysisError("PRIVATE_ERROR")
-            row = article()
-            return json.dumps({"articles": [row]}), {"sources": {row["url"]: row["title"]}, "web_search_calls": 1}
-
-        result = discovery.collect_web(self.config(), NOW, runner=runner)
-        self.assertEqual(result["status"], "partial")
-        self.assertEqual(result["source_queries"]["succeeded"], 2)
-        self.assertNotIn("PRIVATE_ERROR", json.dumps(result))
-
     def test_person_only_headline_is_a_candidate_not_automatic_positive(self):
         cfg = copy.deepcopy(CONFIG)
         cfg["collection"]["require_organization_in_headline"] = False
@@ -212,26 +170,9 @@ class DailyTests(unittest.TestCase):
         self.assertEqual(merged["window_start"], "2026-10-12T15:00:00+00:00")
         report.prepare_collection(merged, merged, cfg, NOW)
 
-    def test_response_cap_is_not_silent_full_success(self):
-        cfg = copy.deepcopy(CONFIG)
-        cfg["collection"]["max_results_per_query"] = 1
-        result = run_search([article()], config=cfg)
-        self.assertEqual(result["status"], "partial")
-        self.assertIn("upstream_limit_reached", result["warnings"])
-
-    def test_deadline_skips_remaining_groups(self):
-        cfg = self.config()
-        cfg["collection"]["codex_timeout_seconds"] = 10
-        with patch.object(discovery.time, "monotonic", side_effect=[0, 11]):
-            result = discovery.collect_web(cfg, NOW, runner=lambda *args, **kwargs: self.fail("expired"))
-        self.assertEqual(result["status"], "failed")
-        self.assertEqual(result["source_queries"]["attempted"], 0)
-
     def test_microsecond_clock_and_no_today_articles(self):
         now = NOW.replace(microsecond=123456)
-        row = article()
-        value = discovery.collect_web(CONFIG, now, runner=lambda *args, **kwargs: (
-            json.dumps({"articles": [row]}), {"sources": {row["url"]: row["title"]}, "web_search_calls": 1}))
+        value = run_search([article()], now=now)
         clean = report.prepare_collection(value, value, CONFIG, now)
         info = {"provider": "codex", "model": CONFIG["analysis"]["model"], "prompt_sha256": "0" * 64,
                 "model_calls": 1, "cache_hits": 0, "failed_articles": 0}

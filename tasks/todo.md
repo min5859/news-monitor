@@ -32,7 +32,12 @@
   - [x] OCI 실데이터 메모리 시험(운영 파일 미변경): 제목 19건·이유 5건만 바뀜, 남은 어색한 제목 0, 근거 생략 0→0, 감성 동일, 브리핑 실패를 가정한 공개 전 검사 통과
   - [x] 커밋 `8281861` push → OCI ff-only 반영·테스트 168개 통과
   - [x] **11/3** 07:00 회차 확인: 성공, 브리핑 ok(캐시 없이 호출 1회). 12:00 회차 공개본(Pages) 60건 중 '회장님 효성'·'Chairman 회장님' 0건, 근거 생략 0건
-- [ ] **11/8 무렵** 예전 수집 방식 코드(`codex_web_search`·GDELT) 정리
+- [x] **(11/8 사용자 승인) 예전 수집 방식 코드(`codex_web_search`·GDELT) 정리**
+  - 확인: OCI 기사 96건 모두 `tavily_feeds`, 10/25 이후 정기 실행 정상 → 남은 자료가 지울 코드에 의존하지 않음
+  - 범위: 수집 provider 2개(GDELT `collect` 본문·`parse_article`, `discovery.collect_web`·prompts/discover.md·schemas/discovery.json), 전용 설정 키, 관련 테스트·문서. 분류·브리핑의 Codex 되돌리기 경로(codex.py)와 공개 화면의 예전 날짜 기준 표시 호환은 유지
+  - 기준: tavily_feeds 결과(collection_status·articles·report) 동일, Mac 3.12/3.14 테스트·Ruff·Node, OCI 현재 데이터로 보고서 dry run 비교
+  - 결과: 18개 파일 −828/+175줄. 테스트 171 → 141개(GDELT·Codex 수집 전용 31개 삭제, Tavily 응답 HTML·목록 없음 실패 테스트 1개 복원), Mac 3.12/3.14·Ruff·Node 7 통과. OCI 자료 사본으로 예전/새 코드의 수집 결과·보고서가 바이트 단위로 같음(96건, 모델 호출 0). 동작 변화는 대기 중 실패 기록의 '계획 수'가 Tavily+피드 수로 바뀐 것뿐
+  - 남김: 공개 화면의 예전 날짜 기준 표시 호환(site.py·web/app.js), 이력 문서, `rate_limit_cooldown_seconds`(지금 Tavily 경로에서는 거의 안 쓰임)
   - 조건: 10/25~11/8 정기 실행이 계속 정상(수집 실패·게시 실패 없음)
   - 영향: 지우면 예전 방식으로 되돌리는 경로가 없어짐. 그 전까지는 설정만 바꿔 되돌릴 수 있음
   - 할 일: 실패 테스트·문서·AGENTS.md 롤백 문구 함께 정리 → Mac 테스트 → 커밋·push → OCI 반영
