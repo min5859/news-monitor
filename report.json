@@ -13,10 +13,10 @@
     "article_titles_modified": true,
     "evidence_may_be_omitted": true
   },
-  "generated_at": "2026-11-14T03:01:44.356664+00:00",
-  "collection_checked_at": "2026-11-14T03:00:21.463883+00:00",
+  "generated_at": "2026-11-14T09:01:52.681140+00:00",
+  "collection_checked_at": "2026-11-14T09:00:23.813750+00:00",
   "window_start": "2026-10-20T15:00:00+00:00",
-  "window_end": "2026-11-14T03:00:21.463883+00:00",
+  "window_end": "2026-11-14T09:00:23.813750+00:00",
   "analysis_scope": "headline_only",
   "date_basis": "reported_publication_date",
   "coverage": "search_sample_not_exhaustive",
@@ -1500,13 +1500,13 @@
       "url": "https://www.ceojhn.com/news/articleView.html?idxno=10736",
       "publisher": "ceojhn.com",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-11-13",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-13T03:00:41.446457+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -1548,13 +1548,13 @@
       "url": "https://blog.naver.com/PostView.naver?blogId=dealsite&logNo=224472998932&redirect=Dlog",
       "publisher": "naver.com",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-11-10",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-11T09:00:10.618783+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -1764,13 +1764,13 @@
       "url": "https://www.newsis.com/view/NISX20261103_0003851949",
       "publisher": "newsis.com",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-11-03",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-03T03:00:27.479358+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -2316,13 +2316,13 @@
       "url": "https://www.smartbizn.com/news/articleView.html?idxno=158050",
       "publisher": "smartbizn.com",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T09:00:27.127758+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -2364,13 +2364,13 @@
       "url": "https://www.koreadaily.com/article/20261029080205444",
       "publisher": "koreadaily.com",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -2388,13 +2388,13 @@
       "url": "https://www.joongang.co.kr/article/25474195",
       "publisher": "joongang.co.kr",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T22:00:41.449152+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -2508,13 +2508,13 @@
       "url": "https://www.fntimes.com/html/view.php?ud=2026103008340770817de3572ddd_18",
       "publisher": "fntimes.com",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -2532,13 +2532,13 @@
       "url": "https://www.donga.com/news/Economy/article/all/20261029/134934757/2",
       "publisher": "donga.com",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T22:00:41.449152+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -2628,13 +2628,13 @@
       "url": "https://en.koreadaily.com/hyosung-group-60th-anniversary-cho-hyun-joon",
       "publisher": "koreadaily.com",
       "language": "unknown",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -2676,13 +2676,13 @@
       "url": "https://zdnet.co.kr/view?no=20261029133433",
       "publisher": "zdnet.co.kr",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T22:00:41.449152+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -2772,13 +2772,13 @@
       "url": "https://www.speconomy.com/news/articleView.html?idxno=419469",
       "publisher": "speconomy.com",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -2844,13 +2844,13 @@
       "url": "https://www.newstopkorea.com/news/articleView.html?idxno=48602",
       "publisher": "newstopkorea.com",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -2892,13 +2892,13 @@
       "url": "https://www.newspim.com/news/view/20261029000863",
       "publisher": "newspim.com",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -2940,13 +2940,13 @@
       "url": "https://www.mt.co.kr/industry/2026/10/29/2026102914142285796",
       "publisher": "mt.co.kr",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -2964,13 +2964,13 @@
       "url": "https://www.mt.co.kr/en/industry/2026/10/29/2026102914142285796",
       "publisher": "mt.co.kr",
       "language": "unknown",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -3060,13 +3060,13 @@
       "url": "https://www.mk.co.kr/en/business/12189970",
       "publisher": "mk.co.kr",
       "language": "unknown",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -3132,13 +3132,13 @@
       "url": "https://www.itnk.co.kr/news/articleView.html?idxno=82140",
       "publisher": "itnk.co.kr",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-04T09:00:27.652774+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -3156,13 +3156,13 @@
       "url": "https://www.insidevina.com/news/articleView.html?idxno=44384",
       "publisher": "insidevina.com",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -3228,13 +3228,13 @@
       "url": "https://www.g-enews.com/article/Industry/2026/10/202610291428231976139bf6e4b2_1",
       "publisher": "g-enews.com",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -3324,13 +3324,13 @@
       "url": "https://www.donga.com/news/Economy/article/all/20261029/134931988/1",
       "publisher": "donga.com",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -3348,13 +3348,13 @@
       "url": "https://www.chosun.com/economy/industry-company/2026/10/29/5RP6B7AJ7RGY3KZISEBUZNWPJA",
       "publisher": "chosun.com",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -3372,13 +3372,13 @@
       "url": "https://www.asiae.co.kr/en/article/2026102914502960911",
       "publisher": "asiae.co.kr",
       "language": "unknown",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -3468,13 +3468,13 @@
       "url": "https://livesnews.com/news/article.html?no=65476",
       "publisher": "livesnews.com",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -3492,13 +3492,13 @@
       "url": "https://kr.investing.com/news/stock-market-news/article-2147595",
       "publisher": "investing.com",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -3540,13 +3540,13 @@
       "url": "https://biz.chosun.com/industry/company/2026/10/29/FYOJPL5RY5CB5K23VGKQE2QM74",
       "publisher": "chosun.com",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-04T09:00:27.652774+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -3732,13 +3732,13 @@
       "url": "https://www.m-i.kr/news/articleView.html?idxno=2010462",
       "publisher": "m-i.kr",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-26",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-27T03:00:41.452940+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -3876,13 +3876,13 @@
       "url": "https://www.asiatime.co.kr/article/20261023500147",
       "publisher": "asiatime.co.kr",
       "language": "ko",
-      "indexed_at": "2026-11-14T03:00:21.463883+00:00",
+      "indexed_at": "2026-11-14T09:00:23.813750+00:00",
       "published_at": "2026-10-24",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-24T22:00:27.137568+00:00",
-        "last_seen_at": "2026-11-14T03:00:21.463883+00:00",
+        "last_seen_at": "2026-11-14T09:00:23.813750+00:00",
         "reused": false
       },
       "classification": {
@@ -4045,8 +4045,8 @@
     "provider": "cursor",
     "model": "claude-sonnet-5-5-medium",
     "prompt_sha256": "1751c7d88f69795eeae3cae1bb2e495b53f05501e344e56ab9fcf7a0f65f8d9c",
-    "model_calls": 1,
-    "cache_hit": false,
+    "model_calls": 0,
+    "cache_hit": true,
     "topics": {
       "management": "경영·투자",
       "governance": "지배구조",
