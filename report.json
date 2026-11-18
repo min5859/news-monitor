@@ -13,15 +13,15 @@
     "article_titles_modified": true,
     "evidence_may_be_omitted": true
   },
-  "generated_at": "2026-11-17T22:02:37.374425+00:00",
-  "collection_checked_at": "2026-11-17T22:00:27.150141+00:00",
+  "generated_at": "2026-11-18T03:02:10.443560+00:00",
+  "collection_checked_at": "2026-11-18T03:00:21.980807+00:00",
   "window_start": "2026-10-20T15:00:00+00:00",
-  "window_end": "2026-11-17T22:00:27.150141+00:00",
+  "window_end": "2026-11-18T03:00:21.980807+00:00",
   "analysis_scope": "headline_only",
   "date_basis": "reported_publication_date",
   "coverage": "search_sample_not_exhaustive",
   "selection": "latest_published_target_in_headline",
-  "article_count": 116,
+  "article_count": 118,
   "publisher_count": 57,
   "publisher_goal": 5,
   "warnings": [],
@@ -33,31 +33,31 @@
     "provider": "cursor",
     "model": "claude-sonnet-5-5-medium",
     "prompt_sha256": "577fb8d45a5b68cdf1276b241a66a8c5c9d9f40961bfeba35f6243ceccac4389",
-    "model_calls": 2,
-    "cache_hits": 114,
+    "model_calls": 1,
+    "cache_hits": 117,
     "failed_articles": 0
   },
   "statistics": {
     "counts": {
-      "positive": 78,
+      "positive": 80,
       "negative": 3,
       "neutral": 34,
       "mixed": 1
     },
-    "denominator": 116,
+    "denominator": 118,
     "percentages": {
-      "positive": 67.2,
-      "negative": 2.6,
-      "neutral": 29.3,
+      "positive": 67.8,
+      "negative": 2.5,
+      "neutral": 28.8,
       "mixed": 0.9
     },
     "abstained": 0,
     "unrelated": 0,
     "positive_negative_only": {
-      "denominator": 81,
+      "denominator": 83,
       "percentages": {
-        "positive": 96.3,
-        "negative": 3.7
+        "positive": 96.4,
+        "negative": 3.6
       }
     }
   },
@@ -194,24 +194,24 @@
     },
     {
       "publisher": "ceojhn.com",
-      "article_count": 4,
+      "article_count": 5,
       "counts": {
-        "positive": 3,
+        "positive": 4,
         "negative": 0,
         "neutral": 1,
         "mixed": 0
       },
-      "denominator": 4,
+      "denominator": 5,
       "percentages": {
-        "positive": 75.0,
+        "positive": 80.0,
         "negative": 0.0,
-        "neutral": 25.0,
+        "neutral": 20.0,
         "mixed": 0.0
       },
       "abstained": 0,
       "unrelated": 0,
       "positive_negative_only": {
-        "denominator": 3,
+        "denominator": 4,
         "percentages": {
           "positive": 100.0,
           "negative": 0.0
@@ -532,27 +532,27 @@
     },
     {
       "publisher": "google.com",
-      "article_count": 35,
+      "article_count": 36,
       "counts": {
-        "positive": 22,
+        "positive": 23,
         "negative": 1,
         "neutral": 11,
         "mixed": 1
       },
-      "denominator": 35,
+      "denominator": 36,
       "percentages": {
-        "positive": 62.9,
-        "negative": 2.9,
-        "neutral": 31.4,
+        "positive": 63.9,
+        "negative": 2.8,
+        "neutral": 30.5,
         "mixed": 2.8
       },
       "abstained": 0,
       "unrelated": 0,
       "positive_negative_only": {
-        "denominator": 23,
+        "denominator": 24,
         "percentages": {
-          "positive": 95.7,
-          "negative": 4.3
+          "positive": 95.8,
+          "negative": 4.2
         }
       }
     },
@@ -1547,6 +1547,30 @@
   ],
   "articles": [
     {
+      "id": "dac4b99b258f1788aec8",
+      "title": "효성 회장님, 사탕수수 스판덱스 '리젠 바이오'로 유럽 공략...베트남 일관 생산 본격화",
+      "url": "https://www.ceojhn.com/news/articleView.html?idxno=10887",
+      "publisher": "ceojhn.com",
+      "language": "ko",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
+      "published_at": "2026-11-18",
+      "analysis_scope": "headline_only",
+      "source": "tavily_feeds",
+      "observation": {
+        "first_seen_at": "2026-11-18T03:00:21.980807+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "유럽 공략...베트남 일관 생산 본격화",
+        "reason": "제목만 보면 효성 회장님이 신제품으로 유럽 시장 공략과 베트남 일관 생산 본격화를 추진한다는 성과·확장 중심의 보도입니다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
       "id": "8bfd396ecbf54f54f0c3",
       "title": "효성 회장님, 배리어프리영화 10년째 지원...임직원이 음성해설 녹음",
       "url": "https://www.ceojhn.com/news/articleView.html?idxno=10736",
@@ -1619,18 +1643,18 @@
       "evidence_omitted_for_display": false
     },
     {
-      "id": "d6659ff36d19c6f81eec",
+      "id": "faffab09bf82c850cd5d",
       "title": "Late Hyosung Group Honorary Chairman Cho Suck-rae Receives Korea-America Friendship Award; Chairman Accepts on His Behalf",
-      "url": "https://www.google.com/url?opi=89978449&q=CAESaQHEIkXXcB5_huUvkg42AnGcNIodkx4iNf_7PqgTZTJK4-SxFnlSJtvGyrh4LWagO5yE7wfPXtjHZw-yC8r9kQvR-CpPEAD0ufOsH7pKiBkFQEyvcWEPrboGqqEl5nXvACAcz8Cq4PbuPA&sa=U&uoh=3&usg=AOvVaw0Yub3ctkdNW8fBzfJDCv3I&ved=2ahUKEwit7660gJCYAxV5j4kEHfA2DeQQxfQBegQICRAC",
+      "url": "https://www.google.com/url?opi=89978449&q=CAESagHEIkXXVUHNB4SrrNo8TiXpApaY56Gl7FWZJDDnjRPnIuRsd88MT1qyAslxo51tq_FHowTXY0zGDdfc4c8G5gczMnMxPHdnETJDRnlqaFGPeTHxfB-RSRJ9FSZvjy2FIfeGXDpiVNEB8gI&sa=U&uoh=3&usg=AOvVaw1nBRqkrY9XtQ5sSOdjaT0P&ved=2ahUKEwjHv724w5CYAxWNGVkFHYBBL8wQxfQBegQIBBAC",
       "publisher": "google.com",
       "language": "unknown",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-11-11",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-17T22:00:27.150141+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -1648,13 +1672,13 @@
       "url": "https://blog.naver.com/PostView.naver?blogId=dealsite&logNo=224472998932&redirect=Dlog",
       "publisher": "naver.com",
       "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-11-11",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-11T09:00:10.618783+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -1859,18 +1883,18 @@
       "evidence_omitted_for_display": false
     },
     {
-      "id": "75bdc4358262a2b30b36",
+      "id": "b412edaf511e5aa543fa",
       "title": "[Ceo’s Speech] 효성 회장님 “악착, 치밀, 신뢰”",
-      "url": "https://www.google.com/url?opi=89978449&q=CAEShQEBxCJF118ImlDkEsjC7ufEQ9lnIgA03eyIEYq-n4Tx265fmPovXMygMM9FP8njWD24Rohp6pGss2xTjKX2x3IiC_QhQVnpmOWAUoFP8dmmftr8I0GE9kRmlsjH5hkvLrySK-zoE76V0scolkNh5XP3vrNjLN3QjYXoE5EjXOcRuai_rziN&sa=U&uoh=3&usg=AOvVaw2NO_ejb7IlKeTVB3eaiLeN&ved=2ahUKEwiz74KvgJCYAxWfmWoFHbWUJGcQxfQBegQIAxAC",
+      "url": "https://www.google.com/url?opi=89978449&q=CAEShQEBxCJF106y0sUzVDNlr5aIRqYCA7FXTEYD1waJkOsEzWLPTyn85B5hinU-S1BgKtXD3jJoxstee43o3y_4XjL97Q9VHJV8NQZwqaB_GRwBMlMHkVX67Oi7da4D-i-SvZNE8EjxMQZFW7FCPN83EiVPif_JPe-Q9cudIourzOp67nsWiDuN&sa=U&uoh=3&usg=AOvVaw1HMpdXcte4SEqc7vLnN9Tu&ved=2ahUKEwi9qMGzw5CYAxUtEVkFHXPXEh0QxfQBegQIBxAC",
       "publisher": "google.com",
       "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-11-04",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-17T22:00:27.150141+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -1878,6 +1902,30 @@
         "reason": "제목은 효성 회장님의 연설 발언(악착, 치밀, 신뢰)을 인용해 전달할 뿐, 인물에 대한 뚜렷한 긍정·부정 평가는 제목만으로 드러나지 않음.",
         "relevance": "related",
         "sentiment": "neutral"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "e892a1f6c925d7d721a3",
+      "title": "‘효성 60돌’ 회장님 “치열한 도전, 새 100년 열자”",
+      "url": "https://www.google.com/url?opi=89978449&q=CAESgAEBxCJF16CD2qvQRKs85ShivQB06-ylJq_A7Kjnkg54PdtthBNrmPuJXxLYwtTlRZO_ZwjGKmtkmeuuxAAv8ihV-uALS-q6hrUpmn812fgI4_jMG1hNdUtfaj8cCHyxr0G7dXxwV4E5ayLxZuIrKV7bphibImQWGMj7kDC6KWtxVQ&sa=U&uoh=3&usg=AOvVaw3iuIF4HvGtR3oGH0DwQTpu&ved=2ahUKEwi9qMGzw5CYAxUtEVkFHXPXEh0QxfQBegQIAxAC",
+      "publisher": "google.com",
+      "language": "ko",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
+      "published_at": "2026-11-04",
+      "analysis_scope": "headline_only",
+      "source": "tavily_feeds",
+      "observation": {
+        "first_seen_at": "2026-11-06T09:00:30.706137+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "회장님 “치열한 도전, 새 100년 열자”",
+        "reason": "제목만 보면 회장님이 효성 창립 60주년을 맞아 도전과 새로운 100년을 강조했다는 내용으로, 대상 인물을 우호적으로 전달하는 보도 논조입니다.",
+        "relevance": "related",
+        "sentiment": "positive"
       },
       "analysis_failed": false,
       "evidence_omitted_for_display": false
@@ -1895,7 +1943,7 @@
       "observation": {
         "first_seen_at": "2026-11-17T22:00:27.150141+00:00",
         "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "회장님 창원 신공장으로 생산능력 2배 키운 직후 갈등 수습 과제",
@@ -2020,30 +2068,6 @@
       "classification": {
         "evidence": "회장님 rallies Korea group for next century",
         "reason": "제목만 보면 회장님이 효성그룹 창립 60주년을 맞아 그룹을 결집시켜 다음 100년을 준비한다는 호의적 보도로 읽힌다. 본문은 확인하지 않았다.",
-        "relevance": "related",
-        "sentiment": "positive"
-      },
-      "analysis_failed": false,
-      "evidence_omitted_for_display": false
-    },
-    {
-      "id": "699665b32e9661e2cf46",
-      "title": "‘효성 60돌’ 회장님 “치열한 도전, 새 100년 열자”",
-      "url": "https://www.google.com/url?opi=89978449&q=CAESgAEBxCJF14_BRvf1K7lEQe6LAZOuTHOwRfa8CZVU5hW8ul63-pNHDn6FssZUHn1KLZpSVw7xfjcd_5k0C4LU_baPDxMf23P1nFvW1pl1a97_v66EEYadIiCURD-ngIM4XR84KVpLuc62gc50U8SyUDh0aWCq_qCTOHyOMirNq_Hz1w&sa=U&uoh=3&usg=AOvVaw2WZf-bgtj5hGqUq8lS7zmk&ved=2ahUKEwjH4fGtv_WXAxWEvokEHckIH4kQxfQBegQIBRAC",
-      "publisher": "google.com",
-      "language": "ko",
-      "indexed_at": "2026-11-07T09:00:23.665098+00:00",
-      "published_at": "2026-10-31",
-      "analysis_scope": "headline_only",
-      "source": "tavily_feeds",
-      "observation": {
-        "first_seen_at": "2026-11-06T09:00:30.706137+00:00",
-        "last_seen_at": "2026-11-07T09:00:23.665098+00:00",
-        "reused": true
-      },
-      "classification": {
-        "evidence": "회장님 “치열한 도전, 새 100년 열자”",
-        "reason": "제목만 보면 회장님이 효성 창립 60주년을 맞아 도전과 새로운 100년을 강조했다는 내용으로, 대상 인물을 우호적으로 전달하는 보도 논조입니다.",
         "relevance": "related",
         "sentiment": "positive"
       },
@@ -2320,13 +2344,13 @@
       "url": "https://www.koreadaily.com/article/20261029080205444",
       "publisher": "koreadaily.com",
       "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-10-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -2488,13 +2512,13 @@
       "url": "https://www.fntimes.com/html/view.php?ud=2026103008340770817de3572ddd_18",
       "publisher": "fntimes.com",
       "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-10-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -2519,7 +2543,7 @@
       "observation": {
         "first_seen_at": "2026-10-29T22:00:41.449152+00:00",
         "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "회장님 “치열한 도전, 새 100년 열자”",
@@ -2608,13 +2632,13 @@
       "url": "https://en.koreadaily.com/hyosung-group-60th-anniversary-cho-hyun-joon",
       "publisher": "koreadaily.com",
       "language": "unknown",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-10-30",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -2831,7 +2855,7 @@
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
         "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "회장님 \"악착같고 치밀하게\"... 60주년 효성 '일하는방식' 대전환 당부",
@@ -3112,13 +3136,13 @@
       "url": "https://www.insidevina.com/news/articleView.html?idxno=44384",
       "publisher": "insidevina.com",
       "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -3280,13 +3304,13 @@
       "url": "https://www.donga.com/news/Economy/article/all/20261029/134931988/1",
       "publisher": "donga.com",
       "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-29T09:00:27.135340+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -3304,13 +3328,13 @@
       "url": "https://www.chosun.com/economy/industry-company/2026/10/29/5RP6B7AJ7RGY3KZISEBUZNWPJA",
       "publisher": "chosun.com",
       "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-10-30T03:00:05.932182+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -3496,13 +3520,13 @@
       "url": "https://biz.chosun.com/industry/company/2026/10/29/FYOJPL5RY5CB5K23VGKQE2QM74",
       "publisher": "chosun.com",
       "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-10-29",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-04T09:00:27.652774+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -3683,18 +3707,18 @@
       "evidence_omitted_for_display": false
     },
     {
-      "id": "f81cc4ed7382b83d0548",
+      "id": "dd3bfe685e039abb26dc",
       "title": "효성 창립 60주년 기념식...회장님 ‘목표를 향한 치열함’ 당부",
-      "url": "https://www.google.com/url?opi=89978449&q=CAESjAEBxCJF17k7aQS8FVhXFfXErefz73BFlkcRpWQnkkPHMhloGKjVFYPfWPmPo8gtIjnAvoNgXt0MxR4XAtR4aSZHTmXXB8JSrGWeoylm5pZg69akeQWIPQvefbcm5Bi_-cNJ0WQo6QSm5zbj1iUaZ3PHiaph4E82caYF5p3NKxCDXTMFo_ttbw1FKhLCdw&sa=U&uoh=3&usg=AOvVaw0FzEoQxhCmCdqzSTdFqHsO&ved=2ahUKEwiB7sOtgJCYAxWEjYkEHf0JOeQQxfQBegQIAxAC",
+      "url": "https://www.google.com/url?opi=89978449&q=CAESjAEBxCJF121slMgUPKbbO0Ao86RGN4FfMVdC8BG4NYhqorQaSG5iAAYDO3Ofdn0Ug0WGeSCQM-l0lhKf3RGZKIfZqC5OjEq2dNUlDx3FSnTl5f50JZLU2Kfh8MhS_4ONHJfMgdfX1Aa7d1yWp2yDIx6sPr2MKKdUzND3cQGZb6YLeQASF2DFo49N1iYN5Q&sa=U&uoh=3&usg=AOvVaw1ntBHkd-CUXMbSx0GLpnRY&ved=2ahUKEwi9qMGzw5CYAxUtEVkFHXPXEh0QxfQBegQICxAC",
       "publisher": "google.com",
       "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-10-28",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-06T09:00:30.706137+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -3707,18 +3731,42 @@
       "evidence_omitted_for_display": false
     },
     {
-      "id": "ef600400629caf9e21ef",
-      "title": "회장님 \"악착같고 치밀하게\"... 60주년 효성 '일하는방식' 대전환 당부",
-      "url": "https://www.google.com/url?opi=89978449&q=CAESewHEIkXXeb4KvmeJesnBYxqta1SZpjgkFteuaO0pV7dyTSg1xDFZP2aGg3OVNWwVoCwUTQQuc3up1MMWGUeuURbgNYZIwvSqwyGOCkMLQlIbual-w-oBEzli3Pa13MV6RiTpThDrRxCZv6vOlrzDw_FtjnkaqtiOE_5Tiw&sa=U&uoh=3&usg=AOvVaw0JswtDyG2OQ5E2klDJplTb&ved=2ahUKEwiB7sOtgJCYAxWEjYkEHf0JOeQQxfQBegQIBxAC",
+      "id": "02b7765fd05136365f89",
+      "title": "효성 회장님, 창립 60주년 새로운 비전 선포 \"위기 뚫는 '모닝 스타' 될 것\"",
+      "url": "https://www.google.com/url?opi=89978449&q=CAESfQHEIkXXCtr6CtzYXlzyhszVMEe2fTxOuAA8ElQF-x--9HXmJlNKocLTKHrrDM6XN7kcM5VB3tjnWHStWGdUthkyjlWX2CDD1z8VwiXOd_LG-wj0dUdJIP__hWDfZlfqLDKdZpWbbq547Ytuz883NCnLS0R7JC_j_JTmQA4y&sa=U&uoh=3&usg=AOvVaw0z_kJ0LrE7eW-_F9VLFx2U&ved=2ahUKEwjUopWyw5CYAxVxlYkEHTPMMYoQxfQBegQIBBAC",
       "publisher": "google.com",
       "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
+      "published_at": "2026-10-28",
+      "analysis_scope": "headline_only",
+      "source": "tavily_feeds",
+      "observation": {
+        "first_seen_at": "2026-11-18T03:00:21.980807+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "효성 회장님, 창립 60주년 새로운 비전 선포",
+        "reason": "제목만 보면 대상 인물인 효성 회장님이 창립 60주년에 새로운 비전을 선포하고 위기 극복 의지를 밝힌 내용입니다. 인물에 우호적으로 전달하는 보도로 판단했습니다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "8f8ab107020f31de673c",
+      "title": "회장님 \"악착같고 치밀하게\"... 60주년 효성 '일하는방식' 대전환 당부",
+      "url": "https://www.google.com/url?opi=89978449&q=CAESewHEIkXX8vxp_iQzKITpb0Gx1WSyey8CWYV0twx5o2gC2vV8tJajvChTLK8EkgLeW42nu3PAwDiUaa8HB5sh3yzvbZnVveBIBzfdc5SLYG58XS7xcYK18OlFFOaKKSmqupyouP-yu0-o8RBb40MnaRZmIUBSKDSJiE4EAw&sa=U&uoh=3&usg=AOvVaw2GXlitLtFLwxrPmXjd-K2F&ved=2ahUKEwj5hr-1w5CYAxXSlYkEHSQvE2UQxfQBegQIBRAC",
+      "publisher": "google.com",
+      "language": "ko",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-10-28",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-06T22:00:09.786637+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -3731,18 +3779,18 @@
       "evidence_omitted_for_display": false
     },
     {
-      "id": "713587da331567136c53",
+      "id": "ecc07bc48a7be79529dd",
       "title": "회장님 \"조직문화 혁신으로 새로운 100년 준비\"...효성 창립 60주년",
-      "url": "https://www.google.com/url?opi=89978449&q=CAESegHEIkXXVWQD79NaA0kzb-mQlYjVq-_9I5UTioWEZW0wO3i5epXeEbr0b7Bh-xxi_vuhW-i0_VWcb1xhIonP3jWArV-2Srz08HNL4Fzv8IWOtyZqff7YDm4LAXEOZQ3s_8SoqQz7_f6NnRne-JX-ORNG6fUyvAvGJDbr&sa=U&uoh=3&usg=AOvVaw3r-FBZvqMoLsl88yvqjmA0&ved=2ahUKEwiz74KvgJCYAxWfmWoFHbWUJGcQxfQBegQICxAC",
+      "url": "https://www.google.com/url?opi=89978449&q=CAESegHEIkXXu27NKhwHF-AwBv322lR3nQud5EMztkkx1J4ZtxxOZHx-TnPUHqJvozFU5HUtAg1Z5gbZvEDFaZakYKYPjx8pL7BsFCEOZ6ozlAFxxCriHgQrgVq5KfFmXcSYPvZ9r8kkFlbqsuYHO1ih5vk6kYxvmUvZ9nkn&sa=U&uoh=3&usg=AOvVaw2QTA8I6UMrl0go53Qk2Rp2&ved=2ahUKEwi9qMGzw5CYAxUtEVkFHXPXEh0QxfQBegQIBBAC",
       "publisher": "google.com",
       "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-10-28",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-17T22:00:27.150141+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -3755,18 +3803,18 @@
       "evidence_omitted_for_display": false
     },
     {
-      "id": "b6dba6ece548ac5bab3f",
+      "id": "3cd96397b3281d6093d2",
       "title": "효성, 창립 60주년 맞아 미래 비전 선포...회장님 \"새로운 100년의 '모닝 스타' 될 것\"",
-      "url": "https://www.google.com/url?opi=89978449&q=CAESeQHEIkXX2De4XVCigQtGjhZlsNCQtni-hfdWy0snJ-gyYtalknmh2dI5mHX0EUMA-7PZxncXIN-AmG0EECpRUrSQaomtgRexDZGtNtz1WEdL1edHQ3FAo0sR8B5oEVGw5dJYOEr-ar-6iDNuhJ2Zm1hpsPcfugZ94dw&sa=U&uoh=3&usg=AOvVaw0akooHl9JJXKPgU0Qy0Z1c&ved=2ahUKEwiB7sOtgJCYAxWEjYkEHf0JOeQQxfQBegQIBhAC",
+      "url": "https://www.google.com/url?opi=89978449&q=CAESeQHEIkXXhNeyuqnbTEieQ-z_xeTkC3QKhSgJ-l4j3sHmmswaV8FivNG3G90IWtKt8NXHwd96kZKW85dq7gAmkaLMtsg-OJw--Gn-IHfEKwL7kwoyKQKJNI0G5Roa1Y_ocodyGmBk-BQSPQqO002NDMo7l4sL8DllThU&sa=U&uoh=3&usg=AOvVaw3GbSA0UtKtLNNKOTIaQC6P&ved=2ahUKEwj5hr-1w5CYAxXSlYkEHSQvE2UQxfQBegQICBAC",
       "publisher": "google.com",
       "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-10-28",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-17T22:00:27.150141+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -3779,18 +3827,18 @@
       "evidence_omitted_for_display": false
     },
     {
-      "id": "55f3c1d7fff865233933",
+      "id": "9e62d9616bdb651613c5",
       "title": "[쩐의흔적] 회장님 1905주 늘고 송광자 같은 수량 줄어...효성중공업 지분 이동",
-      "url": "https://www.google.com/url?opi=89978449&q=CAESeAHEIkXXKGkSv3QkL8SGHhnafz2chP8yZX53f3MjX7poZ5wx9Ips7w6Ax_nhqpDpfIeY1tFR-bCRIhIvO9SI_C4q7p09uB64jxkKnSZGlOk_OWfJfLixJOK6tp26kHdxlCuCxHx-4PLJgO4e-C9LDizXLsOX20-MxQ&sa=U&uoh=3&usg=AOvVaw26qBjWk2m4j12A91lrcQOI&ved=2ahUKEwj63vCwgJCYAxWFJkQIHTVmF5oQxfQBegQICBAC",
+      "url": "https://www.google.com/url?opi=89978449&q=CAESeAHEIkXXw2h0PeB8-1QBhcYgWUEoy3uD5VsiAkuM_mkxPr2wGK5NQKblSbWSlv0hyJnbCaxQvo3_QpiRu8eAOguwoud6dlkUmYENYl5SZ8RhEpxMU-PvtySPzfc1jqbvwHcTw2ur5O0FEdQoxIrxanXLORIKKHIOhg&sa=U&uoh=3&usg=AOvVaw0MrQZuaIAklQ-hRl7kIsxd&ved=2ahUKEwj5hr-1w5CYAxXSlYkEHSQvE2UQxfQBegQICxAC",
       "publisher": "google.com",
       "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-10-28",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-17T22:00:27.150141+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -3803,18 +3851,18 @@
       "evidence_omitted_for_display": false
     },
     {
-      "id": "049c57fbf96692e761da",
+      "id": "06ef297b99d95f354358",
       "title": "회장님, 효성중공업 1905주 추가 취득",
-      "url": "https://www.google.com/url?opi=89978449&q=CAEScwHEIkXXB7yT1bOClrHHyxVN1saBqZ0j3f9pUfKvNTlctmmrFWEgrlA9I4le5ZjzXVklY5CLKxJd8Kv7FU4o0YPmkcbJ5G1JQyYtpZHSOA3p_rzh5F-nvWhMRi10lAOzLprvSiZqWhGkStA3D5jE5V6Bj78&sa=U&uoh=3&usg=AOvVaw3RIU5D3Qma8HZNQlUMirRA&ved=2ahUKEwj63vCwgJCYAxWFJkQIHTVmF5oQxfQBegQICRAC",
+      "url": "https://www.google.com/url?opi=89978449&q=CAEScwHEIkXXFt5PhNZnk0Fx9g2JWThBXT-BnF5AT1XFQxhPkYpP7uKawpzVhTWN24bG3mJ5Ljx-4jzc31IR5PAZBZralYbm63zgLsxkkYuwn4kuutSWCgffeBpNlE_pIPdOvc2oOteBJQGYU_gypsWP4gnsC6A&sa=U&uoh=3&usg=AOvVaw1xvhc3nR9Qp2UYMHGwCrSw&ved=2ahUKEwj5hr-1w5CYAxXSlYkEHSQvE2UQxfQBegQICRAC",
       "publisher": "google.com",
       "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-10-28",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-06T09:00:30.706137+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -3827,18 +3875,18 @@
       "evidence_omitted_for_display": false
     },
     {
-      "id": "62ef230eaee72152a88d",
+      "id": "a3e112604f9177f4d1d1",
       "title": "효성 창립 60주년...회장님 \"새로운 100년 여는 모닝 스타 될 것\"",
-      "url": "https://www.google.com/url?opi=89978449&q=CAEScAHEIkXXlBjCpoZrk13W8S_KS5GFqfVl-0RmQWkiXMY2WCNVDm793UJfBUTBcQonXY93KRttuFPvzYRy70vrHiJwKSTkJ8GCZig19WVJ88tMFn5rkO3O_h09euQBMfYTropEsxSS11ifUr51J1231kA&sa=U&uoh=3&usg=AOvVaw3cEKtRIaxOiI67I8PrXio2&ved=2ahUKEwiz74KvgJCYAxWfmWoFHbWUJGcQxfQBegQIBxAC",
+      "url": "https://www.google.com/url?opi=89978449&q=CAEScAHEIkXXpILGpUZdj4c13Tmn2Xb2j0oOWRV98D-biEQfFDqmWFc0jylaFCBD_Zc7IEfVemsroBYUWdVRnZVR8ydTfKGyxWUzouJVJgiyr2Zp3q_fNka7pph9li-OOeLqLL0kCq8rKzR6zPjbdAXxBBc&sa=U&uoh=3&usg=AOvVaw3CQrrgl7ehLbxkubQ6ampP&ved=2ahUKEwi9qMGzw5CYAxUtEVkFHXPXEh0QxfQBegQICBAC",
       "publisher": "google.com",
       "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-10-28",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-06T22:00:09.786637+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -3851,18 +3899,18 @@
       "evidence_omitted_for_display": false
     },
     {
-      "id": "9e4f3f2d25413a0b6dac",
+      "id": "6d2fad0c4989817a35df",
       "title": "[힘내라 K산업]2 회장님 美 전력망 투자 결실...효성중공업 상반기 수주 7.5조 中 71%가 미국",
-      "url": "https://www.google.com/url?opi=89978449&q=CAESbgHEIkXX25U30YLD6Ne0EzMuNUbJIfhyhF2JkyW2ozIuqKtLscR3S9diBExF4L5eCcFNYc0qAKv8JopY6Tpk0Y8ByA7ynTFj5cPXBKBBpoQwk3Lsa6wBL15W9q5Om4xLtp-vpJ3652hiDOXt3pPe&sa=U&uoh=3&usg=AOvVaw0-vmihgjXenWOirSNFHKW8&ved=2ahUKEwj63vCwgJCYAxWFJkQIHTVmF5oQxfQBegQICxAC",
+      "url": "https://www.google.com/url?opi=89978449&q=CAESbgHEIkXXvupeGl2_JvjrU0828uLhleNkLFmuky-fLk8IDi3m1Kb40P12gLOs95L5S9PrTFicjK74DZZa_AJySKdzCNIbu2MWNQfdk9QNu2RkiggB-ncFz3X5NiIOasteVEPHfJIvMmPYjJF66ajb&sa=U&uoh=3&usg=AOvVaw3oTwzpC1RGqYytMV9h1EVD&ved=2ahUKEwj5hr-1w5CYAxXSlYkEHSQvE2UQxfQBegQIAxAC",
       "publisher": "google.com",
       "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-10-28",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-17T22:00:27.150141+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -3875,18 +3923,18 @@
       "evidence_omitted_for_display": false
     },
     {
-      "id": "5bfc06c173579a134c41",
+      "id": "8f0e07f252e063b42edc",
       "title": "창립 60주년 맞은 효성, 회장님 “새로운 100년 밝힐 ‘모닝 스타’ 될 것”",
-      "url": "https://www.google.com/url?opi=89978449&q=CAESbQHEIkXXTZhbFvC1IEGl8sDp4dhaswZ6ladpcB1kiMJ2UHQg12k6Lc81JpSHf4G3cDe39VmmNpBHxgKC1EpkqM2U76wqmHpnET_WLzL0y7IYeLNdsMSUbM1XeKeVFvGV714_FeRTHoLEypKT9H0&sa=U&uoh=3&usg=AOvVaw3M0eimsseYDswy2C8Qo1M4&ved=2ahUKEwiz74KvgJCYAxWfmWoFHbWUJGcQxfQBegQIBhAC",
+      "url": "https://www.google.com/url?opi=89978449&q=CAESbQHEIkXXizxNRetysim59qRxtNy32Hokj5WMwHCBPsMIORPUpbbDEZ9ZxXo2lBpKd5ka5osdsnRVq20o1vvdFTZKcjQZGLANIIXW_xxp7z3utgb5D6MBzA4gdCC6N7rcDSGOpXTBwLJ1JXxOozI&sa=U&uoh=3&usg=AOvVaw1gy4IwjxEOWVVOew6HwIqy&ved=2ahUKEwi9qMGzw5CYAxUtEVkFHXPXEh0QxfQBegQIBhAC",
       "publisher": "google.com",
       "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-10-28",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-06T22:00:09.786637+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -3899,18 +3947,18 @@
       "evidence_omitted_for_display": false
     },
     {
-      "id": "d69c81d46d5bf0328443",
+      "id": "5ca6f405708ef41c1df7",
       "title": "효성 회장님, '악착같은·치밀한·신뢰의 효성' 3대 실천 원칙 제시",
-      "url": "https://www.google.com/url?opi=89978449&q=CAESbQHEIkXXShRHUqviSCt5s9vZUPd00kVp9V11gCmUEao3hUc_Cirve_SWlxF60Cj31IeNzITfi_vN77p3It9Lb3hF6i2SChJPtIDdD3uMG2kn7IxCfUKlRz7OtBFcf_SIs8wijFLn0C1FkUVevLo&sa=U&uoh=3&usg=AOvVaw2ZXmULDZFkxQPKX8e9Wc6i&ved=2ahUKEwiz74KvgJCYAxWfmWoFHbWUJGcQxfQBegQICBAC",
+      "url": "https://www.google.com/url?opi=89978449&q=CAESbQHEIkXXiZNF6iNLAuomyn-5F11gy9Cf2sgug-CxQcbgphXdsDi2mSUxq9W52VSw8UdEn08Tir6l1Au4PHx9lr5QuozaGKYeuBN7mpJxu4AAhOKTNcyQKIz22o20iWQTFGeaYzdajKVwAlxEHys&sa=U&uoh=3&usg=AOvVaw10-dJfRuHKx3KuYyaCRb16&ved=2ahUKEwi9qMGzw5CYAxUtEVkFHXPXEh0QxfQBegQICRAC",
       "publisher": "google.com",
       "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-10-28",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-06T09:00:30.706137+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -3923,42 +3971,18 @@
       "evidence_omitted_for_display": false
     },
     {
-      "id": "da9aa9602c7bf0362219",
-      "title": "회장님 “효성, 새 100년 밝힐 모닝스타”",
-      "url": "https://www.google.com/url?opi=89978449&q=CAESaAHEIkXXdFCbsUhhUVR4il-W2UiQS5q30-yhRkTmA22sACDz8kAxsoRoIxdjQyXvlu7MhgEpoU0eSNXdfYNFQSW90sQy4si946gOv6YvFBft9SIBERKgt54Ro5SsN-bDhSxwc7WWHGHX&sa=U&uoh=3&usg=AOvVaw13SQ82m0efGmGrERv1JaMu&ved=2ahUKEwj63vCwgJCYAxWFJkQIHTVmF5oQxfQBegQIBRAC",
-      "publisher": "google.com",
-      "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
-      "published_at": "2026-10-28",
-      "analysis_scope": "headline_only",
-      "source": "tavily_feeds",
-      "observation": {
-        "first_seen_at": "2026-11-06T09:00:30.706137+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
-        "reused": false
-      },
-      "classification": {
-        "evidence": "회장님 “효성, 새 100년 밝힐 모닝스타”",
-        "reason": "제목만 보면 회장님이 효성의 미래를 밝힐 '모닝스타'를 언급하는 발언을 전하는 보도로, 대상 인물에 대한 전달 논조는 긍정적입니다. 본문은 확인하지 않았고 제목만 근거로 판단했습니다.",
-        "relevance": "related",
-        "sentiment": "positive"
-      },
-      "analysis_failed": false,
-      "evidence_omitted_for_display": false
-    },
-    {
-      "id": "ea5183f3a718fd1b1745",
+      "id": "2ce8c9825b5ece337c6e",
       "title": "효성 회장님 \"악착같고 치밀하게 새로운 100년 준비\"",
-      "url": "https://www.google.com/url?opi=89978449&q=CAESaAHEIkXXAJ6OUOR6kZCg9RKQjFVGHIcHDuHint06f7wIXDiMVBUGsYJyO99Ri0Xb4E65ruR3HYUjKKWEeBh3uPkPH0otgQLi0mmwMIClRMLR2yNqnetIdtjGFpOFWu5ZYYM0NTioEvij&sa=U&uoh=3&usg=AOvVaw1cdh1Og1Bl8iwnnQSLCsTc&ved=2ahUKEwiB7sOtgJCYAxWEjYkEHf0JOeQQxfQBegQICxAC",
+      "url": "https://www.google.com/url?opi=89978449&q=CAESaAHEIkXXV5-cZaiFEo6nlW8jwCRdCPorXdJ_Qv-ufIR_xPaVttJ5vzSAfQWis9zmlDfDhgiI87_rCitxtmlrnnSWJXoFNmOeVB485ZjjrYj3SpSlj2TphInTtP6oyF-pI6pUNRj6xBo_&sa=U&uoh=3&usg=AOvVaw0Fn_CUp9spUzgJXWa6dr40&ved=2ahUKEwi9qMGzw5CYAxUtEVkFHXPXEh0QxfQBegQIBRAC",
       "publisher": "google.com",
       "language": "ko",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-10-28",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-06T09:00:30.706137+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -3971,18 +3995,42 @@
       "evidence_omitted_for_display": false
     },
     {
-      "id": "abc4b7eb9fbfd5dedbe7",
-      "title": "Hyosung Marks 60th Anniversary; Chairman Says It Will Become a ‘Morning Star’ Lighting the Way for the Next 100 Years",
-      "url": "https://www.google.com/url?opi=89978449&q=CAESZQHEIkXX_VbOu7tzjozTaIKoxOldQjL-0K-zBwd4UiAB4NV0pr0o7sW-Kb0EPnAAtRriQ4-RegCggUxjOaT0ComriDQTWPL_LrVMzHtz6Pp38daruLk79pjFXd_5wn2V4_LUs6cT&sa=U&uoh=3&usg=AOvVaw1YmVj6lT0FadcMmG_rLBNo&ved=2ahUKEwit7660gJCYAxV5j4kEHfA2DeQQxfQBegQIAxAC",
+      "id": "12d9ae9b6a5ce3fa64b4",
+      "title": "회장님 “효성, 새 100년 밝힐 모닝스타”",
+      "url": "https://www.google.com/url?opi=89978449&q=CAESaAHEIkXX6ZTh4YOlWUTOdo55KYLk51G51rHJz1mnsKVDVykIl8qyEaGkfW0OETrsNlO9Nji7DQ5WMJxETQE0uXMksy-e6UHFZ-xJ4T7aUud8e_Qpi2DswhIUU-DYsAsqtw7Kpz0Pt49v&sa=U&uoh=3&usg=AOvVaw1_VRG5E8lcI_ZOw_WRkhyo&ved=2ahUKEwj5hr-1w5CYAxXSlYkEHSQvE2UQxfQBegQIBhAC",
       "publisher": "google.com",
-      "language": "unknown",
-      "indexed_at": "2026-11-17T22:00:27.150141+00:00",
+      "language": "ko",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
       "published_at": "2026-10-28",
       "analysis_scope": "headline_only",
       "source": "tavily_feeds",
       "observation": {
         "first_seen_at": "2026-11-06T09:00:30.706137+00:00",
-        "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
+        "reused": false
+      },
+      "classification": {
+        "evidence": "회장님 “효성, 새 100년 밝힐 모닝스타”",
+        "reason": "제목만 보면 회장님이 효성의 미래를 밝힐 '모닝스타'를 언급하는 발언을 전하는 보도로, 대상 인물에 대한 전달 논조는 긍정적입니다. 본문은 확인하지 않았고 제목만 근거로 판단했습니다.",
+        "relevance": "related",
+        "sentiment": "positive"
+      },
+      "analysis_failed": false,
+      "evidence_omitted_for_display": false
+    },
+    {
+      "id": "cba16d1bbd673ba9fad1",
+      "title": "Hyosung Marks 60th Anniversary; Chairman Says It Will Become a ‘Morning Star’ Lighting the Way for the Next 100 Years",
+      "url": "https://www.google.com/url?opi=89978449&q=CAESZgHEIkXXDSQv3I1xObhC35hesgn92uRYnIXZnGLdA81KAXZbSZVaQ3oFPQF86JlVoa7hXNAITr9ObA4VmVJ3weot3mcV_phesiC4hVTiMRXNRHHUK1m19bltnRE7HdFNGZ3cGHRFiA&sa=U&uoh=3&usg=AOvVaw3-CUzUGkvx23t4Yh6FX_63&ved=2ahUKEwjHv724w5CYAxWNGVkFHYBBL8wQxfQBegQIBxAC",
+      "publisher": "google.com",
+      "language": "unknown",
+      "indexed_at": "2026-11-18T03:00:21.980807+00:00",
+      "published_at": "2026-10-28",
+      "analysis_scope": "headline_only",
+      "source": "tavily_feeds",
+      "observation": {
+        "first_seen_at": "2026-11-06T09:00:30.706137+00:00",
+        "last_seen_at": "2026-11-18T03:00:21.980807+00:00",
         "reused": false
       },
       "classification": {
@@ -4295,7 +4343,7 @@
       "observation": {
         "first_seen_at": "2026-11-17T22:00:27.150141+00:00",
         "last_seen_at": "2026-11-17T22:00:27.150141+00:00",
-        "reused": false
+        "reused": true
       },
       "classification": {
         "evidence": "Chairman Continues Power Equipment Success Story with AI Data Centers",
@@ -4351,13 +4399,13 @@
     "available_start": "2026-10-21",
     "groups": [
       {
-        "label": "회장 효성중공업 주식 추가 취득",
-        "summary": "회장의 효성중공업 주식 1905주 추가 취득과 지분 이동을 다룬 제목들입니다.",
+        "label": "회장의 효성중공업 주식 추가 취득",
+        "summary": "회장이 효성중공업 주식 1905주를 추가 취득했다는 제목들이다.",
         "topic": "governance",
         "article_ids": [
           "0053a092cbac22f03b77",
-          "049c57fbf96692e761da",
-          "55f3c1d7fff865233933",
+          "06ef297b99d95f354358",
+          "9e62d9616bdb651613c5",
           "b486cfe20a841cbd02c0"
         ],
         "evidence": [
@@ -4366,11 +4414,11 @@
             "quote": "회장님, 효성중공업 1905주 추가 취득"
           },
           {
-            "article_id": "049c57fbf96692e761da",
+            "article_id": "06ef297b99d95f354358",
             "quote": "회장님, 효성중공업 1905주 추가 취득"
           },
           {
-            "article_id": "55f3c1d7fff865233933",
+            "article_id": "9e62d9616bdb651613c5",
             "quote": "[쩐의흔적] 회장님 1905주 늘고 송광자 같은 수량 줄어...효성중공업 지분 이동"
           },
           {
@@ -4380,22 +4428,26 @@
         ]
       },
       {
-        "label": "효성 창립 60주년 기념사",
-        "summary": "창립 60주년을 맞아 회장이 '모닝 스타', 치열함, 악착·치밀·신뢰 등을 언급하며 새로운 100년을 강조했다는 제목들입니다.",
+        "label": "효성 창립 60주년 기념 메시지",
+        "summary": "창립 60주년을 맞아 회장이 '모닝 스타', 치열함·악착·치밀·신뢰 등을 내세워 새로운 100년을 강조했다는 제목들이다.",
         "topic": "management",
         "article_ids": [
           "0129236ad7b455c28064",
+          "02b7765fd05136365f89",
           "079879cfb6d87ef3a68b",
           "12991cfd03eab70969bd",
+          "12d9ae9b6a5ce3fa64b4",
           "1adb9a9ffd257ec190dd",
           "1ceb82c2966ea0f58c0f",
           "2449049fb15857b6259f",
           "24f765e22aa7650eeb52",
           "26891038c6b62b262ea9",
           "284461fb8fa7551467cc",
+          "2ce8c9825b5ece337c6e",
           "2ee663ade445be2c0830",
           "35f9a312975fadd1eadc",
           "36700998fd1fdc295dba",
+          "3cd96397b3281d6093d2",
           "40561682a8ac47e411e1",
           "49fdf284afb94dae4bec",
           "4a9a06137b2e0f5dcae7",
@@ -4403,34 +4455,32 @@
           "4cd060e13bb19e4f1700",
           "547daa1ea3381b48b27f",
           "5aff9659e0d3ec60baa6",
-          "5bfc06c173579a134c41",
-          "62ef230eaee72152a88d",
+          "5ca6f405708ef41c1df7",
           "64b3b88c4bb341a35113",
           "65c5710bcb2a7adb51dc",
           "66374f4a8aaa23f6956f",
           "675417fc07ffad97b418",
-          "699665b32e9661e2cf46",
           "6ed11621db74edc97ad7",
           "70a50d5060882949a81b",
-          "713587da331567136c53",
           "7531a9e0ce718d5702de",
           "88afdbaf3e0df80aff2b",
+          "8f0e07f252e063b42edc",
+          "8f8ab107020f31de673c",
           "92507af66c49661f2086",
           "939d137df55e9a0f18ae",
           "988b9f9e378b6986332f",
           "9eda4f2a1e75bcf6aa29",
           "9f126afa117f5f475a66",
           "a2eedf9caee2bb5e2936",
+          "a3e112604f9177f4d1d1",
           "a5a37231e2ab8bb161f0",
           "a7749e916698fc616fc4",
           "a812ce35188ca81b8dc5",
           "a90fe454ab1edc3dfa75",
           "a9b7f17589ebf50ea2bd",
-          "abc4b7eb9fbfd5dedbe7",
           "ae332763a0520a17f5c1",
           "b23fa840424f1240b658",
           "b52f0ffc5a1cf2240c7b",
-          "b6dba6ece548ac5bab3f",
           "b920c14eeb1cc040e0f7",
           "bf2dc3956724c337b420",
           "c152eb05a3acdf350129",
@@ -4439,24 +4489,22 @@
           "c5da412c36f383ac0d0d",
           "c6835e2dde9b628efe32",
           "c9c163ef8aa011b427a2",
+          "cba16d1bbd673ba9fad1",
           "d065bde7d37c85ad7e53",
-          "d69c81d46d5bf0328443",
           "d8c4154460709c51eeb8",
-          "da9aa9602c7bf0362219",
           "dacb721b452a603f14ac",
           "daecbe09c53b6d1d4eee",
+          "dd3bfe685e039abb26dc",
           "e0dffb5051822cd5bbd2",
           "e277adae3224cead540a",
           "e7e074d5591eba8106e9",
           "e9a8bb2d9bc4aee9ec30",
-          "ea5183f3a718fd1b1745",
           "eb86eab3948a55345302",
+          "ecc07bc48a7be79529dd",
           "ed530764767a09dd6f65",
           "ed9be270bd0a6834bfe4",
-          "ef600400629caf9e21ef",
           "f46deecbde301b35e08a",
           "f4e102270ca65ae49e9d",
-          "f81cc4ed7382b83d0548",
           "f8294431a83515616e8e",
           "fb14698422b9b4acb033",
           "fc77adb4cb9a4983fe35",
@@ -4469,12 +4517,20 @@
             "quote": "효성 회장님 “새로운 100년 밝힐 모닝 스타 될 것”"
           },
           {
+            "article_id": "02b7765fd05136365f89",
+            "quote": "효성 회장님, 창립 60주년 새로운 비전 선포 \"위기 뚫는 '모닝 스타' 될 것\""
+          },
+          {
             "article_id": "079879cfb6d87ef3a68b",
             "quote": "창립 60주년 효성, 회장님 \"새로운 100년 밝힐 ’모닝 스타’ 되자\" By EBN"
           },
           {
             "article_id": "12991cfd03eab70969bd",
             "quote": "Hyosung marks 60th year as 회장님 rallies Korea group for next century"
+          },
+          {
+            "article_id": "12d9ae9b6a5ce3fa64b4",
+            "quote": "회장님 “효성, 새 100년 밝힐 모닝스타”"
           },
           {
             "article_id": "1adb9a9ffd257ec190dd",
@@ -4501,6 +4557,10 @@
             "quote": "효성 회장님, '악착같은·치밀한·신뢰의 효성' 3대 실천 원칙 제시"
           },
           {
+            "article_id": "2ce8c9825b5ece337c6e",
+            "quote": "효성 회장님 \"악착같고 치밀하게 새로운 100년 준비\""
+          },
+          {
             "article_id": "2ee663ade445be2c0830",
             "quote": "‘효성 60돌’ 회장님 “치열한 도전, 새 100년 열자”|동아일보"
           },
@@ -4511,6 +4571,10 @@
           {
             "article_id": "36700998fd1fdc295dba",
             "quote": "효성 창립 60돌...회장님 “우리는 모닝스타, 목표 향한 치열함으로 새 100년 열어야”"
+          },
+          {
+            "article_id": "3cd96397b3281d6093d2",
+            "quote": "효성, 창립 60주년 맞아 미래 비전 선포...회장님 \"새로운 100년의 '모닝 스타' 될 것\""
           },
           {
             "article_id": "40561682a8ac47e411e1",
@@ -4541,12 +4605,8 @@
             "quote": "[​​​​​​​창립 60주년]효성 회장님 “새로운 100년 여는 모닝 스타 될 것”"
           },
           {
-            "article_id": "5bfc06c173579a134c41",
-            "quote": "창립 60주년 맞은 효성, 회장님 “새로운 100년 밝힐 ‘모닝 스타’ 될 것”"
-          },
-          {
-            "article_id": "62ef230eaee72152a88d",
-            "quote": "효성 창립 60주년...회장님 \"새로운 100년 여는 모닝 스타 될 것\""
+            "article_id": "5ca6f405708ef41c1df7",
+            "quote": "효성 회장님, '악착같은·치밀한·신뢰의 효성' 3대 실천 원칙 제시"
           },
           {
             "article_id": "64b3b88c4bb341a35113",
@@ -4565,10 +4625,6 @@
             "quote": "효성 회장님 \"새로운 100년 밝힐 '모닝 스타' 되자\""
           },
           {
-            "article_id": "699665b32e9661e2cf46",
-            "quote": "‘효성 60돌’ 회장님 “치열한 도전, 새 100년 열자”"
-          },
-          {
             "article_id": "6ed11621db74edc97ad7",
             "quote": "효성 창립 60주년 기념식...회장님 ‘목표를 향한 치열함’ 당부"
           },
@@ -4577,16 +4633,20 @@
             "quote": "Hyosung Group — Chairman Celebrates 60th Anniversary with Vision for New Century"
           },
           {
-            "article_id": "713587da331567136c53",
-            "quote": "회장님 \"조직문화 혁신으로 새로운 100년 준비\"...효성 창립 60주년"
-          },
-          {
             "article_id": "7531a9e0ce718d5702de",
             "quote": "Hyosung Marks 60th Anniversary... 회장님: \"Let's Be the 'Morning Star' That Will Illuminate the Next 100 Years\""
           },
           {
             "article_id": "88afdbaf3e0df80aff2b",
             "quote": "효성 창립 60주년...회장님 \"치열함으로 새로운 100년 열어야\""
+          },
+          {
+            "article_id": "8f0e07f252e063b42edc",
+            "quote": "창립 60주년 맞은 효성, 회장님 “새로운 100년 밝힐 ‘모닝 스타’ 될 것”"
+          },
+          {
+            "article_id": "8f8ab107020f31de673c",
+            "quote": "회장님 \"악착같고 치밀하게\"... 60주년 효성 '일하는방식' 대전환 당부"
           },
           {
             "article_id": "92507af66c49661f2086",
@@ -4613,6 +4673,10 @@
             "quote": "창립 60주년 효성...회장님 “새로운 100년 밝힐 모닝스타 될 것”"
           },
           {
+            "article_id": "a3e112604f9177f4d1d1",
+            "quote": "효성 창립 60주년...회장님 \"새로운 100년 여는 모닝 스타 될 것\""
+          },
+          {
             "article_id": "a5a37231e2ab8bb161f0",
             "quote": "창립 60주년 효성...회장님 “새로운 100년 밝힐 모닝스타 될 것”"
           },
@@ -4633,10 +4697,6 @@
             "quote": "효성 창립 60주년...회장님 “새로운 100년 밝힐 ‘모닝 스타’ 될 것”"
           },
           {
-            "article_id": "abc4b7eb9fbfd5dedbe7",
-            "quote": "Hyosung Marks 60th Anniversary; Chairman Says It Will Become a ‘Morning Star’ Lighting the Way for the Next 100 Years"
-          },
-          {
             "article_id": "ae332763a0520a17f5c1",
             "quote": "효성 창립 60주년...회장님 \"치열함으로 새로운 100년 열어야\""
           },
@@ -4647,10 +4707,6 @@
           {
             "article_id": "b52f0ffc5a1cf2240c7b",
             "quote": "효성 회장님, 창립 60주년 맞아 “악착같고 치밀한 조직 돼야”"
-          },
-          {
-            "article_id": "b6dba6ece548ac5bab3f",
-            "quote": "효성, 창립 60주년 맞아 미래 비전 선포...회장님 \"새로운 100년의 '모닝 스타' 될 것\""
           },
           {
             "article_id": "b920c14eeb1cc040e0f7",
@@ -4685,20 +4741,16 @@
             "quote": "효성 회장님 \"악착같고 치밀하게 새로운 100년 준비\" - ZDNet korea"
           },
           {
+            "article_id": "cba16d1bbd673ba9fad1",
+            "quote": "Hyosung Marks 60th Anniversary; Chairman Says It Will Become a ‘Morning Star’ Lighting the Way for the Next 100 Years"
+          },
+          {
             "article_id": "d065bde7d37c85ad7e53",
             "quote": "Hyosung Marks 60th Anniversary... 회장님: \"Let's Be the 'Morning Star' That Will Illuminate the Next 100 Years\""
           },
           {
-            "article_id": "d69c81d46d5bf0328443",
-            "quote": "효성 회장님, '악착같은·치밀한·신뢰의 효성' 3대 실천 원칙 제시"
-          },
-          {
             "article_id": "d8c4154460709c51eeb8",
             "quote": "창립 60주년 효성, 회장님 “악착같이, 치밀하게, 신뢰의 효성으로 새 100년 열자”"
-          },
-          {
-            "article_id": "da9aa9602c7bf0362219",
-            "quote": "회장님 “효성, 새 100년 밝힐 모닝스타”"
           },
           {
             "article_id": "dacb721b452a603f14ac",
@@ -4707,6 +4759,10 @@
           {
             "article_id": "daecbe09c53b6d1d4eee",
             "quote": "회장님 \"악착, 치밀, 신뢰의 효성으로\""
+          },
+          {
+            "article_id": "dd3bfe685e039abb26dc",
+            "quote": "효성 창립 60주년 기념식...회장님 ‘목표를 향한 치열함’ 당부"
           },
           {
             "article_id": "e0dffb5051822cd5bbd2",
@@ -4725,12 +4781,12 @@
             "quote": "효성 60년 밝힌 회장님의 ‘모닝 스타’··· 글로벌 100년 도전"
           },
           {
-            "article_id": "ea5183f3a718fd1b1745",
-            "quote": "효성 회장님 \"악착같고 치밀하게 새로운 100년 준비\""
-          },
-          {
             "article_id": "eb86eab3948a55345302",
             "quote": "Hyosung marks 60th anniversary as Chairman calls for new leap forward with relentless focus on goals"
+          },
+          {
+            "article_id": "ecc07bc48a7be79529dd",
+            "quote": "회장님 \"조직문화 혁신으로 새로운 100년 준비\"...효성 창립 60주년"
           },
           {
             "article_id": "ed530764767a09dd6f65",
@@ -4741,20 +4797,12 @@
             "quote": "회장님 \"악착같고 치밀하게\"... 60주년 효성 '일하는방식' 대전환 당부"
           },
           {
-            "article_id": "ef600400629caf9e21ef",
-            "quote": "회장님 \"악착같고 치밀하게\"... 60주년 효성 '일하는방식' 대전환 당부"
-          },
-          {
             "article_id": "f46deecbde301b35e08a",
             "quote": "창립 60주년 효성, 회장님 \"새로운 100년 밝힐 ’모닝 스타’ 되자\" By EBN"
           },
           {
             "article_id": "f4e102270ca65ae49e9d",
             "quote": "회장님: “Building Hyosung on tenacity, meticulousness and trust”"
-          },
-          {
-            "article_id": "f81cc4ed7382b83d0548",
-            "quote": "효성 창립 60주년 기념식...회장님 ‘목표를 향한 치열함’ 당부"
           },
           {
             "article_id": "f8294431a83515616e8e",
@@ -4779,8 +4827,8 @@
         ]
       },
       {
-        "label": "고 조석래 명예회장 한미우호상 수상",
-        "summary": "고 조석래 명예회장이 한미우호상을 받았고 회장이 대리 수상했다는 제목들입니다.",
+        "label": "한미우호상 대리 수상",
+        "summary": "고 조석래 명예회장이 한미우호상을 받았고 회장이 대리 수상했다는 제목들이다.",
         "topic": "external",
         "article_ids": [
           "0d90779241e03127fa01",
@@ -4789,8 +4837,8 @@
           "7e7a075c24c048513d1d",
           "8de7cb1ae52954fd9987",
           "a11c8dffba83ba197723",
-          "d6659ff36d19c6f81eec",
           "e6d344de2f5a3a2b5e2b",
+          "faffab09bf82c850cd5d",
           "fd1b4f9665b4572388f7"
         ],
         "evidence": [
@@ -4819,12 +4867,12 @@
             "quote": "고 조석래 효성 명예회장, ‘한미우호상’ 수상...회장님 대리 수상"
           },
           {
-            "article_id": "d6659ff36d19c6f81eec",
-            "quote": "Late Hyosung Group Honorary Chairman Cho Suck-rae Receives Korea-America Friendship Award; Chairman Accepts on His Behalf"
-          },
-          {
             "article_id": "e6d344de2f5a3a2b5e2b",
             "quote": "Hyosung Chairman Accepts 'Korea-US Friendship Award' for Late Father | Taiwan News | Nov. 10, 2026 22:00"
+          },
+          {
+            "article_id": "faffab09bf82c850cd5d",
+            "quote": "Late Hyosung Group Honorary Chairman Cho Suck-rae Receives Korea-America Friendship Award; Chairman Accepts on His Behalf"
           },
           {
             "article_id": "fd1b4f9665b4572388f7",
@@ -4833,8 +4881,8 @@
         ]
       },
       {
-        "label": "효성 60년 기획: 친환경 소재·전력기기",
-        "summary": "효성 60년 기획 1회에서 친환경 소재·전력기기 기업 구상을 다룬 제목입니다.",
+        "label": "[효성 60년1] 친환경 소재·전력기기 비전",
+        "summary": "효성을 친환경 소재·전력기기 기업으로 만들겠다는 제목이다.",
         "topic": "management",
         "article_ids": [
           "1a1531577d0bfce69ef9"
@@ -4847,12 +4895,12 @@
         ]
       },
       {
-        "label": "효성중공업 상반기 수주와 미국 비중",
-        "summary": "효성중공업 상반기 수주 중 미국 비중이 큰 것으로 다룬 제목들입니다.",
+        "label": "효성중공업 미국 수주 비중",
+        "summary": "효성중공업 상반기 수주 중 미국 비중이 크다는 제목들이다.",
         "topic": "management",
         "article_ids": [
           "22a673bf402a0d2a240b",
-          "9e4f3f2d25413a0b6dac"
+          "6d2fad0c4989817a35df"
         ],
         "evidence": [
           {
@@ -4860,14 +4908,14 @@
             "quote": "[힘내라 K산업]2 회장님 美 전력망 투자 결실...효성중공업 상반기 수주 7.5조 中 71%가 미국"
           },
           {
-            "article_id": "9e4f3f2d25413a0b6dac",
+            "article_id": "6d2fad0c4989817a35df",
             "quote": "[힘내라 K산업]2 회장님 美 전력망 투자 결실...효성중공업 상반기 수주 7.5조 中 71%가 미국"
           }
         ]
       },
       {
-        "label": "창립 60주년 효성 최대 실적 전망",
-        "summary": "창립 60주년 효성의 최대 실적 전망과 전력기기 중심 성장을 언급한 제목들입니다.",
+        "label": "창립 60주년 최대 실적 전망",
+        "summary": "창립 60주년 효성이 최대 실적을 전망하며 전력기기 중심 성장을 말했다는 제목들이다.",
         "topic": "management",
         "article_ids": [
           "3dc1a0a4ca8cea8fdd2e",
@@ -4885,8 +4933,8 @@
         ]
       },
       {
-        "label": "한독 정상회담 만찬 재계 참석",
-        "summary": "한독 정상회담 만찬에 재계 오너들이 참석했다는 제목입니다.",
+        "label": "한독 정상회담 만찬 참석",
+        "summary": "한독 정상회담 국빈급 만찬에 재계 오너들이 참석했다는 제목이다.",
         "topic": "external",
         "article_ids": [
           "588a681ab509fc4c4205"
@@ -4899,8 +4947,8 @@
         ]
       },
       {
-        "label": "베트남 바이오 BDO 상업생산",
-        "summary": "바이오 기반 소재 전략과 베트남 바이오 BDO 상업생산을 언급한 제목들입니다.",
+        "label": "베트남 바이오 BDO 상업 생산",
+        "summary": "효성이 베트남에서 Bio-BDO 상업 생산으로 바이오 소재 전략을 추진한다는 제목들이다.",
         "topic": "management",
         "article_ids": [
           "5c1f372965509e151aa1",
@@ -4918,22 +4966,8 @@
         ]
       },
       {
-        "label": "CEO 연설 악착·치밀·신뢰",
-        "summary": "효성 회장의 연설에서 악착, 치밀, 신뢰를 언급한 제목입니다.",
-        "topic": "management",
-        "article_ids": [
-          "75bdc4358262a2b30b36"
-        ],
-        "evidence": [
-          {
-            "article_id": "75bdc4358262a2b30b36",
-            "quote": "[Ceo’s Speech] 효성 회장님 “악착, 치밀, 신뢰”"
-          }
-        ]
-      },
-      {
-        "label": "효성중공업 지멘스 협력",
-        "summary": "효성중공업이 디지털 전력·데이터센터 기술 분야에서 독일 지멘스와 협력한다는 제목입니다.",
+        "label": "효성중공업·지멘스 협력",
+        "summary": "효성중공업이 독일 지멘스와 디지털 전력·데이터센터 분야에서 협력한다는 제목이다.",
         "topic": "management",
         "article_ids": [
           "7989979f4456a4210c6a"
@@ -4946,8 +4980,8 @@
         ]
       },
       {
-        "label": "효성 60년 기획: 중공업 착시와 화학·건설",
-        "summary": "효성 60년 기획 2회에서 중공업과 화학·건설 부문을 다룬 제목들입니다.",
+        "label": "[효성 60년2] 중공업 착시와 화학·건설 부실",
+        "summary": "중공업에 안주하는 사이 화학·건설 부실이 길어졌다는 제목들이다.",
         "topic": "management",
         "article_ids": [
           "7fc0bf08522196663f35",
@@ -4966,7 +5000,7 @@
       },
       {
         "label": "효성중공업 첫 파업과 창원 신공장",
-        "summary": "효성중공업의 첫 파업과 창원 신공장 직후의 갈등 수습 과제를 다룬 제목입니다.",
+        "summary": "효성중공업 사상 첫 파업 해결 과제와 창원 신공장 생산능력 확대를 다룬 제목이다.",
         "topic": "management",
         "article_ids": [
           "8a0f824b6d69aecf1e0b"
@@ -4979,8 +5013,8 @@
         ]
       },
       {
-        "label": "회장 리더십 기획 시리즈",
-        "summary": "회장 시대를 다룬 기획 시리즈 기사 제목입니다.",
+        "label": "[회장님 시대上] 토탈 인프라 100년 기업",
+        "summary": "소재부터 AI까지 토탈 인프라로 100년 기업을 향한다는 제목이다.",
         "topic": "management",
         "article_ids": [
           "8b98b6c8229e610f0693"
@@ -4993,9 +5027,9 @@
         ]
       },
       {
-        "label": "효성 배리어프리영화 지원",
-        "summary": "배리어프리영화를 10년째 지원하고 임직원이 음성해설을 녹음했다는 제목입니다.",
-        "topic": "external",
+        "label": "배리어프리영화 지원",
+        "summary": "효성이 배리어프리영화를 10년째 지원하고 임직원이 음성해설을 녹음한다는 제목이다.",
+        "topic": "management",
         "article_ids": [
           "8bfd396ecbf54f54f0c3"
         ],
@@ -5008,7 +5042,7 @@
       },
       {
         "label": "미국 전력시장 초고압 차단기 투자",
-        "summary": "초고압 차단기로 미국 전력시장에 새로 투자한다는 제목입니다.",
+        "summary": "효성 회장이 초고압 차단기로 미국 전력시장에 새로 투자한다는 제목이다.",
         "topic": "management",
         "article_ids": [
           "8e59851716501dd334ae"
@@ -5021,8 +5055,8 @@
         ]
       },
       {
-        "label": "회장의 인재 선발과 성장",
-        "summary": "회장의 사람을 읽는 힘이 효성 성장판을 바꿨다는 제목들입니다.",
+        "label": "회장의 인재 보는 안목",
+        "summary": "회장의 사람을 읽는 힘이 효성 성장판을 바꿨다는 제목들이다.",
         "topic": "management",
         "article_ids": [
           "a0dbf1e8377275be638d",
@@ -5040,8 +5074,8 @@
         ]
       },
       {
-        "label": "AI 데이터센터 전력기기",
-        "summary": "AI 데이터센터와 전력기기 성공 스토리를 언급한 제목입니다.",
+        "label": "AI 데이터센터와 전력기기",
+        "summary": "회장이 AI 데이터센터로 전력기기 성공 스토리를 이어간다는 제목이다.",
         "topic": "management",
         "article_ids": [
           "a4c60a3a01f7a92cceca"
@@ -5055,7 +5089,7 @@
       },
       {
         "label": "섬유 폐기물 해결",
-        "summary": "효성이 섬유 폐기물 해결에 앞장선다는 제목입니다.",
+        "summary": "효성 회장이 섬유 폐기물 해결에 앞장선다는 제목이다.",
         "topic": "management",
         "article_ids": [
           "ac85d34f3dd84520bfcc"
@@ -5068,8 +5102,8 @@
         ]
       },
       {
-        "label": "효성중공업 성과급 노사 갈등",
-        "summary": "효성중공업 노사 간 성과급 갈등을 다룬 제목입니다.",
+        "label": "효성중공업 성과급 갈등",
+        "summary": "효성중공업 노사의 성과급 관련 갈등을 다룬 제목이다.",
         "topic": "management",
         "article_ids": [
           "b09324357da19b75223c"
@@ -5082,8 +5116,27 @@
         ]
       },
       {
-        "label": "ESG·나눔경영 강화",
-        "summary": "환경 보전과 지역사회 상생을 잇는 ESG·나눔경영을 다룬 제목들입니다.",
+        "label": "효성 'CEO's Speech' 악착·치밀·신뢰 및 60돌 도전 메시지",
+        "summary": "효성 회장의 악착·치밀·신뢰, 치열한 도전과 새 100년을 다룬 제목들이다.",
+        "topic": "management",
+        "article_ids": [
+          "b412edaf511e5aa543fa",
+          "e892a1f6c925d7d721a3"
+        ],
+        "evidence": [
+          {
+            "article_id": "b412edaf511e5aa543fa",
+            "quote": "[Ceo’s Speech] 효성 회장님 “악착, 치밀, 신뢰”"
+          },
+          {
+            "article_id": "e892a1f6c925d7d721a3",
+            "quote": "‘효성 60돌’ 회장님 “치열한 도전, 새 100년 열자”"
+          }
+        ]
+      },
+      {
+        "label": "효성 ESG·지역 상생",
+        "summary": "효성이 환경 보전과 지역사회 상생을 이어간다는 제목들이다.",
         "topic": "management",
         "article_ids": [
           "b81439d0632b44c54d1c",
@@ -5101,8 +5154,22 @@
         ]
       },
       {
-        "label": "선제 투자와 실적 호조",
-        "summary": "선제 투자와 효성중공업·티앤씨 실적을 언급한 제목입니다.",
+        "label": "리젠 바이오 스판덱스 유럽 공략",
+        "summary": "사탕수수 스판덱스 '리젠 바이오'로 유럽을 공략하고 베트남 일관 생산을 본격화한다는 제목이다.",
+        "topic": "management",
+        "article_ids": [
+          "dac4b99b258f1788aec8"
+        ],
+        "evidence": [
+          {
+            "article_id": "dac4b99b258f1788aec8",
+            "quote": "효성 회장님, 사탕수수 스판덱스 '리젠 바이오'로 유럽 공략...베트남 일관 생산 본격화"
+          }
+        ]
+      },
+      {
+        "label": "선제 투자와 효성중공업·티앤씨 실적",
+        "summary": "창립 60년 효성그룹의 선제 투자로 효성중공업·티앤씨 실적이 좋다는 제목이다.",
         "topic": "management",
         "article_ids": [
           "f9940aad6d4fe35ffbdc"
@@ -5115,8 +5182,8 @@
         ]
       },
       {
-        "label": "회장 인문학적 기술 리더십",
-        "summary": "회장 시대 하편으로 현장과 인문학적 기술 리더십을 다룬 제목입니다.",
+        "label": "[회장님 시대下] 인문학적 기술 리더십",
+        "summary": "통찰은 책에서, 해답은 현장에서 찾는 리더십을 다룬 제목이다.",
         "topic": "management",
         "article_ids": [
           "fb5b3640ae84494b599c"
@@ -5135,74 +5202,8 @@
         "start": "2026-11-18",
         "end": "2026-11-18",
         "coverage_complete": true,
-        "article_ids": [],
-        "statistics": {
-          "counts": {
-            "positive": 0,
-            "negative": 0,
-            "neutral": 0,
-            "mixed": 0
-          },
-          "denominator": 0,
-          "percentages": {
-            "positive": null,
-            "negative": null,
-            "neutral": null,
-            "mixed": null
-          },
-          "abstained": 0,
-          "unrelated": 0,
-          "positive_negative_only": {
-            "denominator": 0,
-            "percentages": {
-              "positive": null,
-              "negative": null
-            }
-          }
-        },
-        "publisher_count": 0,
-        "issue_count": 0,
-        "newly_seen_count": 0,
-        "retained_count": 0,
-        "daily": [
-          {
-            "date": "2026-11-18",
-            "covered": true,
-            "article_count": 0,
-            "statistics": {
-              "counts": {
-                "positive": 0,
-                "negative": 0,
-                "neutral": 0,
-                "mixed": 0
-              },
-              "denominator": 0,
-              "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
-              },
-              "abstained": 0,
-              "unrelated": 0,
-              "positive_negative_only": {
-                "denominator": 0,
-                "percentages": {
-                  "positive": null,
-                  "negative": null
-                }
-              }
-            }
-          }
-        ]
-      },
-      {
-        "days": 7,
-        "start": "2026-11-12",
-        "end": "2026-11-18",
-        "coverage_complete": true,
         "article_ids": [
-          "8bfd396ecbf54f54f0c3"
+          "dac4b99b258f1788aec8"
         ],
         "statistics": {
           "counts": {
@@ -5230,7 +5231,76 @@
         },
         "publisher_count": 1,
         "issue_count": 1,
-        "newly_seen_count": 0,
+        "newly_seen_count": 1,
+        "retained_count": 0,
+        "daily": [
+          {
+            "date": "2026-11-18",
+            "covered": true,
+            "article_count": 1,
+            "statistics": {
+              "counts": {
+                "positive": 1,
+                "negative": 0,
+                "neutral": 0,
+                "mixed": 0
+              },
+              "denominator": 1,
+              "percentages": {
+                "positive": 100.0,
+                "negative": 0.0,
+                "neutral": 0.0,
+                "mixed": 0.0
+              },
+              "abstained": 0,
+              "unrelated": 0,
+              "positive_negative_only": {
+                "denominator": 1,
+                "percentages": {
+                  "positive": 100.0,
+                  "negative": 0.0
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "days": 7,
+        "start": "2026-11-12",
+        "end": "2026-11-18",
+        "coverage_complete": true,
+        "article_ids": [
+          "dac4b99b258f1788aec8",
+          "8bfd396ecbf54f54f0c3"
+        ],
+        "statistics": {
+          "counts": {
+            "positive": 2,
+            "negative": 0,
+            "neutral": 0,
+            "mixed": 0
+          },
+          "denominator": 2,
+          "percentages": {
+            "positive": 100.0,
+            "negative": 0.0,
+            "neutral": 0.0,
+            "mixed": 0.0
+          },
+          "abstained": 0,
+          "unrelated": 0,
+          "positive_negative_only": {
+            "denominator": 2,
+            "percentages": {
+              "positive": 100.0,
+              "negative": 0.0
+            }
+          }
+        },
+        "publisher_count": 1,
+        "issue_count": 2,
+        "newly_seen_count": 1,
         "retained_count": 1,
         "daily": [
           {
@@ -5410,28 +5480,28 @@
           {
             "date": "2026-11-18",
             "covered": true,
-            "article_count": 0,
+            "article_count": 1,
             "statistics": {
               "counts": {
-                "positive": 0,
+                "positive": 1,
                 "negative": 0,
                 "neutral": 0,
                 "mixed": 0
               },
-              "denominator": 0,
+              "denominator": 1,
               "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
+                "positive": 100.0,
+                "negative": 0.0,
+                "neutral": 0.0,
+                "mixed": 0.0
               },
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 0,
+                "denominator": 1,
                 "percentages": {
-                  "positive": null,
-                  "negative": null
+                  "positive": 100.0,
+                  "negative": 0.0
                 }
               }
             }
@@ -5444,10 +5514,11 @@
         "end": "2026-11-18",
         "coverage_complete": false,
         "article_ids": [
+          "dac4b99b258f1788aec8",
           "8bfd396ecbf54f54f0c3",
           "e6d344de2f5a3a2b5e2b",
           "fd1b4f9665b4572388f7",
-          "d6659ff36d19c6f81eec",
+          "faffab09bf82c850cd5d",
           "b09324357da19b75223c",
           "a11c8dffba83ba197723",
           "7e7a075c24c048513d1d",
@@ -5457,14 +5528,14 @@
           "64319143a60d1cfa4a66",
           "d57d412322bfaad156fc",
           "7fc0bf08522196663f35",
-          "75bdc4358262a2b30b36",
+          "b412edaf511e5aa543fa",
+          "e892a1f6c925d7d721a3",
           "8a0f824b6d69aecf1e0b",
           "e270e96eadf087cac5ef",
           "1a1531577d0bfce69ef9",
           "3dc1a0a4ca8cea8fdd2e",
           "40561682a8ac47e411e1",
           "e7e074d5591eba8106e9",
-          "699665b32e9661e2cf46",
           "b52f0ffc5a1cf2240c7b",
           "f8294431a83515616e8e",
           "eb86eab3948a55345302",
@@ -5533,19 +5604,20 @@
           "fc77adb4cb9a4983fe35",
           "b486cfe20a841cbd02c0",
           "fb5b3640ae84494b599c",
-          "f81cc4ed7382b83d0548",
-          "ef600400629caf9e21ef",
-          "713587da331567136c53",
-          "b6dba6ece548ac5bab3f",
-          "55f3c1d7fff865233933",
-          "049c57fbf96692e761da",
-          "62ef230eaee72152a88d",
-          "9e4f3f2d25413a0b6dac",
-          "5bfc06c173579a134c41",
-          "d69c81d46d5bf0328443",
-          "da9aa9602c7bf0362219",
-          "ea5183f3a718fd1b1745",
-          "abc4b7eb9fbfd5dedbe7",
+          "dd3bfe685e039abb26dc",
+          "02b7765fd05136365f89",
+          "8f8ab107020f31de673c",
+          "ecc07bc48a7be79529dd",
+          "3cd96397b3281d6093d2",
+          "9e62d9616bdb651613c5",
+          "06ef297b99d95f354358",
+          "a3e112604f9177f4d1d1",
+          "6d2fad0c4989817a35df",
+          "8f0e07f252e063b42edc",
+          "5ca6f405708ef41c1df7",
+          "2ce8c9825b5ece337c6e",
+          "12d9ae9b6a5ce3fa64b4",
+          "cba16d1bbd673ba9fad1",
           "284461fb8fa7551467cc",
           "0053a092cbac22f03b77",
           "8b98b6c8229e610f0693",
@@ -5563,32 +5635,32 @@
         ],
         "statistics": {
           "counts": {
-            "positive": 78,
+            "positive": 80,
             "negative": 3,
             "neutral": 34,
             "mixed": 1
           },
-          "denominator": 116,
+          "denominator": 118,
           "percentages": {
-            "positive": 67.2,
-            "negative": 2.6,
-            "neutral": 29.3,
+            "positive": 67.8,
+            "negative": 2.5,
+            "neutral": 28.8,
             "mixed": 0.9
           },
           "abstained": 0,
           "unrelated": 0,
           "positive_negative_only": {
-            "denominator": 81,
+            "denominator": 83,
             "percentages": {
-              "positive": 96.3,
-              "negative": 3.7
+              "positive": 96.4,
+              "negative": 3.6
             }
           }
         },
         "publisher_count": 57,
-        "issue_count": 22,
-        "newly_seen_count": 8,
-        "retained_count": 89,
+        "issue_count": 23,
+        "newly_seen_count": 10,
+        "retained_count": 92,
         "daily": [
           {
             "date": "2026-10-20",
@@ -5802,25 +5874,25 @@
           {
             "date": "2026-10-28",
             "covered": true,
-            "article_count": 15,
+            "article_count": 16,
             "statistics": {
               "counts": {
-                "positive": 9,
+                "positive": 10,
                 "negative": 0,
                 "neutral": 6,
                 "mixed": 0
               },
-              "denominator": 15,
+              "denominator": 16,
               "percentages": {
-                "positive": 60.0,
+                "positive": 62.5,
                 "negative": 0.0,
-                "neutral": 40.0,
+                "neutral": 37.5,
                 "mixed": 0.0
               },
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 9,
+                "denominator": 10,
                 "percentages": {
                   "positive": 100.0,
                   "negative": 0.0
@@ -5889,25 +5961,25 @@
           {
             "date": "2026-10-31",
             "covered": true,
-            "article_count": 11,
+            "article_count": 10,
             "statistics": {
               "counts": {
-                "positive": 8,
+                "positive": 7,
                 "negative": 0,
                 "neutral": 3,
                 "mixed": 0
               },
-              "denominator": 11,
+              "denominator": 10,
               "percentages": {
-                "positive": 72.7,
+                "positive": 70.0,
                 "negative": 0.0,
-                "neutral": 27.3,
+                "neutral": 30.0,
                 "mixed": 0.0
               },
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 8,
+                "denominator": 7,
                 "percentages": {
                   "positive": 100.0,
                   "negative": 0.0
@@ -6005,28 +6077,28 @@
           {
             "date": "2026-11-04",
             "covered": true,
-            "article_count": 2,
+            "article_count": 3,
             "statistics": {
               "counts": {
-                "positive": 0,
+                "positive": 1,
                 "negative": 0,
                 "neutral": 1,
                 "mixed": 1
               },
-              "denominator": 2,
+              "denominator": 3,
               "percentages": {
-                "positive": 0.0,
+                "positive": 33.4,
                 "negative": 0.0,
-                "neutral": 50.0,
-                "mixed": 50.0
+                "neutral": 33.3,
+                "mixed": 33.3
               },
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 0,
+                "denominator": 1,
                 "percentages": {
-                  "positive": null,
-                  "negative": null
+                  "positive": 100.0,
+                  "negative": 0.0
                 }
               }
             }
@@ -6411,28 +6483,28 @@
           {
             "date": "2026-11-18",
             "covered": true,
-            "article_count": 0,
+            "article_count": 1,
             "statistics": {
               "counts": {
-                "positive": 0,
+                "positive": 1,
                 "negative": 0,
                 "neutral": 0,
                 "mixed": 0
               },
-              "denominator": 0,
+              "denominator": 1,
               "percentages": {
-                "positive": null,
-                "negative": null,
-                "neutral": null,
-                "mixed": null
+                "positive": 100.0,
+                "negative": 0.0,
+                "neutral": 0.0,
+                "mixed": 0.0
               },
               "abstained": 0,
               "unrelated": 0,
               "positive_negative_only": {
-                "denominator": 0,
+                "denominator": 1,
                 "percentages": {
-                  "positive": null,
-                  "negative": null
+                  "positive": 100.0,
+                  "negative": 0.0
                 }
               }
             }
